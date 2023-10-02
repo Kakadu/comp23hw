@@ -13,6 +13,7 @@ jobs:
     runs-on: ubuntu-latest
     container:
       image: kakadu18/ocaml:llvm14
+      options: --user root
 
     concurrency:
       group: ${{ github.workflow }}-${{ github.ref }}
