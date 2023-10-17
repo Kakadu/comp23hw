@@ -172,7 +172,7 @@
   (** An expression for let in declaration: let id = expr in expr *)
   | ELetRecIn of strin<span data-count="1">g</span> * expr * expr
   (** An expression for let rec in declaration: let rec id = expr in expr *)
-  | EFun of strin<span data-count="21">g</span> * expr (** An expression for function: fun expr -&gt; expr *)
+  | EFun of strin<span data-count="21">g</span> * expr (** An expression for function: fun id -&gt; expr *)
 [@@deriving show { with_path = false }<span data-count="541">]</span>
 
 (** Binding type *)
