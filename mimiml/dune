@@ -1,0 +1,5 @@
+(executable
+ (name repl)
+ (public_name repl)
+ (libraries mimiml)
+ (modes byte exe))

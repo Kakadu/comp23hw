@@ -1,0 +1,8 @@
+(library
+ (name MimiML_lib)
+ (public_name mimiml)
+ (modules Ast Parser Typing Inferencer Pp)
+ (libraries base angstrom stdio)
+ (preprocess
+  (pps ppx_expect ppx_deriving.show ppx_variants_conv))
+ (inline_tests))
