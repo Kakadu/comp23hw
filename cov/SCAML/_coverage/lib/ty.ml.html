@@ -239,12 +239,12 @@ let v x = <span data-count="0">T</span>Var x
 
 let rec pp_typ ppf = function
   | <span data-count="17">T</span>Var n -&gt; fprintf ppf "%s" @@ "'" ^ Char.escape<span data-count="17">d</span> (Char.ch<span data-count="17">r</span> (n + 97))
-  | <span data-count="18">T</span>Int -&gt; fprintf ppf "int"
+  | <span data-count="24">T</span>Int -&gt; fprintf ppf "int"
   | <span data-count="5">T</span>Bool -&gt; fprintf ppf "bool"
-  | <span data-count="20">T</span>Arrow (l, r) -&gt;
+  | <span data-count="22">T</span>Arrow (l, r) -&gt;
     (match l with
      | <span data-count="2">T</span>Arrow (_, _) -&gt; fprintf ppf "(%a) -&gt; %a" pp_typ l pp_typ r
-     | <span data-count="18">_</span> -&gt; fprintf ppf "%a -&gt; %a" pp_typ l pp_typ r)
+     | <span data-count="20">_</span> -&gt; fprintf ppf "%a -&gt; %a" pp_typ l pp_typ r)
   | <span data-count="0">T</span>Unit -&gt; fprintf ppf "()"
 ;;
 
