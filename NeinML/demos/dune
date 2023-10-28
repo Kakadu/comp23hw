@@ -1,0 +1,14 @@
+(executable
+ (name demoParse)
+ (modules demoParse)
+ (public_name demoParse)
+ (libraries neinml_lib stdio))
+
+(executable
+ (name demoInfer)
+ (modules demoInfer)
+ (public_name demoInfer)
+ (libraries neinml_lib stdio))
+
+(cram
+ (deps ./demoParse.exe ./demoInfer.exe))

@@ -1,0 +1,34 @@
+(lang dune 2.8)
+
+(generate_opam_files true)
+
+(cram enable)
+
+(name NeinML)
+
+(license LGPL-3.0-or-later)
+
+(authors "Mikhail Vyrodov")
+
+(maintainers "Mikhail Vyrodov")
+
+(bug_reports "https://github.com/VyrodovMikhail/comp23hw/issues")
+
+(homepage "https://github.com/VyrodovMikhail/comp23hw")
+
+(package
+ (name NeinML)
+ (synopsis "NeinML")
+ (description "Compiler for mini version of ML")
+ (version 0.1)
+ (depends
+  dune
+  angstrom
+  (ppx_inline_test :with-test)
+  qcheck-core
+  ppx_expect
+  ppx_deriving
+  (odoc :with-doc)
+  (ocamlformat :build)
+  base
+  bisect_ppx))
