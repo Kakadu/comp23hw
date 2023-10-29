@@ -4,11 +4,6 @@
 
 type name = string [@@deriving eq, show { with_path = false }]
 
-type mltype =
-  | TBool
-  | TInt
-[@@deriving show { with_path = false }]
-
 type const =
   | VInt of int
   | VBool of bool
