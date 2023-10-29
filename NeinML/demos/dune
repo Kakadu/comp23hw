@@ -1,12 +1,16 @@
 (executable
  (name demoParse)
  (modules demoParse)
+ (instrumentation
+  (backend bisect_ppx))
  (public_name demoParse)
  (libraries neinml_lib stdio))
 
 (executable
  (name demoInfer)
  (modules demoInfer)
+ (instrumentation
+  (backend bisect_ppx))
  (public_name demoInfer)
  (libraries neinml_lib stdio))
 
