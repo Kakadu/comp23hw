@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8"/>
     <title>closure.ml &mdash; Coverage report</title>
-    <meta name="description" content="78.26% coverage in lib/closure.ml">
+    <meta name="description" content="93.04% coverage in lib/closure.ml">
     <link rel="stylesheet" href="../coverage.css"/>
     <script src="../highlight.pack.js"></script>
     <script>hljs.initHighlightingOnLoad();</script>
@@ -15,22 +15,14 @@
           <span class="dirname">lib/</span>closure.ml
         </a>
       </h1>
-      <h2>78.26%</h2>
+      <h2>93.04%</h2>
     </div>
     <div id="navbar">
-      <span class="unvisited" style="top:33.33%"></span>
-      <span class="unvisited" style="top:34.27%"></span>
-      <span class="unvisited" style="top:34.74%"></span>
-      <span class="unvisited" style="top:35.68%"></span>
       <span class="unvisited" style="top:37.09%"></span>
       <span class="unvisited" style="top:42.25%"></span>
       <span class="unvisited" style="top:43.19%"></span>
       <span class="unvisited" style="top:49.77%"></span>
       <span class="unvisited" style="bottom:49.77%"></span>
-      <span class="unvisited" style="bottom:29.11%"></span>
-      <span class="unvisited" style="bottom:28.17%"></span>
-      <span class="unvisited" style="bottom:27.70%"></span>
-      <span class="unvisited" style="bottom:26.29%"></span>
     </div>
     <div id="report">
       <div id="lines-layer">
@@ -105,12 +97,12 @@
 <a id="L68"></a><span > </span>
 <a id="L69"></a><span > </span>
 <a id="L70"></a><span class="visited"> </span>
-<a id="L71"></a><span class="unvisited"> </span>
+<a id="L71"></a><span class="visited"> </span>
 <a id="L72"></a><span > </span>
-<a id="L73"></a><span class="unvisited"> </span>
-<a id="L74"></a><span class="unvisited"> </span>
+<a id="L73"></a><span class="visited"> </span>
+<a id="L74"></a><span class="visited"> </span>
 <a id="L75"></a><span > </span>
-<a id="L76"></a><span class="unvisited"> </span>
+<a id="L76"></a><span class="visited"> </span>
 <a id="L77"></a><span > </span>
 <a id="L78"></a><span class="visited"> </span>
 <a id="L79"></a><span class="unvisited"> </span>
@@ -185,13 +177,13 @@
 <a id="L148"></a><span class="visited"> </span>
 <a id="L149"></a><span class="visited"> </span>
 <a id="L150"></a><span class="visited"> </span>
-<a id="L151"></a><span class="unvisited"> </span>
+<a id="L151"></a><span class="visited"> </span>
 <a id="L152"></a><span > </span>
-<a id="L153"></a><span class="unvisited"> </span>
-<a id="L154"></a><span class="unvisited"> </span>
+<a id="L153"></a><span class="visited"> </span>
+<a id="L154"></a><span class="visited"> </span>
 <a id="L155"></a><span > </span>
 <a id="L156"></a><span > </span>
-<a id="L157"></a><span class="unvisited"> </span>
+<a id="L157"></a><span class="visited"> </span>
 <a id="L158"></a><span class="visited"> </span>
 <a id="L159"></a><span > </span>
 <a id="L160"></a><span class="visited"> </span>
@@ -486,14 +478,6 @@ module ClosureAst = struct
     cf_expr : cf_typ_expr;
   }
 
-  and cf_fun_let_binding = {
-    is_rec : rec_flag;
-    name : (int, ty) typed;
-    args : db_lvalue;
-    b : cf_typ_let_body;
-    env_vars : (int, ty) typed list;
-  }
-
   and cf_expr =
     | CFApply of cf_typ_expr * cf_typ_expr
     | CFLiteral of literal
@@ -509,6 +493,14 @@ module ClosureAst = struct
   }
 
   and cf_typ_expr = (cf_expr, ty) typed
+
+  type cf_fun_let_binding = {
+    is_rec : rec_flag;
+    name : (int, ty) typed;
+    args : db_lvalue;
+    b : cf_typ_let_body;
+    env_vars : (int, ty) typed list;
+  }
 
   type cf_binding =
     | FunBinding of cf_fun_let_binding
@@ -527,23 +519,23 @@ module ClosureConvert = struct
   module TypedName = struct
     type t = (int, ty) typed
 
-    let compare (n1 : t) (n2 : t) = <span data-count="3048">c</span>ompare n1.value n2.value
+    let compare (n1 : t) (n2 : t) = <span data-count="3116">c</span>ompare n1.value n2.value
   end
 
   module NameSet = Set.Make (TypedName)
 
-  let typed t e : ('a, ty) typed = <span data-count="1156">{</span> value = e; typ = t }
+  let typed t e : ('a, ty) typed = <span data-count="1256">{</span> value = e; typ = t }
 
   let rec typ_names_of_lvalue (lval : (ilvalue, ty) typed) =
-    <span data-count="173">m</span>atch (lval.value, lval.typ) with
-    | <span data-count="0">D</span>LvTuple vs, TyTuple typs -&gt;
+    <span data-count="195">m</span>atch (lval.value, lval.typ) with
+    | <span data-count="6">D</span>LvTuple vs, TyTuple typs -&gt;
         let e = NameSet.empty in
-        let valtyps = List.map2 (fun x y -&gt; <span data-count="0">(</span>x, y)) vs typs in
-        <span data-count="0">L</span>ist.fold_left
+        let valtyps = List.map2 (fun x y -&gt; <span data-count="14">(</span>x, y)) vs typs in
+        <span data-count="6">L</span>ist.fold_left
           (fun xs x -&gt;
-            <span data-count="0">N</span>ameSet.union xs @@ typ_names_of_lvalu<span data-count="0">e</span> (typed (sn<span data-count="0">d</span> x<span data-count="0">)</span> @@ fs<span data-count="0">t</span> x))
+            <span data-count="14">N</span>ameSet.union xs @@ typ_names_of_lvalu<span data-count="14">e</span> (typed (sn<span data-count="14">d</span> x<span data-count="14">)</span> @@ fs<span data-count="14">t</span> x))
           e valtyps
-    | <span data-count="173">D</span>LvValue v, ty -&gt; typed ty v |&gt; <span data-count="173">N</span>ameSet.singleton
+    | <span data-count="189">D</span>LvValue v, ty -&gt; typed ty v |&gt; <span data-count="189">N</span>ameSet.singleton
     | <span data-count="0">_</span>, ty -&gt; typed ty (-1) |&gt; <span data-count="0">N</span>ameSet.singleton
 
   let rec collect_unbound_variables (f : db_fun_body) global_bindings =
@@ -608,21 +600,21 @@ module ClosureConvert = struct
     <span data-count="98">N</span>ameSet.diff unknown known
 
   let rec closure_free_expr globals r (e : db_expr) =
-    <span data-count="537">m</span>atch e.value with
-    | <span data-count="209">D</span>Apply (left, right) -&gt;
+    <span data-count="599">m</span>atch e.value with
+    | <span data-count="229">D</span>Apply (left, right) -&gt;
         let left_decs, left = closure_free_expr globals r left in
-        <span data-count="209">l</span>et right_decs, right = closure_free_expr globals r right in
-        <span data-count="209">l</span>et result = CFApply (left, right) |&gt; typed e.typ in
-        <span data-count="209">(</span>left_decs @ right_decs, result)
-    | <span data-count="90">D</span>Literal literal -&gt; ([], CFLiteral literal |&gt; type<span data-count="90">d</span> e.typ)
-    | <span data-count="193">D</span>Value name -&gt; ([], CFValue name |&gt; type<span data-count="193">d</span> e.typ)
-    | <span data-count="0">D</span>Tuple exprs -&gt;
+        <span data-count="229">l</span>et right_decs, right = closure_free_expr globals r right in
+        <span data-count="229">l</span>et result = CFApply (left, right) |&gt; typed e.typ in
+        <span data-count="229">(</span>left_decs @ right_decs, result)
+    | <span data-count="102">D</span>Literal literal -&gt; ([], CFLiteral literal |&gt; type<span data-count="102">d</span> e.typ)
+    | <span data-count="217">D</span>Value name -&gt; ([], CFValue name |&gt; type<span data-count="217">d</span> e.typ)
+    | <span data-count="6">D</span>Tuple exprs -&gt;
         let inner xs x =
-          <span data-count="0">l</span>et x_decs, x_res = closure_free_expr globals r x in
-          <span data-count="0">(</span>fs<span data-count="0">t</span> xs @ x_decs, sn<span data-count="0">d</span> xs @ [ x_res ])
+          <span data-count="14">l</span>et x_decs, x_res = closure_free_expr globals r x in
+          <span data-count="14">(</span>fs<span data-count="14">t</span> xs @ x_decs, sn<span data-count="14">d</span> xs @ [ x_res ])
         in
         let cf_exprs = List.fold_left inner ([], []) exprs in
-        <span data-count="0">(</span>fs<span data-count="0">t</span> cf_exprs, CFTuple (sn<span data-count="0">d</span> cf_exprs) |&gt; type<span data-count="0">d</span> e.typ)
+        <span data-count="6">(</span>fs<span data-count="6">t</span> cf_exprs, CFTuple (sn<span data-count="6">d</span> cf_exprs) |&gt; type<span data-count="6">d</span> e.typ)
     | <span data-count="7">D</span>IfElse ite -&gt;
         let i_decs, i_expr = closure_free_expr globals r ite.cond in
         <span data-count="7">l</span>et t_decs, t_expr = closure_free_expr globals r ite.t_body in
@@ -654,30 +646,30 @@ module ClosureConvert = struct
         <span data-count="38">(</span>List.conca<span data-count="38">t</span> inner_closures @ expr_closures @ [ fun_let ], f)
 
   and cf_let (globals : NameSet.t) is_rec (l : db_let_binding) =
-    <span data-count="60">l</span>et inner = List.map (cf_le<span data-count="60">t</span> globals is_rec) l.body.lets in
-    <span data-count="60">l</span>et closures, cf_expr = closure_free_expr globals is_rec l.body.expr in
-    <span data-count="60">l</span>et inner_cf_lets = List.map snd inner in
-    <span data-count="60">l</span>et inner_closures = List.map fst inner in
-    <span data-count="60">l</span>et cf_let_body : cf_typ_let_body = { cf_lets = inner_cf_lets; cf_expr } in
+    <span data-count="68">l</span>et inner = List.map (cf_le<span data-count="68">t</span> globals is_rec) l.body.lets in
+    <span data-count="68">l</span>et closures, cf_expr = closure_free_expr globals is_rec l.body.expr in
+    <span data-count="68">l</span>et inner_cf_lets = List.map snd inner in
+    <span data-count="68">l</span>et inner_closures = List.map fst inner in
+    <span data-count="68">l</span>et cf_let_body : cf_typ_let_body = { cf_lets = inner_cf_lets; cf_expr } in
     let rec_f = l.rec_f in
     let l_v = l.l_v in
     let cf_let_binding = { rec_f; l_v; cf_body = cf_let_body } in
-    (List.conca<span data-count="60">t</span> inner_closures @ closures, cf_let_binding)
+    (List.conca<span data-count="68">t</span> inner_closures @ closures, cf_let_binding)
 
   and cf_of_db globals prog =
-    <span data-count="14">l</span>et rec inner g (p : db_program) acc =
-      <span data-count="60">m</span>atch p with
-      | <span data-count="46">h</span> :: t -&gt;
+    <span data-count="16">l</span>et rec inner g (p : db_program) acc =
+      <span data-count="70">m</span>atch p with
+      | <span data-count="54">h</span> :: t -&gt;
           let closures, binding = cf_let g h.rec_f h in
-          <span data-count="46">l</span>et closures = List.map (fun x -&gt; <span data-count="38">F</span>unBinding x) closures in
-          <span data-count="46">l</span>et binding = ValBinding binding in
+          <span data-count="54">l</span>et closures = List.map (fun x -&gt; <span data-count="38">F</span>unBinding x) closures in
+          <span data-count="54">l</span>et binding = ValBinding binding in
           let u = NameSet.union in
-          let g = u (typ_names_of_lvalu<span data-count="46">e</span> (h.l_v.value |&gt; type<span data-count="46">d</span> h.l_v.typ)) g in
-          <span data-count="46">a</span>cc @ closures @ [ binding ] |&gt; inner g t
-      | <span data-count="14">[</span>] -&gt; acc
+          let g = u (typ_names_of_lvalu<span data-count="54">e</span> (h.l_v.value |&gt; type<span data-count="54">d</span> h.l_v.typ)) g in
+          <span data-count="54">a</span>cc @ closures @ [ binding ] |&gt; inner g t
+      | <span data-count="16">[</span>] -&gt; acc
     in
     let set = NameSet.of_list globals in
-    <span data-count="14">i</span>nner set prog []
+    <span data-count="16">i</span>nner set prog []
 end
 </code></pre>
       </div>

@@ -222,60 +222,60 @@ open Anf.AnfOptimizations
 module NameMap = Map.Make (String)
 
 let pi =
-  let int_const = t_ground t_int |&gt; <span data-count="4">w</span>ith_lvls 0 0 in
-  <span data-count="4">l</span>et unit_const = t_ground t_unit |&gt; <span data-count="4">w</span>ith_lvls 0 0 in
-  <span data-count="4">l</span>et pi = t_arrow int_const unit_const |&gt; <span data-count="4">w</span>ith_lvls 0 0 in
-  <span data-count="4">(</span>"print_int", pi)
+  let int_const = t_ground t_int |&gt; <span data-count="6">w</span>ith_lvls 0 0 in
+  <span data-count="6">l</span>et unit_const = t_ground t_unit |&gt; <span data-count="6">w</span>ith_lvls 0 0 in
+  <span data-count="6">l</span>et pi = t_arrow int_const unit_const |&gt; <span data-count="6">w</span>ith_lvls 0 0 in
+  <span data-count="6">(</span>"print_int", pi)
 
 let lr =
-  let int_const = t_ground t_int |&gt; <span data-count="4">w</span>ith_lvls 0 0 in
-  <span data-count="4">l</span>et bool_const = t_ground t_bool |&gt; <span data-count="4">w</span>ith_lvls 0 0 in
-  <span data-count="4">l</span>et arr = t_arrow int_const bool_const |&gt; <span data-count="4">w</span>ith_lvls 0 0 in
-  <span data-count="4">l</span>et lr = t_arrow int_const arr |&gt; <span data-count="4">w</span>ith_lvls 0 0 in
-  <span data-count="4">(</span>"&lt;=", lr)
+  let int_const = t_ground t_int |&gt; <span data-count="6">w</span>ith_lvls 0 0 in
+  <span data-count="6">l</span>et bool_const = t_ground t_bool |&gt; <span data-count="6">w</span>ith_lvls 0 0 in
+  <span data-count="6">l</span>et arr = t_arrow int_const bool_const |&gt; <span data-count="6">w</span>ith_lvls 0 0 in
+  <span data-count="6">l</span>et lr = t_arrow int_const arr |&gt; <span data-count="6">w</span>ith_lvls 0 0 in
+  <span data-count="6">(</span>"&lt;=", lr)
 
 let mi =
-  let int_const = t_ground t_int |&gt; <span data-count="4">w</span>ith_lvls 0 0 in
-  <span data-count="4">l</span>et arr = t_arrow int_const int_const |&gt; <span data-count="4">w</span>ith_lvls 0 0 in
-  <span data-count="4">l</span>et mi = t_arrow int_const arr |&gt; <span data-count="4">w</span>ith_lvls 0 0 in
-  <span data-count="4">(</span>"-", mi)
+  let int_const = t_ground t_int |&gt; <span data-count="6">w</span>ith_lvls 0 0 in
+  <span data-count="6">l</span>et arr = t_arrow int_const int_const |&gt; <span data-count="6">w</span>ith_lvls 0 0 in
+  <span data-count="6">l</span>et mi = t_arrow int_const arr |&gt; <span data-count="6">w</span>ith_lvls 0 0 in
+  <span data-count="6">(</span>"-", mi)
 
 let ml =
-  let int_const = t_ground t_int |&gt; <span data-count="4">w</span>ith_lvls 0 0 in
-  <span data-count="4">l</span>et arr = t_arrow int_const int_const |&gt; <span data-count="4">w</span>ith_lvls 0 0 in
-  <span data-count="4">l</span>et ml = t_arrow int_const arr |&gt; <span data-count="4">w</span>ith_lvls 0 0 in
-  <span data-count="4">(</span>"*", ml)
+  let int_const = t_ground t_int |&gt; <span data-count="6">w</span>ith_lvls 0 0 in
+  <span data-count="6">l</span>et arr = t_arrow int_const int_const |&gt; <span data-count="6">w</span>ith_lvls 0 0 in
+  <span data-count="6">l</span>et ml = t_arrow int_const arr |&gt; <span data-count="6">w</span>ith_lvls 0 0 in
+  <span data-count="6">(</span>"*", ml)
 
 let pl =
-  let int_const = t_ground t_int |&gt; <span data-count="4">w</span>ith_lvls 0 0 in
-  <span data-count="4">l</span>et arr = t_arrow int_const int_const |&gt; <span data-count="4">w</span>ith_lvls 0 0 in
-  <span data-count="4">l</span>et pl = t_arrow int_const arr |&gt; <span data-count="4">w</span>ith_lvls 0 0 in
-  <span data-count="4">(</span>"+", pl)
+  let int_const = t_ground t_int |&gt; <span data-count="6">w</span>ith_lvls 0 0 in
+  <span data-count="6">l</span>et arr = t_arrow int_const int_const |&gt; <span data-count="6">w</span>ith_lvls 0 0 in
+  <span data-count="6">l</span>et pl = t_arrow int_const arr |&gt; <span data-count="6">w</span>ith_lvls 0 0 in
+  <span data-count="6">(</span>"+", pl)
 
 let nm =
   let nm = NameMap.empty in
-  let nm = NameMap.add "&lt;=" (cnt_nex<span data-count="4">t</span> ()) nm in
-  <span data-count="4">l</span>et nm = NameMap.add "-" (cnt_nex<span data-count="4">t</span> ()) nm in
-  <span data-count="4">l</span>et nm = NameMap.add "*" (cnt_nex<span data-count="4">t</span> ()) nm in
-  <span data-count="4">l</span>et nm = NameMap.add "+" (cnt_nex<span data-count="4">t</span> ()) nm in
-  <span data-count="4">l</span>et nm = NameMap.add "print_int" (cnt_nex<span data-count="4">t</span> ()) nm in
-  <span data-count="4">n</span>m
+  let nm = NameMap.add "&lt;=" (cnt_nex<span data-count="6">t</span> ()) nm in
+  <span data-count="6">l</span>et nm = NameMap.add "-" (cnt_nex<span data-count="6">t</span> ()) nm in
+  <span data-count="6">l</span>et nm = NameMap.add "*" (cnt_nex<span data-count="6">t</span> ()) nm in
+  <span data-count="6">l</span>et nm = NameMap.add "+" (cnt_nex<span data-count="6">t</span> ()) nm in
+  <span data-count="6">l</span>et nm = NameMap.add "print_int" (cnt_nex<span data-count="6">t</span> ()) nm in
+  <span data-count="6">n</span>m
 
 let env = [ lr; mi; ml; pi; pl ]
-let typed t a : ('a, ty) typed = <span data-count="20">{</span> value = a; typ = t }
+let typed t a : ('a, ty) typed = <span data-count="30">{</span> value = a; typ = t }
 
 let globals =
   [
-    typed (TyArrow (TyArrow (TyGround TInt, TyGround TInt), TyGround TBool)<span data-count="4">)</span>
-    @@ NameMap.fin<span data-count="4">d</span> "&lt;=" nm;
-    typed (TyArrow (TyArrow (TyGround TInt, TyGround TInt), TyGround TInt)<span data-count="4">)</span>
-    @@ NameMap.fin<span data-count="4">d</span> "-" nm;
-    typed (TyArrow (TyArrow (TyGround TInt, TyGround TInt), TyGround TInt)<span data-count="4">)</span>
-    @@ NameMap.fin<span data-count="4">d</span> "*" nm;
-    typed (TyArrow (TyArrow (TyGround TInt, TyGround TInt), TyGround TInt)<span data-count="4">)</span>
-    @@ NameMap.fin<span data-count="4">d</span> "+" nm;
-    typed (TyArrow (TyGround TInt, TyGround TUnit)<span data-count="4">)</span>
-    @@ NameMap.fin<span data-count="4">d</span> "print_int" nm;
+    typed (TyArrow (TyArrow (TyGround TInt, TyGround TInt), TyGround TBool)<span data-count="6">)</span>
+    @@ NameMap.fin<span data-count="6">d</span> "&lt;=" nm;
+    typed (TyArrow (TyArrow (TyGround TInt, TyGround TInt), TyGround TInt)<span data-count="6">)</span>
+    @@ NameMap.fin<span data-count="6">d</span> "-" nm;
+    typed (TyArrow (TyArrow (TyGround TInt, TyGround TInt), TyGround TInt)<span data-count="6">)</span>
+    @@ NameMap.fin<span data-count="6">d</span> "*" nm;
+    typed (TyArrow (TyArrow (TyGround TInt, TyGround TInt), TyGround TInt)<span data-count="6">)</span>
+    @@ NameMap.fin<span data-count="6">d</span> "+" nm;
+    typed (TyArrow (TyGround TInt, TyGround TUnit)<span data-count="6">)</span>
+    @@ NameMap.fin<span data-count="6">d</span> "print_int" nm;
   ]
 
 (*
@@ -290,12 +290,12 @@ let globals =
 let () =
   match from_channel stdin with
   | <span data-count="0">E</span>rror msg -&gt; Printf.print<span data-count="0">f</span> "%s" msg
-  | <span data-count="4">O</span>k p -&gt; (
+  | <span data-count="6">O</span>k p -&gt; (
       match top_infer env p with
       | <span data-count="0">E</span>rror msg -&gt; Printf.print<span data-count="0">f</span> "%s" msg
-      | <span data-count="4">O</span>k p -&gt;
-          db_of_typed nm p |&gt; <span data-count="4">c</span>f_of_db globals |&gt; <span data-count="4">a</span>nf_of_cf |&gt; <span data-count="4">o</span>ptimize_moves
-          |&gt; <span data-count="4">p</span>rint_anf_program false |&gt; <span data-count="4">t</span>rim |&gt; <span data-count="4">p</span>rint_endlin<span data-count="4">e</span>)
+      | <span data-count="6">O</span>k p -&gt;
+          db_of_typed nm p |&gt; <span data-count="6">c</span>f_of_db globals |&gt; <span data-count="6">a</span>nf_of_cf |&gt; <span data-count="6">o</span>ptimize_moves
+          |&gt; <span data-count="6">p</span>rint_anf_program false |&gt; <span data-count="6">t</span>rim |&gt; <span data-count="6">p</span>rint_endlin<span data-count="6">e</span>)
 </code></pre>
       </div>
     </div>

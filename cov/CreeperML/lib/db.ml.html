@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8"/>
     <title>db.ml &mdash; Coverage report</title>
-    <meta name="description" content="79.73% coverage in lib/db.ml">
+    <meta name="description" content="97.30% coverage in lib/db.ml">
     <link rel="stylesheet" href="../coverage.css"/>
     <script src="../highlight.pack.js"></script>
     <script>hljs.initHighlightingOnLoad();</script>
@@ -15,17 +15,11 @@
           <span class="dirname">lib/</span>db.ml
         </a>
       </h1>
-      <h2>79.73%</h2>
+      <h2>97.30%</h2>
     </div>
     <div id="navbar">
       <span class="some-visited" style="top:31.79%"></span>
-      <span class="unvisited" style="top:33.11%"></span>
-      <span class="unvisited" style="top:33.77%"></span>
-      <span class="unvisited" style="top:34.44%"></span>
       <span class="unvisited" style="top:37.09%"></span>
-      <span class="unvisited" style="top:39.07%"></span>
-      <span class="unvisited" style="top:39.74%"></span>
-      <span class="unvisited" style="bottom:48.34%"></span>
     </div>
     <div id="report">
       <div id="lines-layer">
@@ -79,17 +73,17 @@
 <a id="L47"></a><span class="visited"> </span>
 <a id="L48"></a><span class="some-visited"> </span>
 <a id="L49"></a><span class="visited"> </span>
-<a id="L50"></a><span class="unvisited"> </span>
-<a id="L51"></a><span class="unvisited"> </span>
-<a id="L52"></a><span class="unvisited"> </span>
+<a id="L50"></a><span class="visited"> </span>
+<a id="L51"></a><span class="visited"> </span>
+<a id="L52"></a><span class="visited"> </span>
 <a id="L53"></a><span > </span>
 <a id="L54"></a><span > </span>
 <a id="L55"></a><span class="visited"> </span>
 <a id="L56"></a><span class="unvisited"> </span>
 <a id="L57"></a><span class="visited"> </span>
 <a id="L58"></a><span class="visited"> </span>
-<a id="L59"></a><span class="unvisited"> </span>
-<a id="L60"></a><span class="unvisited"> </span>
+<a id="L59"></a><span class="visited"> </span>
+<a id="L60"></a><span class="visited"> </span>
 <a id="L61"></a><span > </span>
 <a id="L62"></a><span > </span>
 <a id="L63"></a><span class="visited"> </span>
@@ -107,7 +101,7 @@
 <a id="L75"></a><span > </span>
 <a id="L76"></a><span class="visited"> </span>
 <a id="L77"></a><span class="visited"> </span>
-<a id="L78"></a><span class="unvisited"> </span>
+<a id="L78"></a><span class="visited"> </span>
 <a id="L79"></a><span class="visited"> </span>
 <a id="L80"></a><span > </span>
 <a id="L81"></a><span class="visited"> </span>
@@ -380,30 +374,30 @@ module DbTypeAst = struct
   type 'a res = 'a * nm
 
   (* cons *)
-  let typed typ value : ('a, 'b) typed = <span data-count="815">{</span> typ; value }
+  let typed typ value : ('a, 'b) typed = <span data-count="885">{</span> typ; value }
 
   let rec names_of_lvalue (l : lvalue) =
-    <span data-count="133">m</span>atch l with
+    <span data-count="155">m</span>atch l with
     | <span data-count="0">L</span>vAny | <span data-count="1">L</span>vUnit -&gt; [ "any" ]
-    | <span data-count="132">L</span>vValue v -&gt; [ v ]
-    | <span data-count="0">L</span>vTuple vs -&gt;
-        List.map (fun x -&gt; <span data-count="0">v</span>alue x |&gt; <span data-count="0">n</span>ames_of_lvalue) vs
-        |&gt; <span data-count="0">L</span>ist.fold_left ( @ ) []
+    | <span data-count="148">L</span>vValue v -&gt; [ v ]
+    | <span data-count="6">L</span>vTuple vs -&gt;
+        List.map (fun x -&gt; <span data-count="14">v</span>alue x |&gt; <span data-count="14">n</span>ames_of_lvalue) vs
+        |&gt; <span data-count="6">L</span>ist.fold_left ( @ ) []
 
   let rec db_lv (nm : nm) (l : lvalue) =
-    <span data-count="133">m</span>atch l with
+    <span data-count="155">m</span>atch l with
     | <span data-count="0">L</span>vAny -&gt; DLvAny
     | <span data-count="1">L</span>vUnit -&gt; DLvUnit
-    | <span data-count="132">L</span>vValue v -&gt; DLvValue (NameMap.fin<span data-count="132">d</span> v nm)
-    | <span data-count="0">L</span>vTuple vs -&gt;
-        List.map (fun x -&gt; <span data-count="0">v</span>alue x |&gt; <span data-count="0">d</span>b_lv nm) vs |&gt; <span data-count="0">f</span>un x -&gt; <span data-count="0">D</span>LvTuple x
+    | <span data-count="148">L</span>vValue v -&gt; DLvValue (NameMap.fin<span data-count="148">d</span> v nm)
+    | <span data-count="6">L</span>vTuple vs -&gt;
+        List.map (fun x -&gt; <span data-count="14">v</span>alue x |&gt; <span data-count="14">d</span>b_lv nm) vs |&gt; <span data-count="6">f</span>un x -&gt; <span data-count="6">D</span>LvTuple x
 
   let rec db_expr (nm : nm) (e : ty typ_expr) : db_expr =
-    <span data-count="649">m</span>atch e.value with
-    | <span data-count="246">T</span>Apply (l, r) -&gt;
+    <span data-count="711">m</span>atch e.value with
+    | <span data-count="266">T</span>Apply (l, r) -&gt;
         let lr = db_expr nm l in
-        <span data-count="246">l</span>et rr = db_expr nm r in
-        <span data-count="246">D</span>Apply (lr, rr) |&gt; typed e.typ
+        <span data-count="266">l</span>et rr = db_expr nm r in
+        <span data-count="266">D</span>Apply (lr, rr) |&gt; typed e.typ
     | <span data-count="8">T</span>IfElse ite -&gt;
         let ir = db_expr nm ite.cond in
         <span data-count="8">l</span>et tr = db_expr nm ite.t_body in
@@ -412,9 +406,9 @@ module DbTypeAst = struct
         let t_body = tr in
         let f_body = er in
         DIfElse { cond; t_body; f_body } |&gt; typed e.typ
-    | <span data-count="105">T</span>Literal l -&gt; DLiteral l |&gt; typed e.typ
-    | <span data-count="240">T</span>Value v -&gt; NameMap.find v nm |&gt; <span data-count="240">f</span>un x -&gt; <span data-count="240">D</span>Value x |&gt; typed e.typ
-    | <span data-count="0">T</span>Tuple vs -&gt; List.map (db_exp<span data-count="0">r</span> nm) vs |&gt; <span data-count="0">f</span>un x -&gt; <span data-count="0">D</span>Tuple x |&gt; typed e.typ
+    | <span data-count="117">T</span>Literal l -&gt; DLiteral l |&gt; typed e.typ
+    | <span data-count="264">T</span>Value v -&gt; NameMap.find v nm |&gt; <span data-count="264">f</span>un x -&gt; <span data-count="264">D</span>Value x |&gt; typed e.typ
+    | <span data-count="6">T</span>Tuple vs -&gt; List.map (db_exp<span data-count="6">r</span> nm) vs |&gt; <span data-count="6">f</span>un x -&gt; <span data-count="6">D</span>Tuple x |&gt; typed e.typ
     | <span data-count="50">T</span>Fun f -&gt;
         let all_names = names_of_lvalue f.lvalue.value in
         <span data-count="50">l</span>et nm =
@@ -436,14 +430,14 @@ module DbTypeAst = struct
         DFun f |&gt; typed e.typ
 
   and db_let (l : ty typ_let_binding) nm : db_let_binding res =
-    <span data-count="83">l</span>et all_names = names_of_lvalue l.l_v.value in
-    <span data-count="83">l</span>et nm =
+    <span data-count="91">l</span>et all_names = names_of_lvalue l.l_v.value in
+    <span data-count="91">l</span>et nm =
       match l.rec_f with
       | <span data-count="5">R</span>ec -&gt;
           List.fold_lef<span data-count="5">t</span>
             (fun nm n -&gt; <span data-count="5">N</span>ameMap.add n (cnt_nex<span data-count="5">t</span> ()) nm)
             nm all_names
-      | <span data-count="78">N</span>oRec -&gt; nm
+      | <span data-count="86">N</span>oRec -&gt; nm
     in
     let lets, nm_inners =
       List.fold_left
@@ -452,41 +446,41 @@ module DbTypeAst = struct
           <span data-count="9">(</span>xs @ [ inner_r ], nm))
         ([], nm) l.body.lets
     in
-    <span data-count="83">l</span>et expr = l.body.expr |&gt; db_expr nm_inners in
-    <span data-count="83">l</span>et body = { lets; expr } in
+    <span data-count="91">l</span>et expr = l.body.expr |&gt; db_expr nm_inners in
+    <span data-count="91">l</span>et body = { lets; expr } in
     let nm =
       match l.rec_f with
       | <span data-count="5">R</span>ec -&gt; nm
-      | <span data-count="78">N</span>oRec -&gt;
-          List.fold_lef<span data-count="78">t</span>
-            (fun nm n -&gt; <span data-count="78">N</span>ameMap.add n (cnt_nex<span data-count="78">t</span> ()) nm)
+      | <span data-count="86">N</span>oRec -&gt;
+          List.fold_lef<span data-count="86">t</span>
+            (fun nm n -&gt; <span data-count="94">N</span>ameMap.add n (cnt_nex<span data-count="94">t</span> ()) nm)
             nm all_names
     in
-    let l_v = db_lv nm l.l_v.value |&gt; <span data-count="83">t</span>yped l.l_v.typ in
-    <span data-count="83">l</span>et rec_f = l.rec_f in
+    let l_v = db_lv nm l.l_v.value |&gt; <span data-count="91">t</span>yped l.l_v.typ in
+    <span data-count="91">l</span>et rec_f = l.rec_f in
     ({ rec_f; body; l_v }, nm)
 
   (* Move declarations of let inside of fun *)
   let rec move_lets (l : ty typ_let_binding) : ty typ_let_binding =
-    <span data-count="71">m</span>atch l.body.expr.value with
+    <span data-count="79">m</span>atch l.body.expr.value with
     | <span data-count="33">T</span>Fun f -&gt;
         let inners = l.body.lets @ f.b.lets in
         let inners = List.map move_lets inners in
         <span data-count="33">l</span>et new_fun = { f with b = { f.b with lets = inners } } in
         let expr = TFun new_fun |&gt; typed l.body.expr.typ in
         <span data-count="33">{</span> l with body = { lets = []; expr } }
-    | <span data-count="38">_</span> -&gt; l
+    | <span data-count="46">_</span> -&gt; l
 
   let db_of_typed (nm : nm) (p : ty typ_program) : db_program =
-    <span data-count="20">l</span>et p = List.map move_lets p in
-    <span data-count="20">l</span>et res, _ =
+    <span data-count="22">l</span>et p = List.map move_lets p in
+    <span data-count="22">l</span>et res, _ =
       List.fold_left
         (fun (xs, nm) x -&gt;
-          <span data-count="54">l</span>et res, nm = db_let x nm in
-          <span data-count="54">(</span>xs @ [ res ], nm))
+          <span data-count="62">l</span>et res, nm = db_let x nm in
+          <span data-count="62">(</span>xs @ [ res ], nm))
         ([], nm) p
     in
-    <span data-count="20">r</span>es
+    <span data-count="22">r</span>es
 end
 </code></pre>
       </div>

@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8"/>
     <title>type_ast.ml &mdash; Coverage report</title>
-    <meta name="description" content="43.33% coverage in lib/type_ast.ml">
+    <meta name="description" content="48.67% coverage in lib/type_ast.ml">
     <link rel="stylesheet" href="../coverage.css"/>
     <script src="../highlight.pack.js"></script>
     <script>hljs.initHighlightingOnLoad();</script>
@@ -15,7 +15,7 @@
           <span class="dirname">lib/</span>type_ast.ml
         </a>
       </h1>
-      <h2>43.33%</h2>
+      <h2>48.67%</h2>
     </div>
     <div id="navbar">
       <span class="unvisited" style="top:4.28%"></span>
@@ -27,7 +27,6 @@
       <span class="unvisited" style="top:11.76%"></span>
       <span class="unvisited" style="top:12.30%"></span>
       <span class="unvisited" style="top:13.37%"></span>
-      <span class="unvisited" style="top:19.79%"></span>
       <span class="unvisited" style="top:24.06%"></span>
       <span class="unvisited" style="top:28.88%"></span>
       <span class="unvisited" style="top:29.95%"></span>
@@ -69,12 +68,8 @@
       <span class="unvisited" style="bottom:32.62%"></span>
       <span class="unvisited" style="bottom:31.55%"></span>
       <span class="unvisited" style="bottom:31.02%"></span>
-      <span class="unvisited" style="bottom:26.74%"></span>
       <span class="unvisited" style="bottom:25.13%"></span>
       <span class="unvisited" style="bottom:24.06%"></span>
-      <span class="unvisited" style="bottom:19.79%"></span>
-      <span class="unvisited" style="bottom:14.97%"></span>
-      <span class="unvisited" style="bottom:9.63%"></span>
     </div>
     <div id="report">
       <div id="lines-layer">
@@ -115,7 +110,7 @@
 <a id="L34"></a><span > </span>
 <a id="L35"></a><span > </span>
 <a id="L36"></a><span class="visited"> </span>
-<a id="L37"></a><span class="unvisited"> </span>
+<a id="L37"></a><span class="visited"> </span>
 <a id="L38"></a><span class="visited"> </span>
 <a id="L39"></a><span class="visited"> </span>
 <a id="L40"></a><span class="visited"> </span>
@@ -215,7 +210,7 @@
 <a id="L134"></a><span > </span>
 <a id="L135"></a><span > </span>
 <a id="L136"></a><span class="visited"> </span>
-<a id="L137"></a><span class="unvisited"> </span>
+<a id="L137"></a><span class="visited"> </span>
 <a id="L138"></a><span class="visited"> </span>
 <a id="L139"></a><span class="visited"> </span>
 <a id="L140"></a><span class="unvisited"> </span>
@@ -228,7 +223,7 @@
 <a id="L147"></a><span class="visited"> </span>
 <a id="L148"></a><span class="visited"> </span>
 <a id="L149"></a><span class="visited"> </span>
-<a id="L150"></a><span class="unvisited"> </span>
+<a id="L150"></a><span class="visited"> </span>
 <a id="L151"></a><span class="visited"> </span>
 <a id="L152"></a><span > </span>
 <a id="L153"></a><span > </span>
@@ -237,7 +232,7 @@
 <a id="L156"></a><span class="visited"> </span>
 <a id="L157"></a><span class="visited"> </span>
 <a id="L158"></a><span class="visited"> </span>
-<a id="L159"></a><span class="unvisited"> </span>
+<a id="L159"></a><span class="visited"> </span>
 <a id="L160"></a><span class="visited"> </span>
 <a id="L161"></a><span > </span>
 <a id="L162"></a><span > </span>
@@ -247,7 +242,7 @@
 <a id="L166"></a><span class="visited"> </span>
 <a id="L167"></a><span class="visited"> </span>
 <a id="L168"></a><span class="visited"> </span>
-<a id="L169"></a><span class="unvisited"> </span>
+<a id="L169"></a><span class="visited"> </span>
 <a id="L170"></a><span class="visited"> </span>
 <a id="L171"></a><span class="visited"> </span>
 <a id="L172"></a><span class="visited"> </span>
@@ -493,24 +488,24 @@ module InferTypeUtils = struct
   let t_string = TString
   let t_bool = TBool
   let t_unit = TUnit
-  let t_arrow t1 t2 = <span data-count="738">T</span>Arrow (t1, t2)
-  let t_tuple ts = <span data-count="0">T</span>Tuple ts
-  let t_ground t = <span data-count="260">T</span>Ground t
-  let t_var t = <span data-count="451">T</span>Var t
-  let tv_unbound n l = <span data-count="454">U</span>nbound (n, l)
-  let tv_link t = <span data-count="321">L</span>ink t
-  let lvl_value { value = v; old_lvl = _; new_lvl = _ } = <span data-count="9077">v</span>
+  let t_arrow t1 t2 = <span data-count="796">T</span>Arrow (t1, t2)
+  let t_tuple ts = <span data-count="12">T</span>Tuple ts
+  let t_ground t = <span data-count="286">T</span>Ground t
+  let t_var t = <span data-count="487">T</span>Var t
+  let tv_unbound n l = <span data-count="490">U</span>nbound (n, l)
+  let tv_link t = <span data-count="341">L</span>ink t
+  let lvl_value { value = v; old_lvl = _; new_lvl = _ } = <span data-count="9767">v</span>
 
   let is_unit typ =
     <span data-count="0">m</span>atch lvl_value typ with <span data-count="0">T</span>Ground TUnit -&gt; true | <span data-count="0">_</span> -&gt; false
 
-  let with_lvls old_l new_l v = <span data-count="1449">{</span> value = v; old_lvl = old_l; new_lvl = new_l }
+  let with_lvls old_l new_l v = <span data-count="1581">{</span> value = v; old_lvl = old_l; new_lvl = new_l }
   let assoc = List.assoc
 
   let convert_const l =
-    <span data-count="108">l</span>et l = Position.Position.value l in
-    <span data-count="108">(</span>match l with
-    | <span data-count="105">L</span>Int _ -&gt; TInt
+    <span data-count="120">l</span>et l = Position.Position.value l in
+    <span data-count="120">(</span>match l with
+    | <span data-count="117">L</span>Int _ -&gt; TInt
     | <span data-count="0">L</span>String _ -&gt; TString
     | <span data-count="3">L</span>Bool _ -&gt; TBool
     | <span data-count="0">L</span>Float _ -&gt; TFloat
@@ -518,12 +513,12 @@ module InferTypeUtils = struct
     |&gt; t_ground
 
   let rec repr t =
-    <span data-count="2713">m</span>atch lvl_value t with
-    | <span data-count="388">T</span>Var ({ contents = Link t } as tvar) -&gt;
+    <span data-count="2917">m</span>atch lvl_value t with
+    | <span data-count="408">T</span>Var ({ contents = Link t } as tvar) -&gt;
         let t = repr t in
-        <span data-count="388">t</span>var := Link t;
+        <span data-count="408">t</span>var := Link t;
         t
-    | <span data-count="2325">_</span> -&gt; t
+    | <span data-count="2509">_</span> -&gt; t
 end
 
 module TypeAst = struct
@@ -593,40 +588,40 @@ module TypeAstUtils = struct
   open TypeAst
   open InferTypeUtils
 
-  let ty_arrow t1 t2 = <span data-count="663">T</span>yArrow (t1, t2)
-  let ty_tuple ts = <span data-count="0">T</span>yTuple ts
-  let ty_ground t = <span data-count="1471">T</span>yGround t
+  let ty_arrow t1 t2 = <span data-count="693">T</span>yArrow (t1, t2)
+  let ty_tuple ts = <span data-count="22">T</span>yTuple ts
+  let ty_ground t = <span data-count="1597">T</span>yGround t
   let ty_var n = <span data-count="7">T</span>yVar n
   let typed_value { value = v; typ = _ } = <span data-count="0">v</span>
-  let with_typ t v = <span data-count="1630">{</span> value = v; typ = t }
+  let with_typ t v = <span data-count="1770">{</span> value = v; typ = t }
   let typ { value = _; typ = t } = <span data-count="0">t</span>
   let ty_typ : ('a, ty) typed -&gt; ty = fun { value = _; typ = t } -&gt; <span data-count="1">t</span>
-  let typ_let_binding rec_f l_v b = <span data-count="170">{</span> rec_f; l_v; body = b }
-  let typ_let_body ls e = <span data-count="276">{</span> lets = ls; expr = e }
-  let t_apply e1 e2 = <span data-count="512">T</span>Apply (e1, e2)
-  let t_literal l = <span data-count="216">T</span>Literal l
-  let t_value n = <span data-count="502">T</span>Value n
+  let typ_let_binding rec_f l_v b = <span data-count="186">{</span> rec_f; l_v; body = b }
+  let typ_let_body ls e = <span data-count="292">{</span> lets = ls; expr = e }
+  let t_apply e1 e2 = <span data-count="552">T</span>Apply (e1, e2)
+  let t_literal l = <span data-count="240">T</span>Literal l
+  let t_value n = <span data-count="550">T</span>Value n
   let t_fun l_v b = <span data-count="106">T</span>Fun { lvalue = l_v; b }
-  let t_tuple es = <span data-count="0">T</span>Tuple es
+  let t_tuple es = <span data-count="12">T</span>Tuple es
   let t_if_else c t f = <span data-count="18">T</span>IfElse { cond = c; t_body = t; f_body = f }
 
   let rec remove_lvl typ =
-    <span data-count="3070">l</span>et open InferType in
+    <span data-count="3280">l</span>et open InferType in
     match lvl_value typ with
     | <span data-count="7">T</span>Var { contents = Unbound (n, _) } -&gt; ty_var n
-    | <span data-count="929">T</span>Var { contents = Link t } -&gt; remove_lvl t
-    | <span data-count="663">T</span>Arrow (t1, t2) -&gt; ty_arrow (remove_lv<span data-count="663">l</span> t1) (remove_lv<span data-count="663">l</span> t2)
-    | <span data-count="0">T</span>Tuple ts -&gt; List.map remove_lvl ts |&gt; <span data-count="0">t</span>y_tuple
-    | <span data-count="1471">T</span>Ground t -&gt; ty_ground t
+    | <span data-count="961">T</span>Var { contents = Link t } -&gt; remove_lvl t
+    | <span data-count="693">T</span>Arrow (t1, t2) -&gt; ty_arrow (remove_lv<span data-count="693">l</span> t1) (remove_lv<span data-count="693">l</span> t2)
+    | <span data-count="22">T</span>Tuple ts -&gt; List.map remove_lvl ts |&gt; <span data-count="22">t</span>y_tuple
+    | <span data-count="1597">T</span>Ground t -&gt; ty_ground t
 
   let rec convert_expr : InferType.typ typ_expr -&gt; ty typ_expr =
    fun { value = expr; typ } -&gt;
-    <span data-count="677">l</span>et e : ty t_expr =
+    <span data-count="739">l</span>et e : ty t_expr =
       match expr with
-      | <span data-count="256">T</span>Apply (l, r) -&gt; convert_expr r |&gt; <span data-count="256">t</span>_appl<span data-count="256">y</span> (convert_exp<span data-count="256">r</span> l)
-      | <span data-count="108">T</span>Literal l -&gt; t_litera<span data-count="108">l</span> l
-      | <span data-count="251">T</span>Value n -&gt; t_valu<span data-count="251">e</span> n
-      | <span data-count="0">T</span>Tuple es -&gt; List.map convert_expr es |&gt; <span data-count="0">t</span>_tupl<span data-count="0">e</span>
+      | <span data-count="276">T</span>Apply (l, r) -&gt; convert_expr r |&gt; <span data-count="276">t</span>_appl<span data-count="276">y</span> (convert_exp<span data-count="276">r</span> l)
+      | <span data-count="120">T</span>Literal l -&gt; t_litera<span data-count="120">l</span> l
+      | <span data-count="275">T</span>Value n -&gt; t_valu<span data-count="275">e</span> n
+      | <span data-count="6">T</span>Tuple es -&gt; List.map convert_expr es |&gt; <span data-count="6">t</span>_tupl<span data-count="6">e</span>
       | <span data-count="9">T</span>IfElse { cond; t_body; f_body } -&gt;
           t_if_els<span data-count="9">e</span> (convert_exp<span data-count="9">r</span> cond) (convert_exp<span data-count="9">r</span> t_body)
             (convert_exp<span data-count="9">r</span> f_body)
@@ -634,16 +629,16 @@ module TypeAstUtils = struct
           with_typ (remove_lv<span data-count="53">l</span> lvalue.typ) lvalue.value |&gt; <span data-count="53">f</span>un l_v -&gt;
           <span data-count="53">c</span>onvert_body b |&gt; <span data-count="53">t</span>_fun l_<span data-count="53">v</span>
     in
-    e |&gt; with_typ (remove_lv<span data-count="677">l</span> typ)
+    e |&gt; with_typ (remove_lv<span data-count="739">l</span> typ)
 
   and convert_body : InferType.typ typ_let_body -&gt; ty typ_let_body =
    fun body -&gt;
-    <span data-count="138">t</span>yp_let_body (List.ma<span data-count="138">p</span> convert_let body.lets) (convert_exp<span data-count="138">r</span> body.expr)
+    <span data-count="146">t</span>yp_let_body (List.ma<span data-count="146">p</span> convert_let body.lets) (convert_exp<span data-count="146">r</span> body.expr)
 
   and convert_let : InferType.typ typ_let_binding -&gt; ty typ_let_binding =
    fun { rec_f; l_v; body } -&gt;
-    <span data-count="85">l</span>et l_v = with_typ (remove_lv<span data-count="85">l</span> l_v.typ) l_v.value in
-    <span data-count="85">c</span>onvert_body body |&gt; <span data-count="85">t</span>yp_let_binding rec_f l_v
+    <span data-count="93">l</span>et l_v = with_typ (remove_lv<span data-count="93">l</span> l_v.typ) l_v.value in
+    <span data-count="93">c</span>onvert_body body |&gt; <span data-count="93">t</span>yp_let_binding rec_f l_v
 end
 </code></pre>
       </div>
