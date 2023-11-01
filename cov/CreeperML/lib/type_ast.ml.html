@@ -570,7 +570,7 @@ module TypeAst = struct
 
   <span data-count="0">t</span>ype 'ty typ_program = <span data-count="0">'</span>ty typ_let_binding lis<span data-count="0">t</span>
   [@@deriving show { with_path = false }<span data-count="0">]</span>
-  
+
   let rec show_ty = function
     | <span data-count="0">T</span>yArrow (x, y) -&gt; Format.sprintf "%s -&gt; %s" (show_t<span data-count="0">y</span> x) (show_t<span data-count="0">y</span> y)
     | <span data-count="0">T</span>yGround TInt -&gt; "int"
