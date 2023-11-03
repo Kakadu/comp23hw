@@ -210,7 +210,7 @@ open Type_ast.InferTypeUtils
 open Type_ast.TypeAst
 open Counter.Counter
 open Pp.PrettyPrinter
-open Db.DbTypeAst
+open Indexed_ast.IndexedTypeAst
 open Closure.ClosureConvert
 open String
 module NameMap = Map.Make (String)
@@ -288,8 +288,8 @@ let () =
       match top_infer env p with
       | <span data-count="0">E</span>rror msg -&gt; Printf.print<span data-count="0">f</span> "%s" msg
       | <span data-count="4">O</span>k p -&gt;
-          db_of_typed nm p |&gt; <span data-count="4">c</span>f_of_db globals |&gt; <span data-count="4">p</span>rint_cf_program false |&gt; <span data-count="4">t</span>rim
-          |&gt; <span data-count="4">p</span>rint_endlin<span data-count="4">e</span>)
+          index_of_typed nm p |&gt; <span data-count="4">c</span>f_of_index globals |&gt; <span data-count="4">p</span>rint_cf_program false
+          |&gt; <span data-count="4">t</span>rim |&gt; <span data-count="4">p</span>rint_endlin<span data-count="4">e</span>)
 </code></pre>
       </div>
     </div>

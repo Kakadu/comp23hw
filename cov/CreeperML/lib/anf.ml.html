@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8"/>
     <title>anf.ml &mdash; Coverage report</title>
-    <meta name="description" content="98.04% coverage in lib/anf.ml">
+    <meta name="description" content="98.08% coverage in lib/anf.ml">
     <link rel="stylesheet" href="../coverage.css"/>
     <script src="../highlight.pack.js"></script>
     <script>hljs.initHighlightingOnLoad();</script>
@@ -15,12 +15,12 @@
           <span class="dirname">lib/</span>anf.ml
         </a>
       </h1>
-      <h2>98.04%</h2>
+      <h2>98.08%</h2>
     </div>
     <div id="navbar">
-      <span class="unvisited" style="top:48.88%"></span>
-      <span class="unvisited" style="bottom:49.33%"></span>
-      <span class="unvisited" style="bottom:48.88%"></span>
+      <span class="unvisited" style="top:48.23%"></span>
+      <span class="unvisited" style="top:50.00%"></span>
+      <span class="unvisited" style="bottom:49.56%"></span>
     </div>
     <div id="report">
       <div id="lines-layer">
@@ -215,39 +215,42 @@
 <a id="L188"></a><span class="visited"> </span>
 <a id="L189"></a><span > </span>
 <a id="L190"></a><span > </span>
-<a id="L191"></a><span class="visited"> </span>
+<a id="L191"></a><span > </span>
 <a id="L192"></a><span class="visited"> </span>
-<a id="L193"></a><span > </span>
+<a id="L193"></a><span class="visited"> </span>
 <a id="L194"></a><span > </span>
 <a id="L195"></a><span > </span>
-<a id="L196"></a><span class="visited"> </span>
+<a id="L196"></a><span > </span>
 <a id="L197"></a><span class="visited"> </span>
 <a id="L198"></a><span class="visited"> </span>
 <a id="L199"></a><span class="visited"> </span>
-<a id="L200"></a><span > </span>
+<a id="L200"></a><span class="visited"> </span>
 <a id="L201"></a><span > </span>
-<a id="L202"></a><span class="visited"> </span>
-<a id="L203"></a><span > </span>
+<a id="L202"></a><span > </span>
+<a id="L203"></a><span class="visited"> </span>
 <a id="L204"></a><span > </span>
 <a id="L205"></a><span class="visited"> </span>
-<a id="L206"></a><span class="visited"> </span>
-<a id="L207"></a><span class="visited"> </span>
+<a id="L206"></a><span > </span>
+<a id="L207"></a><span > </span>
 <a id="L208"></a><span class="visited"> </span>
-<a id="L209"></a><span > </span>
-<a id="L210"></a><span > </span>
-<a id="L211"></a><span > </span>
-<a id="L212"></a><span class="visited"> </span>
+<a id="L209"></a><span class="visited"> </span>
+<a id="L210"></a><span class="visited"> </span>
+<a id="L211"></a><span class="visited"> </span>
+<a id="L212"></a><span > </span>
 <a id="L213"></a><span > </span>
-<a id="L214"></a><span class="visited"> </span>
-<a id="L215"></a><span > </span>
-<a id="L216"></a><span class="visited"> </span>
+<a id="L214"></a><span > </span>
+<a id="L215"></a><span class="visited"> </span>
+<a id="L216"></a><span > </span>
 <a id="L217"></a><span class="visited"> </span>
 <a id="L218"></a><span > </span>
 <a id="L219"></a><span class="visited"> </span>
-<a id="L220"></a><span > </span>
+<a id="L220"></a><span class="visited"> </span>
 <a id="L221"></a><span > </span>
 <a id="L222"></a><span class="visited"> </span>
 <a id="L223"></a><span > </span>
+<a id="L224"></a><span > </span>
+<a id="L225"></a><span class="visited"> </span>
+<a id="L226"></a><span > </span>
 </pre>
       </div>
       <div id="text-layer">
@@ -475,6 +478,9 @@
 <a href="#L221">221</a>
 <a href="#L222">222</a>
 <a href="#L223">223</a>
+<a href="#L224">224</a>
+<a href="#L225">225</a>
+<a href="#L226">226</a>
 </pre>
 <pre><code class="ocaml">(** Copyright 2023-2024, Arthur Alekseev and Starcev Matvey *)
 
@@ -483,9 +489,9 @@
 module AnfTypeAst = struct
   open Type_ast.TypeAst
   open Parser_ast.ParserAst
-  open Db.DbTypeAst
+  open Indexed_ast.IndexedTypeAst
 
-  type tlvalue = db_lvalue
+  type tlvalue = index_lvalue
   type tliteral = (literal, ty) typed
   type tname = (int, ty) typed
   type imm = ImmVal of tname | ImmLit of tliteral
@@ -666,6 +672,7 @@ module AnfOptimizations = struct
       | <span data-count="134">_</span> -&gt; nmm
     in
     let e = apply_moves_to_expr nmm b.e in
+
     <span data-count="189">l</span>et b = { b with e } in
     let b = match b.e with <span data-count="55">A</span>Imm (ImmVal _) -&gt; None | <span data-count="134">_</span> -&gt; Some b in
     (b, nmm)
@@ -674,9 +681,11 @@ module AnfOptimizations = struct
     <span data-count="16">l</span>et deopt_lst = List.filter_map (fun x -&gt; <span data-count="56">x</span>) in
     <span data-count="16">l</span>et inner (binds, nmm) bind =
       <span data-count="56">l</span>et bind, nmm = apply_moves_to_val nmm bind in
-      <span data-count="56">(</span>binds @ [ bind ], nmm)
+      <span data-count="56">(</span>bind :: binds, nmm)
     in
-    let res, nmm = List.fold_left inner ([], nmm) vals in
+    let res, nmm =
+      List.fold_left inner ([], nmm) vals |&gt; <span data-count="16">f</span>un (bs, nm) -&gt; <span data-count="16">(</span>List.re<span data-count="16">v</span> bs, nm)
+    in
     <span data-count="16">(</span>deopt_ls<span data-count="16">t</span> res, nmm)
 
   let apply_moves_to_fun (nmm : nmm) (fn : anf_fun_binding) =

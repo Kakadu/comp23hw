@@ -212,7 +212,7 @@ open Type_ast.InferTypeUtils
 open Type_ast.TypeAst
 open Counter.Counter
 open Pp.PrettyPrinter
-open Db.DbTypeAst
+open Indexed_ast.IndexedTypeAst
 open Closure.ClosureConvert
 open String
 open Anf.AnfConvert
@@ -291,7 +291,7 @@ let () =
       match top_infer env p with
       | <span data-count="0">E</span>rror msg -&gt; Printf.print<span data-count="0">f</span> "%s" msg
       | <span data-count="6">O</span>k p -&gt;
-          db_of_typed nm p |&gt; <span data-count="6">c</span>f_of_db globals |&gt; <span data-count="6">a</span>nf_of_cf
+          index_of_typed nm p |&gt; <span data-count="6">c</span>f_of_index globals |&gt; <span data-count="6">a</span>nf_of_cf
           |&gt; <span data-count="6">p</span>rint_anf_program false |&gt; <span data-count="6">t</span>rim |&gt; <span data-count="6">p</span>rint_endlin<span data-count="6">e</span>)
 </code></pre>
       </div>

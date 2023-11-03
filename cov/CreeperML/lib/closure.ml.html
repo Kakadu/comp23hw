@@ -463,7 +463,7 @@
 (** SPDX-License-Identifier: LGPL-3.0-or-later *)
 
 module ClosureAst = struct
-  open Db.DbTypeAst
+  open Indexed_ast.IndexedTypeAst
   open Parser_ast.ParserAst
   open Type_ast.TypeAst
 
@@ -485,7 +485,7 @@ module ClosureAst = struct
 
   type cf_typ_let_binding = {
     rec_f : rec_flag;
-    l_v : db_lvalue;
+    l_v : index_lvalue;
     cf_body : cf_typ_let_body;
   }
 
@@ -497,7 +497,7 @@ module ClosureAst = struct
   type cf_fun_let_binding = {
     is_rec : rec_flag;
     name : (int, ty) typed;
-    args : db_lvalue;
+    args : index_lvalue;
     b : cf_typ_let_body;
     env_vars : (int, ty) typed list;
   }
@@ -513,7 +513,7 @@ module ClosureConvert = struct
   open ClosureAst
   open Type_ast.TypeAst
   open Parser_ast.ParserAst
-  open Db.DbTypeAst
+  open Indexed_ast.IndexedTypeAst
   open Counter.Counter
 
   module TypedName = struct
@@ -538,8 +538,8 @@ module ClosureConvert = struct
     | <span data-count="189">D</span>LvValue v, ty -&gt; typed ty v |&gt; <span data-count="189">N</span>ameSet.singleton
     | <span data-count="0">_</span>, ty -&gt; typed ty (-1) |&gt; <span data-count="0">N</span>ameSet.singleton
 
-  let rec collect_unbound_variables (f : db_fun_body) global_bindings =
-    <span data-count="98">l</span>et rec collect_variables_in_expr (e : db_expr) =
+  let rec collect_unbound_variables (f : index_fun_body) global_bindings =
+    <span data-count="98">l</span>et rec collect_variables_in_expr (e : index_expr) =
       <span data-count="790">m</span>atch e.value with
       | <span data-count="318">D</span>Apply (left, right) -&gt;
           let left = collect_variables_in_expr left in
@@ -558,7 +558,7 @@ module ClosureConvert = struct
       | <span data-count="60">D</span>Fun f -&gt; collect_unbound_variables f global_bindings
     in
 
-    let rec collect_variables_in_let (l : db_let_binding) known =
+    let rec collect_variables_in_let (l : index_let_binding) known =
       <span data-count="29">l</span>et e = NameSet.empty in
       let u = NameSet.union in
       let d = NameSet.diff in
@@ -581,7 +581,7 @@ module ClosureConvert = struct
           <span data-count="26">(</span>known, <span data-count="26">u</span> iunknown expr_unknowns)
     in
 
-    let collect_variables_in_body (b : db_let_body) known =
+    let collect_variables_in_body (b : index_let_body) known =
       <span data-count="98">l</span>et e = NameSet.empty in
       let u = NameSet.union in
       let known, unknown =
@@ -599,7 +599,7 @@ module ClosureConvert = struct
     <span data-count="98">l</span>et known, unknown = collect_variables_in_body f.b known in
     <span data-count="98">N</span>ameSet.diff unknown known
 
-  let rec closure_free_expr globals r (e : db_expr) =
+  let rec closure_free_expr globals r (e : index_expr) =
     <span data-count="599">m</span>atch e.value with
     | <span data-count="229">D</span>Apply (left, right) -&gt;
         let left_decs, left = closure_free_expr globals r left in
@@ -645,7 +645,7 @@ module ClosureConvert = struct
         let f = CFClosure (genned, env) |&gt; typed e.typ in
         <span data-count="38">(</span>List.conca<span data-count="38">t</span> inner_closures @ expr_closures @ [ fun_let ], f)
 
-  and cf_let (globals : NameSet.t) is_rec (l : db_let_binding) =
+  and cf_let (globals : NameSet.t) is_rec (l : index_let_binding) =
     <span data-count="68">l</span>et inner = List.map (cf_le<span data-count="68">t</span> globals is_rec) l.body.lets in
     <span data-count="68">l</span>et closures, cf_expr = closure_free_expr globals is_rec l.body.expr in
     <span data-count="68">l</span>et inner_cf_lets = List.map snd inner in
@@ -656,8 +656,8 @@ module ClosureConvert = struct
     let cf_let_binding = { rec_f; l_v; cf_body = cf_let_body } in
     (List.conca<span data-count="68">t</span> inner_closures @ closures, cf_let_binding)
 
-  and cf_of_db globals prog =
-    <span data-count="16">l</span>et rec inner g (p : db_program) acc =
+  and cf_of_index globals prog =
+    <span data-count="16">l</span>et rec inner g (p : index_program) acc =
       <span data-count="70">m</span>atch p with
       | <span data-count="54">h</span> :: t -&gt;
           let closures, binding = cf_let g h.rec_f h in
