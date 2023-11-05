@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <title>alpha.ml &mdash; Coverage report</title>
+    <meta name="description" content="61.36% coverage in lib/alpha.ml">
+    <link rel="stylesheet" href="../coverage.css"/>
+    <script src="../highlight.pack.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+  </head>
+  <body>
+    <div id="header">
+      <h1>
+        <a href="../index.html">
+          <span class="dirname">lib/</span>alpha.ml
+        </a>
+      </h1>
+      <h2>61.36%</h2>
+    </div>
+    <div id="navbar">
+      <span class="unvisited" style="top:37.50%"></span>
+      <span class="unvisited" style="top:39.58%"></span>
+      <span class="unvisited" style="top:41.67%"></span>
+      <span class="unvisited" style="top:43.75%"></span>
+      <span class="unvisited" style="top:47.92%"></span>
+      <span class="unvisited" style="bottom:43.75%"></span>
+      <span class="unvisited" style="bottom:29.17%"></span>
+      <span class="unvisited" style="bottom:25.00%"></span>
+    </div>
+    <div id="report">
+      <div id="lines-layer">
+        <pre>
+<a id="L1"></a><span > </span>
+<a id="L2"></a><span > </span>
+<a id="L3"></a><span > </span>
+<a id="L4"></a><span > </span>
+<a id="L5"></a><span > </span>
+<a id="L6"></a><span > </span>
+<a id="L7"></a><span > </span>
+<a id="L8"></a><span > </span>
+<a id="L9"></a><span class="visited"> </span>
+<a id="L10"></a><span class="visited"> </span>
+<a id="L11"></a><span > </span>
+<a id="L12"></a><span > </span>
+<a id="L13"></a><span class="visited"> </span>
+<a id="L14"></a><span class="visited"> </span>
+<a id="L15"></a><span class="visited"> </span>
+<a id="L16"></a><span > </span>
+<a id="L17"></a><span class="visited"> </span>
+<a id="L18"></a><span class="unvisited"> </span>
+<a id="L19"></a><span class="unvisited"> </span>
+<a id="L20"></a><span class="unvisited"> </span>
+<a id="L21"></a><span class="unvisited"> </span>
+<a id="L22"></a><span > </span>
+<a id="L23"></a><span class="unvisited"> </span>
+<a id="L24"></a><span class="visited"> </span>
+<a id="L25"></a><span > </span>
+<a id="L26"></a><span class="visited"> </span>
+<a id="L27"></a><span class="unvisited"> </span>
+<a id="L28"></a><span > </span>
+<a id="L29"></a><span > </span>
+<a id="L30"></a><span > </span>
+<a id="L31"></a><span class="visited"> </span>
+<a id="L32"></a><span > </span>
+<a id="L33"></a><span class="visited"> </span>
+<a id="L34"></a><span class="unvisited"> </span>
+<a id="L35"></a><span > </span>
+<a id="L36"></a><span class="unvisited"> </span>
+<a id="L37"></a><span > </span>
+<a id="L38"></a><span > </span>
+<a id="L39"></a><span > </span>
+<a id="L40"></a><span class="visited"> </span>
+<a id="L41"></a><span class="visited"> </span>
+<a id="L42"></a><span class="visited"> </span>
+<a id="L43"></a><span > </span>
+<a id="L44"></a><span class="visited"> </span>
+<a id="L45"></a><span class="visited"> </span>
+<a id="L46"></a><span > </span>
+<a id="L47"></a><span class="visited"> </span>
+<a id="L48"></a><span > </span>
+</pre>
+      </div>
+      <div id="text-layer">
+        <pre id="line-numbers">
+<a href="#L1"> 1</a>
+<a href="#L2"> 2</a>
+<a href="#L3"> 3</a>
+<a href="#L4"> 4</a>
+<a href="#L5"> 5</a>
+<a href="#L6"> 6</a>
+<a href="#L7"> 7</a>
+<a href="#L8"> 8</a>
+<a href="#L9"> 9</a>
+<a href="#L10">10</a>
+<a href="#L11">11</a>
+<a href="#L12">12</a>
+<a href="#L13">13</a>
+<a href="#L14">14</a>
+<a href="#L15">15</a>
+<a href="#L16">16</a>
+<a href="#L17">17</a>
+<a href="#L18">18</a>
+<a href="#L19">19</a>
+<a href="#L20">20</a>
+<a href="#L21">21</a>
+<a href="#L22">22</a>
+<a href="#L23">23</a>
+<a href="#L24">24</a>
+<a href="#L25">25</a>
+<a href="#L26">26</a>
+<a href="#L27">27</a>
+<a href="#L28">28</a>
+<a href="#L29">29</a>
+<a href="#L30">30</a>
+<a href="#L31">31</a>
+<a href="#L32">32</a>
+<a href="#L33">33</a>
+<a href="#L34">34</a>
+<a href="#L35">35</a>
+<a href="#L36">36</a>
+<a href="#L37">37</a>
+<a href="#L38">38</a>
+<a href="#L39">39</a>
+<a href="#L40">40</a>
+<a href="#L41">41</a>
+<a href="#L42">42</a>
+<a href="#L43">43</a>
+<a href="#L44">44</a>
+<a href="#L45">45</a>
+<a href="#L46">46</a>
+<a href="#L47">47</a>
+<a href="#L48">48</a>
+</pre>
+<pre><code class="ocaml">(** Copyright 2023-2024, Ilya Pankratov, Maxim Drumov *)
+
+(** SPDX-License-Identifier: LGPL-2.1-or-later *)
+
+open Base
+open Typedtree
+open Counter.Counter
+
+let find x env = <span data-count="16">M</span>ap.find_exn env x
+let extend_env id env = <span data-count="8">M</span>ap.set ~key:id ~data:(geni<span data-count="8">d</span> id) env
+
+let rec alpha_expr env = function
+  | <span data-count="8">T</span>Var (x, ty) -&gt; TVar (fin<span data-count="8">d</span> x env, ty)
+  | <span data-count="4">T</span>Binop (op, e1, e2, ty) -&gt; TBinop (op, alpha_exp<span data-count="4">r</span> env e1, alpha_exp<span data-count="4">r</span> env e2, ty)
+  | <span data-count="4">T</span>Fun (Arg (id, ty1), expr, ty2) -&gt;
+    let env = extend_env id env in
+    <span data-count="4">T</span>Fun (Arg (fin<span data-count="4">d</span> id env, ty1), alpha_exp<span data-count="4">r</span> env expr, ty2)
+  | <span data-count="0">T</span>App (fst, scd, ty) -&gt; TApp (alpha_exp<span data-count="0">r</span> env fst, alpha_exp<span data-count="0">r</span> env scd, ty)
+  | <span data-count="0">T</span>IfThenElse (cond, e1, e2, ty) -&gt;
+    TIfThenElse (alpha_exp<span data-count="0">r</span> env cond, alpha_exp<span data-count="0">r</span> env e1, alpha_exp<span data-count="0">r</span> env e2, ty)
+  | <span data-count="0">T</span>LetRecIn (id, e1, e2, ty) -&gt;
+    let env' = extend_env id env in
+    <span data-count="0">T</span>LetRecIn (fin<span data-count="0">d</span> id env', alpha_exp<span data-count="0">r</span> env e1, alpha_exp<span data-count="0">r</span> env' e2, ty)
+  | <span data-count="2">T</span>LetIn (id, e1, e2, ty) -&gt;
+    let env' = extend_env id env in
+    <span data-count="2">T</span>LetIn (fin<span data-count="2">d</span> id env', alpha_exp<span data-count="2">r</span> env e1, alpha_exp<span data-count="2">r</span> env' e2, ty)
+  | <span data-count="0">o</span>ther -&gt; other
+;;
+
+let alpha_bindings env = function
+  | <span data-count="2">T</span>Let (id, expr, ty) -&gt;
+    let env = extend_env id env in
+    <span data-count="2">T</span>Let (fin<span data-count="2">d</span> id env, alpha_exp<span data-count="2">r</span> env expr, ty), env
+  | <span data-count="0">T</span>LetRec (id, expr, ty) -&gt;
+    let env = extend_env id env in
+    <span data-count="0">T</span>LetRec (fin<span data-count="0">d</span> id env, alpha_exp<span data-count="0">r</span> env expr, ty), env
+;;
+
+let alpha stms =
+  <span data-count="2">r</span>eset 0;
+  <span data-count="2">l</span>et empty = Map.empty (module Base.String) in
+  <span data-count="2">l</span>et _, stms =
+    List.fold stms ~init:(empty, []) ~f:(fun (env, stms) el -&gt;
+      <span data-count="2">l</span>et stmt, env = alpha_bindings env el in
+      <span data-count="2">e</span>nv, stmt :: stms)
+  in
+  <span data-count="2">L</span>ist.rev stms
+;;
+</code></pre>
+      </div>
+    </div>
+    <script src="../coverage.js"></script>
+  </body>
+</html>
