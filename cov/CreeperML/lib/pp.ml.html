@@ -684,20 +684,20 @@ module PrettyPrinter = struct
     | <span data-count="91">I</span>mmLit x -&gt; Format.sprintf "l(%s%s)" (show_litera<span data-count="91">l</span> x.value) (s<span data-count="91">t</span> x.typ)
 
   let rec print_body st intd (b : anf_body) =
-    <span data-count="18">l</span>et inner xs x = <span data-count="40">x</span>s ^ "\n" ^ print_anf_de<span data-count="40">c</span> st (intd ^ "  ") (AnfVal x) in
+    <span data-count="12">l</span>et inner xs x = <span data-count="27">x</span>s ^ "\n" ^ print_anf_de<span data-count="27">c</span> st (intd ^ "  ") (AnfVal x) in
     let lets = List.fold_left inner "" b.lets in
-    <span data-count="18">l</span>et expr = Format.sprintf "  %s%s" intd (print_im<span data-count="18">m</span> st b.res) in
-    <span data-count="18">F</span>ormat.sprintf "%s\n%s" lets expr
+    <span data-count="12">l</span>et expr = Format.sprintf "  %s%s" intd (print_im<span data-count="12">m</span> st b.res) in
+    <span data-count="12">F</span>ormat.sprintf "%s\n%s" lets expr
 
   and print_anf_expr st intd = function
     | <span data-count="197">A</span>Apply (x, y) -&gt; Format.sprintf "%s %s" (print_im<span data-count="197">m</span> st x) (print_im<span data-count="197">m</span> st y)
     | <span data-count="6">A</span>Tuple xs -&gt;
         List.map (print_im<span data-count="6">m</span> st) xs |&gt; <span data-count="6">j</span>oin ", " |&gt; <span data-count="6">F</span>ormat.sprintf "(%s)"
     | <span data-count="6">A</span>ite (i, t, e) -&gt;
-        let i_b = print_body st intd i in
+        let i_b = print_imm st i in
         <span data-count="6">l</span>et t_b = print_body st intd t in
         <span data-count="6">l</span>et f_b = print_body st intd e in
-        <span data-count="6">F</span>ormat.sprintf "if%s\n%sthen%s\n%selse%s" i_b intd t_b intd f_b
+        <span data-count="6">F</span>ormat.sprintf "if %s then%s\n%selse%s" i_b t_b intd f_b
     | <span data-count="14">A</span>TupleAccess (t, e) -&gt; Format.sprintf "%s[%d]" (print_im<span data-count="14">m</span> st t) e
     | <span data-count="33">A</span>Imm i -&gt; print_imm st i
     | <span data-count="25">A</span>Closure (i, env) -&gt;
@@ -711,7 +711,7 @@ module PrettyPrinter = struct
     | <span data-count="25">A</span>nfFun x -&gt;
         let print_env_var x = <span data-count="40">x</span>.value |&gt; Format.sprintf "%d" in
         let intd = intd ^ "  " in
-        let inner xs x = <span data-count="76">x</span>s ^ "\n" ^ print_anf_de<span data-count="76">c</span> st intd (AnfVal x) in
+        let inner xs x = <span data-count="80">x</span>s ^ "\n" ^ print_anf_de<span data-count="80">c</span> st intd (AnfVal x) in
         let name, name_type = (x.name.value, s<span data-count="25">t</span> x.name.typ) in
         let arg, arg_type = (x.arg.value, s<span data-count="25">t</span> x.arg.typ) in
         let lets = List.fold_left inner "" x.body.lets in
@@ -723,7 +723,7 @@ module PrettyPrinter = struct
     <span data-count="12">l</span>et do_show_type t = <span data-count="0">"</span>: " ^ show_t<span data-count="0">y</span> t in
     let dont_show_type _ = <span data-count="894">"</span>" in
     let st = if print_type then <span data-count="0">d</span>o_show_type else <span data-count="12">d</span>ont_show_type in
-    let inner xs x = <span data-count="190">F</span>ormat.sprintf "%s\n%s\n" xs (print_anf_de<span data-count="190">c</span> st "" x) in
+    let inner xs x = <span data-count="199">F</span>ormat.sprintf "%s\n%s\n" xs (print_anf_de<span data-count="199">c</span> st "" x) in
     List.fold_left inner ""
 
   (********************************************************
