@@ -187,8 +187,8 @@
 
 open Ast
 
-let empty = Base.Set.empt<span data-count="79">y</span> (module Base.String)
-let singleton = Base.Set.singleto<span data-count="79">n</span> (module Base.String)
+let empty = Base.Set.empt<span data-count="83">y</span> (module Base.String)
+let singleton = Base.Set.singleto<span data-count="83">n</span> (module Base.String)
 
 let find_identifiers_pattern =
   let rec helper acc = function
@@ -202,7 +202,7 @@ let find_identifiers_pattern =
     | <span data-count="43">P</span>ConstructList (operand, list) -&gt; helper (helpe<span data-count="43">r</span> acc operand) list
     | <span data-count="65">_</span> -&gt; acc
   in
-  helpe<span data-count="79">r</span> empty
+  helpe<span data-count="83">r</span> empty
 ;;
 
 (** Finds all identifiers in an expression. Used in pattern-matching inference *)
@@ -252,7 +252,7 @@ let find_identifiers =
        | <span data-count="10">[</span>] -&gt; helper acc matched)
     | <span data-count="29">_</span> -&gt; acc
   in
-  helpe<span data-count="79">r</span> empty
+  helpe<span data-count="83">r</span> empty
 ;;
 </code></pre>
       </div>

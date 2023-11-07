@@ -1781,7 +1781,7 @@ module Type = struct
 
   let free_vars =
     let empty_set = Base.Set.empty (module Base.Int) in
-    <span data-count="60">l</span>et rec helper acc = function
+    <span data-count="64">l</span>et rec helper acc = function
       | <span data-count="268">T</span>Var n -&gt; Base.Set.add acc n
       | <span data-count="304">T</span>Arr (left, right) -&gt; helper (helpe<span data-count="304">r</span> acc left) right
       | <span data-count="14">T</span>Tuple typ_list -&gt;
@@ -1792,7 +1792,7 @@ module Type = struct
       | <span data-count="141">T</span>List typ -&gt; helper acc typ
       | <span data-count="331">T</span>Ground _ -&gt; acc
     in
-    helpe<span data-count="60">r</span> empty_set
+    helpe<span data-count="64">r</span> empty_set
   ;;
 end
 
@@ -1821,7 +1821,7 @@ end = struct
   (* An association list. In real world replace it by Map *)
   type t = (fresh, typ, Base.Int.comparator_witness) Base.Map.t
 
-  let empty = Base.Map.empt<span data-count="60">y</span> (module Base.Int)
+  let empty = Base.Map.empt<span data-count="64">y</span> (module Base.Int)
 
   let mapping key value =
     <span data-count="10537">i</span>f Type.occurs_in key value then <span data-count="0">f</span>ail `Occurs_check else <span data-count="10537">r</span>eturn (key, value)
@@ -1926,11 +1926,11 @@ module TypeEnv = struct
   type t = (identifier, scheme, Base.String.comparator_witness) Base.Map.t
 
   let extend env id scheme = <span data-count="464">B</span>ase.Map.set env ~key:id ~data:scheme
-  let empty = Base.Map.empt<span data-count="60">y</span> (module Base.String)
+  let empty = Base.Map.empt<span data-count="64">y</span> (module Base.String)
 
   let free_vars : t -&gt; (type_variable_number, Base.Int.comparator_witness) Base.Set.t =
     Base.Map.fold
-      ~init:(Base.Set.empt<span data-count="60">y</span> (module Base.Int))
+      ~init:(Base.Set.empt<span data-count="64">y</span> (module Base.Int))
       ~f:(fun ~key:_ ~data acc -&gt; <span data-count="157">B</span>ase.Set.union acc (Scheme.free_var<span data-count="157">s</span> data))
   ;;
 
@@ -1942,7 +1942,7 @@ open R
 open R.Syntax
 
 let unify = Subst.unify
-let fresh_var = fresh &gt;&gt;<span data-count="60">|</span> fun n -&gt; <span data-count="604">t</span>var n
+let fresh_var = fresh &gt;&gt;<span data-count="64">|</span> fun n -&gt; <span data-count="604">t</span>var n
 
 let instantiate : scheme -&gt; typ R.t =
   fun (set, t) -&gt;
@@ -2253,7 +2253,7 @@ let%expect_test _ =
                , [ EBinaryOperation (Mul, EIdentifier "x", ELiteral (LInt 3)) ] ) ) ));
   <span data-count="1">[</span>%expect {|
     int -&gt; string * int * int
-  |}<span data-count="121">]</span>
+  |}<span data-count="129">]</span>
 ;;
 
 let%expect_test _ =
@@ -2271,7 +2271,7 @@ let%expect_test _ =
                ] ) ));
   <span data-count="1">[</span>%expect {|
     int -&gt; int list
-  |}<span data-count="121">]</span>
+  |}<span data-count="129">]</span>
 ;;
 
 let%expect_test _ =
@@ -2288,7 +2288,7 @@ let%expect_test _ =
                ] ) ));
   <span data-count="1">[</span>%expect {|
     int -&gt; int list 
-  |}<span data-count="121">]</span>
+  |}<span data-count="129">]</span>
 ;;
 
 let%expect_test _ =
@@ -2302,7 +2302,7 @@ let%expect_test _ =
            , EList [ EIdentifier "x"; EIdentifier "y"; EIdentifier "z" ] ) ));
   <span data-count="1">[</span>%expect {|
     'a -&gt; 'a -&gt; 'a -&gt; 'a list
-  |}<span data-count="121">]</span>
+  |}<span data-count="129">]</span>
 ;;
 
 let%expect_test _ =
@@ -2315,7 +2315,7 @@ let%expect_test _ =
        ));
   <span data-count="1">[</span>%expect {|
     bool -&gt; bool
-  |}<span data-count="121">]</span>
+  |}<span data-count="129">]</span>
 ;;
 
 let%expect_test _ =
@@ -2329,7 +2329,7 @@ let%expect_test _ =
            , [] ) ));
   <span data-count="1">[</span>%expect {|
     int * int
-  |}<span data-count="121">]</span>
+  |}<span data-count="129">]</span>
 ;;
 
 let%expect_test _ =
@@ -2338,7 +2338,7 @@ let%expect_test _ =
        ("main", [], EFun (PIdentifier "x", [], EUnaryOperation (Not, EIdentifier "x"))));
   <span data-count="1">[</span>%expect {|
     bool -&gt; bool
-  |}<span data-count="121">]</span>
+  |}<span data-count="129">]</span>
 ;;
 
 let%expect_test _ =
@@ -2348,7 +2348,7 @@ let%expect_test _ =
   <span data-count="1">[</span>%expect
     {|
   Unification failed: type of the expression is int but expected type was bool
-  |}<span data-count="121">]</span>
+  |}<span data-count="129">]</span>
 ;;
 
 let%expect_test _ =
@@ -2362,7 +2362,7 @@ let%expect_test _ =
            , EBinaryOperation (Add, ELiteral (LInt 2), EIdentifier "x") ) ));
   <span data-count="1">[</span>%expect {|
   int -&gt; int
-  |}<span data-count="121">]</span>
+  |}<span data-count="129">]</span>
 ;;
 
 let%expect_test _ =
@@ -2376,7 +2376,7 @@ let%expect_test _ =
            , EBinaryOperation (Div, EIdentifier "y", EIdentifier "x") ) ));
   <span data-count="1">[</span>%expect {|
   int -&gt; int -&gt; int
-  |}<span data-count="121">]</span>
+  |}<span data-count="129">]</span>
 ;;
 
 let%expect_test _ =
@@ -2390,7 +2390,7 @@ let%expect_test _ =
            , EBinaryOperation (LT, EIdentifier "y", EIdentifier "x") ) ));
   <span data-count="1">[</span>%expect {|
   'a -&gt; 'a -&gt; bool
-  |}<span data-count="121">]</span>
+  |}<span data-count="129">]</span>
 ;;
 
 let%expect_test _ =
@@ -2404,7 +2404,7 @@ let%expect_test _ =
            , EBinaryOperation (LT, ELiteral (LString "asdf"), EIdentifier "x") ) ));
   <span data-count="1">[</span>%expect {|
   string -&gt; bool
-  |}<span data-count="121">]</span>
+  |}<span data-count="129">]</span>
 ;;
 
 let%expect_test _ =
@@ -2420,7 +2420,7 @@ let%expect_test _ =
            , ELiteral (LString "asdfg") ) );
   <span data-count="1">[</span>%expect {|
   bool
-  |}<span data-count="121">]</span>
+  |}<span data-count="129">]</span>
 ;;
 
 let%expect_test _ =
@@ -2437,7 +2437,7 @@ let%expect_test _ =
   <span data-count="1">[</span>%expect
     {|
   Unification failed: type of the expression is unit but expected type was string
-  |}<span data-count="121">]</span>
+  |}<span data-count="129">]</span>
 ;;
 
 let%expect_test _ =
@@ -2458,7 +2458,7 @@ let%expect_test _ =
                , [ PWildcard, EList [] ] ) ) );
   <span data-count="1">[</span>%expect {|
   int list -&gt; int -&gt; (int list -&gt; int list) -&gt; int list
-  |}<span data-count="121">]</span>
+  |}<span data-count="129">]</span>
 ;;
 
 let%expect_test _ =
@@ -2490,7 +2490,7 @@ let%expect_test _ =
                  ] ) ) );
   <span data-count="1">[</span>%expect {|
   bool -&gt; bool -&gt; bool -&gt; bool
-  |}<span data-count="121">]</span>
+  |}<span data-count="129">]</span>
 ;;
 
 let%expect_test _ =
@@ -2514,7 +2514,7 @@ let%expect_test _ =
            , EIdentifier "factorial" ) );
   <span data-count="1">[</span>%expect {|
   int -&gt; int -&gt; int
-  |}<span data-count="121">]</span>
+  |}<span data-count="129">]</span>
 ;;
 </code></pre>
       </div>

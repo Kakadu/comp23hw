@@ -3027,11 +3027,11 @@ type dispatch =
 
 (* Helpers *)
 let space_predicate x = <span data-count="80460190">x</span> == ' <span data-count="9543189">'</span> || x == '\n<span data-count="425978">'</span> || x == '\t<span data-count="170">'</span> || x == '\r<span data-count="0">'</span>
-let remove_spaces = take_whil<span data-count="79">e</span> space_predicate
+let remove_spaces = take_whil<span data-count="83">e</span> space_predicate
 let parens parser = <span data-count="30101936">r</span>emove_spaces *<span data-count="30101936">&gt;</span> cha<span data-count="30101936">r</span> '(' *<span data-count="30101936">&gt;</span> parser &lt;<span data-count="30101936">*</span> remove_spaces &lt;* cha<span data-count="30101936">r</span> ')'
 
 let parse_entity =
-  fi<span data-count="79">x</span>
+  fi<span data-count="83">x</span>
   @@ fun self -&gt;
   <span data-count="79">r</span>emove_spaces
   *&gt; (paren<span data-count="79">s</span> self
@@ -3042,7 +3042,7 @@ let parse_entity =
 
 let parse_uncapitalized_entity =
   parse_entity
-  &gt;&gt;<span data-count="79">=</span> fun entity -&gt;
+  &gt;&gt;<span data-count="83">=</span> fun entity -&gt;
   <span data-count="2319151">m</span>atch entity.[0] with
   | <span data-count="1272299">'</span>a' .. 'z' | <span data-count="3464">'</span>_' -&gt; return entity
   | <span data-count="1043388">_</span> -&gt; fail "Parsing error: not an uncapitalized entity."
@@ -3068,7 +3068,7 @@ let parse_pattern d =
 ;;
 
 let parse_literal constructor =
-  <span data-count="158">f</span>ix
+  <span data-count="166">f</span>ix
   @@ fun self -&gt;
   <span data-count="158">r</span>emove_spaces
   *&gt; (paren<span data-count="158">s</span> self
@@ -3098,11 +3098,11 @@ let parse_literal constructor =
       <span data-count="158">c</span>onstructor &lt;$<span data-count="158">&gt;</span> parse_literal)
 ;;
 
-let parse_pliteral = parse_litera<span data-count="79">l</span> pliteral
-let parse_literal = parse_litera<span data-count="79">l</span> eliteral
+let parse_pliteral = parse_litera<span data-count="83">l</span> pliteral
+let parse_literal = parse_litera<span data-count="83">l</span> eliteral
 
 let parse_pidentifier =
-  fi<span data-count="79">x</span>
+  fi<span data-count="83">x</span>
   @@ fun _ -&gt;
   <span data-count="79">r</span>emove_spaces
   *&gt;
@@ -3119,13 +3119,13 @@ let parse_pidentifier =
 ;;
 
 let parse_pwildcard =
-  fi<span data-count="79">x</span>
+  fi<span data-count="83">x</span>
   @@ fun self -&gt;
   <span data-count="79">p</span>aren<span data-count="79">s</span> self &lt;|&gt; remove_spaces *<span data-count="79">&gt;</span> (pwildcard &lt;$<span data-count="79">&gt;</span> take_while<span data-count="79">1</span> (fun c -&gt; <span data-count="138121">c</span> = '_'))
 ;;
 
 let parse_ptuple d =
-  <span data-count="834596">f</span>ix
+  <span data-count="834600">f</span>ix
   @@ fun self -&gt;
   <span data-count="24693">(</span>remove_spaces
    *<span data-count="24693">&gt;</span>
@@ -3149,7 +3149,7 @@ let parse_ptuple d =
 ;;
 
 let parse_plist d =
-  <span data-count="859289">f</span>ix
+  <span data-count="859293">f</span>ix
   @@ fun self -&gt;
   <span data-count="84970">r</span>emove_spaces
   *&gt;
@@ -3160,7 +3160,7 @@ let parse_plist d =
 ;;
 
 let parse_pconstruct_list d =
-  <span data-count="811951">f</span>ix
+  <span data-count="811955">f</span>ix
   @@ fun self -&gt;
   <span data-count="47338">r</span>emove_spaces
   *&gt; (paren<span data-count="47338">s</span> self
@@ -3182,7 +3182,7 @@ let parse_pconstruct_list d =
 (* Parsers *)
 
 let parse_identifier =
-  fi<span data-count="79">x</span>
+  fi<span data-count="83">x</span>
   @@ fun _ -&gt;
   <span data-count="79">r</span>emove_spaces
   *&gt;
@@ -3197,7 +3197,7 @@ let parse_identifier =
 ;;
 
 let parse_tuple d =
-  <span data-count="4129011">f</span>ix
+  <span data-count="4129019">f</span>ix
   @@ fun self -&gt;
   <span data-count="116210">r</span>emove_spaces
   *&gt; ((let parse_content =
@@ -3225,7 +3225,7 @@ let parse_tuple d =
 ;;
 
 let parse_list d =
-  <span data-count="3283914">f</span>ix
+  <span data-count="3283922">f</span>ix
   @@ fun self -&gt;
   <span data-count="1193611">r</span>emove_spaces
   *&gt;
@@ -3252,7 +3252,7 @@ let parse_list d =
 ;;
 
 let parse_fun d =
-  <span data-count="4921526">f</span>ix
+  <span data-count="4921534">f</span>ix
   @@ fun self -&gt;
   <span data-count="174136">r</span>emove_spaces
   *&gt;
@@ -3309,7 +3309,7 @@ let declaration_helper constructing_function d =
 ;;
 
 let parse_declaration d =
-  <span data-count="79">f</span>ix
+  <span data-count="83">f</span>ix
   @@ fun _ -&gt;
   <span data-count="79">r</span>emove_spaces
   *<span data-count="79">&gt;</span> strin<span data-count="79">g</span> "let"
@@ -3321,7 +3321,7 @@ let parse_declaration d =
 ;;
 
 let parse_let_in d =
-  <span data-count="7216159">f</span>ix
+  <span data-count="7216167">f</span>ix
   @@ fun self -&gt;
   <span data-count="749890">r</span>emove_spaces
   *&gt;
@@ -3365,7 +3365,7 @@ let parse_let_in d =
 ;;
 
 let parse_conditional d =
-  <span data-count="7617113">f</span>ix
+  <span data-count="7617121">f</span>ix
   @@ fun self -&gt;
   <span data-count="348936">r</span>emove_spaces
   *&gt;
@@ -3395,7 +3395,7 @@ let parse_conditional d =
 ;;
 
 let parse_matching d =
-  <span data-count="7615277">f</span>ix
+  <span data-count="7615285">f</span>ix
   @@ fun self -&gt;
   <span data-count="350772">r</span>emove_spaces
   *&gt;
@@ -3437,7 +3437,7 @@ let parse_matching d =
 ;;
 
 let parse_binary_operation d =
-  <span data-count="6003943">f</span>ix
+  <span data-count="6003951">f</span>ix
   @@ fun self -&gt;
   <span data-count="232304">r</span>emove_spaces
   *&gt;
@@ -3496,7 +3496,7 @@ let parse_binary_operation d =
 ;;
 
 let parse_application d =
-  <span data-count="6265167">f</span>ix
+  <span data-count="6265175">f</span>ix
   @@ fun self -&gt;
   <span data-count="850441">r</span>emove_spaces
   *&gt; (paren<span data-count="850441">s</span> self
@@ -3531,7 +3531,7 @@ let parse_application d =
 ;;
 
 let parse_unary_operation d =
-  <span data-count="4477525">f</span>ix
+  <span data-count="4477533">f</span>ix
   @@ fun self -&gt;
   <span data-count="879361">r</span>emove_spaces
   *&gt;
@@ -3565,7 +3565,7 @@ let parse_unary_operation d =
 ;;
 
 let parse_list_constructing d =
-  <span data-count="4019623">f</span>ix
+  <span data-count="4019631">f</span>ix
   @@ fun self -&gt;
   <span data-count="457902">r</span>emove_spaces
   *&gt; (paren<span data-count="457902">s</span> self
@@ -3593,17 +3593,17 @@ let parse_list_constructing d =
 (* --------------------------- *)
 
 let parse_expression d =
-  <span data-count="79">c</span>hoice
-    [ d.parse_tupl<span data-count="79">e</span> d
-    ; d.parse_list_constructin<span data-count="79">g</span> d
-    ; d.parse_binary_operatio<span data-count="79">n</span> d
-    ; d.parse_unary_operatio<span data-count="79">n</span> d
-    ; d.parse_lis<span data-count="79">t</span> d
-    ; d.parse_applicatio<span data-count="79">n</span> d
-    ; d.parse_fu<span data-count="79">n</span> d
-    ; d.parse_conditiona<span data-count="79">l</span> d
-    ; d.parse_matchin<span data-count="79">g</span> d
-    ; d.parse_let_i<span data-count="79">n</span> d
+  <span data-count="83">c</span>hoice
+    [ d.parse_tupl<span data-count="83">e</span> d
+    ; d.parse_list_constructin<span data-count="83">g</span> d
+    ; d.parse_binary_operatio<span data-count="83">n</span> d
+    ; d.parse_unary_operatio<span data-count="83">n</span> d
+    ; d.parse_lis<span data-count="83">t</span> d
+    ; d.parse_applicatio<span data-count="83">n</span> d
+    ; d.parse_fu<span data-count="83">n</span> d
+    ; d.parse_conditiona<span data-count="83">l</span> d
+    ; d.parse_matchin<span data-count="83">g</span> d
+    ; d.parse_let_i<span data-count="83">n</span> d
     ; parse_literal
     ; parse_identifier
     ]
@@ -3630,21 +3630,21 @@ let default =
   }
 ;;
 
-let parse_tuple = parse_tupl<span data-count="79">e</span> default
-let parse_list = parse_lis<span data-count="79">t</span> default
-let parse_fun = parse_fu<span data-count="79">n</span> default
-let parse_declaration = parse_declaratio<span data-count="79">n</span> default
-let parse_conditional = parse_conditiona<span data-count="79">l</span> default
-let parse_matching = parse_matchin<span data-count="79">g</span> default
-let parse_binary_operation = parse_binary_operatio<span data-count="79">n</span> default
-let parse_let_in = parse_let_i<span data-count="79">n</span> default
-let parse_application = parse_applicatio<span data-count="79">n</span> default
-let parse_unary_operation = parse_unary_operatio<span data-count="79">n</span> default
-let parse_list_constructing = parse_list_constructin<span data-count="79">g</span> default
-let parse_expression = parse_expressio<span data-count="79">n</span> default
-let parse_ptuple = parse_ptupl<span data-count="79">e</span> default
-let parse_plist = parse_plis<span data-count="79">t</span> default
-let parse_pconstruct_list = parse_pconstruct_lis<span data-count="79">t</span> default
+let parse_tuple = parse_tupl<span data-count="83">e</span> default
+let parse_list = parse_lis<span data-count="83">t</span> default
+let parse_fun = parse_fu<span data-count="83">n</span> default
+let parse_declaration = parse_declaratio<span data-count="83">n</span> default
+let parse_conditional = parse_conditiona<span data-count="83">l</span> default
+let parse_matching = parse_matchin<span data-count="83">g</span> default
+let parse_binary_operation = parse_binary_operatio<span data-count="83">n</span> default
+let parse_let_in = parse_let_i<span data-count="83">n</span> default
+let parse_application = parse_applicatio<span data-count="83">n</span> default
+let parse_unary_operation = parse_unary_operatio<span data-count="83">n</span> default
+let parse_list_constructing = parse_list_constructin<span data-count="83">g</span> default
+let parse_expression = parse_expressio<span data-count="83">n</span> default
+let parse_ptuple = parse_ptupl<span data-count="83">e</span> default
+let parse_plist = parse_plis<span data-count="83">t</span> default
+let parse_pconstruct_list = parse_pconstruct_lis<span data-count="83">t</span> default
 
 (* Main parsing function *)
 let parse : input -&gt; (declaration list, error_message) result =
