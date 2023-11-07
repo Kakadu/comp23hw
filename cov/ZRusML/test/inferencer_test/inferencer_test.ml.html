@@ -211,7 +211,7 @@ let%expect_test "arithmetic operations test" =
     val x : int
     val y : int
     val result : int
-  |}<span data-count="3">]</span>
+  |}<span data-count="5">]</span>
 ;;
 
 let%expect_test "let rec test" =
@@ -225,7 +225,7 @@ let%expect_test "let rec test" =
   <span data-count="1">[</span>%expect {|
     val timer : int -&gt; int
     val tmp : int
-  |}<span data-count="3">]</span>
+  |}<span data-count="5">]</span>
 ;;
 
 let%expect_test "binary operator inference test" =
@@ -235,7 +235,7 @@ let%expect_test "binary operator inference test" =
   Format.printf "%a" inference code;
   <span data-count="1">[</span>%expect {|
     val e : int -&gt; bool
-  |}<span data-count="3">]</span>
+  |}<span data-count="5">]</span>
 ;;
 
 let%expect_test "typs test" =
@@ -247,7 +247,7 @@ let%expect_test "typs test" =
   <span data-count="1">[</span>%expect {|
     val int : int
     val bool : bool
-  |}<span data-count="3">]</span>
+  |}<span data-count="5">]</span>
 ;;
 
 let%expect_test "factorial test" =
@@ -257,7 +257,7 @@ let%expect_test "factorial test" =
   Format.printf "%a" inference code;
   <span data-count="1">[</span>%expect {|
     val fact : int -&gt; int
-  |}<span data-count="3">]</span>
+  |}<span data-count="5">]</span>
 ;;
 
 let%expect_test "factorial acc test" =
@@ -271,7 +271,7 @@ let%expect_test "factorial acc test" =
   <span data-count="1">[</span>%expect {|
     val acc_fact : int -&gt; int -&gt; int
     val test : bool
-  |}<span data-count="3">]</span>
+  |}<span data-count="5">]</span>
 ;;
 </code></pre>
       </div>
