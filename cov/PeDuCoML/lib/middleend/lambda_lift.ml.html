@@ -1,0 +1,644 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <title>lambda_lift.ml &mdash; Coverage report</title>
+    <meta name="description" content="94.97% coverage in lib/middleend/lambda_lift.ml">
+    <link rel="stylesheet" href="../../coverage.css"/>
+    <script src="../../highlight.pack.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+  </head>
+  <body>
+    <div id="header">
+      <h1>
+        <a href="../../index.html">
+          <span class="dirname">lib/middleend/</span>lambda_lift.ml
+        </a>
+      </h1>
+      <h2>94.97%</h2>
+    </div>
+    <div id="navbar">
+      <span class="some-visited" style="top:42.79%"></span>
+      <span class="unvisited" style="bottom:48.76%"></span>
+      <span class="unvisited" style="bottom:48.26%"></span>
+      <span class="unvisited" style="bottom:47.76%"></span>
+      <span class="unvisited" style="bottom:47.26%"></span>
+      <span class="unvisited" style="bottom:46.27%"></span>
+    </div>
+    <div id="report">
+      <div id="lines-layer">
+        <pre>
+<a id="L1"></a><span > </span>
+<a id="L2"></a><span > </span>
+<a id="L3"></a><span > </span>
+<a id="L4"></a><span > </span>
+<a id="L5"></a><span > </span>
+<a id="L6"></a><span > </span>
+<a id="L7"></a><span > </span>
+<a id="L8"></a><span > </span>
+<a id="L9"></a><span > </span>
+<a id="L10"></a><span > </span>
+<a id="L11"></a><span > </span>
+<a id="L12"></a><span > </span>
+<a id="L13"></a><span > </span>
+<a id="L14"></a><span > </span>
+<a id="L15"></a><span > </span>
+<a id="L16"></a><span > </span>
+<a id="L17"></a><span > </span>
+<a id="L18"></a><span > </span>
+<a id="L19"></a><span > </span>
+<a id="L20"></a><span > </span>
+<a id="L21"></a><span > </span>
+<a id="L22"></a><span > </span>
+<a id="L23"></a><span > </span>
+<a id="L24"></a><span > </span>
+<a id="L25"></a><span > </span>
+<a id="L26"></a><span > </span>
+<a id="L27"></a><span class="visited"> </span>
+<a id="L28"></a><span class="visited"> </span>
+<a id="L29"></a><span class="visited"> </span>
+<a id="L30"></a><span class="visited"> </span>
+<a id="L31"></a><span class="visited"> </span>
+<a id="L32"></a><span class="visited"> </span>
+<a id="L33"></a><span class="visited"> </span>
+<a id="L34"></a><span class="visited"> </span>
+<a id="L35"></a><span > </span>
+<a id="L36"></a><span > </span>
+<a id="L37"></a><span class="visited"> </span>
+<a id="L38"></a><span > </span>
+<a id="L39"></a><span > </span>
+<a id="L40"></a><span > </span>
+<a id="L41"></a><span class="visited"> </span>
+<a id="L42"></a><span > </span>
+<a id="L43"></a><span > </span>
+<a id="L44"></a><span class="visited"> </span>
+<a id="L45"></a><span class="visited"> </span>
+<a id="L46"></a><span class="visited"> </span>
+<a id="L47"></a><span > </span>
+<a id="L48"></a><span > </span>
+<a id="L49"></a><span class="visited"> </span>
+<a id="L50"></a><span > </span>
+<a id="L51"></a><span > </span>
+<a id="L52"></a><span > </span>
+<a id="L53"></a><span > </span>
+<a id="L54"></a><span class="visited"> </span>
+<a id="L55"></a><span > </span>
+<a id="L56"></a><span class="visited"> </span>
+<a id="L57"></a><span class="visited"> </span>
+<a id="L58"></a><span class="visited"> </span>
+<a id="L59"></a><span > </span>
+<a id="L60"></a><span class="visited"> </span>
+<a id="L61"></a><span > </span>
+<a id="L62"></a><span > </span>
+<a id="L63"></a><span > </span>
+<a id="L64"></a><span class="visited"> </span>
+<a id="L65"></a><span > </span>
+<a id="L66"></a><span > </span>
+<a id="L67"></a><span class="visited"> </span>
+<a id="L68"></a><span class="visited"> </span>
+<a id="L69"></a><span class="visited"> </span>
+<a id="L70"></a><span > </span>
+<a id="L71"></a><span > </span>
+<a id="L72"></a><span class="visited"> </span>
+<a id="L73"></a><span class="visited"> </span>
+<a id="L74"></a><span > </span>
+<a id="L75"></a><span > </span>
+<a id="L76"></a><span class="visited"> </span>
+<a id="L77"></a><span > </span>
+<a id="L78"></a><span class="visited"> </span>
+<a id="L79"></a><span class="visited"> </span>
+<a id="L80"></a><span class="visited"> </span>
+<a id="L81"></a><span class="visited"> </span>
+<a id="L82"></a><span > </span>
+<a id="L83"></a><span > </span>
+<a id="L84"></a><span class="visited"> </span>
+<a id="L85"></a><span class="visited"> </span>
+<a id="L86"></a><span class="some-visited"> </span>
+<a id="L87"></a><span class="visited"> </span>
+<a id="L88"></a><span class="visited"> </span>
+<a id="L89"></a><span > </span>
+<a id="L90"></a><span class="visited"> </span>
+<a id="L91"></a><span > </span>
+<a id="L92"></a><span class="visited"> </span>
+<a id="L93"></a><span > </span>
+<a id="L94"></a><span class="visited"> </span>
+<a id="L95"></a><span class="visited"> </span>
+<a id="L96"></a><span class="visited"> </span>
+<a id="L97"></a><span class="visited"> </span>
+<a id="L98"></a><span class="visited"> </span>
+<a id="L99"></a><span > </span>
+<a id="L100"></a><span class="visited"> </span>
+<a id="L101"></a><span > </span>
+<a id="L102"></a><span > </span>
+<a id="L103"></a><span class="unvisited"> </span>
+<a id="L104"></a><span class="unvisited"> </span>
+<a id="L105"></a><span class="unvisited"> </span>
+<a id="L106"></a><span class="unvisited"> </span>
+<a id="L107"></a><span > </span>
+<a id="L108"></a><span class="unvisited"> </span>
+<a id="L109"></a><span > </span>
+<a id="L110"></a><span class="visited"> </span>
+<a id="L111"></a><span > </span>
+<a id="L112"></a><span class="visited"> </span>
+<a id="L113"></a><span class="visited"> </span>
+<a id="L114"></a><span class="visited"> </span>
+<a id="L115"></a><span class="visited"> </span>
+<a id="L116"></a><span class="visited"> </span>
+<a id="L117"></a><span class="visited"> </span>
+<a id="L118"></a><span class="visited"> </span>
+<a id="L119"></a><span class="visited"> </span>
+<a id="L120"></a><span class="visited"> </span>
+<a id="L121"></a><span class="visited"> </span>
+<a id="L122"></a><span class="visited"> </span>
+<a id="L123"></a><span class="visited"> </span>
+<a id="L124"></a><span class="visited"> </span>
+<a id="L125"></a><span class="visited"> </span>
+<a id="L126"></a><span class="visited"> </span>
+<a id="L127"></a><span class="visited"> </span>
+<a id="L128"></a><span > </span>
+<a id="L129"></a><span class="visited"> </span>
+<a id="L130"></a><span > </span>
+<a id="L131"></a><span > </span>
+<a id="L132"></a><span class="visited"> </span>
+<a id="L133"></a><span class="visited"> </span>
+<a id="L134"></a><span class="visited"> </span>
+<a id="L135"></a><span class="visited"> </span>
+<a id="L136"></a><span > </span>
+<a id="L137"></a><span class="visited"> </span>
+<a id="L138"></a><span class="visited"> </span>
+<a id="L139"></a><span class="visited"> </span>
+<a id="L140"></a><span class="visited"> </span>
+<a id="L141"></a><span class="visited"> </span>
+<a id="L142"></a><span class="visited"> </span>
+<a id="L143"></a><span class="visited"> </span>
+<a id="L144"></a><span class="visited"> </span>
+<a id="L145"></a><span class="visited"> </span>
+<a id="L146"></a><span class="visited"> </span>
+<a id="L147"></a><span > </span>
+<a id="L148"></a><span > </span>
+<a id="L149"></a><span class="visited"> </span>
+<a id="L150"></a><span class="visited"> </span>
+<a id="L151"></a><span class="visited"> </span>
+<a id="L152"></a><span class="visited"> </span>
+<a id="L153"></a><span > </span>
+<a id="L154"></a><span class="visited"> </span>
+<a id="L155"></a><span class="visited"> </span>
+<a id="L156"></a><span class="visited"> </span>
+<a id="L157"></a><span class="visited"> </span>
+<a id="L158"></a><span class="visited"> </span>
+<a id="L159"></a><span class="visited"> </span>
+<a id="L160"></a><span class="visited"> </span>
+<a id="L161"></a><span class="visited"> </span>
+<a id="L162"></a><span class="visited"> </span>
+<a id="L163"></a><span class="visited"> </span>
+<a id="L164"></a><span class="visited"> </span>
+<a id="L165"></a><span > </span>
+<a id="L166"></a><span > </span>
+<a id="L167"></a><span class="visited"> </span>
+<a id="L168"></a><span class="visited"> </span>
+<a id="L169"></a><span class="visited"> </span>
+<a id="L170"></a><span class="visited"> </span>
+<a id="L171"></a><span > </span>
+<a id="L172"></a><span class="visited"> </span>
+<a id="L173"></a><span class="visited"> </span>
+<a id="L174"></a><span > </span>
+<a id="L175"></a><span class="visited"> </span>
+<a id="L176"></a><span class="visited"> </span>
+<a id="L177"></a><span class="visited"> </span>
+<a id="L178"></a><span > </span>
+<a id="L179"></a><span class="visited"> </span>
+<a id="L180"></a><span > </span>
+<a id="L181"></a><span > </span>
+<a id="L182"></a><span > </span>
+<a id="L183"></a><span class="visited"> </span>
+<a id="L184"></a><span class="visited"> </span>
+<a id="L185"></a><span > </span>
+<a id="L186"></a><span > </span>
+<a id="L187"></a><span class="visited"> </span>
+<a id="L188"></a><span class="visited"> </span>
+<a id="L189"></a><span > </span>
+<a id="L190"></a><span class="visited"> </span>
+<a id="L191"></a><span class="visited"> </span>
+<a id="L192"></a><span > </span>
+<a id="L193"></a><span class="visited"> </span>
+<a id="L194"></a><span class="visited"> </span>
+<a id="L195"></a><span class="visited"> </span>
+<a id="L196"></a><span class="visited"> </span>
+<a id="L197"></a><span > </span>
+<a id="L198"></a><span > </span>
+<a id="L199"></a><span > </span>
+<a id="L200"></a><span > </span>
+<a id="L201"></a><span class="visited"> </span>
+</pre>
+      </div>
+      <div id="text-layer">
+        <pre id="line-numbers">
+<a href="#L1">  1</a>
+<a href="#L2">  2</a>
+<a href="#L3">  3</a>
+<a href="#L4">  4</a>
+<a href="#L5">  5</a>
+<a href="#L6">  6</a>
+<a href="#L7">  7</a>
+<a href="#L8">  8</a>
+<a href="#L9">  9</a>
+<a href="#L10"> 10</a>
+<a href="#L11"> 11</a>
+<a href="#L12"> 12</a>
+<a href="#L13"> 13</a>
+<a href="#L14"> 14</a>
+<a href="#L15"> 15</a>
+<a href="#L16"> 16</a>
+<a href="#L17"> 17</a>
+<a href="#L18"> 18</a>
+<a href="#L19"> 19</a>
+<a href="#L20"> 20</a>
+<a href="#L21"> 21</a>
+<a href="#L22"> 22</a>
+<a href="#L23"> 23</a>
+<a href="#L24"> 24</a>
+<a href="#L25"> 25</a>
+<a href="#L26"> 26</a>
+<a href="#L27"> 27</a>
+<a href="#L28"> 28</a>
+<a href="#L29"> 29</a>
+<a href="#L30"> 30</a>
+<a href="#L31"> 31</a>
+<a href="#L32"> 32</a>
+<a href="#L33"> 33</a>
+<a href="#L34"> 34</a>
+<a href="#L35"> 35</a>
+<a href="#L36"> 36</a>
+<a href="#L37"> 37</a>
+<a href="#L38"> 38</a>
+<a href="#L39"> 39</a>
+<a href="#L40"> 40</a>
+<a href="#L41"> 41</a>
+<a href="#L42"> 42</a>
+<a href="#L43"> 43</a>
+<a href="#L44"> 44</a>
+<a href="#L45"> 45</a>
+<a href="#L46"> 46</a>
+<a href="#L47"> 47</a>
+<a href="#L48"> 48</a>
+<a href="#L49"> 49</a>
+<a href="#L50"> 50</a>
+<a href="#L51"> 51</a>
+<a href="#L52"> 52</a>
+<a href="#L53"> 53</a>
+<a href="#L54"> 54</a>
+<a href="#L55"> 55</a>
+<a href="#L56"> 56</a>
+<a href="#L57"> 57</a>
+<a href="#L58"> 58</a>
+<a href="#L59"> 59</a>
+<a href="#L60"> 60</a>
+<a href="#L61"> 61</a>
+<a href="#L62"> 62</a>
+<a href="#L63"> 63</a>
+<a href="#L64"> 64</a>
+<a href="#L65"> 65</a>
+<a href="#L66"> 66</a>
+<a href="#L67"> 67</a>
+<a href="#L68"> 68</a>
+<a href="#L69"> 69</a>
+<a href="#L70"> 70</a>
+<a href="#L71"> 71</a>
+<a href="#L72"> 72</a>
+<a href="#L73"> 73</a>
+<a href="#L74"> 74</a>
+<a href="#L75"> 75</a>
+<a href="#L76"> 76</a>
+<a href="#L77"> 77</a>
+<a href="#L78"> 78</a>
+<a href="#L79"> 79</a>
+<a href="#L80"> 80</a>
+<a href="#L81"> 81</a>
+<a href="#L82"> 82</a>
+<a href="#L83"> 83</a>
+<a href="#L84"> 84</a>
+<a href="#L85"> 85</a>
+<a href="#L86"> 86</a>
+<a href="#L87"> 87</a>
+<a href="#L88"> 88</a>
+<a href="#L89"> 89</a>
+<a href="#L90"> 90</a>
+<a href="#L91"> 91</a>
+<a href="#L92"> 92</a>
+<a href="#L93"> 93</a>
+<a href="#L94"> 94</a>
+<a href="#L95"> 95</a>
+<a href="#L96"> 96</a>
+<a href="#L97"> 97</a>
+<a href="#L98"> 98</a>
+<a href="#L99"> 99</a>
+<a href="#L100">100</a>
+<a href="#L101">101</a>
+<a href="#L102">102</a>
+<a href="#L103">103</a>
+<a href="#L104">104</a>
+<a href="#L105">105</a>
+<a href="#L106">106</a>
+<a href="#L107">107</a>
+<a href="#L108">108</a>
+<a href="#L109">109</a>
+<a href="#L110">110</a>
+<a href="#L111">111</a>
+<a href="#L112">112</a>
+<a href="#L113">113</a>
+<a href="#L114">114</a>
+<a href="#L115">115</a>
+<a href="#L116">116</a>
+<a href="#L117">117</a>
+<a href="#L118">118</a>
+<a href="#L119">119</a>
+<a href="#L120">120</a>
+<a href="#L121">121</a>
+<a href="#L122">122</a>
+<a href="#L123">123</a>
+<a href="#L124">124</a>
+<a href="#L125">125</a>
+<a href="#L126">126</a>
+<a href="#L127">127</a>
+<a href="#L128">128</a>
+<a href="#L129">129</a>
+<a href="#L130">130</a>
+<a href="#L131">131</a>
+<a href="#L132">132</a>
+<a href="#L133">133</a>
+<a href="#L134">134</a>
+<a href="#L135">135</a>
+<a href="#L136">136</a>
+<a href="#L137">137</a>
+<a href="#L138">138</a>
+<a href="#L139">139</a>
+<a href="#L140">140</a>
+<a href="#L141">141</a>
+<a href="#L142">142</a>
+<a href="#L143">143</a>
+<a href="#L144">144</a>
+<a href="#L145">145</a>
+<a href="#L146">146</a>
+<a href="#L147">147</a>
+<a href="#L148">148</a>
+<a href="#L149">149</a>
+<a href="#L150">150</a>
+<a href="#L151">151</a>
+<a href="#L152">152</a>
+<a href="#L153">153</a>
+<a href="#L154">154</a>
+<a href="#L155">155</a>
+<a href="#L156">156</a>
+<a href="#L157">157</a>
+<a href="#L158">158</a>
+<a href="#L159">159</a>
+<a href="#L160">160</a>
+<a href="#L161">161</a>
+<a href="#L162">162</a>
+<a href="#L163">163</a>
+<a href="#L164">164</a>
+<a href="#L165">165</a>
+<a href="#L166">166</a>
+<a href="#L167">167</a>
+<a href="#L168">168</a>
+<a href="#L169">169</a>
+<a href="#L170">170</a>
+<a href="#L171">171</a>
+<a href="#L172">172</a>
+<a href="#L173">173</a>
+<a href="#L174">174</a>
+<a href="#L175">175</a>
+<a href="#L176">176</a>
+<a href="#L177">177</a>
+<a href="#L178">178</a>
+<a href="#L179">179</a>
+<a href="#L180">180</a>
+<a href="#L181">181</a>
+<a href="#L182">182</a>
+<a href="#L183">183</a>
+<a href="#L184">184</a>
+<a href="#L185">185</a>
+<a href="#L186">186</a>
+<a href="#L187">187</a>
+<a href="#L188">188</a>
+<a href="#L189">189</a>
+<a href="#L190">190</a>
+<a href="#L191">191</a>
+<a href="#L192">192</a>
+<a href="#L193">193</a>
+<a href="#L194">194</a>
+<a href="#L195">195</a>
+<a href="#L196">196</a>
+<a href="#L197">197</a>
+<a href="#L198">198</a>
+<a href="#L199">199</a>
+<a href="#L200">200</a>
+<a href="#L201">201</a>
+</pre>
+<pre><code class="ocaml">(** Copyright 2023-2024, Danila Pechenev, Ilya Dudnikov *)
+
+(** SPDX-License-Identifier: LGPL-3.0-or-later *)
+
+open Ast
+open State
+
+type cf_expr =
+  | CFLiteral of literal
+  | CFBinaryOperation of binary_operator * cf_expr * cf_expr
+  | CFUnaryOperation of unary_operator * cf_expr
+  | CFApplication of cf_expr * cf_expr
+  | CFIdentifier of id
+  | CFList of cf_expr list
+  | CFConstructList of cf_expr * cf_expr
+  | CFLetIn of cf_let * cf_let list * cf_expr
+  | CFTuple of cf_expr * cf_expr * cf_expr list
+  | CFMatchWith of cf_expr * (pattern * cf_expr) * (pattern * cf_expr) list
+  | CFIf of cf_expr * cf_expr * cf_expr
+
+and cf_let = id * cf_expr
+
+type cf_decl =
+  | CFDeclaration of id * id list * cf_expr
+  | CFRecursiveDeclaration of id * id list * cf_expr
+
+let cfliteral literal = <span data-count="186">C</span>FLiteral literal
+let cfbinaryoperation bop left right = <span data-count="84">C</span>FBinaryOperation (bop, left, right)
+let cfunaryoperation operator operand = <span data-count="3">C</span>FUnaryOperation (operator, operand)
+let cfapplication func arg = <span data-count="243">C</span>FApplication (func, arg)
+let cfidentifier id = <span data-count="437">C</span>FIdentifier id
+let cflist list = <span data-count="32">C</span>FList list
+let cfconstructlist head tail = <span data-count="12">C</span>FConstructList (head, tail)
+let cfletin first_let other_lets expr = <span data-count="4">C</span>FLetIn (first_let, other_lets, expr)
+
+let cftuple first_elem second_elem other_elems =
+  <span data-count="9">C</span>FTuple (first_elem, second_elem, other_elems)
+;;
+
+let cfmatchwith matched first_case other_cases =
+  <span data-count="25">C</span>FMatchWith (matched, first_case, other_cases)
+;;
+
+let cfif cond true_branch false_branch = <span data-count="12">C</span>FIf (cond, true_branch, false_branch)
+let cflet id body = <span data-count="37">i</span>d, body
+let cfdeclaration name arguments body = <span data-count="129">C</span>FDeclaration (name, arguments, body)
+
+let cfrecursivedeclaration name arguments body =
+  <span data-count="17">C</span>FRecursiveDeclaration (name, arguments, body)
+;;
+
+let lambda_lift =
+  let rec helper current_expr current_arg_number args_list = function
+    | <span data-count="221">h</span>ead :: tail -&gt;
+      (match head with
+       | <span data-count="215">P</span>Identifier id -&gt; helper current_expr current_arg_number (id :: args_list) tail
+       | <span data-count="6">_</span> -&gt;
+         let arg_name = "``" ^ string_of_in<span data-count="6">t</span> current_arg_number in
+         helper
+           (ematchwit<span data-count="6">h</span> (eidentifie<span data-count="6">r</span> arg_name) (head, current_expr) [])
+           (current_arg_number + 1)
+           (arg_name :: args_list)
+           tail)
+    | <span data-count="146">_</span> -&gt; List.re<span data-count="146">v</span> args_list, current_expr
+  in
+  let ll_expr expr =
+    <span data-count="77">l</span>et get_constructor = function
+      | <span data-count="23">D</span>Declaration _ -&gt; cfdeclaration
+      | <span data-count="10">D</span>RecursiveDeclaration _ -&gt; cfrecursivedeclaration
+    in
+    let rec ll_decl env lifted_decls = function
+      | ( <span data-count="23">D</span>Declaration (name, head :: tail, body)
+        | <span data-count="10">D</span>RecursiveDeclaration (name, head :: tail, body) ) as original -&gt;
+        let pattern_list = head :: tail in
+        let* fresh_var = fresh in
+        <span data-count="33">l</span>et fresh_name = "`ll_" ^ Base.Int.to_strin<span data-count="33">g</span> fresh_var in
+        let env = Base.Map.set env ~key:name ~data:fresh_name in
+        <span data-count="33">l</span>et args_list, body = helper body 1 [] pattern_list in
+        <span data-count="33">l</span>et* body, lifted = ll_exp<span data-count="33">r</span> env lifted_decls body in
+        <span data-count="33">l</span>et decl = get_constructor original in
+        <span data-count="33">r</span>eturn
+        @@ ( name
+           , fresh_name
+           , cfle<span data-count="33">t</span> fresh_name body
+           , dec<span data-count="33">l</span> fresh_name args_list body :: lifted )
+      | <span data-count="4">D</span>Declaration (name, _, body) | <span data-count="0">D</span>RecursiveDeclaration (name, _, body) -&gt;
+        let* body, lifted = ll_exp<span data-count="4">r</span> env lifted_decls body in
+        <span data-count="4">r</span>eturn @@ (name, name, cfle<span data-count="4">t</span> name body, lifted)
+    and ll_expr env lifted_decls = function
+      | <span data-count="36">E</span>Fun (first_arg, other_args, body) -&gt;
+        let* fresh_var = fresh in
+        <span data-count="36">l</span>et id = "`ll_" ^ Base.Int.to_strin<span data-count="36">g</span> fresh_var in
+        let args_list, body = helper body 1 [] (first_arg :: other_args) in
+        <span data-count="36">l</span>et* body, lifted = ll_exp<span data-count="36">r</span> env lifted_decls body in
+        <span data-count="36">r</span>eturn @@ (cfidentifie<span data-count="36">r</span> id, cfdeclaratio<span data-count="36">n</span> id args_list body :: lifted)
+      | <span data-count="37">E</span>LetIn (first_decl, other_decls, body) -&gt;
+        let* old_name, fresh_name, first, lifted = ll_dec<span data-count="37">l</span> env lifted_decls first_decl in
+        <span data-count="37">l</span>et decl_acc = if old_name = fresh_name then <span data-count="4">[</span> first ] else <span data-count="33">[</span>] in
+        let* env, lifted, decl_acc =
+          Base.List.fold_righ<span data-count="37">t</span>
+            other_decls
+            ~f:(fun decl acc -&gt;
+              <span data-count="0">l</span>et* env, lifted, decl_acc = acc in
+              <span data-count="0">l</span>et* old_name, fresh_name, decl, lifted = ll_dec<span data-count="0">l</span> env lifted decl in
+              <span data-count="0">l</span>et decl_acc =
+                if old_name = fresh_name then <span data-count="0">d</span>ecl :: decl_acc else <span data-count="0">d</span>ecl_acc
+              in
+              return @@ (Base.Map.se<span data-count="0">t</span> env ~key:old_name ~data:fresh_name, lifted, decl_acc))
+            ~init:
+              (retur<span data-count="37">n</span> (Base.Map.se<span data-count="37">t</span> env ~key:old_name ~data:fresh_name, lifted, decl_acc))
+        in
+        <span data-count="37">l</span>et* body, lifted = ll_exp<span data-count="37">r</span> env lifted body in
+        <span data-count="37">(</span>match decl_acc with
+         | <span data-count="4">h</span>ead :: tail -&gt; return @@ (cfleti<span data-count="4">n</span> head tail body, lifted)
+         | <span data-count="33">[</span>] -&gt; return (body, lifted))
+      | <span data-count="84">E</span>BinaryOperation (bop, left, right) -&gt;
+        let* left, lifted = ll_exp<span data-count="84">r</span> env lifted_decls left in
+        <span data-count="84">l</span>et* right, lifted = ll_exp<span data-count="84">r</span> env lifted right in
+        <span data-count="84">r</span>eturn @@ (cfbinaryoperatio<span data-count="84">n</span> bop left right, lifted)
+      | <span data-count="3">E</span>UnaryOperation (operation, operand) -&gt;
+        let* operand, lifted = ll_exp<span data-count="3">r</span> env lifted_decls operand in
+        <span data-count="3">r</span>eturn @@ (cfunaryoperatio<span data-count="3">n</span> operation operand, lifted)
+      | <span data-count="243">E</span>Application (func, arg) -&gt;
+        let* func, lifted = ll_exp<span data-count="243">r</span> env lifted_decls func in
+        <span data-count="243">l</span>et* arg, lifted = ll_exp<span data-count="243">r</span> env lifted arg in
+        <span data-count="243">r</span>eturn @@ (cfapplicatio<span data-count="243">n</span> func arg, lifted)
+      | <span data-count="32">E</span>List expr_list -&gt;
+        let* expr_list, lifted =
+          Base.List.fold_righ<span data-count="32">t</span>
+            expr_list
+            ~f:(fun expr acc -&gt;
+              <span data-count="95">l</span>et* expr_acc, lifted_acc = acc in
+              <span data-count="95">l</span>et* expr, lifted_from_expr = ll_exp<span data-count="95">r</span> env lifted_acc expr in
+              <span data-count="95">r</span>eturn @@ (expr :: expr_acc, lifted_from_expr))
+            ~init:(retur<span data-count="32">n</span> ([], lifted_decls))
+        in
+        <span data-count="32">r</span>eturn @@ (cflis<span data-count="32">t</span> expr_list, lifted)
+      | <span data-count="12">E</span>ConstructList (head, tail) -&gt;
+        let* head, lifted = ll_exp<span data-count="12">r</span> env lifted_decls head in
+        <span data-count="12">l</span>et* tail, lifted = ll_exp<span data-count="12">r</span> env lifted tail in
+        <span data-count="12">r</span>eturn @@ (cfconstructlis<span data-count="12">t</span> head tail, lifted)
+      | <span data-count="9">E</span>Tuple (first_elem, second_elem, other_elems) -&gt;
+        let* first, lifted = ll_exp<span data-count="9">r</span> env lifted_decls first_elem in
+        <span data-count="9">l</span>et* second, lifted = ll_exp<span data-count="9">r</span> env lifted second_elem in
+        <span data-count="9">l</span>et* other_elems, lifted =
+          Base.List.fold_righ<span data-count="9">t</span>
+            other_elems
+            ~f:(fun expr acc -&gt;
+              <span data-count="1">l</span>et* expr_acc, lifted_acc = acc in
+              <span data-count="1">l</span>et* expr, lifted_from_expr = ll_exp<span data-count="1">r</span> env lifted_acc expr in
+              <span data-count="1">r</span>eturn @@ (expr :: expr_acc, lifted_from_expr))
+            ~init:(retur<span data-count="9">n</span> ([], lifted))
+        in
+        <span data-count="9">r</span>eturn @@ (cftupl<span data-count="9">e</span> first second other_elems, lifted)
+      | <span data-count="12">E</span>If (condition, true_branch, false_branch) -&gt;
+        let* condition, lifted = ll_exp<span data-count="12">r</span> env lifted_decls condition in
+        <span data-count="12">l</span>et* true_branch, lifted = ll_exp<span data-count="12">r</span> env lifted true_branch in
+        <span data-count="12">l</span>et* false_branch, lifted = ll_exp<span data-count="12">r</span> env lifted false_branch in
+        <span data-count="12">r</span>eturn @@ (cfi<span data-count="12">f</span> condition true_branch false_branch, lifted)
+      | <span data-count="25">E</span>MatchWith (matched, (first_pattern, first_action), other_cases) -&gt;
+        let* matched, lifted = ll_exp<span data-count="25">r</span> env lifted_decls matched in
+        <span data-count="25">l</span>et* first_action, lifted = ll_exp<span data-count="25">r</span> env lifted first_action in
+        <span data-count="25">l</span>et* other_cases, lifted =
+          Base.List.fold_righ<span data-count="25">t</span>
+            other_cases
+            ~f:(fun (pattern, action) acc -&gt;
+              <span data-count="12">l</span>et* case_acc, lifted_acc = acc in
+              <span data-count="12">l</span>et* action, lifted = ll_exp<span data-count="12">r</span> env lifted_acc action in
+              <span data-count="12">r</span>eturn @@ ((pattern, action) :: case_acc, lifted))
+            ~init:(retur<span data-count="25">n</span> ([], lifted))
+        in
+        <span data-count="25">r</span>eturn @@ (cfmatchwit<span data-count="25">h</span> matched (first_pattern, first_action) other_cases, lifted)
+      | <span data-count="401">E</span>Identifier id -&gt;
+        (match Base.Map.find env id with
+         | <span data-count="344">N</span>one -&gt; return @@ (cfidentifie<span data-count="344">r</span> id, lifted_decls)
+         | <span data-count="57">S</span>ome new_id -&gt; return @@ (cfidentifie<span data-count="57">r</span> new_id, lifted_decls))
+      | <span data-count="186">E</span>Literal literal -&gt; return @@ (cflitera<span data-count="186">l</span> literal, lifted_decls)
+    in
+    ll_expr (Base.Map.empt<span data-count="77">y</span> (module Base.String)) [] expr
+  in
+  let rec ll_program =
+    let get_constructor = function
+      | <span data-count="70">D</span>Declaration _ -&gt; cfdeclaration
+      | <span data-count="7">D</span>RecursiveDeclaration _ -&gt; cfrecursivedeclaration
+    in
+    function
+    | <span data-count="52">[</span>] -&gt; return []
+    | <span data-count="77">h</span>ead :: tail -&gt;
+      (match head with
+       | ( <span data-count="70">D</span>Declaration (name, pattern_list, body)
+         | <span data-count="7">D</span>RecursiveDeclaration (name, pattern_list, body) ) as original -&gt;
+         let decl = get_constructor original in
+         <span data-count="77">l</span>et args_list, body = helper body 1 [] pattern_list in
+         <span data-count="77">l</span>et* body, lifted_decls = ll_exp<span data-count="77">r</span> body in
+         <span data-count="77">l</span>et* tail = ll_progra<span data-count="77">m</span> tail in
+         <span data-count="77">r</span>eturn @@ tail @ (dec<span data-count="77">l</span> name args_list body :: lifted_decls))
+  in
+  ll_program
+;;
+
+let run_lambda_lifting program = <span data-count="52">L</span>ist.rev @@ ru<span data-count="52">n</span> (lambda_lif<span data-count="52">t</span> program)
+</code></pre>
+      </div>
+    </div>
+    <script src="../../coverage.js"></script>
+  </body>
+</html>
