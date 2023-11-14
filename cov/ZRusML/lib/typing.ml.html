@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8"/>
     <title>typing.ml &mdash; Coverage report</title>
-    <meta name="description" content="47.83% coverage in lib/typing.ml">
+    <meta name="description" content="56.52% coverage in lib/typing.ml">
     <link rel="stylesheet" href="../coverage.css"/>
     <script src="../highlight.pack.js"></script>
     <script>hljs.initHighlightingOnLoad();</script>
@@ -15,13 +15,11 @@
           <span class="dirname">lib/</span>typing.ml
         </a>
       </h1>
-      <h2>47.83%</h2>
+      <h2>56.52%</h2>
     </div>
     <div id="navbar">
       <span class="unvisited" style="bottom:47.89%"></span>
       <span class="unvisited" style="bottom:33.80%"></span>
-      <span class="unvisited" style="bottom:25.35%"></span>
-      <span class="unvisited" style="bottom:22.54%"></span>
       <span class="unvisited" style="bottom:21.13%"></span>
       <span class="unvisited" style="bottom:18.31%"></span>
       <span class="unvisited" style="bottom:7.04%"></span>
@@ -84,9 +82,9 @@
 <a id="L50"></a><span class="visited"> </span>
 <a id="L51"></a><span > </span>
 <a id="L52"></a><span > </span>
-<a id="L53"></a><span class="unvisited"> </span>
+<a id="L53"></a><span class="visited"> </span>
 <a id="L54"></a><span > </span>
-<a id="L55"></a><span class="unvisited"> </span>
+<a id="L55"></a><span class="visited"> </span>
 <a id="L56"></a><span class="unvisited"> </span>
 <a id="L57"></a><span > </span>
 <a id="L58"></a><span class="unvisited"> </span>
@@ -199,7 +197,7 @@ type typ =
 let int_typ = TGround Int
 let bool_typ = TGround Bool
 let var_t n = <span data-count="40">T</span>Var n
-let arrow_t left_type right_type = <span data-count="146">T</span>Arr (left_type, right_type)
+let arrow_t left_type right_type = <span data-count="147">T</span>Arr (left_type, right_type)
 
 type scheme = (type_variable_number, Base.Int.comparator_witness) Base.Set.t * typ
 
@@ -213,27 +211,27 @@ type error =
   ]
 
 let rec pp_type fmt typ =
-  <span data-count="21">l</span>et open Format in
+  <span data-count="26">l</span>et open Format in
   let arrow_format = function
     | <span data-count="0">T</span>Arr _ -&gt; format_of_string "(%a)"
-    | <span data-count="5">_</span> -&gt; format_of_string "%a"
+    | <span data-count="6">_</span> -&gt; format_of_string "%a"
   in
   match typ with
-  | <span data-count="16">T</span>Ground x -&gt;
+  | <span data-count="20">T</span>Ground x -&gt;
     (match x with
-     | <span data-count="13">I</span>nt -&gt; fprintf fmt "int"
-     | <span data-count="3">B</span>ool -&gt; fprintf fmt "bool")
-  | <span data-count="5">T</span>Arr (typ_left, typ_right) -&gt;
-    fprintf fmt (arrow_forma<span data-count="5">t</span> typ_left ^<span data-count="5">^</span> " -&gt; %a") pp_type typ_left pp_type typ_right
+     | <span data-count="15">I</span>nt -&gt; fprintf fmt "int"
+     | <span data-count="5">B</span>ool -&gt; fprintf fmt "bool")
+  | <span data-count="6">T</span>Arr (typ_left, typ_right) -&gt;
+    fprintf fmt (arrow_forma<span data-count="6">t</span> typ_left ^<span data-count="6">^</span> " -&gt; %a") pp_type typ_left pp_type typ_right
   | <span data-count="0">T</span>Var var -&gt; fprintf fmt "%s" @@ "'" ^ Char.escape<span data-count="0">d</span> (Stdlib.Char.ch<span data-count="0">r</span> (var + 97))
 ;;
 
 let print_typ typ = <span data-count="11">F</span>ormat.printf "%a\n" pp_type typ
 
 let pp_error fmt (err : error) =
-  <span data-count="0">l</span>et open Format in
+  <span data-count="1">l</span>et open Format in
   match err with
-  | <span data-count="0">`</span>OccursCheck -&gt; fprintf fmt "Occurs check failed."
+  | <span data-count="1">`</span>OccursCheck -&gt; fprintf fmt "Occurs check failed."
   | <span data-count="0">`</span>NoVariable identifier -&gt;
     fprintf fmt "Elaboration failed: Unbound value identifier %s" identifier
   | <span data-count="0">`</span>UnificationFailed (t1, t2) -&gt;
