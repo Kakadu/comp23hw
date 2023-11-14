@@ -18,10 +18,10 @@
       <h2>96.33%</h2>
     </div>
     <div id="navbar">
-      <span class="some-visited" style="top:15.24%"></span>
-      <span class="unvisited" style="top:45.12%"></span>
-      <span class="unvisited" style="bottom:48.78%"></span>
-      <span class="unvisited" style="bottom:47.56%"></span>
+      <span class="some-visited" style="top:15.53%"></span>
+      <span class="unvisited" style="top:45.96%"></span>
+      <span class="unvisited" style="bottom:47.83%"></span>
+      <span class="unvisited" style="bottom:46.58%"></span>
     </div>
     <div id="report">
       <div id="lines-layer">
@@ -136,60 +136,57 @@
 <a id="L108"></a><span class="visited"> </span>
 <a id="L109"></a><span class="visited"> </span>
 <a id="L110"></a><span class="visited"> </span>
-<a id="L111"></a><span > </span>
+<a id="L111"></a><span class="visited"> </span>
 <a id="L112"></a><span class="visited"> </span>
-<a id="L113"></a><span > </span>
-<a id="L114"></a><span class="visited"> </span>
+<a id="L113"></a><span class="visited"> </span>
+<a id="L114"></a><span > </span>
 <a id="L115"></a><span class="visited"> </span>
-<a id="L116"></a><span > </span>
+<a id="L116"></a><span class="visited"> </span>
 <a id="L117"></a><span class="visited"> </span>
-<a id="L118"></a><span class="visited"> </span>
+<a id="L118"></a><span > </span>
 <a id="L119"></a><span class="visited"> </span>
-<a id="L120"></a><span > </span>
+<a id="L120"></a><span class="visited"> </span>
 <a id="L121"></a><span class="visited"> </span>
-<a id="L122"></a><span class="visited"> </span>
-<a id="L123"></a><span > </span>
+<a id="L122"></a><span > </span>
+<a id="L123"></a><span class="visited"> </span>
 <a id="L124"></a><span class="visited"> </span>
 <a id="L125"></a><span > </span>
 <a id="L126"></a><span class="visited"> </span>
 <a id="L127"></a><span class="visited"> </span>
-<a id="L128"></a><span > </span>
+<a id="L128"></a><span class="visited"> </span>
 <a id="L129"></a><span class="visited"> </span>
-<a id="L130"></a><span class="visited"> </span>
+<a id="L130"></a><span > </span>
 <a id="L131"></a><span class="visited"> </span>
 <a id="L132"></a><span class="visited"> </span>
 <a id="L133"></a><span > </span>
-<a id="L134"></a><span class="visited"> </span>
-<a id="L135"></a><span class="visited"> </span>
-<a id="L136"></a><span > </span>
+<a id="L134"></a><span > </span>
+<a id="L135"></a><span > </span>
+<a id="L136"></a><span class="visited"> </span>
 <a id="L137"></a><span > </span>
-<a id="L138"></a><span > </span>
+<a id="L138"></a><span class="visited"> </span>
 <a id="L139"></a><span class="visited"> </span>
 <a id="L140"></a><span > </span>
 <a id="L141"></a><span class="visited"> </span>
-<a id="L142"></a><span class="visited"> </span>
+<a id="L142"></a><span > </span>
 <a id="L143"></a><span > </span>
-<a id="L144"></a><span class="visited"> </span>
-<a id="L145"></a><span > </span>
-<a id="L146"></a><span > </span>
-<a id="L147"></a><span > </span>
-<a id="L148"></a><span class="visited"> </span>
-<a id="L149"></a><span class="visited"> </span>
+<a id="L144"></a><span > </span>
+<a id="L145"></a><span class="visited"> </span>
+<a id="L146"></a><span class="visited"> </span>
+<a id="L147"></a><span class="visited"> </span>
+<a id="L148"></a><span > </span>
+<a id="L149"></a><span > </span>
 <a id="L150"></a><span class="visited"> </span>
-<a id="L151"></a><span > </span>
+<a id="L151"></a><span class="visited"> </span>
 <a id="L152"></a><span > </span>
 <a id="L153"></a><span class="visited"> </span>
 <a id="L154"></a><span class="visited"> </span>
 <a id="L155"></a><span > </span>
 <a id="L156"></a><span class="visited"> </span>
 <a id="L157"></a><span class="visited"> </span>
-<a id="L158"></a><span > </span>
-<a id="L159"></a><span class="visited"> </span>
+<a id="L158"></a><span class="visited"> </span>
+<a id="L159"></a><span > </span>
 <a id="L160"></a><span class="visited"> </span>
-<a id="L161"></a><span class="visited"> </span>
-<a id="L162"></a><span > </span>
-<a id="L163"></a><span class="visited"> </span>
-<a id="L164"></a><span > </span>
+<a id="L161"></a><span > </span>
 </pre>
       </div>
       <div id="text-layer">
@@ -355,9 +352,6 @@
 <a href="#L159">159</a>
 <a href="#L160">160</a>
 <a href="#L161">161</a>
-<a href="#L162">162</a>
-<a href="#L163">163</a>
-<a href="#L164">164</a>
 </pre>
 <pre><code class="ocaml">(** Copyright 2023-2024, Danila Pechenev, Ilya Dudnikov *)
 
@@ -367,8 +361,8 @@ open Util
 open Ast
 
 let closure_conversion global_scope =
-  <span data-count="100">l</span>et empty = Base.Set.empty (module Base.String) in
-  <span data-count="100">l</span>et get_constructor = function
+  <span data-count="102">l</span>et empty = Base.Set.empty (module Base.String) in
+  <span data-count="102">l</span>et get_constructor = function
     | <span data-count="84">D</span>Declaration _ -&gt; ddeclaration
     | <span data-count="22">D</span>RecursiveDeclaration _ -&gt; drecursivedeclaration
   in
@@ -449,42 +443,39 @@ let closure_conversion global_scope =
       in
       let decl_acc, global_scope = helper other_decls [] global_scope env in
       <span data-count="53">e</span>letin decl decl_acc (closure_expressio<span data-count="53">n</span> env global_scope body)
-    | <span data-count="426">E</span>Identifier id as original -&gt;
+    | <span data-count="431">E</span>Identifier id as original -&gt;
       (match Base.Map.find env id with
-       | <span data-count="355">N</span>one -&gt; original
+       | <span data-count="360">N</span>one -&gt; original
        | <span data-count="71">S</span>ome free_vars -&gt;
          Base.Set.fold_right
            free_vars
            ~f:(fun var acc -&gt; <span data-count="57">e</span>application acc (eidentifie<span data-count="57">r</span> var))
            ~init:original)
-    | <span data-count="116">E</span>BinaryOperation (bop, left, right) -&gt;
+    | <span data-count="118">E</span>BinaryOperation (bop, left, right) -&gt;
       let left = closure_expression env global_scope left in
-      <span data-count="116">l</span>et right = closure_expression env global_scope right in
-      <span data-count="116">e</span>binary_operation bop left right
+      <span data-count="118">l</span>et right = closure_expression env global_scope right in
+      <span data-count="118">e</span>binary_operation bop left right
     | <span data-count="5">E</span>UnaryOperation (operator, operand) -&gt;
       let operand = closure_expression env global_scope operand in
       <span data-count="5">e</span>unary_operation operator operand
-    | <span data-count="220">E</span>Application (func, arg) -&gt;
+    | <span data-count="222">E</span>Application (func, arg) -&gt;
       let func = closure_expression env global_scope func in
-      <span data-count="220">l</span>et arg = closure_expression env global_scope arg in
-      <span data-count="220">e</span>application func arg
-    | <span data-count="37">E</span>List expr_list -&gt;
-      let expr_list =
-        Base.List.map expr_list ~f:(fun expr -&gt; <span data-count="107">c</span>losure_expression env global_scope expr)
-      in
-      <span data-count="37">e</span>list expr_list
-    | <span data-count="15">E</span>ConstructList (head, tail) -&gt;
+      <span data-count="222">l</span>et arg = closure_expression env global_scope arg in
+      <span data-count="222">e</span>application func arg
+    | <span data-count="38">E</span>List expr_list -&gt;
+      let expr_list = Base.List.map expr_list ~f:(closure_expressio<span data-count="38">n</span> env global_scope) in
+      <span data-count="38">e</span>list expr_list
+    | <span data-count="16">E</span>ConstructList (head, tail) -&gt;
       let head = closure_expression env global_scope head in
-      <span data-count="15">l</span>et tail = closure_expression env global_scope tail in
-      <span data-count="15">e</span>construct_list head tail
-    | <span data-count="12">E</span>Tuple (first_elem, second_elem, other_elems) -&gt;
+      <span data-count="16">l</span>et tail = closure_expression env global_scope tail in
+      <span data-count="16">e</span>construct_list head tail
+    | <span data-count="13">E</span>Tuple (first_elem, second_elem, other_elems) -&gt;
       let first_elem = closure_expression env global_scope first_elem in
-      <span data-count="12">l</span>et second_elem = closure_expression env global_scope second_elem in
-      <span data-count="12">l</span>et other_elems =
-        Base.List.map other_elems ~f:(fun elem -&gt;
-          <span data-count="1">c</span>losure_expression env global_scope elem)
+      <span data-count="13">l</span>et second_elem = closure_expression env global_scope second_elem in
+      <span data-count="13">l</span>et other_elems =
+        Base.List.map other_elems ~f:(closure_expressio<span data-count="13">n</span> env global_scope)
       in
-      <span data-count="12">e</span>tuple first_elem second_elem other_elems
+      <span data-count="13">e</span>tuple first_elem second_elem other_elems
     | <span data-count="16">E</span>If (expr, true_branch, false_branch) -&gt;
       let expr = closure_expression env global_scope expr in
       <span data-count="16">l</span>et true_branch = closure_expression env global_scope true_branch in
@@ -500,28 +491,28 @@ let closure_conversion global_scope =
           <span data-count="13">p</span>attern, closure_expressio<span data-count="13">n</span> env global_scope action)
       in
       <span data-count="23">e</span>matchwith matched first_case other_cases
-    | <span data-count="229">e</span>xpr -&gt; expr
+    | <span data-count="234">e</span>xpr -&gt; expr
   in
-  closure_expression (Base.Map.empt<span data-count="100">y</span> (module Base.String)) global_scope
+  closure_expression (Base.Map.empt<span data-count="102">y</span> (module Base.String)) global_scope
 ;;
 
 let run_closure program =
-  <span data-count="69">l</span>et get_constructor = function
-    | <span data-count="91">D</span>Declaration _ -&gt; ddeclaration
+  <span data-count="70">l</span>et get_constructor = function
+    | <span data-count="93">D</span>Declaration _ -&gt; ddeclaration
     | <span data-count="9">D</span>RecursiveDeclaration _ -&gt; drecursivedeclaration
   in
   let rec helper acc global_scope = function
-    | <span data-count="69">[</span>] -&gt; acc
-    | <span data-count="100">h</span>ead :: tail -&gt;
+    | <span data-count="70">[</span>] -&gt; acc
+    | <span data-count="102">h</span>ead :: tail -&gt;
       (match head with
-       | ( <span data-count="91">D</span>Declaration (id, pattern_list, body)
+       | ( <span data-count="93">D</span>Declaration (id, pattern_list, body)
          | <span data-count="9">D</span>RecursiveDeclaration (id, pattern_list, body) ) as original -&gt;
          let decl = get_constructor original in
-         <span data-count="100">l</span>et global_scope = Base.Set.add global_scope id in
-         <span data-count="100">l</span>et body = closure_conversion global_scope body in
-         <span data-count="100">h</span>elper (dec<span data-count="100">l</span> id pattern_list body :: acc) global_scope tail)
+         <span data-count="102">l</span>et global_scope = Base.Set.add global_scope id in
+         <span data-count="102">l</span>et body = closure_conversion global_scope body in
+         <span data-count="102">h</span>elper (dec<span data-count="102">l</span> id pattern_list body :: acc) global_scope tail)
   in
-  Base.List.rev @@ helpe<span data-count="69">r</span> [] (Base.Set.empt<span data-count="69">y</span> (module Base.String)) program
+  Base.List.rev @@ helpe<span data-count="70">r</span> [] (Base.Set.empt<span data-count="70">y</span> (module Base.String)) program
 ;;
 </code></pre>
       </div>
