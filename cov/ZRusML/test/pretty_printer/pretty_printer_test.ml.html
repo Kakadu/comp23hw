@@ -289,7 +289,7 @@ let%expect_test "function test" =
 |} in
   helper code;
   <span data-count="1">[</span>%expect {|
-  let f = (fun x -&gt; (x + y));;
+  let f x = (x + y);;
 |}<span data-count="5">]</span>
 ;;
 
@@ -306,11 +306,11 @@ let%expect_test "let in, apps, operators test" =
   helper code;
   <span data-count="1">[</span>%expect
     {|
-let a = (fun c d -&gt; (
+let a c d = (
     let m = (c + d) in
-    let k = (fun l -&gt; (l + m)) in
+    let k l = (l + m) in
     k (5 + m)
-) );;
+) ;;
 |}<span data-count="5">]</span>
 ;;
 
@@ -331,15 +331,15 @@ let%expect_test "let in depth 2, apps, operators" =
   helper code;
   <span data-count="1">[</span>%expect
     {|
-  let a = (fun c d -&gt; (
+  let a c d = (
       let m = (c + d) in
-      let k = (fun l -&gt; (
+      let k l = (
           let x = (l * 2) in
-          let y = (fun t -&gt; (m + t)) in
+          let y t = (m + t) in
           y x
-      ) ) in
+      )  in
       k (5 + m)
-  ) );;
+  ) ;;
 |}<span data-count="5">]</span>
 ;;
 
@@ -358,10 +358,10 @@ let%expect_test "factorial cps test" =
   helper code;
   <span data-count="1">[</span>%expect
     {|
-let fac = (fun n -&gt; (
-    let rec fack = (fun n k -&gt; if n &lt;= 1 then 1 else fack (n - 1) (fun m -&gt; k (m * n))) in
+let fac n = (
+    let rec fack n k = if n &lt;= 1 then 1 else fack (n - 1) (fun m -&gt; k (m * n)) in
     fack n (fun x -&gt; x)
-) );;
+) ;;
 |}<span data-count="5">]</span>
 ;;
 
@@ -381,14 +381,14 @@ let%expect_test "let ins test" =
   helper code;
   <span data-count="1">[</span>%expect
     {|
-let f = (fun a b -&gt; (
-    let x = (fun y -&gt; (y + z)) in
+let f a b = (
+    let x y = (y + z) in
     let t = (
-        let g = (fun s -&gt; (m * s)) in
+        let g s = (m * s) in
         g 15
     )  in
     x 1337
-) );;
+) ;;
 |}<span data-count="5">]</span>
 ;;
 </code></pre>
