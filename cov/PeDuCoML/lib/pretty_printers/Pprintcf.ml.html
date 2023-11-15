@@ -261,33 +261,33 @@ open Format
 open Base
 
 let rec pp_cfexpr fmt =
-  <span data-count="416">l</span>et get_format = function
-    | <span data-count="21">C</span>FLiteral _ | <span data-count="119">C</span>FIdentifier _ -&gt; Stdlib.format_of_string "%a"
-    | <span data-count="76">_</span> -&gt; Stdlib.format_of_string "(%a)"
+  <span data-count="437">l</span>et get_format = function
+    | <span data-count="21">C</span>FLiteral _ | <span data-count="121">C</span>FIdentifier _ -&gt; Stdlib.format_of_string "%a"
+    | <span data-count="80">_</span> -&gt; Stdlib.format_of_string "(%a)"
   in
   let ( ^^ ) = Stdlib.( ^^ ) in
   let pp_list fmt delimiter =
-    <span data-count="10">p</span>p_print_list
-      ~pp_sep:(fun fmt _ -&gt; <span data-count="14">f</span>printf fmt delimiter)
-      (fun fmt value -&gt; <span data-count="23">p</span>p_cfexpr fmt value)
+    <span data-count="12">p</span>p_print_list
+      ~pp_sep:(fun fmt _ -&gt; <span data-count="17">f</span>printf fmt delimiter)
+      (fun fmt value -&gt; <span data-count="28">p</span>p_cfexpr fmt value)
       fmt
   in
   function
-  | <span data-count="57">C</span>FLiteral literal -&gt; pp_literal fmt literal
-  | <span data-count="184">C</span>FIdentifier id -&gt; fprintf fmt "%s" id
-  | <span data-count="39">C</span>FBinaryOperation (binary_operator, left_operand, right_operand) -&gt;
+  | <span data-count="62">C</span>FLiteral literal -&gt; pp_literal fmt literal
+  | <span data-count="191">C</span>FIdentifier id -&gt; fprintf fmt "%s" id
+  | <span data-count="41">C</span>FBinaryOperation (binary_operator, left_operand, right_operand) -&gt;
     let format =
       Stdlib.format_of_string
         (match left_operand, right_operand with
          | <span data-count="0">C</span>FLiteral _, CFLiteral _
          | <span data-count="1">C</span>FLiteral _, CFIdentifier _
          | <span data-count="15">C</span>FIdentifier _, CFLiteral _
-         | <span data-count="12">C</span>FIdentifier _, CFIdentifier _ -&gt; "%a %a %a"
+         | <span data-count="13">C</span>FIdentifier _, CFIdentifier _ -&gt; "%a %a %a"
          | <span data-count="2">(</span><span data-count="1">C</span>FLiteral _ | <span data-count="1">C</span>FIdentifier _), _ -&gt; "%a %a (%a)"
-         | <span data-count="5">_</span>, (<span data-count="0">C</span>FLiteral _ | <span data-count="5">C</span>FIdentifier _) -&gt; "(%a) %a %a"
+         | <span data-count="6">_</span>, (<span data-count="0">C</span>FLiteral _ | <span data-count="6">C</span>FIdentifier _) -&gt; "(%a) %a %a"
          | <span data-count="4">_</span> -&gt; "(%a) %a (%a)")
     in
-    <span data-count="39">f</span>printf
+    <span data-count="41">f</span>printf
       fmt
       format
       pp_cfexpr
@@ -304,24 +304,24 @@ let rec pp_cfexpr fmt =
       unary_operator
       pp_cfexpr
       operand
-  | <span data-count="103">C</span>FApplication (left_operand, right_operand) -&gt;
+  | <span data-count="105">C</span>FApplication (left_operand, right_operand) -&gt;
     fprintf
       fmt
-      (get_forma<span data-count="103">t</span> left_operand ^<span data-count="103">^</span> " " ^<span data-count="103">^</span> get_forma<span data-count="103">t</span> right_operand)
+      (get_forma<span data-count="105">t</span> left_operand ^<span data-count="105">^</span> " " ^<span data-count="105">^</span> get_forma<span data-count="105">t</span> right_operand)
       pp_cfexpr
       left_operand
       pp_cfexpr
       right_operand
-  | <span data-count="6">C</span>FList list -&gt; fprintf fmt "[%a]" (fun fmt -&gt; <span data-count="6">p</span>p_list fmt "; ") list
-  | <span data-count="4">C</span>FConstructList (operand, list) -&gt;
+  | <span data-count="7">C</span>FList list -&gt; fprintf fmt "[%a]" (fun fmt -&gt; <span data-count="7">p</span>p_list fmt "; ") list
+  | <span data-count="5">C</span>FConstructList (operand, list) -&gt;
     fprintf
       fmt
-      (get_forma<span data-count="4">t</span> operand ^<span data-count="4">^</span> " :: " ^<span data-count="4">^</span> get_forma<span data-count="4">t</span> list)
+      (get_forma<span data-count="5">t</span> operand ^<span data-count="5">^</span> " :: " ^<span data-count="5">^</span> get_forma<span data-count="5">t</span> list)
       pp_cfexpr
       operand
       pp_cfexpr
       list
-  | <span data-count="4">C</span>FTuple (first_elem, second_elem, other_elems) -&gt;
+  | <span data-count="5">C</span>FTuple (first_elem, second_elem, other_elems) -&gt;
     pp_list fmt ", " (first_elem :: second_elem :: other_elems)
   | <span data-count="6">C</span>FIf (predicate, true_branch, false_branch) -&gt;
     fprintf
@@ -341,22 +341,22 @@ let rec pp_cfexpr fmt =
        fprintf fmt "%a" pp_cflet head;
        <span data-count="2">L</span>ist.iter tail ~f:(fun declaration -&gt; <span data-count="0">p</span>p_cflet fmt declaration);
        <span data-count="2">f</span>printf fmt " in %a" pp_cfexpr body)
-  | <span data-count="9">C</span>FMatchWith (matched_expression, first_case, other_cases) -&gt;
+  | <span data-count="11">C</span>FMatchWith (matched_expression, first_case, other_cases) -&gt;
     fprintf fmt "match %a with" pp_cfexpr matched_expression;
-    <span data-count="9">L</span>ist.iter (first_case :: other_cases) ~f:(fun (case, action) -&gt;
-      <span data-count="10">f</span>printf fmt " | %a -&gt; %a" pp_pattern case pp_cfexpr action)
+    <span data-count="11">L</span>ist.iter (first_case :: other_cases) ~f:(fun (case, action) -&gt;
+      <span data-count="12">f</span>printf fmt " | %a -&gt; %a" pp_pattern case pp_cfexpr action)
 
 and pp_cflet fmt (id, body) = <span data-count="2">f</span>printf fmt "let %s = %a" id pp_cfexpr body
 
 let pp_declaration fmt =
-  <span data-count="58">l</span>et pp_args fmt =
-    <span data-count="58">p</span>p_print_list
-      ~pp_sep:(fun fmt _ -&gt; <span data-count="48">f</span>printf fmt " ")
-      (fun fmt arg -&gt; <span data-count="100">f</span>printf fmt "%s" arg)
+  <span data-count="60">l</span>et pp_args fmt =
+    <span data-count="60">p</span>p_print_list
+      ~pp_sep:(fun fmt _ -&gt; <span data-count="49">f</span>printf fmt " ")
+      (fun fmt arg -&gt; <span data-count="102">f</span>printf fmt "%s" arg)
       fmt
   in
   function
-  | <span data-count="53">C</span>FDeclaration (name, arg_list, expression) -&gt;
+  | <span data-count="55">C</span>FDeclaration (name, arg_list, expression) -&gt;
     fprintf fmt "let %s %a = %a" name pp_args arg_list pp_cfexpr expression
   | <span data-count="5">C</span>FRecursiveDeclaration (name, arg_list, expression) -&gt;
     fprintf fmt "let rec %s %a = %a" name pp_args arg_list pp_cfexpr expression

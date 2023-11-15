@@ -2953,26 +2953,26 @@ type dispatch =
 (* ------------------------------- *)
 
 (* Helpers *)
-let space_predicate x = <span data-count="79451913">x</span> == ' <span data-count="9550816">'</span> || x == '\n<span data-count="429653">'</span> || x == '\t<span data-count="152">'</span> || x == '\r<span data-count="0">'</span>
-let remove_spaces = take_whil<span data-count="84">e</span> space_predicate
-let parens parser = <span data-count="29663072">r</span>emove_spaces *<span data-count="29663072">&gt;</span> cha<span data-count="29663072">r</span> '(' *<span data-count="29663072">&gt;</span> parser &lt;<span data-count="29663072">*</span> remove_spaces &lt;* cha<span data-count="29663072">r</span> ')'
+let space_predicate x = <span data-count="79465108">x</span> == ' <span data-count="9551485">'</span> || x == '\n<span data-count="429872">'</span> || x == '\t<span data-count="152">'</span> || x == '\r<span data-count="0">'</span>
+let remove_spaces = take_whil<span data-count="85">e</span> space_predicate
+let parens parser = <span data-count="29667156">r</span>emove_spaces *<span data-count="29667156">&gt;</span> cha<span data-count="29667156">r</span> '(' *<span data-count="29667156">&gt;</span> parser &lt;<span data-count="29667156">*</span> remove_spaces &lt;* cha<span data-count="29667156">r</span> ')'
 
 let parse_entity =
-  fi<span data-count="84">x</span>
+  fi<span data-count="85">x</span>
   @@ fun self -&gt;
-  <span data-count="80">r</span>emove_spaces
-  *&gt; (paren<span data-count="80">s</span> self
-      &lt;|<span data-count="80">&gt;</span> take_while<span data-count="80">1</span> (function
-        | <span data-count="0">'</span>A' .. 'Z' | <span data-count="2186895">'</span>a' .. 'z' | <span data-count="1186427">'</span>0' .. '9' | <span data-count="69875">'</span>_' | <span data-count="928">'</span>\'' -&gt; true
-        | <span data-count="3682223">_</span> -&gt; false))
+  <span data-count="81">r</span>emove_spaces
+  *&gt; (paren<span data-count="81">s</span> self
+      &lt;|<span data-count="81">&gt;</span> take_while<span data-count="81">1</span> (function
+        | <span data-count="0">'</span>A' .. 'Z' | <span data-count="2187124">'</span>a' .. 'z' | <span data-count="1186759">'</span>0' .. '9' | <span data-count="69919">'</span>_' | <span data-count="928">'</span>\'' -&gt; true
+        | <span data-count="3682857">_</span> -&gt; false))
 ;;
 
 let parse_uncapitalized_entity =
   parse_entity
-  &gt;&gt;<span data-count="84">=</span> fun entity -&gt;
-  <span data-count="2324957">m</span>atch entity.[0] with
-  | <span data-count="1273805">'</span>a' .. 'z' | <span data-count="3464">'</span>_' -&gt; return entity
-  | <span data-count="1047688">_</span> -&gt; fail "Parsing error: not an uncapitalized entity."
+  &gt;&gt;<span data-count="85">=</span> fun entity -&gt;
+  <span data-count="2325343">m</span>atch entity.[0] with
+  | <span data-count="1273935">'</span>a' .. 'z' | <span data-count="3464">'</span>_' -&gt; return entity
+  | <span data-count="1047944">_</span> -&gt; fail "Parsing error: not an uncapitalized entity."
 ;;
 
 let keywords =
@@ -2984,10 +2984,10 @@ let keywords =
 (* Patterns parsers *)
 
 let parse_pattern d =
-  <span data-count="758318">c</span>hoice
-    [ d.parse_ptupl<span data-count="758318">e</span> d
-    ; d.parse_pconstruct_lis<span data-count="758318">t</span> d
-    ; d.parse_plis<span data-count="758318">t</span> d
+  <span data-count="758429">c</span>hoice
+    [ d.parse_ptupl<span data-count="758429">e</span> d
+    ; d.parse_pconstruct_lis<span data-count="758429">t</span> d
+    ; d.parse_plis<span data-count="758429">t</span> d
     ; d.parse_pliteral
     ; d.parse_pidentifier
     ; d.parse_pwildcard
@@ -2995,24 +2995,24 @@ let parse_pattern d =
 ;;
 
 let parse_literal constructor =
-  <span data-count="168">f</span>ix
+  <span data-count="170">f</span>ix
   @@ fun self -&gt;
-  <span data-count="160">r</span>emove_spaces
-  *&gt; (paren<span data-count="160">s</span> self
-      &lt;|<span data-count="160">&gt;</span>
+  <span data-count="162">r</span>emove_spaces
+  *&gt; (paren<span data-count="162">s</span> self
+      &lt;|<span data-count="162">&gt;</span>
       let is_digit = function
-        | <span data-count="1277080">'</span>0' .. '9' -&gt; true
-        | <span data-count="2744749">_</span> -&gt; false
+        | <span data-count="1277368">'</span>0' .. '9' -&gt; true
+        | <span data-count="2745229">_</span> -&gt; false
       in
-      let parse_int_literal = take_while<span data-count="160">1</span> is_digit &gt;&gt;<span data-count="160">|</span> int_of_string &gt;&gt;| lint in
-      <span data-count="160">l</span>et parse_string_literal =
-        cha<span data-count="160">r</span> '"' *<span data-count="160">&gt;</span> take_whil<span data-count="160">e</span> (( != ) '"') &lt;<span data-count="160">*</span> cha<span data-count="160">r</span> '"' &gt;&gt;| lstring
+      let parse_int_literal = take_while<span data-count="162">1</span> is_digit &gt;&gt;<span data-count="162">|</span> int_of_string &gt;&gt;| lint in
+      <span data-count="162">l</span>et parse_string_literal =
+        cha<span data-count="162">r</span> '"' *<span data-count="162">&gt;</span> take_whil<span data-count="162">e</span> (( != ) '"') &lt;<span data-count="162">*</span> cha<span data-count="162">r</span> '"' &gt;&gt;| lstring
       in
-      <span data-count="160">l</span>et parse_char_literal = cha<span data-count="160">r</span> '\'' *<span data-count="160">&gt;</span> any_char &lt;<span data-count="160">*</span> cha<span data-count="160">r</span> '\'' &gt;&gt;| lchar in
-      <span data-count="160">l</span>et parse_bool_literal =
-        strin<span data-count="160">g</span> "true" &lt;|<span data-count="160">&gt;</span> strin<span data-count="160">g</span> "false" &gt;&gt;<span data-count="160">|</span> bool_of_string &gt;&gt;| lbool
+      <span data-count="162">l</span>et parse_char_literal = cha<span data-count="162">r</span> '\'' *<span data-count="162">&gt;</span> any_char &lt;<span data-count="162">*</span> cha<span data-count="162">r</span> '\'' &gt;&gt;| lchar in
+      <span data-count="162">l</span>et parse_bool_literal =
+        strin<span data-count="162">g</span> "true" &lt;|<span data-count="162">&gt;</span> strin<span data-count="162">g</span> "false" &gt;&gt;<span data-count="162">|</span> bool_of_string &gt;&gt;| lbool
       in
-      <span data-count="160">l</span>et parse_literal =
+      <span data-count="162">l</span>et parse_literal =
         choice
           [ parse_int_literal
           ; parse_string_literal
@@ -3020,257 +3020,257 @@ let parse_literal constructor =
           ; parse_bool_literal
           ]
       in
-      <span data-count="160">c</span>onstructor &lt;$<span data-count="160">&gt;</span> parse_literal)
+      <span data-count="162">c</span>onstructor &lt;$<span data-count="162">&gt;</span> parse_literal)
 ;;
 
-let parse_pliteral = parse_litera<span data-count="84">l</span> pliteral
-let parse_literal = parse_litera<span data-count="84">l</span> eliteral
+let parse_pliteral = parse_litera<span data-count="85">l</span> pliteral
+let parse_literal = parse_litera<span data-count="85">l</span> eliteral
 
 let parse_pidentifier =
-  fi<span data-count="84">x</span>
+  fi<span data-count="85">x</span>
   @@ fun _ -&gt;
-  <span data-count="80">r</span>emove_spaces
+  <span data-count="81">r</span>emove_spaces
   *&gt;
   let parse_identifier =
     parse_uncapitalized_entity
     &gt;&gt;= fun entity -&gt;
-    <span data-count="57506">i</span>f List.exists (( = ) entity) keywords
+    <span data-count="57526">i</span>f List.exists (( = ) entity) keywords
     then <span data-count="4000">f</span>ail "Parsing error: keyword used."
-    else <span data-count="53506">i</span>f String.for_all (fun c -&gt; <span data-count="53510">c</span> = '_') entity
+    else <span data-count="53526">i</span>f String.for_all (fun c -&gt; <span data-count="53530">c</span> = '_') entity
     then <span data-count="3463">f</span>ail "Parsing error: wildcard used."
-    else <span data-count="50043">r</span>eturn @@ pidentifie<span data-count="50043">r</span> entity
+    else <span data-count="50063">r</span>eturn @@ pidentifie<span data-count="50063">r</span> entity
   in
-  <span data-count="80">p</span>arse_identifier
+  <span data-count="81">p</span>arse_identifier
 ;;
 
 let parse_pwildcard =
-  fi<span data-count="84">x</span>
+  fi<span data-count="85">x</span>
   @@ fun self -&gt;
-  <span data-count="80">p</span>aren<span data-count="80">s</span> self &lt;|&gt; remove_spaces *<span data-count="80">&gt;</span> (pwildcard &lt;$<span data-count="80">&gt;</span> take_while<span data-count="80">1</span> (fun c -&gt; <span data-count="148465">c</span> = '_'))
+  <span data-count="81">p</span>aren<span data-count="81">s</span> self &lt;|&gt; remove_spaces *<span data-count="81">&gt;</span> (pwildcard &lt;$<span data-count="81">&gt;</span> take_while<span data-count="81">1</span> (fun c -&gt; <span data-count="148497">c</span> = '_'))
 ;;
 
 let parse_ptuple d =
-  <span data-count="805800">f</span>ix
+  <span data-count="805915">f</span>ix
   @@ fun self -&gt;
-  <span data-count="24771">(</span>remove_spaces
-   *<span data-count="24771">&gt;</span>
-   let separator = remove_spaces *<span data-count="24771">&gt;</span> cha<span data-count="24771">r</span> ',' *&gt; remove_spaces in
-   <span data-count="24771">l</span>et parse_pattern =
+  <span data-count="24773">(</span>remove_spaces
+   *<span data-count="24773">&gt;</span>
+   let separator = remove_spaces *<span data-count="24773">&gt;</span> cha<span data-count="24773">r</span> ',' *&gt; remove_spaces in
+   <span data-count="24773">l</span>et parse_pattern =
      choice
-       [ paren<span data-count="24771">s</span> self
-       ; d.parse_pconstruct_lis<span data-count="24771">t</span> d
+       [ paren<span data-count="24773">s</span> self
+       ; d.parse_pconstruct_lis<span data-count="24773">t</span> d
        ; d.parse_pwildcard
-       ; d.parse_plis<span data-count="24771">t</span> d
+       ; d.parse_plis<span data-count="24773">t</span> d
        ; d.parse_pliteral
        ; d.parse_pidentifier
        ]
    in
-   <span data-count="24771">l</span>ift<span data-count="24771">3</span>
+   <span data-count="24773">l</span>ift<span data-count="24773">3</span>
      ptuple
-     (parse_pattern &lt;<span data-count="24771">*</span> separator)
-     (parse_pattern &lt;<span data-count="24771">*</span> optio<span data-count="24771">n</span> "" separator)
-     (sep_b<span data-count="24771">y</span> separator parse_pattern &lt;<span data-count="24771">*</span> remove_spaces))
-  &lt;|&gt; paren<span data-count="24771">s</span> self
+     (parse_pattern &lt;<span data-count="24773">*</span> separator)
+     (parse_pattern &lt;<span data-count="24773">*</span> optio<span data-count="24773">n</span> "" separator)
+     (sep_b<span data-count="24773">y</span> separator parse_pattern &lt;<span data-count="24773">*</span> remove_spaces))
+  &lt;|&gt; paren<span data-count="24773">s</span> self
 ;;
 
 let parse_plist d =
-  <span data-count="830571">f</span>ix
+  <span data-count="830688">f</span>ix
   @@ fun self -&gt;
-  <span data-count="85234">r</span>emove_spaces
+  <span data-count="85242">r</span>emove_spaces
   *&gt;
-  let brackets parser = <span data-count="85234">c</span>ha<span data-count="85234">r</span> '[' *<span data-count="85234">&gt;</span> parser &lt;* cha<span data-count="85234">r</span> ']'
-  and separator = remove_spaces *<span data-count="85234">&gt;</span> cha<span data-count="85234">r</span> ';' *<span data-count="85234">&gt;</span> remove_spaces &lt;|<span data-count="85234">&gt;</span> remove_spaces in
-  paren<span data-count="85234">s</span> self
-  &lt;|<span data-count="85234">&gt;</span> (plist &lt;$<span data-count="85234">&gt;</span> bracket<span data-count="85234">s</span> @@ (remove_spaces *<span data-count="85234">&gt;</span> man<span data-count="85234">y</span> (parse_patter<span data-count="85234">n</span> d &lt;<span data-count="85234">*</span> separator)))
+  let brackets parser = <span data-count="85242">c</span>ha<span data-count="85242">r</span> '[' *<span data-count="85242">&gt;</span> parser &lt;* cha<span data-count="85242">r</span> ']'
+  and separator = remove_spaces *<span data-count="85242">&gt;</span> cha<span data-count="85242">r</span> ';' *<span data-count="85242">&gt;</span> remove_spaces &lt;|<span data-count="85242">&gt;</span> remove_spaces in
+  paren<span data-count="85242">s</span> self
+  &lt;|<span data-count="85242">&gt;</span> (plist &lt;$<span data-count="85242">&gt;</span> bracket<span data-count="85242">s</span> @@ (remove_spaces *<span data-count="85242">&gt;</span> man<span data-count="85242">y</span> (parse_patter<span data-count="85242">n</span> d &lt;<span data-count="85242">*</span> separator)))
 ;;
 
 let parse_pconstruct_list d =
-  <span data-count="783089">f</span>ix
+  <span data-count="783202">f</span>ix
   @@ fun self -&gt;
-  <span data-count="47482">r</span>emove_spaces
-  *&gt; (paren<span data-count="47482">s</span> self
-      &lt;|<span data-count="47482">&gt;</span>
+  <span data-count="47486">r</span>emove_spaces
+  *&gt; (paren<span data-count="47486">s</span> self
+      &lt;|<span data-count="47486">&gt;</span>
       let parse_pattern =
         choice
-          [ paren<span data-count="47482">s</span> @@ d.parse_ptupl<span data-count="47482">e</span> d
-          ; paren<span data-count="47482">s</span> self
+          [ paren<span data-count="47486">s</span> @@ d.parse_ptupl<span data-count="47486">e</span> d
+          ; paren<span data-count="47486">s</span> self
           ; d.parse_pwildcard
-          ; d.parse_plis<span data-count="47482">t</span> d
+          ; d.parse_plis<span data-count="47486">t</span> d
           ; d.parse_pliteral
           ; d.parse_pidentifier
           ]
       in
-      <span data-count="47482">l</span>et separator = remove_spaces *<span data-count="47482">&gt;</span> strin<span data-count="47482">g</span> "::" *&gt; remove_spaces in
-      <span data-count="47482">l</span>ift<span data-count="47482">2</span> pconstruct_list (parse_pattern &lt;<span data-count="47482">*</span> separator) (self &lt;|<span data-count="47482">&gt;</span> parse_pattern))
+      <span data-count="47486">l</span>et separator = remove_spaces *<span data-count="47486">&gt;</span> strin<span data-count="47486">g</span> "::" *&gt; remove_spaces in
+      <span data-count="47486">l</span>ift<span data-count="47486">2</span> pconstruct_list (parse_pattern &lt;<span data-count="47486">*</span> separator) (self &lt;|<span data-count="47486">&gt;</span> parse_pattern))
 ;;
 
 (* Parsers *)
 
 let parse_identifier =
-  fi<span data-count="84">x</span>
+  fi<span data-count="85">x</span>
   @@ fun _ -&gt;
-  <span data-count="80">r</span>emove_spaces
+  <span data-count="81">r</span>emove_spaces
   *&gt;
   let parse_identifier =
     parse_uncapitalized_entity
     &gt;&gt;= fun entity -&gt;
-    <span data-count="1216532">i</span>f List.exists (( = ) entity) keywords
-    then <span data-count="170606">f</span>ail "Parsing error: keyword used."
-    else <span data-count="1045926">r</span>eturn @@ eidentifie<span data-count="1045926">r</span> entity
+    <span data-count="1216640">i</span>f List.exists (( = ) entity) keywords
+    then <span data-count="170610">f</span>ail "Parsing error: keyword used."
+    else <span data-count="1046030">r</span>eturn @@ eidentifie<span data-count="1046030">r</span> entity
   in
-  <span data-count="80">p</span>arse_identifier
+  <span data-count="81">p</span>arse_identifier
 ;;
 
 let parse_tuple d =
-  <span data-count="4048683">f</span>ix
+  <span data-count="4049236">f</span>ix
   @@ fun self -&gt;
-  <span data-count="114170">r</span>emove_spaces
+  <span data-count="114190">r</span>emove_spaces
   *&gt; ((let parse_content =
-         choic<span data-count="114170">e</span>
-           [ paren<span data-count="114170">s</span> self
-           ; d.parse_list_constructin<span data-count="114170">g</span> d
-           ; d.parse_binary_operatio<span data-count="114170">n</span> d
-           ; d.parse_unary_operatio<span data-count="114170">n</span> d
-           ; d.parse_lis<span data-count="114170">t</span> d
-           ; d.parse_applicatio<span data-count="114170">n</span> d
-           ; d.parse_fu<span data-count="114170">n</span> d
-           ; d.parse_conditiona<span data-count="114170">l</span> d
-           ; d.parse_matchin<span data-count="114170">g</span> d
-           ; d.parse_let_i<span data-count="114170">n</span> d
+         choic<span data-count="114190">e</span>
+           [ paren<span data-count="114190">s</span> self
+           ; d.parse_list_constructin<span data-count="114190">g</span> d
+           ; d.parse_binary_operatio<span data-count="114190">n</span> d
+           ; d.parse_unary_operatio<span data-count="114190">n</span> d
+           ; d.parse_lis<span data-count="114190">t</span> d
+           ; d.parse_applicatio<span data-count="114190">n</span> d
+           ; d.parse_fu<span data-count="114190">n</span> d
+           ; d.parse_conditiona<span data-count="114190">l</span> d
+           ; d.parse_matchin<span data-count="114190">g</span> d
+           ; d.parse_let_i<span data-count="114190">n</span> d
            ; parse_literal
            ; parse_identifier
            ]
-       and separator = remove_spaces *<span data-count="114170">&gt;</span> cha<span data-count="114170">r</span> ',' *<span data-count="114170">&gt;</span> remove_spaces in
-       lift<span data-count="114170">3</span>
+       and separator = remove_spaces *<span data-count="114190">&gt;</span> cha<span data-count="114190">r</span> ',' *<span data-count="114190">&gt;</span> remove_spaces in
+       lift<span data-count="114190">3</span>
          etuple
-         (parse_content &lt;<span data-count="114170">*</span> separator)
-         (parse_content &lt;<span data-count="114170">*</span> optio<span data-count="114170">n</span> "" separator)
-         (sep_b<span data-count="114170">y</span> separator parse_content &lt;<span data-count="114170">*</span> remove_spaces))
-      &lt;|<span data-count="114170">&gt;</span> paren<span data-count="114170">s</span> self)
+         (parse_content &lt;<span data-count="114190">*</span> separator)
+         (parse_content &lt;<span data-count="114190">*</span> optio<span data-count="114190">n</span> "" separator)
+         (sep_b<span data-count="114190">y</span> separator parse_content &lt;<span data-count="114190">*</span> remove_spaces))
+      &lt;|<span data-count="114190">&gt;</span> paren<span data-count="114190">s</span> self)
 ;;
 
 let parse_list d =
-  <span data-count="3209623">f</span>ix
+  <span data-count="3210095">f</span>ix
   @@ fun self -&gt;
-  <span data-count="1181444">r</span>emove_spaces
+  <span data-count="1181576">r</span>emove_spaces
   *&gt;
-  let brackets parser = <span data-count="1181444">c</span>ha<span data-count="1181444">r</span> '[' *<span data-count="1181444">&gt;</span> parser &lt;* cha<span data-count="1181444">r</span> ']'
-  and separator = remove_spaces *<span data-count="1181444">&gt;</span> cha<span data-count="1181444">r</span> ';' *<span data-count="1181444">&gt;</span> remove_spaces &lt;|<span data-count="1181444">&gt;</span> remove_spaces
+  let brackets parser = <span data-count="1181576">c</span>ha<span data-count="1181576">r</span> '[' *<span data-count="1181576">&gt;</span> parser &lt;* cha<span data-count="1181576">r</span> ']'
+  and separator = remove_spaces *<span data-count="1181576">&gt;</span> cha<span data-count="1181576">r</span> ';' *<span data-count="1181576">&gt;</span> remove_spaces &lt;|<span data-count="1181576">&gt;</span> remove_spaces
   and parse_content =
-    choic<span data-count="1181444">e</span>
-      [ d.parse_tupl<span data-count="1181444">e</span> d
-      ; d.parse_list_constructin<span data-count="1181444">g</span> d
-      ; d.parse_binary_operatio<span data-count="1181444">n</span> d
-      ; d.parse_unary_operatio<span data-count="1181444">n</span> d
+    choic<span data-count="1181576">e</span>
+      [ d.parse_tupl<span data-count="1181576">e</span> d
+      ; d.parse_list_constructin<span data-count="1181576">g</span> d
+      ; d.parse_binary_operatio<span data-count="1181576">n</span> d
+      ; d.parse_unary_operatio<span data-count="1181576">n</span> d
       ; self
-      ; d.parse_applicatio<span data-count="1181444">n</span> d
-      ; d.parse_fu<span data-count="1181444">n</span> d
-      ; d.parse_conditiona<span data-count="1181444">l</span> d
-      ; d.parse_matchin<span data-count="1181444">g</span> d
-      ; d.parse_let_i<span data-count="1181444">n</span> d
+      ; d.parse_applicatio<span data-count="1181576">n</span> d
+      ; d.parse_fu<span data-count="1181576">n</span> d
+      ; d.parse_conditiona<span data-count="1181576">l</span> d
+      ; d.parse_matchin<span data-count="1181576">g</span> d
+      ; d.parse_let_i<span data-count="1181576">n</span> d
       ; parse_literal
       ; parse_identifier
       ]
   in
-  paren<span data-count="1181444">s</span> self
-  &lt;|<span data-count="1181444">&gt;</span> lift elis<span data-count="1181444">t</span> @@ bracket<span data-count="1181444">s</span> @@ (remove_spaces *<span data-count="1181444">&gt;</span> man<span data-count="1181444">y</span> (parse_content &lt;<span data-count="1181444">*</span> separator))
+  paren<span data-count="1181576">s</span> self
+  &lt;|<span data-count="1181576">&gt;</span> lift elis<span data-count="1181576">t</span> @@ bracket<span data-count="1181576">s</span> @@ (remove_spaces *<span data-count="1181576">&gt;</span> man<span data-count="1181576">y</span> (parse_content &lt;<span data-count="1181576">*</span> separator))
 ;;
 
 let parse_fun d =
-  <span data-count="4835386">f</span>ix
+  <span data-count="4836053">f</span>ix
   @@ fun self -&gt;
-  <span data-count="165791">r</span>emove_spaces
+  <span data-count="165815">r</span>emove_spaces
   *&gt;
   let parse_content =
     choice
-      [ d.parse_tupl<span data-count="165791">e</span> d
-      ; d.parse_list_constructin<span data-count="165791">g</span> d
-      ; d.parse_binary_operatio<span data-count="165791">n</span> d
-      ; d.parse_unary_operatio<span data-count="165791">n</span> d
-      ; d.parse_lis<span data-count="165791">t</span> d
-      ; d.parse_applicatio<span data-count="165791">n</span> d
+      [ d.parse_tupl<span data-count="165815">e</span> d
+      ; d.parse_list_constructin<span data-count="165815">g</span> d
+      ; d.parse_binary_operatio<span data-count="165815">n</span> d
+      ; d.parse_unary_operatio<span data-count="165815">n</span> d
+      ; d.parse_lis<span data-count="165815">t</span> d
+      ; d.parse_applicatio<span data-count="165815">n</span> d
       ; self
-      ; d.parse_conditiona<span data-count="165791">l</span> d
-      ; d.parse_matchin<span data-count="165791">g</span> d
-      ; d.parse_let_i<span data-count="165791">n</span> d
+      ; d.parse_conditiona<span data-count="165815">l</span> d
+      ; d.parse_matchin<span data-count="165815">g</span> d
+      ; d.parse_let_i<span data-count="165815">n</span> d
       ; parse_literal
       ; parse_identifier
       ]
   in
-  <span data-count="165791">p</span>aren<span data-count="165791">s</span> self
-  &lt;|<span data-count="165791">&gt;</span> strin<span data-count="165791">g</span> "fun"
-      *<span data-count="165791">&gt;</span> lift<span data-count="165791">3</span>
+  <span data-count="165815">p</span>aren<span data-count="165815">s</span> self
+  &lt;|<span data-count="165815">&gt;</span> strin<span data-count="165815">g</span> "fun"
+      *<span data-count="165815">&gt;</span> lift<span data-count="165815">3</span>
            efun
-           (parse_patter<span data-count="165791">n</span> d &lt;<span data-count="165791">*</span> remove_spaces)
-           (man<span data-count="165791">y</span> (parse_patter<span data-count="165791">n</span> d) &lt;<span data-count="165791">*</span> remove_spaces &lt;<span data-count="165791">*</span> strin<span data-count="165791">g</span> "-&gt;" &lt;<span data-count="165791">*</span> remove_spaces)
-           (parse_content &lt;<span data-count="165791">*</span> remove_spaces)
+           (parse_patter<span data-count="165815">n</span> d &lt;<span data-count="165815">*</span> remove_spaces)
+           (man<span data-count="165815">y</span> (parse_patter<span data-count="165815">n</span> d) &lt;<span data-count="165815">*</span> remove_spaces &lt;<span data-count="165815">*</span> strin<span data-count="165815">g</span> "-&gt;" &lt;<span data-count="165815">*</span> remove_spaces)
+           (parse_content &lt;<span data-count="165815">*</span> remove_spaces)
 ;;
 
 (* Used in parse_declaration and parse_let_in *)
 let declaration_helper constructing_function d =
-  <span data-count="3167">l</span>et parse_content =
+  <span data-count="3169">l</span>et parse_content =
     choice
-      [ d.parse_tupl<span data-count="3167">e</span> d
-      ; d.parse_list_constructin<span data-count="3167">g</span> d
-      ; d.parse_binary_operatio<span data-count="3167">n</span> d
-      ; d.parse_unary_operatio<span data-count="3167">n</span> d
-      ; d.parse_lis<span data-count="3167">t</span> d
-      ; d.parse_applicatio<span data-count="3167">n</span> d
-      ; d.parse_fu<span data-count="3167">n</span> d
-      ; d.parse_conditiona<span data-count="3167">l</span> d
-      ; d.parse_matchin<span data-count="3167">g</span> d
-      ; d.parse_let_i<span data-count="3167">n</span> d
+      [ d.parse_tupl<span data-count="3169">e</span> d
+      ; d.parse_list_constructin<span data-count="3169">g</span> d
+      ; d.parse_binary_operatio<span data-count="3169">n</span> d
+      ; d.parse_unary_operatio<span data-count="3169">n</span> d
+      ; d.parse_lis<span data-count="3169">t</span> d
+      ; d.parse_applicatio<span data-count="3169">n</span> d
+      ; d.parse_fu<span data-count="3169">n</span> d
+      ; d.parse_conditiona<span data-count="3169">l</span> d
+      ; d.parse_matchin<span data-count="3169">g</span> d
+      ; d.parse_let_i<span data-count="3169">n</span> d
       ; parse_literal
       ; parse_identifier
       ]
   in
-  <span data-count="3167">l</span>ift3
+  <span data-count="3169">l</span>ift3
     constructing_function
     (parse_uncapitalized_entity
-     &gt;&gt;<span data-count="3167">=</span> fun name -&gt;
-     <span data-count="3231">i</span>f name = "_" then <span data-count="0">f</span>ail "Parsing error: wildcard not expected." else <span data-count="3231">r</span>eturn name)
-    (man<span data-count="3167">y</span> (parse_patter<span data-count="3167">n</span> d))
-    (remove_spaces *<span data-count="3167">&gt;</span> strin<span data-count="3167">g</span> "=" *<span data-count="3167">&gt;</span> parse_content)
+     &gt;&gt;<span data-count="3169">=</span> fun name -&gt;
+     <span data-count="3233">i</span>f name = "_" then <span data-count="0">f</span>ail "Parsing error: wildcard not expected." else <span data-count="3233">r</span>eturn name)
+    (man<span data-count="3169">y</span> (parse_patter<span data-count="3169">n</span> d))
+    (remove_spaces *<span data-count="3169">&gt;</span> strin<span data-count="3169">g</span> "=" *<span data-count="3169">&gt;</span> parse_content)
 ;;
 
 let parse_declaration d =
-  <span data-count="84">f</span>ix
+  <span data-count="85">f</span>ix
   @@ fun _ -&gt;
-  <span data-count="80">r</span>emove_spaces
-  *<span data-count="80">&gt;</span> strin<span data-count="80">g</span> "let"
-  *<span data-count="80">&gt;</span> take_while<span data-count="80">1</span> space_predicate
-  *<span data-count="80">&gt;</span> optio<span data-count="80">n</span> "" (strin<span data-count="80">g</span> "rec" &lt;<span data-count="80">*</span> take_while<span data-count="80">1</span> space_predicate)
+  <span data-count="81">r</span>emove_spaces
+  *<span data-count="81">&gt;</span> strin<span data-count="81">g</span> "let"
+  *<span data-count="81">&gt;</span> take_while<span data-count="81">1</span> space_predicate
+  *<span data-count="81">&gt;</span> optio<span data-count="81">n</span> "" (strin<span data-count="81">g</span> "rec" &lt;<span data-count="81">*</span> take_while<span data-count="81">1</span> space_predicate)
   &gt;&gt;= function
   | <span data-count="11">"</span>rec" -&gt; declaration_helper drecursivedeclaration d
-  | <span data-count="148">_</span> -&gt; declaration_helper ddeclaration d
+  | <span data-count="150">_</span> -&gt; declaration_helper ddeclaration d
 ;;
 
 let parse_let_in d =
-  <span data-count="7097846">f</span>ix
+  <span data-count="7098812">f</span>ix
   @@ fun self -&gt;
-  <span data-count="733277">r</span>emove_spaces
+  <span data-count="733387">r</span>emove_spaces
   *&gt;
   let parse_content =
     choice
-      [ d.parse_tupl<span data-count="733277">e</span> d
-      ; d.parse_list_constructin<span data-count="733277">g</span> d
-      ; d.parse_binary_operatio<span data-count="733277">n</span> d
-      ; d.parse_unary_operatio<span data-count="733277">n</span> d
-      ; d.parse_lis<span data-count="733277">t</span> d
-      ; d.parse_applicatio<span data-count="733277">n</span> d
-      ; d.parse_fu<span data-count="733277">n</span> d
-      ; d.parse_conditiona<span data-count="733277">l</span> d
-      ; d.parse_matchin<span data-count="733277">g</span> d
+      [ d.parse_tupl<span data-count="733387">e</span> d
+      ; d.parse_list_constructin<span data-count="733387">g</span> d
+      ; d.parse_binary_operatio<span data-count="733387">n</span> d
+      ; d.parse_unary_operatio<span data-count="733387">n</span> d
+      ; d.parse_lis<span data-count="733387">t</span> d
+      ; d.parse_applicatio<span data-count="733387">n</span> d
+      ; d.parse_fu<span data-count="733387">n</span> d
+      ; d.parse_conditiona<span data-count="733387">l</span> d
+      ; d.parse_matchin<span data-count="733387">g</span> d
       ; self
       ; parse_literal
       ; parse_identifier
       ]
   in
-  <span data-count="733277">p</span>aren<span data-count="733277">s</span> self
-  &lt;|<span data-count="733277">&gt;</span> (strin<span data-count="733277">g</span> "let"
-       *<span data-count="733277">&gt;</span> take_while<span data-count="733277">1</span> space_predicate
-       *<span data-count="733277">&gt;</span> optio<span data-count="733277">n</span> "" (strin<span data-count="733277">g</span> "rec" &lt;<span data-count="733277">*</span> take_while<span data-count="733277">1</span> space_predicate)
-       &gt;&gt;<span data-count="733277">=</span> fun parsed_rec -&gt;
+  <span data-count="733387">p</span>aren<span data-count="733387">s</span> self
+  &lt;|<span data-count="733387">&gt;</span> (strin<span data-count="733387">g</span> "let"
+       *<span data-count="733387">&gt;</span> take_while<span data-count="733387">1</span> space_predicate
+       *<span data-count="733387">&gt;</span> optio<span data-count="733387">n</span> "" (strin<span data-count="733387">g</span> "rec" &lt;<span data-count="733387">*</span> take_while<span data-count="733387">1</span> space_predicate)
+       &gt;&gt;<span data-count="733387">=</span> fun parsed_rec -&gt;
        <span data-count="1504">l</span>et separator = remove_spaces *<span data-count="1504">&gt;</span> strin<span data-count="1504">g</span> "and" *&gt; take_while<span data-count="1504">1</span> space_predicate in
        <span data-count="1504">l</span>et first_declaration =
          match parsed_rec with
@@ -3290,229 +3290,229 @@ let parse_let_in d =
 ;;
 
 let parse_conditional d =
-  <span data-count="7494624">f</span>ix
+  <span data-count="7495647">f</span>ix
   @@ fun self -&gt;
-  <span data-count="336499">r</span>emove_spaces
+  <span data-count="336552">r</span>emove_spaces
   *&gt;
   let parse_content =
     choice
-      [ d.parse_tupl<span data-count="336499">e</span> d
-      ; d.parse_list_constructin<span data-count="336499">g</span> d
-      ; d.parse_binary_operatio<span data-count="336499">n</span> d
-      ; d.parse_unary_operatio<span data-count="336499">n</span> d
-      ; d.parse_lis<span data-count="336499">t</span> d
-      ; d.parse_applicatio<span data-count="336499">n</span> d
-      ; d.parse_fu<span data-count="336499">n</span> d
+      [ d.parse_tupl<span data-count="336552">e</span> d
+      ; d.parse_list_constructin<span data-count="336552">g</span> d
+      ; d.parse_binary_operatio<span data-count="336552">n</span> d
+      ; d.parse_unary_operatio<span data-count="336552">n</span> d
+      ; d.parse_lis<span data-count="336552">t</span> d
+      ; d.parse_applicatio<span data-count="336552">n</span> d
+      ; d.parse_fu<span data-count="336552">n</span> d
       ; self
-      ; d.parse_matchin<span data-count="336499">g</span> d
-      ; d.parse_let_i<span data-count="336499">n</span> d
+      ; d.parse_matchin<span data-count="336552">g</span> d
+      ; d.parse_let_i<span data-count="336552">n</span> d
       ; parse_literal
       ; parse_identifier
       ]
   in
-  <span data-count="336499">p</span>aren<span data-count="336499">s</span> self
-  &lt;|<span data-count="336499">&gt;</span> strin<span data-count="336499">g</span> "if"
-      *<span data-count="336499">&gt;</span> lift<span data-count="336499">3</span>
+  <span data-count="336552">p</span>aren<span data-count="336552">s</span> self
+  &lt;|<span data-count="336552">&gt;</span> strin<span data-count="336552">g</span> "if"
+      *<span data-count="336552">&gt;</span> lift<span data-count="336552">3</span>
            eif
            parse_content
-           (remove_spaces *<span data-count="336499">&gt;</span> strin<span data-count="336499">g</span> "then" *<span data-count="336499">&gt;</span> parse_content)
-           (remove_spaces *<span data-count="336499">&gt;</span> strin<span data-count="336499">g</span> "else" *<span data-count="336499">&gt;</span> parse_content)
+           (remove_spaces *<span data-count="336552">&gt;</span> strin<span data-count="336552">g</span> "then" *<span data-count="336552">&gt;</span> parse_content)
+           (remove_spaces *<span data-count="336552">&gt;</span> strin<span data-count="336552">g</span> "else" *<span data-count="336552">&gt;</span> parse_content)
 ;;
 
 let parse_matching d =
-  <span data-count="7492788">f</span>ix
+  <span data-count="7493811">f</span>ix
   @@ fun self -&gt;
-  <span data-count="338335">r</span>emove_spaces
+  <span data-count="338388">r</span>emove_spaces
   *&gt;
   let parse_content_right =
     choice
-      [ d.parse_tupl<span data-count="338335">e</span> d
-      ; d.parse_list_constructin<span data-count="338335">g</span> d
-      ; d.parse_binary_operatio<span data-count="338335">n</span> d
-      ; d.parse_unary_operatio<span data-count="338335">n</span> d
-      ; d.parse_lis<span data-count="338335">t</span> d
-      ; d.parse_applicatio<span data-count="338335">n</span> d
-      ; d.parse_fu<span data-count="338335">n</span> d
-      ; d.parse_conditiona<span data-count="338335">l</span> d
+      [ d.parse_tupl<span data-count="338388">e</span> d
+      ; d.parse_list_constructin<span data-count="338388">g</span> d
+      ; d.parse_binary_operatio<span data-count="338388">n</span> d
+      ; d.parse_unary_operatio<span data-count="338388">n</span> d
+      ; d.parse_lis<span data-count="338388">t</span> d
+      ; d.parse_applicatio<span data-count="338388">n</span> d
+      ; d.parse_fu<span data-count="338388">n</span> d
+      ; d.parse_conditiona<span data-count="338388">l</span> d
       ; self
-      ; d.parse_let_i<span data-count="338335">n</span> d
+      ; d.parse_let_i<span data-count="338388">n</span> d
       ; parse_literal
       ; parse_identifier
       ]
   in
-  <span data-count="338335">p</span>aren<span data-count="338335">s</span> self
-  &lt;|<span data-count="338335">&gt;</span> strin<span data-count="338335">g</span> "match"
-      *<span data-count="338335">&gt;</span>
+  <span data-count="338388">p</span>aren<span data-count="338388">s</span> self
+  &lt;|<span data-count="338388">&gt;</span> strin<span data-count="338388">g</span> "match"
+      *<span data-count="338388">&gt;</span>
       let parse_case =
         lift2
           (fun case action -&gt; <span data-count="1368">c</span>ase, action)
-          (parse_patter<span data-count="338335">n</span> d)
-          (remove_spaces *<span data-count="338335">&gt;</span> strin<span data-count="338335">g</span> "-&gt;" *<span data-count="338335">&gt;</span> parse_content_right)
+          (parse_patter<span data-count="338388">n</span> d)
+          (remove_spaces *<span data-count="338388">&gt;</span> strin<span data-count="338388">g</span> "-&gt;" *<span data-count="338388">&gt;</span> parse_content_right)
       in
-      <span data-count="338335">l</span>et separator = remove_spaces *&gt; strin<span data-count="338335">g</span> "|" in
-      <span data-count="338335">l</span>ift<span data-count="338335">2</span>
+      <span data-count="338388">l</span>et separator = remove_spaces *&gt; strin<span data-count="338388">g</span> "|" in
+      <span data-count="338388">l</span>ift<span data-count="338388">2</span>
         (fun matched cases -&gt;
           <span data-count="908">e</span>matchwith matched (Base.List.hd_ex<span data-count="908">n</span> cases) (Base.List.tl_ex<span data-count="908">n</span> cases))
         parse_content_right
         (remove_spaces
-         *<span data-count="338335">&gt;</span> strin<span data-count="338335">g</span> "with"
-         *<span data-count="338335">&gt;</span> remove_spaces
-         *<span data-count="338335">&gt;</span> (strin<span data-count="338335">g</span> "|" &lt;|<span data-count="338335">&gt;</span> remove_spaces)
-         *<span data-count="338335">&gt;</span> sep_by<span data-count="338335">1</span> separator parse_case)
+         *<span data-count="338388">&gt;</span> strin<span data-count="338388">g</span> "with"
+         *<span data-count="338388">&gt;</span> remove_spaces
+         *<span data-count="338388">&gt;</span> (strin<span data-count="338388">g</span> "|" &lt;|<span data-count="338388">&gt;</span> remove_spaces)
+         *<span data-count="338388">&gt;</span> sep_by<span data-count="338388">1</span> separator parse_case)
 ;;
 
 let parse_binary_operation d =
-  <span data-count="5897341">f</span>ix
+  <span data-count="5898150">f</span>ix
   @@ fun self -&gt;
-  <span data-count="228214">r</span>emove_spaces
+  <span data-count="228245">r</span>emove_spaces
   *&gt;
-  let multiplicative = remove_spaces *<span data-count="228214">&gt;</span> choic<span data-count="228214">e</span> [ cha<span data-count="228214">r</span> '*' &gt;&gt;<span data-count="228214">|</span> bmul; cha<span data-count="228214">r</span> '/' &gt;&gt;<span data-count="228214">|</span> bdiv ]
-  and additive = remove_spaces *<span data-count="228214">&gt;</span> choic<span data-count="228214">e</span> [ cha<span data-count="228214">r</span> '+' &gt;&gt;<span data-count="228214">|</span> badd; cha<span data-count="228214">r</span> '-' &gt;&gt;<span data-count="228214">|</span> bsub ]
+  let multiplicative = remove_spaces *<span data-count="228245">&gt;</span> choic<span data-count="228245">e</span> [ cha<span data-count="228245">r</span> '*' &gt;&gt;<span data-count="228245">|</span> bmul; cha<span data-count="228245">r</span> '/' &gt;&gt;<span data-count="228245">|</span> bdiv ]
+  and additive = remove_spaces *<span data-count="228245">&gt;</span> choic<span data-count="228245">e</span> [ cha<span data-count="228245">r</span> '+' &gt;&gt;<span data-count="228245">|</span> badd; cha<span data-count="228245">r</span> '-' &gt;&gt;<span data-count="228245">|</span> bsub ]
   and relational =
     remove_spaces
-    *<span data-count="228214">&gt;</span> choic<span data-count="228214">e</span>
-         [ strin<span data-count="228214">g</span> "&gt;=" &gt;&gt;<span data-count="228214">|</span> bgte
-         ; strin<span data-count="228214">g</span> "&lt;=" &gt;&gt;<span data-count="228214">|</span> blte
-         ; cha<span data-count="228214">r</span> '&gt;' &gt;&gt;<span data-count="228214">|</span> bgt
-         ; cha<span data-count="228214">r</span> '&lt;' &gt;&gt;<span data-count="228214">|</span> blt
+    *<span data-count="228245">&gt;</span> choic<span data-count="228245">e</span>
+         [ strin<span data-count="228245">g</span> "&gt;=" &gt;&gt;<span data-count="228245">|</span> bgte
+         ; strin<span data-count="228245">g</span> "&lt;=" &gt;&gt;<span data-count="228245">|</span> blte
+         ; cha<span data-count="228245">r</span> '&gt;' &gt;&gt;<span data-count="228245">|</span> bgt
+         ; cha<span data-count="228245">r</span> '&lt;' &gt;&gt;<span data-count="228245">|</span> blt
          ]
   and equality =
-    remove_spaces *<span data-count="228214">&gt;</span> choic<span data-count="228214">e</span> [ strin<span data-count="228214">g</span> "=" &gt;&gt;<span data-count="228214">|</span> beq; strin<span data-count="228214">g</span> "!=" &lt;|<span data-count="228214">&gt;</span> strin<span data-count="228214">g</span> "&lt;&gt;" &gt;&gt;<span data-count="228214">|</span> bneq ]
-  and logical_and = remove_spaces *<span data-count="228214">&gt;</span> (strin<span data-count="228214">g</span> "&amp;&amp;" &gt;&gt;<span data-count="228214">|</span> band)
-  and logical_or = remove_spaces *<span data-count="228214">&gt;</span> (strin<span data-count="228214">g</span> "||" &gt;&gt;<span data-count="228214">|</span> bor) in
+    remove_spaces *<span data-count="228245">&gt;</span> choic<span data-count="228245">e</span> [ strin<span data-count="228245">g</span> "=" &gt;&gt;<span data-count="228245">|</span> beq; strin<span data-count="228245">g</span> "!=" &lt;|<span data-count="228245">&gt;</span> strin<span data-count="228245">g</span> "&lt;&gt;" &gt;&gt;<span data-count="228245">|</span> bneq ]
+  and logical_and = remove_spaces *<span data-count="228245">&gt;</span> (strin<span data-count="228245">g</span> "&amp;&amp;" &gt;&gt;<span data-count="228245">|</span> band)
+  and logical_or = remove_spaces *<span data-count="228245">&gt;</span> (strin<span data-count="228245">g</span> "||" &gt;&gt;<span data-count="228245">|</span> bor) in
   let chainl1 expression_parser operation_parser =
-    <span data-count="1369284">l</span>et rec go acc =
-      <span data-count="2735704">l</span>ift<span data-count="2735704">2</span>
+    <span data-count="1369470">l</span>et rec go acc =
+      <span data-count="2736160">l</span>ift<span data-count="2736160">2</span>
         (fun binary_operator right_operand -&gt;
-          <span data-count="110684">e</span>binary_operation binary_operator acc right_operand)
+          <span data-count="110696">e</span>binary_operation binary_operator acc right_operand)
         operation_parser
         expression_parser
-      &gt;&gt;<span data-count="2735704">=</span> go
-      &lt;|&gt; retur<span data-count="2735704">n</span> acc
+      &gt;&gt;<span data-count="2736160">=</span> go
+      &lt;|&gt; retur<span data-count="2736160">n</span> acc
     in
-    expression_parser &gt;&gt;= fun init -&gt; <span data-count="2625020">g</span>o init
+    expression_parser &gt;&gt;= fun init -&gt; <span data-count="2625464">g</span>o init
   in
   let ( &lt;||&gt; ) = chainl1 in
   let parse_content =
     choice
-      [ paren<span data-count="228214">s</span> self
-      ; d.parse_list_constructin<span data-count="228214">g</span> d
-      ; d.parse_unary_operatio<span data-count="228214">n</span> d
-      ; d.parse_lis<span data-count="228214">t</span> d
-      ; d.parse_applicatio<span data-count="228214">n</span> d
-      ; d.parse_conditiona<span data-count="228214">l</span> d
-      ; d.parse_matchin<span data-count="228214">g</span> d
-      ; d.parse_let_i<span data-count="228214">n</span> d
+      [ paren<span data-count="228245">s</span> self
+      ; d.parse_list_constructin<span data-count="228245">g</span> d
+      ; d.parse_unary_operatio<span data-count="228245">n</span> d
+      ; d.parse_lis<span data-count="228245">t</span> d
+      ; d.parse_applicatio<span data-count="228245">n</span> d
+      ; d.parse_conditiona<span data-count="228245">l</span> d
+      ; d.parse_matchin<span data-count="228245">g</span> d
+      ; d.parse_let_i<span data-count="228245">n</span> d
       ; parse_literal
       ; parse_identifier
       ]
   in
-  <span data-count="228214">p</span>arse_content
-  &lt;||<span data-count="228214">&gt;</span> multiplicative
-  &lt;||<span data-count="228214">&gt;</span> additive
-  &lt;||<span data-count="228214">&gt;</span> relational
-  &lt;||<span data-count="228214">&gt;</span> equality
-  &lt;||<span data-count="228214">&gt;</span> logical_and
-  &lt;||<span data-count="228214">&gt;</span> logical_or
-  &gt;&gt;<span data-count="228214">=</span> fun result -&gt;
-  <span data-count="402440">m</span>atch result with
-  | <span data-count="109640">E</span>BinaryOperation (_, _, _) -&gt; return result
-  | <span data-count="292800">_</span> -&gt; fail "Parsing error: not binary operation."
+  <span data-count="228245">p</span>arse_content
+  &lt;||<span data-count="228245">&gt;</span> multiplicative
+  &lt;||<span data-count="228245">&gt;</span> additive
+  &lt;||<span data-count="228245">&gt;</span> relational
+  &lt;||<span data-count="228245">&gt;</span> equality
+  &lt;||<span data-count="228245">&gt;</span> logical_and
+  &lt;||<span data-count="228245">&gt;</span> logical_or
+  &gt;&gt;<span data-count="228245">=</span> fun result -&gt;
+  <span data-count="402512">m</span>atch result with
+  | <span data-count="109646">E</span>BinaryOperation (_, _, _) -&gt; return result
+  | <span data-count="292866">_</span> -&gt; fail "Parsing error: not binary operation."
 ;;
 
 let parse_application d =
-  <span data-count="6154475">f</span>ix
+  <span data-count="6155315">f</span>ix
   @@ fun self -&gt;
-  <span data-count="838324">r</span>emove_spaces
-  *&gt; (paren<span data-count="838324">s</span> self
-      &lt;|<span data-count="838324">&gt;</span>
+  <span data-count="838442">r</span>emove_spaces
+  *&gt; (paren<span data-count="838442">s</span> self
+      &lt;|<span data-count="838442">&gt;</span>
       let function_parser =
-        choic<span data-count="838324">e</span>
-          [ paren<span data-count="838324">s</span> @@ d.parse_fu<span data-count="838324">n</span> d
-          ; paren<span data-count="838324">s</span> @@ d.parse_conditiona<span data-count="838324">l</span> d
-          ; paren<span data-count="838324">s</span> @@ d.parse_matchin<span data-count="838324">g</span> d
-          ; paren<span data-count="838324">s</span> @@ d.parse_let_i<span data-count="838324">n</span> d
+        choic<span data-count="838442">e</span>
+          [ paren<span data-count="838442">s</span> @@ d.parse_fu<span data-count="838442">n</span> d
+          ; paren<span data-count="838442">s</span> @@ d.parse_conditiona<span data-count="838442">l</span> d
+          ; paren<span data-count="838442">s</span> @@ d.parse_matchin<span data-count="838442">g</span> d
+          ; paren<span data-count="838442">s</span> @@ d.parse_let_i<span data-count="838442">n</span> d
           ; parse_identifier
           ]
       and operand_parser =
-        choic<span data-count="838324">e</span>
-          [ paren<span data-count="838324">s</span> @@ d.parse_tupl<span data-count="838324">e</span> d
-          ; paren<span data-count="838324">s</span> @@ d.parse_list_constructin<span data-count="838324">g</span> d
-          ; paren<span data-count="838324">s</span> @@ d.parse_binary_operatio<span data-count="838324">n</span> d
-          ; paren<span data-count="838324">s</span> @@ d.parse_unary_operatio<span data-count="838324">n</span> d
-          ; d.parse_lis<span data-count="838324">t</span> d
-          ; paren<span data-count="838324">s</span> self
-          ; paren<span data-count="838324">s</span> @@ d.parse_fu<span data-count="838324">n</span> d
-          ; paren<span data-count="838324">s</span> @@ d.parse_conditiona<span data-count="838324">l</span> d
-          ; paren<span data-count="838324">s</span> @@ d.parse_matchin<span data-count="838324">g</span> d
-          ; paren<span data-count="838324">s</span> @@ d.parse_let_i<span data-count="838324">n</span> d
+        choic<span data-count="838442">e</span>
+          [ paren<span data-count="838442">s</span> @@ d.parse_tupl<span data-count="838442">e</span> d
+          ; paren<span data-count="838442">s</span> @@ d.parse_list_constructin<span data-count="838442">g</span> d
+          ; paren<span data-count="838442">s</span> @@ d.parse_binary_operatio<span data-count="838442">n</span> d
+          ; paren<span data-count="838442">s</span> @@ d.parse_unary_operatio<span data-count="838442">n</span> d
+          ; d.parse_lis<span data-count="838442">t</span> d
+          ; paren<span data-count="838442">s</span> self
+          ; paren<span data-count="838442">s</span> @@ d.parse_fu<span data-count="838442">n</span> d
+          ; paren<span data-count="838442">s</span> @@ d.parse_conditiona<span data-count="838442">l</span> d
+          ; paren<span data-count="838442">s</span> @@ d.parse_matchin<span data-count="838442">g</span> d
+          ; paren<span data-count="838442">s</span> @@ d.parse_let_i<span data-count="838442">n</span> d
           ; parse_literal
           ; parse_identifier
           ]
       in
-      let apply_lift acc = <span data-count="719970">l</span>ift (eapplicatio<span data-count="719970">n</span> acc) operand_parser in
-      let rec go acc = <span data-count="166376">a</span>pply_lif<span data-count="166376">t</span> acc &gt;&gt;<span data-count="166376">=</span> go &lt;|&gt; retur<span data-count="166376">n</span> acc in
-      function_parser &gt;&gt;<span data-count="838324">=</span> fun init -&gt; <span data-count="553594">a</span>pply_lif<span data-count="553594">t</span> init &gt;&gt;= fun init -&gt; <span data-count="119600">g</span>o init)
+      let apply_lift acc = <span data-count="720042">l</span>ift (eapplicatio<span data-count="720042">n</span> acc) operand_parser in
+      let rec go acc = <span data-count="166392">a</span>pply_lif<span data-count="166392">t</span> acc &gt;&gt;<span data-count="166392">=</span> go &lt;|&gt; retur<span data-count="166392">n</span> acc in
+      function_parser &gt;&gt;<span data-count="838442">=</span> fun init -&gt; <span data-count="553650">a</span>pply_lif<span data-count="553650">t</span> init &gt;&gt;= fun init -&gt; <span data-count="119608">g</span>o init)
 ;;
 
 let parse_unary_operation d =
-  <span data-count="4391067">f</span>ix
+  <span data-count="4391671">f</span>ix
   @@ fun self -&gt;
-  <span data-count="867244">r</span>emove_spaces
+  <span data-count="867362">r</span>emove_spaces
   *&gt;
   let parse_content_minus =
-    let indent = many1 (satisf<span data-count="867244">y</span> space_predicate) in
-    <span data-count="867244">c</span>hoic<span data-count="867244">e</span>
-      [ paren<span data-count="867244">s</span> self &lt;|<span data-count="867244">&gt;</span> indent *<span data-count="867244">&gt;</span> self
-      ; paren<span data-count="867244">s</span> @@ d.parse_applicatio<span data-count="867244">n</span> d &lt;|<span data-count="867244">&gt;</span> indent *<span data-count="867244">&gt;</span> d.parse_applicatio<span data-count="867244">n</span> d
-      ; paren<span data-count="867244">s</span> @@ d.parse_conditiona<span data-count="867244">l</span> d &lt;|<span data-count="867244">&gt;</span> indent *<span data-count="867244">&gt;</span> d.parse_conditiona<span data-count="867244">l</span> d
-      ; paren<span data-count="867244">s</span> @@ d.parse_matchin<span data-count="867244">g</span> d &lt;|<span data-count="867244">&gt;</span> indent *<span data-count="867244">&gt;</span> d.parse_matchin<span data-count="867244">g</span> d
-      ; paren<span data-count="867244">s</span> @@ d.parse_let_i<span data-count="867244">n</span> d &lt;|<span data-count="867244">&gt;</span> indent *<span data-count="867244">&gt;</span> d.parse_let_i<span data-count="867244">n</span> d
+    let indent = many1 (satisf<span data-count="867362">y</span> space_predicate) in
+    <span data-count="867362">c</span>hoic<span data-count="867362">e</span>
+      [ paren<span data-count="867362">s</span> self &lt;|<span data-count="867362">&gt;</span> indent *<span data-count="867362">&gt;</span> self
+      ; paren<span data-count="867362">s</span> @@ d.parse_applicatio<span data-count="867362">n</span> d &lt;|<span data-count="867362">&gt;</span> indent *<span data-count="867362">&gt;</span> d.parse_applicatio<span data-count="867362">n</span> d
+      ; paren<span data-count="867362">s</span> @@ d.parse_conditiona<span data-count="867362">l</span> d &lt;|<span data-count="867362">&gt;</span> indent *<span data-count="867362">&gt;</span> d.parse_conditiona<span data-count="867362">l</span> d
+      ; paren<span data-count="867362">s</span> @@ d.parse_matchin<span data-count="867362">g</span> d &lt;|<span data-count="867362">&gt;</span> indent *<span data-count="867362">&gt;</span> d.parse_matchin<span data-count="867362">g</span> d
+      ; paren<span data-count="867362">s</span> @@ d.parse_let_i<span data-count="867362">n</span> d &lt;|<span data-count="867362">&gt;</span> indent *<span data-count="867362">&gt;</span> d.parse_let_i<span data-count="867362">n</span> d
       ; parse_literal
       ; parse_identifier
-      ; paren<span data-count="867244">s</span> @@ d.parse_binary_operatio<span data-count="867244">n</span> d
+      ; paren<span data-count="867362">s</span> @@ d.parse_binary_operatio<span data-count="867362">n</span> d
       ]
   and parse_content_not =
-    choic<span data-count="867244">e</span>
-      [ paren<span data-count="867244">s</span> @@ d.parse_binary_operatio<span data-count="867244">n</span> d
-      ; paren<span data-count="867244">s</span> self
-      ; paren<span data-count="867244">s</span> @@ d.parse_applicatio<span data-count="867244">n</span> d
-      ; paren<span data-count="867244">s</span> @@ d.parse_conditiona<span data-count="867244">l</span> d
-      ; paren<span data-count="867244">s</span> @@ d.parse_matchin<span data-count="867244">g</span> d
-      ; paren<span data-count="867244">s</span> @@ d.parse_let_i<span data-count="867244">n</span> d
+    choic<span data-count="867362">e</span>
+      [ paren<span data-count="867362">s</span> @@ d.parse_binary_operatio<span data-count="867362">n</span> d
+      ; paren<span data-count="867362">s</span> self
+      ; paren<span data-count="867362">s</span> @@ d.parse_applicatio<span data-count="867362">n</span> d
+      ; paren<span data-count="867362">s</span> @@ d.parse_conditiona<span data-count="867362">l</span> d
+      ; paren<span data-count="867362">s</span> @@ d.parse_matchin<span data-count="867362">g</span> d
+      ; paren<span data-count="867362">s</span> @@ d.parse_let_i<span data-count="867362">n</span> d
       ; parse_literal
       ; parse_identifier
       ]
   in
-  paren<span data-count="867244">s</span> self
-  &lt;|<span data-count="867244">&gt;</span> lift<span data-count="867244">2</span> eunary_operation (cha<span data-count="867244">r</span> '-' &gt;&gt;<span data-count="867244">|</span> uminus) parse_content_minus
-  &lt;|<span data-count="867244">&gt;</span> lift<span data-count="867244">2</span> eunary_operation (strin<span data-count="867244">g</span> "not" &gt;&gt;<span data-count="867244">|</span> unot) parse_content_not
+  paren<span data-count="867362">s</span> self
+  &lt;|<span data-count="867362">&gt;</span> lift<span data-count="867362">2</span> eunary_operation (cha<span data-count="867362">r</span> '-' &gt;&gt;<span data-count="867362">|</span> uminus) parse_content_minus
+  &lt;|<span data-count="867362">&gt;</span> lift<span data-count="867362">2</span> eunary_operation (strin<span data-count="867362">g</span> "not" &gt;&gt;<span data-count="867362">|</span> unot) parse_content_not
 ;;
 
 let parse_list_constructing d =
-  <span data-count="3939221">f</span>ix
+  <span data-count="3939764">f</span>ix
   @@ fun self -&gt;
-  <span data-count="451846">r</span>emove_spaces
-  *&gt; (paren<span data-count="451846">s</span> self
-      &lt;|<span data-count="451846">&gt;</span>
-      let separator = remove_spaces *<span data-count="451846">&gt;</span> strin<span data-count="451846">g</span> "::" *<span data-count="451846">&gt;</span> remove_spaces
+  <span data-count="451907">r</span>emove_spaces
+  *&gt; (paren<span data-count="451907">s</span> self
+      &lt;|<span data-count="451907">&gt;</span>
+      let separator = remove_spaces *<span data-count="451907">&gt;</span> strin<span data-count="451907">g</span> "::" *<span data-count="451907">&gt;</span> remove_spaces
       and parse_content =
-        choic<span data-count="451846">e</span>
-          [ paren<span data-count="451846">s</span> @@ d.parse_tupl<span data-count="451846">e</span> d
-          ; paren<span data-count="451846">s</span> self
-          ; paren<span data-count="451846">s</span> @@ d.parse_binary_operatio<span data-count="451846">n</span> d
-          ; d.parse_unary_operatio<span data-count="451846">n</span> d
-          ; d.parse_lis<span data-count="451846">t</span> d
-          ; d.parse_applicatio<span data-count="451846">n</span> d
-          ; paren<span data-count="451846">s</span> @@ d.parse_fu<span data-count="451846">n</span> d
-          ; paren<span data-count="451846">s</span> @@ d.parse_conditiona<span data-count="451846">l</span> d
-          ; paren<span data-count="451846">s</span> @@ d.parse_matchin<span data-count="451846">g</span> d
-          ; d.parse_let_i<span data-count="451846">n</span> d
+        choic<span data-count="451907">e</span>
+          [ paren<span data-count="451907">s</span> @@ d.parse_tupl<span data-count="451907">e</span> d
+          ; paren<span data-count="451907">s</span> self
+          ; paren<span data-count="451907">s</span> @@ d.parse_binary_operatio<span data-count="451907">n</span> d
+          ; d.parse_unary_operatio<span data-count="451907">n</span> d
+          ; d.parse_lis<span data-count="451907">t</span> d
+          ; d.parse_applicatio<span data-count="451907">n</span> d
+          ; paren<span data-count="451907">s</span> @@ d.parse_fu<span data-count="451907">n</span> d
+          ; paren<span data-count="451907">s</span> @@ d.parse_conditiona<span data-count="451907">l</span> d
+          ; paren<span data-count="451907">s</span> @@ d.parse_matchin<span data-count="451907">g</span> d
+          ; d.parse_let_i<span data-count="451907">n</span> d
           ; parse_literal
           ; parse_identifier
           ]
       in
-      lift<span data-count="451846">2</span> econstruct_list (parse_content &lt;<span data-count="451846">*</span> separator) (self &lt;|<span data-count="451846">&gt;</span> parse_content))
+      lift<span data-count="451907">2</span> econstruct_list (parse_content &lt;<span data-count="451907">*</span> separator) (self &lt;|<span data-count="451907">&gt;</span> parse_content))
 ;;
 
 (* --------------------------- *)
@@ -3537,12 +3537,12 @@ let default =
   }
 ;;
 
-let parse_declaration = parse_declaratio<span data-count="84">n</span> default
+let parse_declaration = parse_declaratio<span data-count="85">n</span> default
 
 (* Main parsing function *)
 let parse : input -&gt; (declaration list, error_message) result =
   fun program -&gt;
-  <span data-count="124">p</span>arse_string ~consume:All (man<span data-count="124">y</span> parse_declaration &lt;<span data-count="124">*</span> remove_spaces) program
+  <span data-count="125">p</span>arse_string ~consume:All (man<span data-count="125">y</span> parse_declaration &lt;<span data-count="125">*</span> remove_spaces) program
 ;;
 
 (* -------------------- TESTS -------------------- *)

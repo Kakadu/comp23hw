@@ -178,7 +178,7 @@
 
 open Ast
 
-let empty = Base.Set.empt<span data-count="84">y</span> (module Base.String)
+let empty = Base.Set.empt<span data-count="85">y</span> (module Base.String)
 
 let find_identifiers_pattern =
   let rec helper acc = function
@@ -192,7 +192,7 @@ let find_identifiers_pattern =
     | <span data-count="64">P</span>ConstructList (operand, list) -&gt; helper (helpe<span data-count="64">r</span> acc operand) list
     | <span data-count="95">_</span> -&gt; acc
   in
-  helpe<span data-count="84">r</span> empty
+  helpe<span data-count="85">r</span> empty
 ;;
 
 (** Finds all identifiers in an expression. Used in pattern-matching inference *)
@@ -208,10 +208,10 @@ let find_identifiers =
       in
       <span data-count="37">B</span>ase.Set.diff (helpe<span data-count="37">r</span> acc body) pattern_args
   and helper acc = function
-    | <span data-count="230">E</span>BinaryOperation (_, left, right) -&gt; helper (helpe<span data-count="230">r</span> acc left) right
+    | <span data-count="232">E</span>BinaryOperation (_, left, right) -&gt; helper (helpe<span data-count="232">r</span> acc left) right
     | <span data-count="3">E</span>UnaryOperation (_, operand) -&gt; helper acc operand
-    | <span data-count="483">E</span>Application (func, arg) -&gt; helper (helpe<span data-count="483">r</span> acc func) arg
-    | <span data-count="956">E</span>Identifier id -&gt; Base.Set.add acc id
+    | <span data-count="485">E</span>Application (func, arg) -&gt; helper (helpe<span data-count="485">r</span> acc func) arg
+    | <span data-count="961">E</span>Identifier id -&gt; Base.Set.add acc id
     | <span data-count="71">E</span>Fun (first_arg, other_args, body) -&gt;
       let pattern_args =
         Base.List.fold_right
@@ -220,13 +220,13 @@ let find_identifiers =
           ~init:empty
       in
       <span data-count="71">B</span>ase.Set.diff (helpe<span data-count="71">r</span> acc body) pattern_args
-    | <span data-count="172">E</span>List expr_list -&gt;
+    | <span data-count="179">E</span>List expr_list -&gt;
       (match expr_list with
-       | <span data-count="123">h</span>ead :: tail -&gt; helper (helpe<span data-count="123">r</span> acc head) (elis<span data-count="123">t</span> tail)
-       | <span data-count="49">[</span>] -&gt; acc)
-    | <span data-count="24">E</span>ConstructList (head, tail) -&gt; helper (helpe<span data-count="24">r</span> acc head) tail
-    | <span data-count="12">E</span>Tuple (first_elem, second_elem, other_elems) -&gt;
-      helper acc (elis<span data-count="12">t</span> @@ (first_elem :: second_elem :: other_elems))
+       | <span data-count="128">h</span>ead :: tail -&gt; helper (helpe<span data-count="128">r</span> acc head) (elis<span data-count="128">t</span> tail)
+       | <span data-count="51">[</span>] -&gt; acc)
+    | <span data-count="25">E</span>ConstructList (head, tail) -&gt; helper (helpe<span data-count="25">r</span> acc head) tail
+    | <span data-count="13">E</span>Tuple (first_elem, second_elem, other_elems) -&gt;
+      helper acc (elis<span data-count="13">t</span> @@ (first_elem :: second_elem :: other_elems))
     | <span data-count="37">E</span>LetIn (first_decl, other_decls, body) -&gt;
       let acc = decl_helper acc first_decl in
       <span data-count="37">(</span>match other_decls with
@@ -240,9 +240,9 @@ let find_identifiers =
       <span data-count="60">(</span>match other_cases with
        | <span data-count="22">h</span>ead :: tail -&gt; helper acc (ematchwit<span data-count="22">h</span> matched head tail)
        | <span data-count="38">[</span>] -&gt; helper acc matched)
-    | <span data-count="243">_</span> -&gt; acc
+    | <span data-count="248">_</span> -&gt; acc
   in
-  helpe<span data-count="84">r</span> empty
+  helpe<span data-count="85">r</span> empty
 ;;
 </code></pre>
       </div>

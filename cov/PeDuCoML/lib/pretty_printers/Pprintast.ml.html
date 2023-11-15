@@ -523,14 +523,14 @@ open Format
 open Base
 
 let pp_literal fmt = function
-  | <span data-count="100">L</span>Int x -&gt; fprintf fmt "%d" x
+  | <span data-count="105">L</span>Int x -&gt; fprintf fmt "%d" x
   | <span data-count="0">L</span>String x -&gt; fprintf fmt "%s" x
   | <span data-count="0">L</span>Char x -&gt; fprintf fmt "%c" x
   | <span data-count="13">L</span>Bool x -&gt; fprintf fmt "%b" x
 ;;
 
 let pp_binary_operator fmt = function
-  | <span data-count="36">A</span>dd -&gt; fprintf fmt "+"
+  | <span data-count="38">A</span>dd -&gt; fprintf fmt "+"
   | <span data-count="16">S</span>ub -&gt; fprintf fmt "-"
   | <span data-count="50">M</span>ul -&gt; fprintf fmt "*"
   | <span data-count="1">D</span>iv -&gt; fprintf fmt "/"
@@ -550,32 +550,32 @@ let pp_unary_operator fmt = function
 ;;
 
 let rec pp_pattern fmt =
-  <span data-count="148">l</span>et open Stdlib in
+  <span data-count="154">l</span>et open Stdlib in
   let get_format = function
-    | <span data-count="0">P</span>Literal _ | <span data-count="12">P</span>Identifier _ -&gt; format_of_string "%a"
+    | <span data-count="0">P</span>Literal _ | <span data-count="14">P</span>Identifier _ -&gt; format_of_string "%a"
     | <span data-count="0">_</span> -&gt; format_of_string "(%a)"
   in
   let pp_list fmt delimiter =
-    <span data-count="6">p</span>p_print_list
-      ~pp_sep:(fun fmt _ -&gt; <span data-count="9">f</span>printf fmt delimiter)
-      (fun fmt value -&gt; <span data-count="15">p</span>p_pattern fmt value)
+    <span data-count="7">p</span>p_print_list
+      ~pp_sep:(fun fmt _ -&gt; <span data-count="10">f</span>printf fmt delimiter)
+      (fun fmt value -&gt; <span data-count="17">p</span>p_pattern fmt value)
       fmt
   in
   function
   | <span data-count="9">P</span>Literal literal -&gt; pp_literal fmt literal
   | <span data-count="6">P</span>Wildcard -&gt; fprintf fmt "_"
-  | <span data-count="6">P</span>Tuple (first_pattern, second_pattern, other_patterns) -&gt;
+  | <span data-count="7">P</span>Tuple (first_pattern, second_pattern, other_patterns) -&gt;
     pp_list fmt ", " (first_pattern :: second_pattern :: other_patterns)
   | <span data-count="0">P</span>List list -&gt; fprintf fmt "[%a]" (fun fmt -&gt; <span data-count="0">p</span>p_list fmt "; ") list
-  | <span data-count="6">P</span>ConstructList (operand, list) -&gt;
+  | <span data-count="7">P</span>ConstructList (operand, list) -&gt;
     fprintf
       fmt
-      (get_forma<span data-count="6">t</span> operand ^<span data-count="6">^</span> " :: " ^<span data-count="6">^</span> get_forma<span data-count="6">t</span> list)
+      (get_forma<span data-count="7">t</span> operand ^<span data-count="7">^</span> " :: " ^<span data-count="7">^</span> get_forma<span data-count="7">t</span> list)
       pp_pattern
       operand
       pp_pattern
       list
-  | <span data-count="121">P</span>Identifier id -&gt; fprintf fmt "%s" id
+  | <span data-count="125">P</span>Identifier id -&gt; fprintf fmt "%s" id
 ;;
 
 let rec pp_expression fmt =
@@ -731,7 +731,7 @@ let%expect_test _ =
   <span data-count="1">[</span>%expect
     {|
   fun x y z -&gt; match x, y, z with | true, true, false -&gt; true | true, false, true -&gt; true | false, true, true -&gt; true | _ -&gt; false
-  |}<span data-count="151">]</span>
+  |}<span data-count="153">]</span>
 ;;
 
 let%expect_test _ =
@@ -749,7 +749,7 @@ let%expect_test _ =
   <span data-count="1">[</span>%expect
     {|
   fun line number line_mult_number -&gt; match line with | head :: tail -&gt; (head * number) :: (line_mult_number tail) | _ -&gt; []
-  |}<span data-count="151">]</span>
+  |}<span data-count="153">]</span>
 ;;
 </code></pre>
       </div>

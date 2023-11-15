@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8"/>
     <title>lambda_lift.ml &mdash; Coverage report</title>
-    <meta name="description" content="94.71% coverage in lib/middleend/lambda_lift.ml">
+    <meta name="description" content="95.29% coverage in lib/middleend/lambda_lift.ml">
     <link rel="stylesheet" href="../../coverage.css"/>
     <script src="../../highlight.pack.js"></script>
     <script>hljs.initHighlightingOnLoad();</script>
@@ -15,10 +15,9 @@
           <span class="dirname">lib/middleend/</span>lambda_lift.ml
         </a>
       </h1>
-      <h2>94.71%</h2>
+      <h2>95.29%</h2>
     </div>
     <div id="navbar">
-      <span class="unvisited" style="top:28.11%"></span>
       <span class="some-visited" style="top:47.00%"></span>
       <span class="unvisited" style="bottom:45.16%"></span>
       <span class="unvisited" style="bottom:44.70%"></span>
@@ -89,7 +88,7 @@
 <a id="L58"></a><span class="visited"> </span>
 <a id="L59"></a><span class="visited"> </span>
 <a id="L60"></a><span class="visited"> </span>
-<a id="L61"></a><span class="unvisited"> </span>
+<a id="L61"></a><span class="visited"> </span>
 <a id="L62"></a><span > </span>
 <a id="L63"></a><span > </span>
 <a id="L64"></a><span > </span>
@@ -495,26 +494,26 @@ type cf_decl =
   | CFDeclaration of id * id list * cf_expr
   | CFRecursiveDeclaration of id * id list * cf_expr
 
-let cfliteral literal = <span data-count="191">C</span>FLiteral literal
-let cfbinaryoperation bop left right = <span data-count="86">C</span>FBinaryOperation (bop, left, right)
+let cfliteral literal = <span data-count="196">C</span>FLiteral literal
+let cfbinaryoperation bop left right = <span data-count="88">C</span>FBinaryOperation (bop, left, right)
 let cfunaryoperation operator operand = <span data-count="3">C</span>FUnaryOperation (operator, operand)
-let cfapplication func arg = <span data-count="245">C</span>FApplication (func, arg)
-let cfidentifier id = <span data-count="444">C</span>FIdentifier id
-let cflist list = <span data-count="33">C</span>FList list
-let cfconstructlist head tail = <span data-count="13">C</span>FConstructList (head, tail)
+let cfapplication func arg = <span data-count="247">C</span>FApplication (func, arg)
+let cfidentifier id = <span data-count="451">C</span>FIdentifier id
+let cflist list = <span data-count="34">C</span>FList list
+let cfconstructlist head tail = <span data-count="14">C</span>FConstructList (head, tail)
 let cfletin first_let other_lets expr = <span data-count="4">C</span>FLetIn (first_let, other_lets, expr)
 
 let cftuple first_elem second_elem other_elems =
-  <span data-count="10">C</span>FTuple (first_elem, second_elem, other_elems)
+  <span data-count="11">C</span>FTuple (first_elem, second_elem, other_elems)
 ;;
 
 let cfmatchwith matched first_case other_cases =
-  <span data-count="27">C</span>FMatchWith (matched, first_case, other_cases)
+  <span data-count="29">C</span>FMatchWith (matched, first_case, other_cases)
 ;;
 
 let cfif cond true_branch false_branch = <span data-count="12">C</span>FIf (cond, true_branch, false_branch)
 let cflet id body = <span data-count="37">i</span>d, body
-let cfdeclaration name arguments body = <span data-count="131">C</span>FDeclaration (name, arguments, body)
+let cfdeclaration name arguments body = <span data-count="133">C</span>FDeclaration (name, arguments, body)
 
 let cfrecursivedeclaration name arguments body =
   <span data-count="17">C</span>FRecursiveDeclaration (name, arguments, body)
@@ -522,35 +521,35 @@ let cfrecursivedeclaration name arguments body =
 
 let lambda_lift =
   let eliminate_arg_patterns body pattern_list =
-    <span data-count="148">l</span>et generate_unique_arg_name used_names start =
-      <span data-count="8">l</span>et start_number = Base.Set.length used_names in
-      <span data-count="8">l</span>et rec find_unique current_number =
-        <span data-count="8">l</span>et current_name = start ^ string_of_in<span data-count="8">t</span> current_number in
-        match Base.Set.find used_names ~f:(fun elem -&gt; <span data-count="14">e</span>lem = current_name) with
-        | <span data-count="8">N</span>one -&gt; current_name
-        | <span data-count="0">_</span> -&gt; find_unique (current_number + 1)
+    <span data-count="150">l</span>et generate_unique_arg_name used_names start =
+      <span data-count="10">l</span>et start_number = Base.Set.length used_names in
+      <span data-count="10">l</span>et rec find_unique current_number =
+        <span data-count="14">l</span>et current_name = start ^ string_of_in<span data-count="14">t</span> current_number in
+        match Base.Set.find used_names ~f:(fun elem -&gt; <span data-count="34">e</span>lem = current_name) with
+        | <span data-count="10">N</span>one -&gt; current_name
+        | <span data-count="4">_</span> -&gt; find_unique (current_number + 1)
       in
       find_unique start_number
     in
     let rec helper used_names current_expr args_list = function
-      | <span data-count="223">h</span>ead :: tail -&gt;
+      | <span data-count="225">h</span>ead :: tail -&gt;
         (match head with
          | <span data-count="215">P</span>Identifier id -&gt;
            helper (Base.Set.ad<span data-count="215">d</span> used_names id) current_expr (id :: args_list) tail
-         | <span data-count="8">_</span> -&gt;
+         | <span data-count="10">_</span> -&gt;
            let arg_name = generate_unique_arg_name used_names "arg_" in
-           <span data-count="8">h</span>elper
-             (Base.Set.ad<span data-count="8">d</span> used_names arg_name)
-             (ematchwit<span data-count="8">h</span> (eidentifie<span data-count="8">r</span> arg_name) (head, current_expr) [])
+           <span data-count="10">h</span>elper
+             (Base.Set.ad<span data-count="10">d</span> used_names arg_name)
+             (ematchwit<span data-count="10">h</span> (eidentifie<span data-count="10">r</span> arg_name) (head, current_expr) [])
              (arg_name :: args_list)
              tail)
-      | <span data-count="148">_</span> -&gt; List.re<span data-count="148">v</span> args_list, current_expr
+      | <span data-count="150">_</span> -&gt; List.re<span data-count="150">v</span> args_list, current_expr
     in
     let used_names = find_identifiers body in
-    <span data-count="148">h</span>elper used_names body [] pattern_list
+    <span data-count="150">h</span>elper used_names body [] pattern_list
   in
   let ll_expr expr =
-    <span data-count="79">l</span>et get_constructor = function
+    <span data-count="81">l</span>et get_constructor = function
       | <span data-count="23">D</span>Declaration _ -&gt; cfdeclaration
       | <span data-count="10">D</span>RecursiveDeclaration _ -&gt; cfrecursivedeclaration
     in
@@ -599,92 +598,92 @@ let lambda_lift =
         <span data-count="37">(</span>match decl_acc with
          | <span data-count="4">h</span>ead :: tail -&gt; return @@ (cfleti<span data-count="4">n</span> head tail body, lifted)
          | <span data-count="33">[</span>] -&gt; return (body, lifted))
-      | <span data-count="86">E</span>BinaryOperation (bop, left, right) -&gt;
-        let* left, lifted = ll_exp<span data-count="86">r</span> env lifted_decls left in
-        <span data-count="86">l</span>et* right, lifted = ll_exp<span data-count="86">r</span> env lifted right in
-        <span data-count="86">r</span>eturn @@ (cfbinaryoperatio<span data-count="86">n</span> bop left right, lifted)
+      | <span data-count="88">E</span>BinaryOperation (bop, left, right) -&gt;
+        let* left, lifted = ll_exp<span data-count="88">r</span> env lifted_decls left in
+        <span data-count="88">l</span>et* right, lifted = ll_exp<span data-count="88">r</span> env lifted right in
+        <span data-count="88">r</span>eturn @@ (cfbinaryoperatio<span data-count="88">n</span> bop left right, lifted)
       | <span data-count="3">E</span>UnaryOperation (operation, operand) -&gt;
         let* operand, lifted = ll_exp<span data-count="3">r</span> env lifted_decls operand in
         <span data-count="3">r</span>eturn @@ (cfunaryoperatio<span data-count="3">n</span> operation operand, lifted)
-      | <span data-count="245">E</span>Application (func, arg) -&gt;
-        let* func, lifted = ll_exp<span data-count="245">r</span> env lifted_decls func in
-        <span data-count="245">l</span>et* arg, lifted = ll_exp<span data-count="245">r</span> env lifted arg in
-        <span data-count="245">r</span>eturn @@ (cfapplicatio<span data-count="245">n</span> func arg, lifted)
-      | <span data-count="33">E</span>List expr_list -&gt;
+      | <span data-count="247">E</span>Application (func, arg) -&gt;
+        let* func, lifted = ll_exp<span data-count="247">r</span> env lifted_decls func in
+        <span data-count="247">l</span>et* arg, lifted = ll_exp<span data-count="247">r</span> env lifted arg in
+        <span data-count="247">r</span>eturn @@ (cfapplicatio<span data-count="247">n</span> func arg, lifted)
+      | <span data-count="34">E</span>List expr_list -&gt;
         let* expr_list, lifted =
-          Base.List.fold_righ<span data-count="33">t</span>
+          Base.List.fold_righ<span data-count="34">t</span>
             expr_list
             ~f:(fun expr acc -&gt;
-              <span data-count="98">l</span>et* expr_acc, lifted_acc = acc in
-              <span data-count="98">l</span>et* expr, lifted_from_expr = ll_exp<span data-count="98">r</span> env lifted_acc expr in
-              <span data-count="98">r</span>eturn @@ (expr :: expr_acc, lifted_from_expr))
-            ~init:(retur<span data-count="33">n</span> ([], lifted_decls))
+              <span data-count="101">l</span>et* expr_acc, lifted_acc = acc in
+              <span data-count="101">l</span>et* expr, lifted_from_expr = ll_exp<span data-count="101">r</span> env lifted_acc expr in
+              <span data-count="101">r</span>eturn @@ (expr :: expr_acc, lifted_from_expr))
+            ~init:(retur<span data-count="34">n</span> ([], lifted_decls))
         in
-        <span data-count="33">r</span>eturn @@ (cflis<span data-count="33">t</span> expr_list, lifted)
-      | <span data-count="13">E</span>ConstructList (head, tail) -&gt;
-        let* head, lifted = ll_exp<span data-count="13">r</span> env lifted_decls head in
-        <span data-count="13">l</span>et* tail, lifted = ll_exp<span data-count="13">r</span> env lifted tail in
-        <span data-count="13">r</span>eturn @@ (cfconstructlis<span data-count="13">t</span> head tail, lifted)
-      | <span data-count="10">E</span>Tuple (first_elem, second_elem, other_elems) -&gt;
-        let* first, lifted = ll_exp<span data-count="10">r</span> env lifted_decls first_elem in
-        <span data-count="10">l</span>et* second, lifted = ll_exp<span data-count="10">r</span> env lifted second_elem in
-        <span data-count="10">l</span>et* other_elems, lifted =
-          Base.List.fold_righ<span data-count="10">t</span>
+        <span data-count="34">r</span>eturn @@ (cflis<span data-count="34">t</span> expr_list, lifted)
+      | <span data-count="14">E</span>ConstructList (head, tail) -&gt;
+        let* head, lifted = ll_exp<span data-count="14">r</span> env lifted_decls head in
+        <span data-count="14">l</span>et* tail, lifted = ll_exp<span data-count="14">r</span> env lifted tail in
+        <span data-count="14">r</span>eturn @@ (cfconstructlis<span data-count="14">t</span> head tail, lifted)
+      | <span data-count="11">E</span>Tuple (first_elem, second_elem, other_elems) -&gt;
+        let* first, lifted = ll_exp<span data-count="11">r</span> env lifted_decls first_elem in
+        <span data-count="11">l</span>et* second, lifted = ll_exp<span data-count="11">r</span> env lifted second_elem in
+        <span data-count="11">l</span>et* other_elems, lifted =
+          Base.List.fold_righ<span data-count="11">t</span>
             other_elems
             ~f:(fun expr acc -&gt;
               <span data-count="1">l</span>et* expr_acc, lifted_acc = acc in
               <span data-count="1">l</span>et* expr, lifted_from_expr = ll_exp<span data-count="1">r</span> env lifted_acc expr in
               <span data-count="1">r</span>eturn @@ (expr :: expr_acc, lifted_from_expr))
-            ~init:(retur<span data-count="10">n</span> ([], lifted))
+            ~init:(retur<span data-count="11">n</span> ([], lifted))
         in
-        <span data-count="10">r</span>eturn @@ (cftupl<span data-count="10">e</span> first second other_elems, lifted)
+        <span data-count="11">r</span>eturn @@ (cftupl<span data-count="11">e</span> first second other_elems, lifted)
       | <span data-count="12">E</span>If (condition, true_branch, false_branch) -&gt;
         let* condition, lifted = ll_exp<span data-count="12">r</span> env lifted_decls condition in
         <span data-count="12">l</span>et* true_branch, lifted = ll_exp<span data-count="12">r</span> env lifted true_branch in
         <span data-count="12">l</span>et* false_branch, lifted = ll_exp<span data-count="12">r</span> env lifted false_branch in
         <span data-count="12">r</span>eturn @@ (cfi<span data-count="12">f</span> condition true_branch false_branch, lifted)
-      | <span data-count="27">E</span>MatchWith (matched, (first_pattern, first_action), other_cases) -&gt;
-        let* matched, lifted = ll_exp<span data-count="27">r</span> env lifted_decls matched in
-        <span data-count="27">l</span>et* first_action, lifted = ll_exp<span data-count="27">r</span> env lifted first_action in
-        <span data-count="27">l</span>et* other_cases, lifted =
-          Base.List.fold_righ<span data-count="27">t</span>
+      | <span data-count="29">E</span>MatchWith (matched, (first_pattern, first_action), other_cases) -&gt;
+        let* matched, lifted = ll_exp<span data-count="29">r</span> env lifted_decls matched in
+        <span data-count="29">l</span>et* first_action, lifted = ll_exp<span data-count="29">r</span> env lifted first_action in
+        <span data-count="29">l</span>et* other_cases, lifted =
+          Base.List.fold_righ<span data-count="29">t</span>
             other_cases
             ~f:(fun (pattern, action) acc -&gt;
               <span data-count="12">l</span>et* case_acc, lifted_acc = acc in
               <span data-count="12">l</span>et* action, lifted = ll_exp<span data-count="12">r</span> env lifted_acc action in
               <span data-count="12">r</span>eturn @@ ((pattern, action) :: case_acc, lifted))
-            ~init:(retur<span data-count="27">n</span> ([], lifted))
+            ~init:(retur<span data-count="29">n</span> ([], lifted))
         in
-        <span data-count="27">r</span>eturn @@ (cfmatchwit<span data-count="27">h</span> matched (first_pattern, first_action) other_cases, lifted)
-      | <span data-count="408">E</span>Identifier id -&gt;
+        <span data-count="29">r</span>eturn @@ (cfmatchwit<span data-count="29">h</span> matched (first_pattern, first_action) other_cases, lifted)
+      | <span data-count="415">E</span>Identifier id -&gt;
         (match Base.Map.find env id with
-         | <span data-count="351">N</span>one -&gt; return @@ (cfidentifie<span data-count="351">r</span> id, lifted_decls)
+         | <span data-count="358">N</span>one -&gt; return @@ (cfidentifie<span data-count="358">r</span> id, lifted_decls)
          | <span data-count="57">S</span>ome new_id -&gt; return @@ (cfidentifie<span data-count="57">r</span> new_id, lifted_decls))
-      | <span data-count="191">E</span>Literal literal -&gt; return @@ (cflitera<span data-count="191">l</span> literal, lifted_decls)
+      | <span data-count="196">E</span>Literal literal -&gt; return @@ (cflitera<span data-count="196">l</span> literal, lifted_decls)
     in
-    ll_expr (Base.Map.empt<span data-count="79">y</span> (module Base.String)) [] expr
+    ll_expr (Base.Map.empt<span data-count="81">y</span> (module Base.String)) [] expr
   in
   let rec ll_program =
     let get_constructor = function
-      | <span data-count="72">D</span>Declaration _ -&gt; cfdeclaration
+      | <span data-count="74">D</span>Declaration _ -&gt; cfdeclaration
       | <span data-count="7">D</span>RecursiveDeclaration _ -&gt; cfrecursivedeclaration
     in
     function
-    | <span data-count="53">[</span>] -&gt; return []
-    | <span data-count="79">h</span>ead :: tail -&gt;
+    | <span data-count="54">[</span>] -&gt; return []
+    | <span data-count="81">h</span>ead :: tail -&gt;
       (match head with
-       | ( <span data-count="72">D</span>Declaration (name, pattern_list, body)
+       | ( <span data-count="74">D</span>Declaration (name, pattern_list, body)
          | <span data-count="7">D</span>RecursiveDeclaration (name, pattern_list, body) ) as original -&gt;
          let decl = get_constructor original in
-         <span data-count="79">l</span>et args_list, body = eliminate_arg_patterns body pattern_list in
-         <span data-count="79">l</span>et* body, lifted_decls = ll_exp<span data-count="79">r</span> body in
-         <span data-count="79">l</span>et* tail = ll_progra<span data-count="79">m</span> tail in
-         <span data-count="79">r</span>eturn @@ tail @ (dec<span data-count="79">l</span> name args_list body :: lifted_decls))
+         <span data-count="81">l</span>et args_list, body = eliminate_arg_patterns body pattern_list in
+         <span data-count="81">l</span>et* body, lifted_decls = ll_exp<span data-count="81">r</span> body in
+         <span data-count="81">l</span>et* tail = ll_progra<span data-count="81">m</span> tail in
+         <span data-count="81">r</span>eturn @@ tail @ (dec<span data-count="81">l</span> name args_list body :: lifted_decls))
   in
   ll_program
 ;;
 
-let run_lambda_lifting program = <span data-count="53">L</span>ist.rev @@ ru<span data-count="53">n</span> (lambda_lif<span data-count="53">t</span> program)
+let run_lambda_lifting program = <span data-count="54">L</span>ist.rev @@ ru<span data-count="54">n</span> (lambda_lif<span data-count="54">t</span> program)
 </code></pre>
       </div>
     </div>
