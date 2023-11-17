@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8"/>
     <title>pretty_printer.ml &mdash; Coverage report</title>
-    <meta name="description" content="66.97% coverage in lib/pretty_printer.ml">
+    <meta name="description" content="79.82% coverage in lib/pretty_printer.ml">
     <link rel="stylesheet" href="../coverage.css"/>
     <script src="../highlight.pack.js"></script>
     <script>hljs.initHighlightingOnLoad();</script>
@@ -15,28 +15,17 @@
           <span class="dirname">lib/</span>pretty_printer.ml
         </a>
       </h1>
-      <h2>66.97%</h2>
+      <h2>79.82%</h2>
     </div>
     <div id="navbar">
-      <span class="unvisited" style="top:7.30%"></span>
       <span class="unvisited" style="top:9.49%"></span>
-      <span class="unvisited" style="top:11.68%"></span>
-      <span class="unvisited" style="top:12.41%"></span>
-      <span class="unvisited" style="top:13.14%"></span>
-      <span class="unvisited" style="top:14.60%"></span>
-      <span class="unvisited" style="top:15.33%"></span>
-      <span class="unvisited" style="top:16.06%"></span>
-      <span class="unvisited" style="top:16.79%"></span>
-      <span class="unvisited" style="top:19.71%"></span>
       <span class="unvisited" style="top:21.90%"></span>
       <span class="unvisited" style="top:24.09%"></span>
-      <span class="unvisited" style="top:24.82%"></span>
       <span class="unvisited" style="top:27.01%"></span>
       <span class="unvisited" style="top:29.20%"></span>
       <span class="unvisited" style="top:30.66%"></span>
       <span class="unvisited" style="top:32.85%"></span>
       <span class="unvisited" style="top:34.31%"></span>
-      <span class="unvisited" style="top:37.23%"></span>
       <span class="unvisited" style="bottom:16.06%"></span>
       <span class="unvisited" style="bottom:15.33%"></span>
       <span class="unvisited" style="bottom:3.65%"></span>
@@ -55,31 +44,31 @@
 <a id="L7"></a><span > </span>
 <a id="L8"></a><span > </span>
 <a id="L9"></a><span class="visited"> </span>
-<a id="L10"></a><span class="unvisited"> </span>
+<a id="L10"></a><span class="visited"> </span>
 <a id="L11"></a><span > </span>
 <a id="L12"></a><span > </span>
 <a id="L13"></a><span class="unvisited"> </span>
 <a id="L14"></a><span > </span>
 <a id="L15"></a><span > </span>
-<a id="L16"></a><span class="unvisited"> </span>
-<a id="L17"></a><span class="unvisited"> </span>
-<a id="L18"></a><span class="unvisited"> </span>
+<a id="L16"></a><span class="visited"> </span>
+<a id="L17"></a><span class="visited"> </span>
+<a id="L18"></a><span class="visited"> </span>
 <a id="L19"></a><span class="visited"> </span>
-<a id="L20"></a><span class="unvisited"> </span>
-<a id="L21"></a><span class="unvisited"> </span>
-<a id="L22"></a><span class="unvisited"> </span>
-<a id="L23"></a><span class="unvisited"> </span>
+<a id="L20"></a><span class="visited"> </span>
+<a id="L21"></a><span class="visited"> </span>
+<a id="L22"></a><span class="visited"> </span>
+<a id="L23"></a><span class="visited"> </span>
 <a id="L24"></a><span class="visited"> </span>
 <a id="L25"></a><span class="visited"> </span>
 <a id="L26"></a><span class="visited"> </span>
-<a id="L27"></a><span class="unvisited"> </span>
+<a id="L27"></a><span class="visited"> </span>
 <a id="L28"></a><span > </span>
 <a id="L29"></a><span > </span>
 <a id="L30"></a><span class="unvisited"> </span>
 <a id="L31"></a><span > </span>
 <a id="L32"></a><span > </span>
 <a id="L33"></a><span class="unvisited"> </span>
-<a id="L34"></a><span class="unvisited"> </span>
+<a id="L34"></a><span class="visited"> </span>
 <a id="L35"></a><span > </span>
 <a id="L36"></a><span > </span>
 <a id="L37"></a><span class="unvisited"> </span>
@@ -96,7 +85,7 @@
 <a id="L48"></a><span > </span>
 <a id="L49"></a><span > </span>
 <a id="L50"></a><span class="visited"> </span>
-<a id="L51"></a><span class="unvisited"> </span>
+<a id="L51"></a><span class="visited"> </span>
 <a id="L52"></a><span class="visited"> </span>
 <a id="L53"></a><span class="visited"> </span>
 <a id="L54"></a><span > </span>
@@ -333,68 +322,68 @@ open Ast
 open Format
 
 let show_const = function
-  | <span data-count="23">C</span>Int x -&gt; sprintf "%d" x
-  | <span data-count="0">C</span>Bool x -&gt; sprintf "%b" x
+  | <span data-count="33">C</span>Int x -&gt; sprintf "%d" x
+  | <span data-count="1">C</span>Bool x -&gt; sprintf "%b" x
 ;;
 
 let pp_const fmt cnst = <span data-count="0">f</span>printf fmt "%s" (show_cons<span data-count="0">t</span> cnst)
 
 let show_bin_op = function
-  | <span data-count="0">A</span>nd -&gt; sprintf "and"
-  | <span data-count="0">O</span>r -&gt; sprintf "or"
-  | <span data-count="0">L</span>ess -&gt; sprintf "&lt;"
-  | <span data-count="3">L</span>eq -&gt; sprintf "&lt;="
-  | <span data-count="0">G</span>re -&gt; sprintf "&gt;"
-  | <span data-count="0">G</span>eq -&gt; sprintf "&gt;="
-  | <span data-count="0">E</span>q -&gt; sprintf "="
-  | <span data-count="0">N</span>eq -&gt; sprintf "&lt;&gt;"
-  | <span data-count="23">A</span>dd -&gt; sprintf "+"
-  | <span data-count="3">S</span>ub -&gt; sprintf "-"
-  | <span data-count="8">M</span>ul -&gt; sprintf "*"
-  | <span data-count="0">D</span>iv -&gt; sprintf "/"
+  | <span data-count="1">A</span>nd -&gt; "&amp;&amp;"
+  | <span data-count="2">O</span>r -&gt; "||"
+  | <span data-count="2">L</span>ess -&gt; "&lt;"
+  | <span data-count="3">L</span>eq -&gt; "&lt;="
+  | <span data-count="1">G</span>re -&gt; "&gt;"
+  | <span data-count="1">G</span>eq -&gt; "&gt;="
+  | <span data-count="4">E</span>q -&gt; "="
+  | <span data-count="1">N</span>eq -&gt; "&lt;&gt;"
+  | <span data-count="24">A</span>dd -&gt; "+"
+  | <span data-count="3">S</span>ub -&gt; "-"
+  | <span data-count="8">M</span>ul -&gt; "*"
+  | <span data-count="1">D</span>iv -&gt; "/"
 ;;
 
 let pp_bin_op fmt op = <span data-count="0">f</span>printf fmt "%s" (show_bin_o<span data-count="0">p</span> op)
 
 let show_un_op = function
-  | <span data-count="0">N</span>ot -&gt; sprintf "not"
-  | <span data-count="0">M</span>inus -&gt; sprintf "-"
+  | <span data-count="0">N</span>ot -&gt; "not"
+  | <span data-count="1">M</span>inus -&gt; "-"
 ;;
 
 let pp_un_op fmt op = <span data-count="0">f</span>printf fmt "%s" (show_un_o<span data-count="0">p</span> op)
 
 let show_pt = function
-  | <span data-count="0">P</span>tWild -&gt; sprintf "_"
-  | <span data-count="113">P</span>tVar x -&gt; sprintf "%s" x
+  | <span data-count="0">P</span>tWild -&gt; "_"
+  | <span data-count="115">P</span>tVar x -&gt; sprintf "%s" x
   | <span data-count="0">P</span>tConst x -&gt; sprintf "%s" (show_cons<span data-count="0">t</span> x)
 ;;
 
 let pp_pt fmt pt = <span data-count="0">f</span>printf fmt "%s" (show_p<span data-count="0">t</span> pt)
-let sprintf_tabs cnt = <span data-count="84">s</span>printf "%s" (String.conca<span data-count="84">t</span> "" (List.ini<span data-count="84">t</span> cnt (fun _ -&gt; <span data-count="57">"</span>    ")))
+let sprintf_tabs cnt = <span data-count="86">s</span>printf "%s" (String.conca<span data-count="86">t</span> "" (List.ini<span data-count="86">t</span> cnt (fun _ -&gt; <span data-count="59">"</span>    ")))
 let print_tabs fmt cnt = <span data-count="0">f</span>printf fmt "%s" (sprintf_tab<span data-count="0">s</span> cnt)
 
 let rec show_exp_helper cnt = function
-  | <span data-count="23">E</span>Const x -&gt; sprintf "%s" (show_cons<span data-count="23">t</span> x)
-  | <span data-count="0">E</span>UnOp (o, e) -&gt; sprintf "%s%s" (show_un_o<span data-count="0">p</span> o) (show_exp_helpe<span data-count="0">r</span> cnt e)
-  | <span data-count="118">E</span>Var id -&gt; sprintf "%s" id
+  | <span data-count="34">E</span>Const x -&gt; sprintf "%s" (show_cons<span data-count="34">t</span> x)
+  | <span data-count="1">E</span>UnOp (o, e) -&gt; sprintf "%s%s" (show_un_o<span data-count="1">p</span> o) (show_exp_helpe<span data-count="1">r</span> cnt e)
+  | <span data-count="123">E</span>Var id -&gt; sprintf "%s" id
   | <span data-count="3">E</span>If (predicate, true_branch, false_branch) -&gt;
     sprintf
       "if %s then %s else %s"
       (show_exp_helpe<span data-count="3">r</span> cnt predicate)
       (show_exp_helpe<span data-count="3">r</span> cnt true_branch)
       (show_exp_helpe<span data-count="3">r</span> cnt false_branch)
-  | <span data-count="37">E</span>BinOp (op, e1, e2) -&gt;
+  | <span data-count="51">E</span>BinOp (op, e1, e2) -&gt;
     let s, e =
       match op with
-      | <span data-count="3">S</span>ub | <span data-count="23">A</span>dd | <span data-count="8">M</span>ul -&gt; "(", ")"
-      | <span data-count="3">_</span> -&gt; "", ""
+      | <span data-count="3">S</span>ub | <span data-count="24">A</span>dd | <span data-count="8">M</span>ul | <span data-count="4">E</span>q | <span data-count="1">G</span>eq | <span data-count="3">L</span>eq | <span data-count="1">G</span>re | <span data-count="2">L</span>ess -&gt; "(", ")"
+      | <span data-count="5">_</span> -&gt; "", ""
     in
     sprintf
       "%s%s %s %s%s"
       s
-      (show_exp_helpe<span data-count="37">r</span> cnt e1)
-      (show_bin_o<span data-count="37">p</span> op)
-      (show_exp_helpe<span data-count="37">r</span> cnt e2)
+      (show_exp_helpe<span data-count="51">r</span> cnt e1)
+      (show_bin_o<span data-count="51">p</span> op)
+      (show_exp_helpe<span data-count="51">r</span> cnt e2)
       e
   | <span data-count="11">E</span>Fun _ as orig -&gt;
     let rec helper = function
@@ -407,25 +396,25 @@ let rec show_exp_helper cnt = function
     let binds =
       List.fold_left
         (fun acc (is_rec, pt, exp) -&gt;
-          <span data-count="27">l</span>et rec helper = function
+          <span data-count="29">l</span>et rec helper = function
             | <span data-count="9">E</span>Fun (a, b) -&gt; sprintf "%s %s" (show_p<span data-count="9">t</span> a) (helpe<span data-count="9">r</span> b)
-            | <span data-count="27">e</span>xp -&gt; sprintf "= %s" (show_exp_helpe<span data-count="27">r</span> cnt exp)
+            | <span data-count="29">e</span>xp -&gt; sprintf "= %s" (show_exp_helpe<span data-count="29">r</span> cnt exp)
           in
           let bind =
             sprintf
               "%slet %s%s %s in\n"
-              (sprintf_tab<span data-count="27">s</span> cnt)
-              (if is_rec then <span data-count="4">"</span>rec " else <span data-count="23">"</span>")
-              (show_p<span data-count="27">t</span> pt)
-              (helpe<span data-count="27">r</span> exp)
+              (sprintf_tab<span data-count="29">s</span> cnt)
+              (if is_rec then <span data-count="4">"</span>rec " else <span data-count="25">"</span>")
+              (show_p<span data-count="29">t</span> pt)
+              (helpe<span data-count="29">r</span> exp)
           in
-          <span data-count="27">l</span>et acc = acc ^ bind in
+          <span data-count="29">l</span>et acc = acc ^ bind in
           acc)
         String.empty
         bindings
     in
     <span data-count="16">s</span>printf
-      "(\n%s%s%s\n%s)"
+      "\n%s%s%s\n%s"
       binds
       (sprintf_tab<span data-count="16">s</span> cnt)
       (show_exp_helpe<span data-count="16">r</span> cnt e)
