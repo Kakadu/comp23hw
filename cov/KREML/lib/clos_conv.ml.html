@@ -787,7 +787,7 @@ open Ast
 open Cc_ast
 open Counter
 
-let gen_var = gen_va<span data-count="7">r</span> "cc"
+let gen_var = gen_va<span data-count="7">r</span> "Cc"
 
 let simplify program =
   <span data-count="5">l</span>et rec uncurry acc = function
@@ -1058,7 +1058,7 @@ let%test _ =
         , [ "n" ]
         , CLetIn
             ( CFun
-                ( "cc_1"
+                ( "Cc_1"
                 , [ "k"; "n"; "m" ]
                 , CApp
                     (CIdentifier "k", CBinaryOp (Mult, CIdentifier "m", CIdentifier "n"))
@@ -1075,7 +1075,7 @@ let%test _ =
                                 ( CIdentifier "fack"
                                 , CBinaryOp (Sub, CIdentifier "n", CLiteral (LInt 1)) )
                             , CApp
-                                ( CApp (CIdentifier "cc_1", CIdentifier "k")
+                                ( CApp (CIdentifier "Cc_1", CIdentifier "k")
                                 , CIdentifier "n" ) ) ) )
                 , CApp
                     ( CApp (CIdentifier "fack", CIdentifier "n")
@@ -1129,7 +1129,7 @@ let%test _ =
             ( CFun ("f3", [ "m"; "y" ], CIdentifier "m")
             , CLetIn
                 ( CFun
-                    ( "cc_1"
+                    ( "Cc_1"
                     , [ "m"; "z" ]
                     , CBinaryOp
                         ( Add
@@ -1139,7 +1139,7 @@ let%test _ =
                                 , CApp (CIdentifier "f3", CIdentifier "m") )
                             , CIdentifier "m" )
                         , CIdentifier "z" ) )
-                , CApp (CIdentifier "cc_1", CIdentifier "m") ) ) )
+                , CApp (CIdentifier "Cc_1", CIdentifier "m") ) ) )
     ]
   in
   equal (cc_progra<span data-count="1">m</span> ast) cc

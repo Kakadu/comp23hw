@@ -663,7 +663,7 @@ open Ll_ast
 open Anf
 open Counter
 
-let gen_var = gen_va<span data-count="7">r</span> "anf"
+let gen_var = gen_va<span data-count="7">r</span> "Anf"
 
 let rec anf (e : ll_expr) (expr_with_hole : immexpr -&gt; aexpr) =
   <span data-count="87">m</span>atch e with
@@ -713,9 +713,9 @@ let equal anf_program1 cc_program2 = <span data-count="7">B</span>ase.Poly.equal
 
 (* fack1 k n m = k (m * n)
    fack1 k n m =
-   let anf_1 = m * n in
-   let anf_2 = k anf_1
-   in anf_2
+   let Anf_1 = m * n in
+   let Anf_2 = k Anf_1
+   in Anf_2
 *)
 let%test _ =
   <span data-count="1">l</span>et ll =
@@ -732,26 +732,26 @@ let%test _ =
         ( "fack1"
         , [ "k"; "n"; "m" ]
         , ALet
-            ( "anf_1"
+            ( "Anf_1"
             , CBinaryOp (Mult, ImmIdentifier "m", ImmIdentifier "n")
             , ALet
-                ( "anf_2"
-                , CApp (ImmIdentifier "k", ImmIdentifier "anf_1")
-                , ACExpr (CImmExpr (ImmIdentifier "anf_2")) ) ) )
+                ( "Anf_2"
+                , CApp (ImmIdentifier "k", ImmIdentifier "Anf_1")
+                , ACExpr (CImmExpr (ImmIdentifier "Anf_2")) ) ) )
     ; AFun ("ll_1", [ "x" ], ACExpr (CImmExpr (ImmIdentifier "x")))
     ; AFun
         ( "fac"
         , [ "n" ]
         , ALet
-            ( "anf_3"
+            ( "Anf_3"
             , CApp (ImmIdentifier "n", ImmIdentifier "ll_1")
-            , ACExpr (CImmExpr (ImmIdentifier "anf_3")) ) )
+            , ACExpr (CImmExpr (ImmIdentifier "Anf_3")) ) )
     ]
   in
   equal (anf_progra<span data-count="1">m</span> ll) anf
 ;;
 
-(*add a b = let anf_2 = ~a in let anf_1 = anf_2 + b in anf_1*)
+(*add a b = let Anf_2 = ~a in let Anf_1 = Anf_2 + b in Anf_1*)
 let%test _ =
   <span data-count="1">l</span>et ll =
     [ LFun
@@ -765,12 +765,12 @@ let%test _ =
         ( "add"
         , [ "a"; "b" ]
         , ALet
-            ( "anf_1"
+            ( "Anf_1"
             , CUnaryOp (Neg, ImmIdentifier "a")
             , ALet
-                ( "anf_2"
-                , CBinaryOp (Add, ImmIdentifier "anf_1", ImmIdentifier "b")
-                , ACExpr (CImmExpr (ImmIdentifier "anf_2")) ) ) )
+                ( "Anf_2"
+                , CBinaryOp (Add, ImmIdentifier "Anf_1", ImmIdentifier "b")
+                , ACExpr (CImmExpr (ImmIdentifier "Anf_2")) ) ) )
     ]
   in
   equal (anf_progra<span data-count="1">m</span> ll) anf
@@ -785,9 +785,9 @@ let%test _ =
         ( "add"
         , [ "a"; "b" ]
         , ALet
-            ( "anf_1"
+            ( "Anf_1"
             , CBinaryOp (Add, ImmIdentifier "a", ImmIdentifier "b")
-            , ACExpr (CImmExpr (ImmIdentifier "anf_1")) ) )
+            , ACExpr (CImmExpr (ImmIdentifier "Anf_1")) ) )
     ]
   in
   equal (anf_progra<span data-count="1">m</span> ll) anf
@@ -800,9 +800,9 @@ let%test _ =
         ( "neg"
         , [ "x" ]
         , ALet
-            ( "anf_1"
+            ( "Anf_1"
             , CUnaryOp (Neg, ImmIdentifier "x")
-            , ACExpr (CImmExpr (ImmIdentifier "anf_1")) ) )
+            , ACExpr (CImmExpr (ImmIdentifier "Anf_1")) ) )
     ]
   in
   equal (anf_progra<span data-count="1">m</span> ll) anf
@@ -822,19 +822,19 @@ let%test _ =
         ( "foo"
         , [ "x"; "y" ]
         , ALet
-            ( "anf_1"
+            ( "Anf_1"
             , CBinaryOp (Add, ImmIdentifier "x", ImmIdentifier "y")
-            , ACExpr (CImmExpr (ImmIdentifier "anf_1")) ) )
+            , ACExpr (CImmExpr (ImmIdentifier "Anf_1")) ) )
     ; AFun
         ( "bar"
         , [ "a"; "b"; "c" ]
         , ALet
-            ( "anf_2"
+            ( "Anf_2"
             , CBinaryOp (Sub, ImmIdentifier "b", ImmIdentifier "c")
             , ALet
-                ( "anf_3"
-                , CApp (ImmIdentifier "a", ImmIdentifier "anf_2")
-                , ACExpr (CImmExpr (ImmIdentifier "anf_3")) ) ) )
+                ( "Anf_3"
+                , CApp (ImmIdentifier "a", ImmIdentifier "Anf_2")
+                , ACExpr (CImmExpr (ImmIdentifier "Anf_3")) ) ) )
     ]
   in
   equal (anf_progra<span data-count="1">m</span> ll) anf
@@ -851,26 +851,26 @@ let%test _ =
    -&gt; anf  -&gt;
 
    fun fack1 k n m =
-   let anf_1 = m n in
-   let anf_2 = k anf_1 in
-   in anf_2;
+   let Anf_1 = m n in
+   let Anf_2 = k Anf_1 in
+   in Anf_2;
 
    fun fack n k =
-   let anf_3 = n &lt;= 1 in
-   let anf_4 = k 1 in
-   let anf_5 = n - 1 in
-   let anf_6 = fack anf_5 in
-   let anf_7 = fack1 k in
-   let anf_8 = anf_7 n in
-   let anf_9 =anf_6 anf_8 in
-   if anf_3 then anf_4 else anf_9;
+   let Anf_3 = n &lt;= 1 in
+   let Anf_4 = k 1 in
+   let Anf_5 = n - 1 in
+   let Anf_6 = fack Anf_5 in
+   let Anf_7 = fack1 k in
+   let Anf_8 = Anf_7 n in
+   let Anf_9 =Anf_6 Anf_8 in
+   if Anf_3 then Anf_4 else Anf_9;
 
    fun ll_1 x = x;
 
    fun n =
-   let anf_10 = fack n in
-   let anf_11 = anf_10 ll_1
-   in anf_11
+   let Anf_10 = fack n in
+   let Anf_11 = Anf_10 ll_1
+   in Anf_11
 *)
 let%test _ =
   <span data-count="1">l</span>et ll =
@@ -902,55 +902,55 @@ let%test _ =
         ( "fack1"
         , [ "k"; "n"; "m" ]
         , ALet
-            ( "anf_1"
+            ( "Anf_1"
             , CBinaryOp (Mult, ImmIdentifier "m", ImmIdentifier "n")
             , ALet
-                ( "anf_2"
-                , CApp (ImmIdentifier "k", ImmIdentifier "anf_1")
-                , ACExpr (CImmExpr (ImmIdentifier "anf_2")) ) ) )
+                ( "Anf_2"
+                , CApp (ImmIdentifier "k", ImmIdentifier "Anf_1")
+                , ACExpr (CImmExpr (ImmIdentifier "Anf_2")) ) ) )
     ; AFun
         ( "fack"
         , [ "n"; "k" ]
         , ALet
-            ( "anf_3"
+            ( "Anf_3"
             , CBinaryOp (LtOrEq, ImmIdentifier "n", ImmInt 1)
             , ALet
-                ( "anf_4"
+                ( "Anf_4"
                 , CApp (ImmIdentifier "k", ImmInt 1)
                 , ALet
-                    ( "anf_5"
+                    ( "Anf_5"
                     , CBinaryOp (Sub, ImmIdentifier "n", ImmInt 1)
                     , ALet
-                        ( "anf_6"
-                        , CApp (ImmIdentifier "fack", ImmIdentifier "anf_5")
+                        ( "Anf_6"
+                        , CApp (ImmIdentifier "fack", ImmIdentifier "Anf_5")
                         , ALet
-                            ( "anf_7"
+                            ( "Anf_7"
                             , CApp (ImmIdentifier "fack1", ImmIdentifier "k")
                             , ALet
-                                ( "anf_8"
-                                , CApp (ImmIdentifier "anf_7", ImmIdentifier "n")
+                                ( "Anf_8"
+                                , CApp (ImmIdentifier "Anf_7", ImmIdentifier "n")
                                 , ALet
-                                    ( "anf_9"
-                                    , CApp (ImmIdentifier "anf_6", ImmIdentifier "anf_8")
+                                    ( "Anf_9"
+                                    , CApp (ImmIdentifier "Anf_6", ImmIdentifier "Anf_8")
                                     , ALet
-                                        ( "anf_10"
+                                        ( "Anf_10"
                                         , CIfThenElse
-                                            ( ImmIdentifier "anf_3"
-                                            , ImmIdentifier "anf_4"
-                                            , ImmIdentifier "anf_9" )
-                                        , ACExpr (CImmExpr (ImmIdentifier "anf_10")) ) )
+                                            ( ImmIdentifier "Anf_3"
+                                            , ImmIdentifier "Anf_4"
+                                            , ImmIdentifier "Anf_9" )
+                                        , ACExpr (CImmExpr (ImmIdentifier "Anf_10")) ) )
                                 ) ) ) ) ) ) )
     ; AFun ("ll_1", [ "x" ], ACExpr (CImmExpr (ImmIdentifier "x")))
     ; AFun
         ( "fac"
         , [ "n" ]
         , ALet
-            ( "anf_11"
+            ( "Anf_11"
             , CApp (ImmIdentifier "fack", ImmIdentifier "n")
             , ALet
-                ( "anf_12"
-                , CApp (ImmIdentifier "anf_11", ImmIdentifier "ll_1")
-                , ACExpr (CImmExpr (ImmIdentifier "anf_12")) ) ) )
+                ( "Anf_12"
+                , CApp (ImmIdentifier "Anf_11", ImmIdentifier "ll_1")
+                , ACExpr (CImmExpr (ImmIdentifier "Anf_12")) ) ) )
     ]
   in
   equal (anf_progra<span data-count="1">m</span> ll) anf

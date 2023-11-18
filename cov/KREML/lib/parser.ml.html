@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8"/>
     <title>parser.ml &mdash; Coverage report</title>
-    <meta name="description" content="97.17% coverage in lib/parser.ml">
+    <meta name="description" content="97.18% coverage in lib/parser.ml">
     <link rel="stylesheet" href="../coverage.css"/>
     <script src="../highlight.pack.js"></script>
     <script>hljs.initHighlightingOnLoad();</script>
@@ -15,17 +15,17 @@
           <span class="dirname">lib/</span>parser.ml
         </a>
       </h1>
-      <h2>97.17%</h2>
+      <h2>97.18%</h2>
     </div>
     <div id="navbar">
       <span class="some-visited" style="top:1.48%"></span>
-      <span class="unvisited" style="top:2.23%"></span>
-      <span class="some-visited" style="top:5.49%"></span>
-      <span class="some-visited" style="top:6.08%"></span>
-      <span class="unvisited" style="top:11.13%"></span>
-      <span class="unvisited" style="top:17.95%"></span>
-      <span class="unvisited" style="top:25.37%"></span>
-      <span class="unvisited" style="top:46.88%"></span>
+      <span class="unvisited" style="top:2.22%"></span>
+      <span class="some-visited" style="top:5.48%"></span>
+      <span class="some-visited" style="top:6.07%"></span>
+      <span class="unvisited" style="top:11.11%"></span>
+      <span class="unvisited" style="top:17.93%"></span>
+      <span class="unvisited" style="top:25.33%"></span>
+      <span class="unvisited" style="top:46.81%"></span>
     </div>
     <div id="report">
       <div id="lines-layer">
@@ -704,6 +704,7 @@
 <a id="L672"></a><span class="visited"> </span>
 <a id="L673"></a><span class="visited"> </span>
 <a id="L674"></a><span class="visited"> </span>
+<a id="L675"></a><span class="visited"> </span>
 </pre>
       </div>
       <div id="text-layer">
@@ -1382,6 +1383,7 @@
 <a href="#L672">672</a>
 <a href="#L673">673</a>
 <a href="#L674">674</a>
+<a href="#L675">675</a>
 </pre>
 <pre><code class="ocaml">(** Copyright 2023-2024, Anton Kraev and Polina Badreeva *)
 
@@ -1392,13 +1394,13 @@ open Angstrom
 
 (* helpers *)
 let is_space = function
-  | <span data-count="3644">'</span> ' | <span data-count="0">'</span>\t' | <span data-count="106">'</span>\n' | <span data-count="0">'</span>\r' -&gt; true
-  | <span data-count="9731">_</span> -&gt; false
+  | <span data-count="3645">'</span> ' | <span data-count="0">'</span>\t' | <span data-count="106">'</span>\n' | <span data-count="0">'</span>\r' -&gt; true
+  | <span data-count="9738">_</span> -&gt; false
 ;;
 
 let skip = take_whil<span data-count="8">e</span> is_space
 let trim p = <span data-count="0">s</span>kip *<span data-count="0">&gt;</span> p &lt;* skip
-let parens p = <span data-count="2711">s</span>kip *<span data-count="2711">&gt;</span> cha<span data-count="2711">r</span> '(' *<span data-count="2711">&gt;</span> skip *<span data-count="2711">&gt;</span> p &lt;<span data-count="2711">*</span> skip &lt;* cha<span data-count="2711">r</span> ')'
+let parens p = <span data-count="2712">s</span>kip *<span data-count="2712">&gt;</span> cha<span data-count="2712">r</span> '(' *<span data-count="2712">&gt;</span> skip *<span data-count="2712">&gt;</span> p &lt;<span data-count="2712">*</span> skip &lt;* cha<span data-count="2712">r</span> ')'
 
 let varname =
   let keywords =
@@ -1420,7 +1422,7 @@ let varname =
   in
   let is_valid_first_char = function
     | <span data-count="542">'</span>a' .. 'z' | <span data-count="0">'</span>_' -&gt; true
-    | <span data-count="224">_</span> -&gt; false
+    | <span data-count="225">_</span> -&gt; false
   in
   let is_varname_char = function
     | <span data-count="961">'</span>a' .. 'z' | <span data-count="0">'</span>A' .. 'Z' | <span data-count="3">'</span>0' .. '9' | <span data-count="4">'</span>_' -&gt; true
@@ -1428,13 +1430,13 @@ let varname =
   in
   skip *<span data-count="8">&gt;</span> peek_char
   &gt;&gt;<span data-count="8">=</span> function
-  | <span data-count="766">S</span>ome c when is_valid_first_cha<span data-count="766">r</span> c -&gt;
+  | <span data-count="767">S</span>ome c when is_valid_first_cha<span data-count="767">r</span> c -&gt;
     <span data-count="542">t</span>ake_whil<span data-count="542">e</span> is_varname_char
     &gt;&gt;= fun s -&gt;
     <span data-count="542">i</span>f List.exists (fun keyword -&gt; <span data-count="6836">k</span>eyword = s) keywords
     then <span data-count="130">f</span>ail "Invalid variable name: keyword used"
     else <span data-count="412">r</span>eturn s
-  | <span data-count="259">_</span> -&gt; fail "Invalid variable name: bad first char"
+  | <span data-count="260">_</span> -&gt; fail "Invalid variable name: bad first char"
 ;;
 
 (* dispatch *)
@@ -1451,31 +1453,31 @@ type dispatch =
 
 (* binding parser *)
 let binding_p d =
-  <span data-count="272">f</span>ix
+  <span data-count="273">f</span>ix
   @@ fun self -&gt;
-  <span data-count="83">l</span>et name keyword =
-    <span data-count="166">s</span>trin<span data-count="166">g</span> keyword *<span data-count="166">&gt;</span> skip *<span data-count="166">&gt;</span> d.identifier_p
+  <span data-count="84">l</span>et name keyword =
+    <span data-count="168">s</span>trin<span data-count="168">g</span> keyword *<span data-count="168">&gt;</span> skip *<span data-count="168">&gt;</span> d.identifier_p
     &gt;&gt;= function
     | <span data-count="85">E</span>Identifier id -&gt; return id
     | <span data-count="0">_</span> -&gt; fail "Invalid binding name"
   in
-  let args = skip *&gt; man<span data-count="83">y</span> (varname &lt;<span data-count="83">*</span> skip) in
-  <span data-count="83">l</span>et body =
+  let args = skip *&gt; man<span data-count="84">y</span> (varname &lt;<span data-count="84">*</span> skip) in
+  <span data-count="84">l</span>et body =
     skip
-    *<span data-count="83">&gt;</span> strin<span data-count="83">g</span> "="
-    *&gt; choic<span data-count="83">e</span>
-         [ d.unary_op_<span data-count="83">p</span> d
-         ; d.binary_op_<span data-count="83">p</span> d
-         ; d.let_in_<span data-count="83">p</span> d
-         ; d.app_<span data-count="83">p</span> d
-         ; d.abs_<span data-count="83">p</span> d
-         ; d.if_then_else_<span data-count="83">p</span> d
+    *<span data-count="84">&gt;</span> strin<span data-count="84">g</span> "="
+    *&gt; choic<span data-count="84">e</span>
+         [ d.unary_op_<span data-count="84">p</span> d
+         ; d.binary_op_<span data-count="84">p</span> d
+         ; d.let_in_<span data-count="84">p</span> d
+         ; d.app_<span data-count="84">p</span> d
+         ; d.abs_<span data-count="84">p</span> d
+         ; d.if_then_else_<span data-count="84">p</span> d
          ; d.literal_p
          ; d.identifier_p
          ]
   in
-  <span data-count="83">s</span>kip
-  *&gt; (paren<span data-count="83">s</span> self &lt;|<span data-count="83">&gt;</span> lift<span data-count="83">2</span> b_val (nam<span data-count="83">e</span> "val") body &lt;|<span data-count="83">&gt;</span> lift<span data-count="83">3</span> b_fun (nam<span data-count="83">e</span> "fun") args body)
+  <span data-count="84">s</span>kip
+  *&gt; (paren<span data-count="84">s</span> self &lt;|<span data-count="84">&gt;</span> lift<span data-count="84">2</span> b_val (nam<span data-count="84">e</span> "val") body &lt;|<span data-count="84">&gt;</span> lift<span data-count="84">3</span> b_fun (nam<span data-count="84">e</span> "fun") args body)
 ;;
 
 (* expression parsers *)
@@ -1509,7 +1511,7 @@ let identifier_p =
 ;;
 
 let unary_op_p d =
-  <span data-count="948">f</span>ix
+  <span data-count="949">f</span>ix
   @@ fun self -&gt;
   <span data-count="326">l</span>et op = choice [ cha<span data-count="326">r</span> '~' &gt;&gt;<span data-count="326">|</span> uneg; strin<span data-count="326">g</span> "not" &gt;&gt;<span data-count="326">|</span> unot ] in
   <span data-count="326">l</span>et body =
@@ -1527,7 +1529,7 @@ let unary_op_p d =
 ;;
 
 let binary_op_p d =
-  <span data-count="1109">f</span>ix
+  <span data-count="1110">f</span>ix
   @@ fun self -&gt;
   <span data-count="165">l</span>et multiplicative = skip *&gt; choic<span data-count="165">e</span> [ cha<span data-count="165">r</span> '*' &gt;&gt;<span data-count="165">|</span> bmul; cha<span data-count="165">r</span> '/' &gt;&gt;<span data-count="165">|</span> bdiv ] in
   <span data-count="165">l</span>et additive = skip *&gt; choic<span data-count="165">e</span> [ cha<span data-count="165">r</span> '+' &gt;&gt;<span data-count="165">|</span> badd; cha<span data-count="165">r</span> '-' &gt;&gt;<span data-count="165">|</span> bsub ] in
@@ -1573,7 +1575,7 @@ let binary_op_p d =
 ;;
 
 let app_p d =
-  <span data-count="1099">f</span>ix
+  <span data-count="1100">f</span>ix
   @@ fun self -&gt;
   <span data-count="175">l</span>et function_parser =
     choice
@@ -1601,7 +1603,7 @@ let app_p d =
 ;;
 
 let abs_p d =
-  <span data-count="780">f</span>ix
+  <span data-count="781">f</span>ix
   @@ fun self -&gt;
   <span data-count="32">p</span>aren<span data-count="32">s</span> self
   &lt;|&gt;
@@ -1622,7 +1624,7 @@ let abs_p d =
 ;;
 
 let if_then_else_p d =
-  <span data-count="1449">f</span>ix
+  <span data-count="1450">f</span>ix
   @@ fun self -&gt;
   <span data-count="146">p</span>aren<span data-count="146">s</span> self
   &lt;|&gt;
@@ -1658,7 +1660,7 @@ let if_then_else_p d =
 ;;
 
 let let_in_p d =
-  <span data-count="1248">f</span>ix
+  <span data-count="1249">f</span>ix
   @@ fun self -&gt;
   <span data-count="201">p</span>aren<span data-count="201">s</span> self
   &lt;|&gt;
@@ -1692,15 +1694,15 @@ let dispatch =
   }
 ;;
 
-let parse program = <span data-count="71">p</span>arse_string ~consume:All (man<span data-count="71">y</span> (binding_<span data-count="71">p</span> dispatch) &lt;<span data-count="71">*</span> skip) program
-let parse_optimistically program = <span data-count="71">R</span>esult.get_ok (pars<span data-count="71">e</span> program)
+let parse program = <span data-count="72">p</span>arse_string ~consume:All (man<span data-count="72">y</span> (binding_<span data-count="72">p</span> dispatch) &lt;<span data-count="72">*</span> skip) program
+let parse_optimistically program = <span data-count="72">R</span>esult.get_ok (pars<span data-count="72">e</span> program)
 
 let parse_error program =
-  <span data-count="6">t</span>ry
+  <span data-count="7">t</span>ry
     let _ = parse_optimistically program in
     <span data-count="0">f</span>alse
   with
-  | <span data-count="6">I</span>nvalid_argument _ -&gt; true
+  | <span data-count="7">I</span>nvalid_argument _ -&gt; true
 ;;
 
 (* tests *)
@@ -2057,6 +2059,7 @@ let%test _ = <span data-count="1">p</span>arse_error "val x = ~(fn x =&gt; (x + 
 let%test _ = <span data-count="1">p</span>arse_error "val y = (fn x =&gt; (x + 1)) + (fn x =&gt; (x + 1))"
 let%test _ = <span data-count="1">p</span>arse_error "val x = (4+5) t"
 let%test _ = <span data-count="1">p</span>arse_error "val x = if (fn x =&gt; x + 1) then (fn z =&gt; (z+1)) else f"
+let%test _ = <span data-count="1">p</span>arse_error "val Ll = True"
 </code></pre>
       </div>
     </div>
