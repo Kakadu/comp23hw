@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8"/>
     <title>ty.ml &mdash; Coverage report</title>
-    <meta name="description" content="46.88% coverage in lib/ty.ml">
+    <meta name="description" content="50.00% coverage in lib/ty.ml">
     <link rel="stylesheet" href="../coverage.css"/>
     <script src="../highlight.pack.js"></script>
     <script>hljs.initHighlightingOnLoad();</script>
@@ -15,7 +15,7 @@
           <span class="dirname">lib/</span>ty.ml
         </a>
       </h1>
-      <h2>46.88%</h2>
+      <h2>50.00%</h2>
     </div>
     <div id="navbar">
       <span class="unvisited" style="top:13.16%"></span>
@@ -25,7 +25,6 @@
       <span class="unvisited" style="top:28.95%"></span>
       <span class="unvisited" style="top:31.58%"></span>
       <span class="unvisited" style="top:39.47%"></span>
-      <span class="unvisited" style="top:50.00%"></span>
       <span class="unvisited" style="bottom:47.37%"></span>
       <span class="unvisited" style="bottom:42.11%"></span>
       <span class="unvisited" style="bottom:28.95%"></span>
@@ -72,7 +71,7 @@
 <a id="L35"></a><span > </span>
 <a id="L36"></a><span > </span>
 <a id="L37"></a><span > </span>
-<a id="L38"></a><span class="unvisited"> </span>
+<a id="L38"></a><span > </span>
 <a id="L39"></a><span > </span>
 <a id="L40"></a><span class="unvisited"> </span>
 <a id="L41"></a><span > </span>
@@ -229,7 +228,7 @@ type error =
   | `Unification_failed of ty * ty
   ]
 
-<span data-count="0">t</span>ype scheme = S of binder_set * ty [@@deriving show { with_path = false }<span data-count="0">]</span>
+type scheme = S of binder_set * ty
 
 let arrow l r = <span data-count="0">T</span>Arrow (l, r)
 let int_typ = TInt
