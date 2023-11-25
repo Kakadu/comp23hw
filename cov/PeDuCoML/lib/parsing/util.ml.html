@@ -178,71 +178,71 @@
 
 open Ast
 
-let empty = Base.Set.empt<span data-count="85">y</span> (module Base.String)
+let empty = Base.Set.empt<span data-count="164">y</span> (module Base.String)
 
 let find_identifiers_pattern =
   let rec helper acc = function
-    | <span data-count="693">P</span>Identifier id -&gt; Base.Set.add acc id
-    | <span data-count="145">P</span>List pattern_list -&gt;
+    | <span data-count="913">P</span>Identifier id -&gt; Base.Set.add acc id
+    | <span data-count="217">P</span>List pattern_list -&gt;
       (match pattern_list with
-       | <span data-count="93">h</span>ead :: tail -&gt; helper (helpe<span data-count="93">r</span> acc head) (PList tail)
-       | <span data-count="52">_</span> -&gt; acc)
-    | <span data-count="40">P</span>Tuple (first_pattern, second_pattern, other_patterns) -&gt;
-      helper acc @@ plis<span data-count="40">t</span> (first_pattern :: second_pattern :: other_patterns)
-    | <span data-count="64">P</span>ConstructList (operand, list) -&gt; helper (helpe<span data-count="64">r</span> acc operand) list
-    | <span data-count="95">_</span> -&gt; acc
+       | <span data-count="140">h</span>ead :: tail -&gt; helper (helpe<span data-count="140">r</span> acc head) (PList tail)
+       | <span data-count="77">_</span> -&gt; acc)
+    | <span data-count="60">P</span>Tuple (first_pattern, second_pattern, other_patterns) -&gt;
+      helper acc @@ plis<span data-count="60">t</span> (first_pattern :: second_pattern :: other_patterns)
+    | <span data-count="106">P</span>ConstructList (operand, list) -&gt; helper (helpe<span data-count="106">r</span> acc operand) list
+    | <span data-count="155">_</span> -&gt; acc
   in
-  helpe<span data-count="85">r</span> empty
+  helpe<span data-count="164">r</span> empty
 ;;
 
 (** Finds all identifiers in an expression. Used in pattern-matching inference *)
 let find_identifiers =
   let rec decl_helper acc = function
-    | <span data-count="27">D</span>Declaration (_, pattern_list, body) | <span data-count="10">D</span>RecursiveDeclaration (_, pattern_list, body)
+    | <span data-count="49">D</span>Declaration (_, pattern_list, body) | <span data-count="14">D</span>RecursiveDeclaration (_, pattern_list, body)
       -&gt;
       let pattern_args =
         Base.List.fold_right
           pattern_list
-          ~f:(fun pattern acc -&gt; <span data-count="69">B</span>ase.Set.union acc (find_identifiers_patter<span data-count="69">n</span> pattern))
+          ~f:(fun pattern acc -&gt; <span data-count="81">B</span>ase.Set.union acc (find_identifiers_patter<span data-count="81">n</span> pattern))
           ~init:acc
       in
-      <span data-count="37">B</span>ase.Set.diff (helpe<span data-count="37">r</span> acc body) pattern_args
+      <span data-count="63">B</span>ase.Set.diff (helpe<span data-count="63">r</span> acc body) pattern_args
   and helper acc = function
-    | <span data-count="232">E</span>BinaryOperation (_, left, right) -&gt; helper (helpe<span data-count="232">r</span> acc left) right
+    | <span data-count="366">E</span>BinaryOperation (_, left, right) -&gt; helper (helpe<span data-count="366">r</span> acc left) right
     | <span data-count="3">E</span>UnaryOperation (_, operand) -&gt; helper acc operand
-    | <span data-count="485">E</span>Application (func, arg) -&gt; helper (helpe<span data-count="485">r</span> acc func) arg
-    | <span data-count="961">E</span>Identifier id -&gt; Base.Set.add acc id
-    | <span data-count="71">E</span>Fun (first_arg, other_args, body) -&gt;
+    | <span data-count="732">E</span>Application (func, arg) -&gt; helper (helpe<span data-count="732">r</span> acc func) arg
+    | <span data-count="1407">E</span>Identifier id -&gt; Base.Set.add acc id
+    | <span data-count="78">E</span>Fun (first_arg, other_args, body) -&gt;
       let pattern_args =
         Base.List.fold_right
           (first_arg :: other_args)
-          ~f:(fun pattern acc -&gt; <span data-count="142">B</span>ase.Set.union acc (find_identifiers_patter<span data-count="142">n</span> pattern))
+          ~f:(fun pattern acc -&gt; <span data-count="153">B</span>ase.Set.union acc (find_identifiers_patter<span data-count="153">n</span> pattern))
           ~init:empty
       in
-      <span data-count="71">B</span>ase.Set.diff (helpe<span data-count="71">r</span> acc body) pattern_args
-    | <span data-count="179">E</span>List expr_list -&gt;
+      <span data-count="78">B</span>ase.Set.diff (helpe<span data-count="78">r</span> acc body) pattern_args
+    | <span data-count="444">E</span>List expr_list -&gt;
       (match expr_list with
-       | <span data-count="128">h</span>ead :: tail -&gt; helper (helpe<span data-count="128">r</span> acc head) (elis<span data-count="128">t</span> tail)
-       | <span data-count="51">[</span>] -&gt; acc)
-    | <span data-count="25">E</span>ConstructList (head, tail) -&gt; helper (helpe<span data-count="25">r</span> acc head) tail
-    | <span data-count="13">E</span>Tuple (first_elem, second_elem, other_elems) -&gt;
-      helper acc (elis<span data-count="13">t</span> @@ (first_elem :: second_elem :: other_elems))
-    | <span data-count="37">E</span>LetIn (first_decl, other_decls, body) -&gt;
+       | <span data-count="334">h</span>ead :: tail -&gt; helper (helpe<span data-count="334">r</span> acc head) (elis<span data-count="334">t</span> tail)
+       | <span data-count="110">[</span>] -&gt; acc)
+    | <span data-count="35">E</span>ConstructList (head, tail) -&gt; helper (helpe<span data-count="35">r</span> acc head) tail
+    | <span data-count="31">E</span>Tuple (first_elem, second_elem, other_elems) -&gt;
+      helper acc (elis<span data-count="31">t</span> @@ (first_elem :: second_elem :: other_elems))
+    | <span data-count="63">E</span>LetIn (first_decl, other_decls, body) -&gt;
       let acc = decl_helper acc first_decl in
-      <span data-count="37">(</span>match other_decls with
+      <span data-count="63">(</span>match other_decls with
        | <span data-count="0">h</span>ead :: tail -&gt; helper acc (eleti<span data-count="0">n</span> head tail body)
-       | <span data-count="37">[</span>] -&gt; helper acc body)
-    | <span data-count="23">E</span>If (condition, true_branch, false_branch) -&gt;
+       | <span data-count="63">[</span>] -&gt; helper acc body)
+    | <span data-count="42">E</span>If (condition, true_branch, false_branch) -&gt;
       let acc = helper acc condition in
-      <span data-count="23">h</span>elper (helpe<span data-count="23">r</span> acc true_branch) false_branch
-    | <span data-count="60">E</span>MatchWith (matched, (pattern, action), other_cases) -&gt;
-      let acc = Base.Set.diff (helpe<span data-count="60">r</span> acc action) (find_identifiers_patter<span data-count="60">n</span> pattern) in
-      <span data-count="60">(</span>match other_cases with
-       | <span data-count="22">h</span>ead :: tail -&gt; helper acc (ematchwit<span data-count="22">h</span> matched head tail)
-       | <span data-count="38">[</span>] -&gt; helper acc matched)
-    | <span data-count="248">_</span> -&gt; acc
+      <span data-count="42">h</span>elper (helpe<span data-count="42">r</span> acc true_branch) false_branch
+    | <span data-count="100">E</span>MatchWith (matched, (pattern, action), other_cases) -&gt;
+      let acc = Base.Set.diff (helpe<span data-count="100">r</span> acc action) (find_identifiers_patter<span data-count="100">n</span> pattern) in
+      <span data-count="100">(</span>match other_cases with
+       | <span data-count="42">h</span>ead :: tail -&gt; helper acc (ematchwit<span data-count="42">h</span> matched head tail)
+       | <span data-count="58">[</span>] -&gt; helper acc matched)
+    | <span data-count="604">_</span> -&gt; acc
   in
-  helpe<span data-count="85">r</span> empty
+  helpe<span data-count="164">r</span> empty
 ;;
 </code></pre>
       </div>

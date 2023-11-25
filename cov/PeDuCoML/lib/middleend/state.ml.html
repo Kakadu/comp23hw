@@ -84,18 +84,18 @@
 
 type 'a t = int -&gt; 'a * int
 
-let fresh last = <span data-count="562">l</span>ast, last + 1
+let fresh last = <span data-count="1166">l</span>ast, last + 1
 
 let ( &gt;&gt;= ) : 'a t -&gt; ('a -&gt; 'b t) -&gt; 'b t =
   fun m f state -&gt;
-  <span data-count="2880">l</span>et value, st = m state in
-  <span data-count="2880">(</span><span data-count="2880">f</span> value) st
+  <span data-count="6375">l</span>et value, st = m state in
+  <span data-count="6375">(</span><span data-count="6375">f</span> value) st
 ;;
 
 let bind m f = <span data-count="0">m</span> &gt;&gt;= f
-let return value st = <span data-count="2405">v</span>alue, st
+let return value st = <span data-count="5444">v</span>alue, st
 let ( let* ) = ( &gt;&gt;= )
-let run monad = <span data-count="87">f</span>st @@ mona<span data-count="87">d</span> 0
+let run monad = <span data-count="235">f</span>st @@ mona<span data-count="235">d</span> 0
 
 let ( &gt;&gt;| ) : 'a t -&gt; ('a -&gt; 'b) -&gt; 'b t =
   fun m f state -&gt;

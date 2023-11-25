@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <title>peducoml_stdlib.ml &mdash; Coverage report</title>
+    <meta name="description" content="100.00% coverage in lib/stdlib/peducoml_stdlib.ml">
+    <link rel="stylesheet" href="../../coverage.css"/>
+    <script src="../../highlight.pack.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+  </head>
+  <body>
+    <div id="header">
+      <h1>
+        <a href="../../index.html">
+          <span class="dirname">lib/stdlib/</span>peducoml_stdlib.ml
+        </a>
+      </h1>
+      <h2>100.00%</h2>
+    </div>
+    <div id="navbar">
+    </div>
+    <div id="report">
+      <div id="lines-layer">
+        <pre>
+<a id="L1"></a><span > </span>
+<a id="L2"></a><span > </span>
+<a id="L3"></a><span > </span>
+<a id="L4"></a><span > </span>
+<a id="L5"></a><span > </span>
+<a id="L6"></a><span > </span>
+<a id="L7"></a><span class="visited"> </span>
+<a id="L8"></a><span class="visited"> </span>
+<a id="L9"></a><span class="visited"> </span>
+<a id="L10"></a><span class="visited"> </span>
+<a id="L11"></a><span > </span>
+<a id="L12"></a><span > </span>
+<a id="L13"></a><span class="visited"> </span>
+<a id="L14"></a><span > </span>
+<a id="L15"></a><span > </span>
+<a id="L16"></a><span > </span>
+<a id="L17"></a><span class="visited"> </span>
+<a id="L18"></a><span > </span>
+<a id="L19"></a><span > </span>
+<a id="L20"></a><span > </span>
+<a id="L21"></a><span > </span>
+<a id="L22"></a><span class="visited"> </span>
+<a id="L23"></a><span > </span>
+<a id="L24"></a><span > </span>
+<a id="L25"></a><span > </span>
+<a id="L26"></a><span class="visited"> </span>
+<a id="L27"></a><span > </span>
+<a id="L28"></a><span > </span>
+<a id="L29"></a><span class="visited"> </span>
+<a id="L30"></a><span > </span>
+<a id="L31"></a><span > </span>
+<a id="L32"></a><span > </span>
+<a id="L33"></a><span class="visited"> </span>
+<a id="L34"></a><span > </span>
+<a id="L35"></a><span > </span>
+<a id="L36"></a><span > </span>
+<a id="L37"></a><span > </span>
+<a id="L38"></a><span class="visited"> </span>
+<a id="L39"></a><span > </span>
+<a id="L40"></a><span > </span>
+<a id="L41"></a><span > </span>
+<a id="L42"></a><span class="visited"> </span>
+<a id="L43"></a><span > </span>
+<a id="L44"></a><span > </span>
+<a id="L45"></a><span > </span>
+<a id="L46"></a><span > </span>
+<a id="L47"></a><span > </span>
+<a id="L48"></a><span > </span>
+<a id="L49"></a><span > </span>
+<a id="L50"></a><span > </span>
+<a id="L51"></a><span > </span>
+<a id="L52"></a><span > </span>
+<a id="L53"></a><span > </span>
+<a id="L54"></a><span > </span>
+<a id="L55"></a><span > </span>
+<a id="L56"></a><span > </span>
+<a id="L57"></a><span > </span>
+<a id="L58"></a><span > </span>
+<a id="L59"></a><span > </span>
+<a id="L60"></a><span > </span>
+<a id="L61"></a><span > </span>
+<a id="L62"></a><span > </span>
+<a id="L63"></a><span > </span>
+<a id="L64"></a><span > </span>
+<a id="L65"></a><span > </span>
+<a id="L66"></a><span > </span>
+<a id="L67"></a><span > </span>
+<a id="L68"></a><span > </span>
+<a id="L69"></a><span > </span>
+<a id="L70"></a><span > </span>
+<a id="L71"></a><span > </span>
+<a id="L72"></a><span > </span>
+<a id="L73"></a><span > </span>
+<a id="L74"></a><span > </span>
+<a id="L75"></a><span > </span>
+</pre>
+      </div>
+      <div id="text-layer">
+        <pre id="line-numbers">
+<a href="#L1"> 1</a>
+<a href="#L2"> 2</a>
+<a href="#L3"> 3</a>
+<a href="#L4"> 4</a>
+<a href="#L5"> 5</a>
+<a href="#L6"> 6</a>
+<a href="#L7"> 7</a>
+<a href="#L8"> 8</a>
+<a href="#L9"> 9</a>
+<a href="#L10">10</a>
+<a href="#L11">11</a>
+<a href="#L12">12</a>
+<a href="#L13">13</a>
+<a href="#L14">14</a>
+<a href="#L15">15</a>
+<a href="#L16">16</a>
+<a href="#L17">17</a>
+<a href="#L18">18</a>
+<a href="#L19">19</a>
+<a href="#L20">20</a>
+<a href="#L21">21</a>
+<a href="#L22">22</a>
+<a href="#L23">23</a>
+<a href="#L24">24</a>
+<a href="#L25">25</a>
+<a href="#L26">26</a>
+<a href="#L27">27</a>
+<a href="#L28">28</a>
+<a href="#L29">29</a>
+<a href="#L30">30</a>
+<a href="#L31">31</a>
+<a href="#L32">32</a>
+<a href="#L33">33</a>
+<a href="#L34">34</a>
+<a href="#L35">35</a>
+<a href="#L36">36</a>
+<a href="#L37">37</a>
+<a href="#L38">38</a>
+<a href="#L39">39</a>
+<a href="#L40">40</a>
+<a href="#L41">41</a>
+<a href="#L42">42</a>
+<a href="#L43">43</a>
+<a href="#L44">44</a>
+<a href="#L45">45</a>
+<a href="#L46">46</a>
+<a href="#L47">47</a>
+<a href="#L48">48</a>
+<a href="#L49">49</a>
+<a href="#L50">50</a>
+<a href="#L51">51</a>
+<a href="#L52">52</a>
+<a href="#L53">53</a>
+<a href="#L54">54</a>
+<a href="#L55">55</a>
+<a href="#L56">56</a>
+<a href="#L57">57</a>
+<a href="#L58">58</a>
+<a href="#L59">59</a>
+<a href="#L60">60</a>
+<a href="#L61">61</a>
+<a href="#L62">62</a>
+<a href="#L63">63</a>
+<a href="#L64">64</a>
+<a href="#L65">65</a>
+<a href="#L66">66</a>
+<a href="#L67">67</a>
+<a href="#L68">68</a>
+<a href="#L69">69</a>
+<a href="#L70">70</a>
+<a href="#L71">71</a>
+<a href="#L72">72</a>
+<a href="#L73">73</a>
+<a href="#L74">74</a>
+<a href="#L75">75</a>
+</pre>
+<pre><code class="ocaml">(** Copyright 2023-2024, Danila Pechenev, Ilya Dudnikov *)
+
+(** SPDX-License-Identifier: LGPL-3.0-or-later *)
+
+open Typing
+
+let print_int_scheme = Base.Set.empt<span data-count="143">y</span> (module Base.Int), TArr (TGround Int, TGround Int)
+let print_char_scheme = Base.Set.empt<span data-count="143">y</span> (module Base.Int), TArr (TGround Char, TGround Int)
+let print_bool_scheme = Base.Set.empt<span data-count="143">y</span> (module Base.Int), TArr (TGround Bool, TGround Int)
+let print_new_line_scheme = Base.Set.empt<span data-count="143">y</span> (module Base.Int), TGround Int
+
+let print_list_scheme =
+  Base.Set.empt<span data-count="143">y</span> (module Base.Int), TArr (TList (TVar (-1)), TGround Int)
+;;
+
+let concat_lists_scheme =
+  ( Base.Set.empt<span data-count="143">y</span> (module Base.Int)
+  , TArr (TList (TVar (-1)), TArr (TList (TVar (-1)), TList (TVar (-1)))) )
+;;
+
+let concat_strings_scheme =
+  ( Base.Set.empt<span data-count="143">y</span> (module Base.Int)
+  , TArr (TGround String, TArr (TGround String, TGround String)) )
+;;
+
+let print_tuple_scheme = Base.Set.empt<span data-count="143">y</span> (module Base.Int), TArr (TVar (-1), TGround Int)
+
+let print_string_scheme =
+  Base.Set.empt<span data-count="143">y</span> (module Base.Int), TArr (TGround String, TGround Int)
+;;
+
+let compare_lists_scheme =
+  ( Base.Set.empt<span data-count="143">y</span> (module Base.Int)
+  , TArr (TList (TVar (-2)), TArr (TList (TVar (-2)), TGround Bool)) )
+;;
+
+let compare_tuples_scheme =
+  Base.Set.empt<span data-count="143">y</span> (module Base.Int), TArr (TVar (-3), TArr (TVar (-3), TGround Bool))
+;;
+
+let compare_strings_scheme =
+  ( Base.Set.empt<span data-count="143">y</span> (module Base.Int)
+  , TArr (TGround String, TArr (TGround String, TGround Bool)) )
+;;
+
+let stdlib =
+  [ "print_int", print_int_scheme
+  ; "print_char", print_char_scheme
+  ; "print_bool", print_bool_scheme
+  ; "print_list", print_list_scheme
+  ; "print_tuple", print_tuple_scheme
+  ; "print_string", print_string_scheme
+  ; "print_new_line", print_new_line_scheme
+  ; "compare_lists_eq", compare_lists_scheme
+  ; "compare_lists_neq", compare_lists_scheme
+  ; "compare_lists_gt", compare_lists_scheme
+  ; "compare_lists_gte", compare_lists_scheme
+  ; "compare_lists_lt", compare_lists_scheme
+  ; "compare_lists_lte", compare_lists_scheme
+  ; "concat_lists", concat_lists_scheme
+  ; "compare_tuples_eq", compare_tuples_scheme
+  ; "compare_tuples_neq", compare_tuples_scheme
+  ; "compare_tuples_gt", compare_tuples_scheme
+  ; "compare_tuples_gte", compare_tuples_scheme
+  ; "compare_tuples_lt", compare_tuples_scheme
+  ; "compare_tuples_lte", compare_tuples_scheme
+  ; "compare_strings_eq", compare_strings_scheme
+  ; "compare_strings_neq", compare_strings_scheme
+  ; "compare_strings_gt", compare_strings_scheme
+  ; "compare_strings_gte", compare_strings_scheme
+  ; "compare_strings_lt", compare_strings_scheme
+  ; "compare_strings_lte", compare_strings_scheme
+  ; "concat_strings", concat_strings_scheme
+  ]
+;;
+</code></pre>
+      </div>
+    </div>
+    <script src="../../coverage.js"></script>
+  </body>
+</html>
