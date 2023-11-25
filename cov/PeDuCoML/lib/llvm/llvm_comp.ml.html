@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8"/>
     <title>llvm_comp.ml &mdash; Coverage report</title>
-    <meta name="description" content="95.13% coverage in lib/llvm/llvm_comp.ml">
+    <meta name="description" content="95.05% coverage in lib/llvm/llvm_comp.ml">
     <link rel="stylesheet" href="../../coverage.css"/>
     <script src="../../highlight.pack.js"></script>
     <script>hljs.initHighlightingOnLoad();</script>
@@ -15,7 +15,7 @@
           <span class="dirname">lib/llvm/</span>llvm_comp.ml
         </a>
       </h1>
-      <h2>95.13%</h2>
+      <h2>95.05%</h2>
     </div>
     <div id="navbar">
       <span class="unvisited" style="top:4.22%"></span>
@@ -968,7 +968,7 @@ let rec codegen_immexpr args_numbers env =
                 "peducoml_apply0_n"
                 builder
          , (0, false) )
-       else <span data-count="192">o</span><span data-count="192">k</span> @@ llv, (0, true)
+       else <span data-count="192">o</span><span data-count="192">k</span> llv, (0, true)
      | <span data-count="0">N</span>one, _ -&gt; erro<span data-count="0">r</span> @@ unboun<span data-count="0">d</span> unq_id, (0, false)
      | <span data-count="605">S</span>ome llvalue, AnfId id -&gt;
        let number_of_args =
@@ -1091,11 +1091,11 @@ let rec codegen_cexpr args_numbers env = function
     <span data-count="39">l</span>et incoming = [ then_branch, new_then_bb; else_branch, new_else_bb ] in
     let phi = build_phi incoming "if_phi_n" builder in
     <span data-count="39">p</span>osition_at_end start_bb builder;
-    <span data-count="39">b</span>uild_cond_br condition_value then_bb else_bb builder |&gt; <span data-count="39">i</span>gnore;
+    <span data-count="39">l</span>et (_ : llvalue) = build_cond_br condition_value then_bb else_bb builder in
     <span data-count="39">p</span>osition_at_end new_then_bb builder;
-    <span data-count="39">b</span>uild_br merge_bb builder |&gt; <span data-count="39">i</span>gnore;
+    <span data-count="39">l</span>et (_ : llvalue) = build_br merge_bb builder in
     <span data-count="39">p</span>osition_at_end new_else_bb builder;
-    <span data-count="39">b</span>uild_br merge_bb builder |&gt; <span data-count="39">i</span>gnore;
+    <span data-count="39">l</span>et (_ : llvalue) = build_br merge_bb builder in
     <span data-count="39">p</span>osition_at_end merge_bb builder;
     <span data-count="39">o</span>k phi
   | <span data-count="8">C</span>ConstructList (arg_value, arg_list) -&gt;
@@ -1120,7 +1120,7 @@ and codegen_aexpr args_numbers env = function
   | <span data-count="462">A</span>Let (id, cexpr, aexpr) -&gt;
     let alloca = build_alloca i64 (string_of_unique_i<span data-count="462">d</span> id) builder in
     <span data-count="462">l</span>et* cexpr = codegen_cexp<span data-count="462">r</span> args_numbers env cexpr in
-    <span data-count="462">b</span>uild_store cexpr alloca builder |&gt; <span data-count="462">i</span>gnore;
+    <span data-count="462">l</span>et (_ : llvalue) = build_store cexpr alloca builder in
     <span data-count="462">l</span>et env = Base.Map.Poly.set env ~key:id ~data:alloca in
     <span data-count="462">c</span>odegen_aexpr args_numbers env aexpr
 ;;
@@ -1140,7 +1140,7 @@ let codegen_global_scope_function args_numbers env (func : global_scope_function
       ~init:env
       ~f:(fun (name, value) acc -&gt;
         <span data-count="70">l</span>et alloca = build_alloca i64 (string_of_unique_i<span data-count="70">d</span> name) builder in
-        <span data-count="70">b</span>uild_store value alloca builder |&gt; <span data-count="70">i</span>gnore;
+        <span data-count="70">l</span>et (_ : llvalue) = build_store value alloca builder in
         <span data-count="70">B</span>ase.Map.Poly.set acc ~key:name ~data:alloca)
   in
   <span data-count="133">l</span>et* return_val =
@@ -1312,7 +1312,7 @@ let codegen program =
   in
   let args_numbers = gather_args_numbers program in
   <span data-count="70">l</span>et rec codegen acc env = function
-    | <span data-count="70">[</span>] -&gt; ok @@ acc
+    | <span data-count="70">[</span>] -&gt; ok acc
     | <span data-count="133">h</span>ead :: tail -&gt;
       let* head, env = codegen_global_scope_functio<span data-count="133">n</span> args_numbers env head in
       <span data-count="133">c</span>odegen (head :: acc) env tail
