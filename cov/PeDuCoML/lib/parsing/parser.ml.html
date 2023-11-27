@@ -2952,7 +2952,7 @@ type dispatch =
 (* ------------------------------- *)
 
 (* Helpers *)
-let space_predicate x = <span data-count="114884976">x</span> == ' <span data-count="15003475">'</span> || x == '\n<span data-count="753546">'</span> || x == '\t<span data-count="152">'</span> || x == '\r<span data-count="0">'</span>
+let space_predicate x = <span data-count="114884976">x</span> = ' <span data-count="15003475">'</span> || x = '\n<span data-count="753546">'</span> || x = '\t<span data-count="152">'</span> || x = '\r<span data-count="0">'</span>
 let remove_spaces = take_whil<span data-count="165">e</span> space_predicate
 let parens parser = <span data-count="38860623">r</span>emove_spaces *<span data-count="38860623">&gt;</span> cha<span data-count="38860623">r</span> '(' *<span data-count="38860623">&gt;</span> parser &lt;<span data-count="38860623">*</span> remove_spaces &lt;* cha<span data-count="38860623">r</span> ')'
 
