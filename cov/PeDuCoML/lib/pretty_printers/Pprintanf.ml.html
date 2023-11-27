@@ -424,28 +424,28 @@ let%expect_test _ =
   <span data-count="1">p</span>rintf "%a" pp_immexpr @@ ImmInt 2;
   <span data-count="1">[</span>%expect {|
   2
-  |}<span data-count="235">]</span>
+  |}<span data-count="237">]</span>
 ;;
 
 let%expect_test _ =
   <span data-count="1">p</span>rintf "%a" pp_immexpr @@ ImmString "abacaba";
   <span data-count="1">[</span>%expect {|
   "abacaba"
-  |}<span data-count="235">]</span>
+  |}<span data-count="237">]</span>
 ;;
 
 let%expect_test _ =
   <span data-count="1">p</span>rintf "%a" pp_immexpr @@ ImmId (AnfId 1);
   <span data-count="1">[</span>%expect {|
   i1
-  |}<span data-count="235">]</span>
+  |}<span data-count="237">]</span>
 ;;
 
 let%expect_test _ =
   <span data-count="1">p</span>rintf "%a" pp_cexpr @@ CBinaryOperation (Add, ImmInt 2, ImmInt 3);
   <span data-count="1">[</span>%expect {|
   2 + 3
-  |}<span data-count="235">]</span>
+  |}<span data-count="237">]</span>
 ;;
 
 let%expect_test _ =
@@ -453,7 +453,7 @@ let%expect_test _ =
   @@ CBinaryOperation (GT, ImmString "greater_than", ImmString "less_than");
   <span data-count="1">[</span>%expect {|
   "greater_than" &gt; "less_than"
-  |}<span data-count="235">]</span>
+  |}<span data-count="237">]</span>
 ;;
 
 let%expect_test _ =
@@ -466,7 +466,7 @@ let%expect_test _ =
   let i1 =
     0 * 100 in
     i1
-  |}<span data-count="235">]</span>
+  |}<span data-count="237">]</span>
 ;;
 
 let%expect_test _ =
@@ -484,7 +484,7 @@ let%expect_test _ =
     let i2 =
     i1 - 10 in
     i2 = i1
-  |}<span data-count="235">]</span>
+  |}<span data-count="237">]</span>
 ;;
 </code></pre>
       </div>
