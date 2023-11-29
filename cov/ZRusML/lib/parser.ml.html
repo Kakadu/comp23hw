@@ -575,8 +575,8 @@ let is_empty = function
 ;;
 
 let not_is_empty c = <span data-count="0">i</span>s_empty c |&gt; <span data-count="0">n</span>ot
-let empty = take_whil<span data-count="15">e</span> is_empty
-let empty_lr p = <span data-count="833">e</span>mpty *<span data-count="833">&gt;</span> p &lt;* empty
+let empty = take_whil<span data-count="14">e</span> is_empty
+let empty_lr p = <span data-count="829">e</span>mpty *<span data-count="829">&gt;</span> p &lt;* empty
 
 let is_digit = function
   | <span data-count="108">'</span>0' .. '9' -&gt; true
@@ -616,12 +616,12 @@ let is_keyword = function
   | <span data-count="290">_</span> -&gt; false
 ;;
 
-let token s = <span data-count="2318">e</span>mpty *&gt; strin<span data-count="2318">g</span> s
+let token s = <span data-count="2308">e</span>mpty *&gt; strin<span data-count="2308">g</span> s
 
 let keyword s =
-  <span data-count="776">t</span>oke<span data-count="776">n</span> s
+  <span data-count="772">t</span>oke<span data-count="772">n</span> s
   &lt;* (peek_char
-      &gt;&gt;<span data-count="776">|</span> function
+      &gt;&gt;<span data-count="772">|</span> function
       | <span data-count="161">S</span>ome x when is_valid_iden<span data-count="161">t</span> x -&gt; <span data-count="0">f</span>ail "Incorrect keyword"
       | <span data-count="161">_</span> -&gt; return None)
 ;;
@@ -629,14 +629,14 @@ let keyword s =
 let between l r p = <span data-count="0">l</span> *<span data-count="0">&gt;</span> p &lt;* r
 let brackets p = <span data-count="76">t</span>oke<span data-count="76">n</span> "(" *<span data-count="76">&gt;</span> p &lt;* toke<span data-count="76">n</span> ")"
 let cint n = <span data-count="80">C</span>Int n
-let cbool b = <span data-count="30">C</span>Bool b
+let cbool b = <span data-count="28">C</span>Bool b
 let econst c = <span data-count="84">E</span>Const c
 let eunop o e = <span data-count="1">E</span>UnOp (o, e)
 let evar id = <span data-count="154">E</span>Var id
 let eif e1 e2 e3 = <span data-count="10">E</span>If (e1, e2, e3)
 let elet binds e = <span data-count="17">E</span>Let (binds, e)
 let efun p e = <span data-count="67">E</span>Fun (p, e)
-let eapp = retur<span data-count="15">n</span> (fun e1 e2 -&gt; <span data-count="54">E</span>App (e1, e2))
+let eapp = retur<span data-count="14">n</span> (fun e1 e2 -&gt; <span data-count="54">E</span>App (e1, e2))
 let efun args rhs = <span data-count="85">L</span>ist.fold_right args ~f:efun ~init:rhs
 let ebinop o e1 e2 = <span data-count="95">E</span>BinOp (o, e1, e2)
 let ccase p e = <span data-count="0">p</span>, e
@@ -674,7 +674,7 @@ let apply_unary p =
 ;;
 
 let id valid_fst =
-  <span data-count="15">l</span>et* fst = empty *<span data-count="15">&gt;</span> satisf<span data-count="15">y</span> valid_fst in
+  <span data-count="14">l</span>et* fst = empty *<span data-count="14">&gt;</span> satisf<span data-count="14">y</span> valid_fst in
   <span data-count="341">l</span>et take_func =
     match fst with
     | <span data-count="1">'</span>_' -&gt; many1
@@ -686,13 +686,13 @@ let id valid_fst =
 ;;
 
 let ident =
-  i<span data-count="15">d</span>
+  i<span data-count="14">d</span>
   @@ function
   | <span data-count="340">'</span>a' .. 'z' | <span data-count="1">'</span>_' -&gt; true
   | <span data-count="302">_</span> -&gt; false
 ;;
 
-let uns = empty_l<span data-count="15">r</span> @@ take_while<span data-count="15">1</span> is_digit
+let uns = empty_l<span data-count="14">r</span> @@ take_while<span data-count="14">1</span> is_digit
 
 let cunsint =
   let* uns = uns in
@@ -700,22 +700,22 @@ let cunsint =
 ;;
 
 let cint =
-  let* sign = optio<span data-count="15">n</span> "" (toke<span data-count="15">n</span> "+" &lt;|<span data-count="15">&gt;</span> toke<span data-count="15">n</span> "-") in
+  let* sign = optio<span data-count="14">n</span> "" (toke<span data-count="14">n</span> "+" &lt;|<span data-count="14">&gt;</span> toke<span data-count="14">n</span> "-") in
   <span data-count="223">l</span>et* uns = empty_l<span data-count="223">r</span> @@ take_while<span data-count="223">1</span> is_digit in
   <span data-count="0">r</span>etur<span data-count="0">n</span> @@ Base.Int.of_strin<span data-count="0">g</span> (sign ^ uns) &gt;&gt;| cint
 ;;
 
 let cbool =
-  let ctrue = keywor<span data-count="15">d</span> "true" *&gt; retur<span data-count="15">n</span> (cboo<span data-count="15">l</span> true) in
-  <span data-count="15">l</span>et cfalse = keywor<span data-count="15">d</span> "false" *&gt; retur<span data-count="15">n</span> (cboo<span data-count="15">l</span> false) in
-  <span data-count="15">c</span>true &lt;|<span data-count="15">&gt;</span> cfalse
+  let ctrue = keywor<span data-count="14">d</span> "true" *&gt; retur<span data-count="14">n</span> (cboo<span data-count="14">l</span> true) in
+  <span data-count="14">l</span>et cfalse = keywor<span data-count="14">d</span> "false" *&gt; retur<span data-count="14">n</span> (cboo<span data-count="14">l</span> false) in
+  <span data-count="14">c</span>true &lt;|<span data-count="14">&gt;</span> cfalse
 ;;
 
-let const = empty_l<span data-count="15">r</span> @@ choic<span data-count="15">e</span> [ cint; cbool ]
-let uns_const = empty_l<span data-count="15">r</span> @@ choic<span data-count="15">e</span> [ cunsint; cbool ]
-let ptvar = ident &gt;&gt;<span data-count="15">|</span> ptvar
-let ptwild = toke<span data-count="15">n</span> "_" &gt;&gt;<span data-count="15">|</span> ptwild
-let ptconst = const &gt;&gt;<span data-count="15">|</span> ptconst
+let const = empty_l<span data-count="14">r</span> @@ choic<span data-count="14">e</span> [ cint; cbool ]
+let uns_const = empty_l<span data-count="14">r</span> @@ choic<span data-count="14">e</span> [ cunsint; cbool ]
+let ptvar = ident &gt;&gt;<span data-count="14">|</span> ptvar
+let ptwild = toke<span data-count="14">n</span> "_" &gt;&gt;<span data-count="14">|</span> ptwild
+let ptconst = const &gt;&gt;<span data-count="14">|</span> ptconst
 
 type pdispatch =
   { other : pdispatch -&gt; pt t
@@ -728,7 +728,7 @@ let chainl1 e op =
 ;;
 
 let pack =
-  let pt d = <span data-count="20">f</span>ix @@ fun _self -&gt; <span data-count="5">e</span>mpty_lr @@ d.othe<span data-count="5">r</span> d in
+  let pt d = <span data-count="19">f</span>ix @@ fun _self -&gt; <span data-count="5">e</span>mpty_lr @@ d.othe<span data-count="5">r</span> d in
   let other d =
     <span data-count="5">f</span>ix
     @@ fun _self -&gt;
@@ -738,7 +738,7 @@ let pack =
   { other; pt }
 ;;
 
-let pt = pack.p<span data-count="15">t</span> pack
+let pt = pack.p<span data-count="14">t</span> pack
 
 type edispatch =
   { key : edispatch -&gt; exp t
@@ -753,7 +753,7 @@ let chainl1' i e op =
 
 let pack =
   let pt = pt in
-  let exp d = <span data-count="578">f</span>ix @@ fun _self -&gt; <span data-count="81">e</span>mpty_l<span data-count="81">r</span> @@ d.ke<span data-count="81">y</span> d &lt;|&gt; d.o<span data-count="81">p</span> d in
+  let exp d = <span data-count="577">f</span>ix @@ fun _self -&gt; <span data-count="81">e</span>mpty_l<span data-count="81">r</span> @@ d.ke<span data-count="81">y</span> d &lt;|&gt; d.o<span data-count="81">p</span> d in
   let key d =
     <span data-count="507">f</span>ix
     @@ fun _self -&gt;
@@ -805,15 +805,15 @@ let pack =
 ;;
 
 let decl =
-  lift<span data-count="15">3</span>
+  lift<span data-count="14">3</span>
     dlet
-    (keywor<span data-count="15">d</span> "let" *<span data-count="15">&gt;</span> optio<span data-count="15">n</span> false (keywor<span data-count="15">d</span> "rec" &gt;&gt;<span data-count="15">|</span> fun _ -&gt; <span data-count="7">t</span>rue))
+    (keywor<span data-count="14">d</span> "let" *<span data-count="14">&gt;</span> optio<span data-count="14">n</span> false (keywor<span data-count="14">d</span> "rec" &gt;&gt;<span data-count="14">|</span> fun _ -&gt; <span data-count="7">t</span>rue))
     pt
-    (efun &lt;$<span data-count="15">&gt;</span> (empty *<span data-count="15">&gt;</span> man<span data-count="15">y</span> pt &lt;<span data-count="15">*</span> toke<span data-count="15">n</span> "=") &lt;*<span data-count="15">&gt;</span> pack.ex<span data-count="15">p</span> pack)
+    (efun &lt;$<span data-count="14">&gt;</span> (empty *<span data-count="14">&gt;</span> man<span data-count="14">y</span> pt &lt;<span data-count="14">*</span> toke<span data-count="14">n</span> "=") &lt;*<span data-count="14">&gt;</span> pack.ex<span data-count="14">p</span> pack)
 ;;
 
 let pprog (l : decl list) : prog = <span data-count="25">l</span>
-let prog = sep_by<span data-count="15">1</span> (toke<span data-count="15">n</span> ";;") decl &lt;<span data-count="15">*</span> option "<span data-count="15">"</span> @@ empty_l<span data-count="15">r</span> (toke<span data-count="15">n</span> ";;") &gt;&gt;<span data-count="15">|</span> pprog
+let prog = sep_by<span data-count="14">1</span> (toke<span data-count="14">n</span> ";;") decl &lt;<span data-count="14">*</span> option "<span data-count="14">"</span> @@ empty_l<span data-count="14">r</span> (toke<span data-count="14">n</span> ";;") &gt;&gt;<span data-count="14">|</span> pprog
 </code></pre>
       </div>
     </div>

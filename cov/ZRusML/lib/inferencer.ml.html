@@ -933,12 +933,12 @@ module Type = struct
 
   let unpack_vars =
     let empty = Set.empty (module Int) in
-    <span data-count="15">l</span>et rec ehelper acc = function
+    <span data-count="14">l</span>et rec ehelper acc = function
       | <span data-count="4">T</span>Var n -&gt; Set.add acc n
       | <span data-count="28">T</span>Arr (left, right) -&gt; ehelper (ehelpe<span data-count="28">r</span> acc left) right
       | <span data-count="74">T</span>Ground _ -&gt; acc
     in
-    ehelpe<span data-count="15">r</span> empty
+    ehelpe<span data-count="14">r</span> empty
   ;;
 end
 
@@ -961,7 +961,7 @@ end = struct
 
   type t = (fresh, typ, Int.comparator_witness) Map.t
 
-  let empty = Map.empt<span data-count="15">y</span> (module Int)
+  let empty = Map.empt<span data-count="14">y</span> (module Int)
 
   let mapping key value =
     <span data-count="366">i</span>f Type.occurs_in key value then <span data-count="0">f</span>ail `OccursCheck else <span data-count="366">r</span>eturn (key, value)
@@ -1053,11 +1053,11 @@ module TypeEnv = struct
   type t = (identifier, scheme, String.comparator_witness) Map.t
 
   let extend env id scheme = <span data-count="48">M</span>ap.update env id ~f:(fun _ -&gt; <span data-count="48">s</span>cheme)
-  let empty = Map.empt<span data-count="15">y</span> (module String)
+  let empty = Map.empt<span data-count="14">y</span> (module String)
 
   let unpack_vars : t -&gt; (type_variable_number, Int.comparator_witness) Set.t =
     Map.fold
-      ~init:(Set.empt<span data-count="15">y</span> (module Int))
+      ~init:(Set.empt<span data-count="14">y</span> (module Int))
       ~f:(fun ~key:_ ~data acc -&gt; <span data-count="22">S</span>et.union acc (Scheme.unpack_var<span data-count="22">s</span> data))
   ;;
 
@@ -1069,7 +1069,7 @@ open R
 open R.Syntax
 
 let unify = Subst.unify
-let fresh_var = fresh &gt;&gt;<span data-count="15">|</span> var_t
+let fresh_var = fresh &gt;&gt;<span data-count="14">|</span> var_t
 
 let instantiate : scheme -&gt; typ R.t =
   fun (set, t) -&gt;

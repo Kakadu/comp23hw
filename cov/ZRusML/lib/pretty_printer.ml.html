@@ -444,12 +444,12 @@ let show_binding_helper cnt (is_rec, pt, exp) =
     (helpe<span data-count="25">r</span> exp)
 ;;
 
-let show_binding = show_binding_helpe<span data-count="15">r</span> 0
+let show_binding = show_binding_helpe<span data-count="14">r</span> 0
 let pp_binding_helper fmt cnt x = <span data-count="0">f</span>printf fmt "%s" (show_binding_helpe<span data-count="0">r</span> cnt x)
 let pp_binding fmt = <span data-count="0">p</span>p_binding_helper fmt 0
 let show_decl (DLet t) = <span data-count="25">s</span>printf "%s;;\n" (show_bindin<span data-count="25">g</span> t)
 let pp_decl fmt x = <span data-count="0">f</span>printf fmt "%s" (show_dec<span data-count="0">l</span> x)
-let show_prog = List.fold_lef<span data-count="15">t</span> (fun acc decl -&gt; <span data-count="25">a</span>cc ^ show_dec<span data-count="25">l</span> decl) ""
+let show_prog = List.fold_lef<span data-count="14">t</span> (fun acc decl -&gt; <span data-count="25">a</span>cc ^ show_dec<span data-count="25">l</span> decl) ""
 let pp_prog fmt prog = <span data-count="14">f</span>printf fmt "%s" (show_pro<span data-count="14">g</span> prog)
 </code></pre>
       </div>
