@@ -74,15 +74,15 @@
   define i32 @fact(i32 %n) {
   entry:
     %lte = icmp ule i32 %n, 1
-    %sub = sub i32 %n, 1
-    %call = call i32 @fact(i32 %sub)
-    %mult = mul i32 %n, %call
     br i1 %lte, label %then, label %else
   
   then:                                             ; preds = %entry
     br label %ifcont
   
   else:                                             ; preds = %entry
+    %sub = sub i32 %n, 1
+    %call = call i32 @fact(i32 %sub)
+    %mult = mul i32 %n, %call
     br label %ifcont
   
   ifcont:                                           ; preds = %else, %then
@@ -126,6 +126,7 @@
 
   $ ./demoLlvm.exe <<- EOF
   > fun fac n = let fun fack n k = if n <= 1 then k 1 else fack (n-1) (fn m => k (m * n)) in fack n (fn x => x) end
+  > val fat3 = fac 3
   > EOF
   Segmentation fault (core dumped)
   [139]
@@ -146,3 +147,41 @@
     ret i32 %call
   }
   
+
+
+  $ ./demoLlvm.exe <<- EOF
+  > fun sum a b c = a + b + c
+  > EOF
+  define i32 @sum(i32 %a, i32 %b, i32 %c) {
+  entry:
+    %add = add i32 %a, %b
+    %add1 = add i32 %add, %c
+    ret i32 %add1
+  }
+  
+
+  $ ./demoLlvm.exe <<- EOF
+  > fun fact n = if n <= 1 then 1 else n * fact (n - 1)
+  > val fact3 = fact 3
+  > EOF
+  define i32 @fact(i32 %n) {
+  entry:
+    %lte = icmp ule i32 %n, 1
+    br i1 %lte, label %then, label %else
+  
+  then:                                             ; preds = %entry
+    br label %ifcont
+  
+  else:                                             ; preds = %entry
+    %sub = sub i32 %n, 1
+    %call = call i32 @fact(i32 %sub)
+    %mult = mul i32 %n, %call
+    br label %ifcont
+  
+  ifcont:                                           ; preds = %else, %then
+    %iftmp = phi i32 [ 1, %then ], [ %mult, %else ]
+    ret i32 %iftmp
+    %call1 = call i32 @fact(i32 3)
+  }
+  
+    %call1 = call i32 @fact(i32 3)
