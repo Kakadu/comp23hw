@@ -23,7 +23,7 @@ let immexpr_to_llvm_ir = function
   | ImmIdentifier name -> get_value name
 ;;
 
-let cexpr_to_llvm_ir = function
+let rec cexpr_to_llvm_ir = function
   | CImmExpr imm -> immexpr_to_llvm_ir imm
   | CUnaryOp (op, imm) ->
     let imm_val = immexpr_to_llvm_ir imm in
@@ -58,18 +58,18 @@ let cexpr_to_llvm_ir = function
     let merge_block = append_block context "ifcont" the_function in
     ignore (build_cond_br cond_val true_block false_block builder);
     position_at_end true_block builder;
-    let true_val = immexpr_to_llvm_ir t_branch in
+    let true_val = aexpr_to_llvm_ir t_branch in
     ignore (build_br merge_block builder);
     let true_block = insertion_block builder in
     position_at_end false_block builder;
-    let false_val = immexpr_to_llvm_ir f_branch in
+    let false_val = aexpr_to_llvm_ir f_branch in
     ignore (build_br merge_block builder);
     let false_block = insertion_block builder in
     position_at_end merge_block builder;
     build_phi [ true_val, true_block; false_val, false_block ] "iftmp" builder
-;;
 
-let rec aexpr_to_llvm_ir = function
+
+and aexpr_to_llvm_ir = function
   | ALet (name, left, right) ->
     let av = cexpr_to_llvm_ir left in
     Hashtbl.add named_values name av;
@@ -114,9 +114,9 @@ let abinding_to_llvm_ir = function
           (params func_val);
       
         let ret_val = aexpr_to_llvm_ir body in
-        let ret_val_conv = build_zext ret_val i32_t "boolToInt" builder in  (* convert return value from i1 to i32 *)
+        let ret_val_conv = build_zext ret_val i32_t "boolToInt" builder in
       
-        ignore (build_ret ret_val_conv builder);  (* Using converted value here *)
+        ignore (build_ret ret_val_conv builder);
         func_val
 ;;
 

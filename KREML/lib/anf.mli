@@ -12,9 +12,9 @@ type cexpr =
   | CUnaryOp of Ast.unary_op * immexpr
   | CBinaryOp of Ast.binary_op * immexpr * immexpr
   | CApp of immexpr * immexpr
-  | CIfThenElse of immexpr * immexpr * immexpr
+  | CIfThenElse of immexpr * aexpr * aexpr
 
-type aexpr =
+and aexpr =
   | ALet of string * cexpr * aexpr
   | ACExpr of cexpr
 
