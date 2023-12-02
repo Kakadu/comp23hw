@@ -730,7 +730,7 @@ let%expect_test _ =
   <span data-count="1">[</span>%expect
     {|
   fun x y z -&gt; match x, y, z with | true, true, false -&gt; true | true, false, true -&gt; true | false, true, true -&gt; true | _ -&gt; false
-  |}<span data-count="313">]</span>
+  |}<span data-count="327">]</span>
 ;;
 
 let%expect_test _ =
@@ -748,7 +748,7 @@ let%expect_test _ =
   <span data-count="1">[</span>%expect
     {|
   fun line number line_mult_number -&gt; match line with | head :: tail -&gt; (head * number) :: (line_mult_number tail) | _ -&gt; []
-  |}<span data-count="313">]</span>
+  |}<span data-count="327">]</span>
 ;;
 </code></pre>
       </div>

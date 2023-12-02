@@ -325,7 +325,7 @@
   <span data-count="0">|</span> LBool of boo<span data-count="0">l</span> (** true *)
 [@@deriving eq, show { with_path = false }]
 
-<span data-count="198">t</span>ype binary_operator =
+<span data-count="218">t</span>ype binary_operator =
   | Add (** + *)
   | Sub (** - *)
   | Mul (** * *)
@@ -375,82 +375,82 @@ and declaration =
   (** let rec factorial n = n * factorial (n - 1) *)
 
 (* Smart constructors for literals *)
-let lint x = <span data-count="1744353">L</span>Int x
-let lstring x = <span data-count="2962">L</span>String x
+let lint x = <span data-count="313673">L</span>Int x
+let lstring x = <span data-count="3026">L</span>String x
 let lchar x = <span data-count="2596">L</span>Char x
-let lbool x = <span data-count="6860">L</span>Bool x
+let lbool x = <span data-count="5340">L</span>Bool x
 
 (* Smart constructors for expressions *)
-let eliteral x = <span data-count="1748578">E</span>Literal x
-let eidentifier x = <span data-count="1526906">E</span>Identifier x
+let eliteral x = <span data-count="323048">E</span>Literal x
+let eidentifier x = <span data-count="1134873">E</span>Identifier x
 
 let etuple first_elem second_elem other_elems =
-  <span data-count="927">E</span>Tuple (first_elem, second_elem, other_elems)
+  <span data-count="889">E</span>Tuple (first_elem, second_elem, other_elems)
 ;;
 
-let elist x = <span data-count="49981">E</span>List x
-let efun first_arg other_args fun_body = <span data-count="10316">E</span>Fun (first_arg, other_args, fun_body)
+let elist x = <span data-count="6163">E</span>List x
+let efun first_arg other_args fun_body = <span data-count="10100">E</span>Fun (first_arg, other_args, fun_body)
 
 let ebinary_operation operator left_operand right_operand =
-  <span data-count="181317">E</span>BinaryOperation (operator, left_operand, right_operand)
+  <span data-count="101762">E</span>BinaryOperation (operator, left_operand, right_operand)
 ;;
 
 let ddeclaration function_name variable_list expression =
-  <span data-count="2945">D</span>Declaration (function_name, variable_list, expression)
+  <span data-count="1001">D</span>Declaration (function_name, variable_list, expression)
 ;;
 
 let drecursivedeclaration function_name variable_list expression =
-  <span data-count="211">D</span>RecursiveDeclaration (function_name, variable_list, expression)
+  <span data-count="82">D</span>RecursiveDeclaration (function_name, variable_list, expression)
 ;;
 
-let eif condition true_branch false_branch = <span data-count="59508">E</span>If (condition, true_branch, false_branch)
+let eif condition true_branch false_branch = <span data-count="8928">E</span>If (condition, true_branch, false_branch)
 
 let ematchwith matched_expression first_case other_cases =
-  <span data-count="1149">E</span>MatchWith (matched_expression, first_case, other_cases)
+  <span data-count="767">E</span>MatchWith (matched_expression, first_case, other_cases)
 ;;
 
 let eletin first_declaration other_declarations body =
-  <span data-count="2407">E</span>LetIn (first_declaration, other_declarations, body)
+  <span data-count="435">E</span>LetIn (first_declaration, other_declarations, body)
 ;;
 
 let eapplication function_expression operand_expression =
-  <span data-count="185163">E</span>Application (function_expression, operand_expression)
+  <span data-count="164987">E</span>Application (function_expression, operand_expression)
 ;;
 
-let eunary_operation operation expression = <span data-count="65565">E</span>UnaryOperation (operation, expression)
-let econstruct_list head tail = <span data-count="805">E</span>ConstructList (head, tail)
+let eunary_operation operation expression = <span data-count="42413">E</span>UnaryOperation (operation, expression)
+let econstruct_list head tail = <span data-count="371">E</span>ConstructList (head, tail)
 
 (* Smart constructors for binary operators *)
-let badd _ = <span data-count="8826">A</span>dd
-let bsub _ = <span data-count="11504">S</span>ub
-let bmul _ = <span data-count="31638">M</span>ul
-let bdiv _ = <span data-count="296">D</span>iv
-let beq _ = <span data-count="115924">E</span>q
-let bneq _ = <span data-count="1168">N</span>Eq
-let bgt _ = <span data-count="5172">G</span>T
-let bgte _ = <span data-count="1288">G</span>TE
-let blt _ = <span data-count="3040">L</span>T
-let blte _ = <span data-count="1288">L</span>TE
-let band _ = <span data-count="1096">A</span>ND
-let bor _ = <span data-count="1040">O</span>R
+let badd _ = <span data-count="67380">A</span>dd
+let bsub _ = <span data-count="6832">S</span>ub
+let bmul _ = <span data-count="7084">M</span>ul
+let bdiv _ = <span data-count="248">D</span>iv
+let beq _ = <span data-count="17068">E</span>q
+let bneq _ = <span data-count="208">N</span>Eq
+let bgt _ = <span data-count="1108">G</span>T
+let bgte _ = <span data-count="328">G</span>TE
+let blt _ = <span data-count="1120">L</span>T
+let blte _ = <span data-count="160">L</span>TE
+let band _ = <span data-count="136">A</span>ND
+let bor _ = <span data-count="80">O</span>R
 (* --------------------------------------- *)
 
 (* Smart constructors for unary operators *)
-let uminus _ = <span data-count="65536">M</span>inus
+let uminus _ = <span data-count="42384">M</span>inus
 let unot _ = <span data-count="24">N</span>ot
 (* -------------------------------------- *)
 
 (* Smart constructors for patterns *)
-let pliteral literal = <span data-count="7994">P</span>Literal literal
-let pwildcard _ = <span data-count="15175">P</span>Wildcard
+let pliteral literal = <span data-count="1384">P</span>Literal literal
+let pwildcard _ = <span data-count="2199">P</span>Wildcard
 
 let ptuple first_pattern second_pattern other_patterns =
-  <span data-count="1376">P</span>Tuple (first_pattern, second_pattern, other_patterns)
+  <span data-count="1280">P</span>Tuple (first_pattern, second_pattern, other_patterns)
 ;;
 
-let plist pattern_list = <span data-count="2868">P</span>List pattern_list
-let pconstruct_list head tail = <span data-count="1996">P</span>ConstructList (head, tail)
-let pidentifier id = <span data-count="62586">P</span>Identifier id
+let plist pattern_list = <span data-count="2706">P</span>List pattern_list
+let pconstruct_list head tail = <span data-count="322">P</span>ConstructList (head, tail)
+let pidentifier id = <span data-count="47895">P</span>Identifier id
 </code></pre>
       </div>
     </div>

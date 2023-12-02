@@ -341,19 +341,19 @@ open Anf
 open Format
 
 let pp_id fmt = function
-  | <span data-count="1202">A</span>nfId id -&gt; fprintf fmt "i%d" id
-  | <span data-count="154">G</span>lobalScopeId id -&gt; fprintf fmt "%s" id
+  | <span data-count="1212">A</span>nfId id -&gt; fprintf fmt "i%d" id
+  | <span data-count="157">G</span>lobalScopeId id -&gt; fprintf fmt "%s" id
 ;;
 
 let rec pp_immexpr fmt =
-  <span data-count="1111">l</span>et pp_list pp fmt delimiter =
+  <span data-count="1120">l</span>et pp_list pp fmt delimiter =
     <span data-count="54">p</span>p_print_list
       ~pp_sep:(fun fmt _ -&gt; <span data-count="113">f</span>printf fmt delimiter)
       (fun fmt value -&gt; <span data-count="158">p</span>p fmt value)
       fmt
   in
   function
-  | <span data-count="213">I</span>mmInt num -&gt; fprintf fmt "%d" num
+  | <span data-count="214">I</span>mmInt num -&gt; fprintf fmt "%d" num
   | <span data-count="5">I</span>mmString str -&gt; fprintf fmt "\"%s\"" str
   | <span data-count="1">I</span>mmChar smb -&gt; fprintf fmt "'%c'" smb
   | <span data-count="36">I</span>mmBool boolean -&gt; fprintf fmt (if boolean then <span data-count="19">"</span>true" else <span data-count="17">"</span>false")
@@ -361,7 +361,7 @@ let rec pp_immexpr fmt =
     fprintf fmt "[%a]" (fun fmt -&gt; <span data-count="33">p</span>p_list pp_immexpr fmt "; ") imm_values
   | <span data-count="21">I</span>mmTuple imm_values -&gt;
     fprintf fmt "(%a)" (fun fmt -&gt; <span data-count="21">p</span>p_list pp_immexpr fmt ", ") imm_values
-  | <span data-count="802">I</span>mmId id -&gt; pp_id fmt id
+  | <span data-count="810">I</span>mmId id -&gt; pp_id fmt id
 ;;
 
 let rec pp_cexpr fmt = function
@@ -377,7 +377,7 @@ let rec pp_cexpr fmt = function
       right
   | <span data-count="1">C</span>UnaryOperation (unop, imm) -&gt;
     fprintf fmt "%a%a" Pprintast.pp_unary_operator unop pp_immexpr imm
-  | <span data-count="258">C</span>Application (fun_imm, arg_imm) -&gt;
+  | <span data-count="261">C</span>Application (fun_imm, arg_imm) -&gt;
     fprintf fmt "%a %a" pp_immexpr fun_imm pp_immexpr arg_imm
   | <span data-count="33">C</span>If (condition, true_branch, false_branch) -&gt;
     fprintf
@@ -390,31 +390,31 @@ let rec pp_cexpr fmt = function
       pp_aexpr
       false_branch
   | <span data-count="11">C</span>ConstructList (head, tail) -&gt; fprintf fmt "%a :: %a" pp_immexpr head pp_immexpr tail
-  | <span data-count="206">C</span>Imm immexpr -&gt; pp_immexpr fmt immexpr
+  | <span data-count="209">C</span>Imm immexpr -&gt; pp_immexpr fmt immexpr
 
 and pp_aexpr fmt = function
-  | <span data-count="422">A</span>Let (id, cexpr, aexpr) -&gt;
+  | <span data-count="425">A</span>Let (id, cexpr, aexpr) -&gt;
     fprintf fmt "let %a =\n  %a in\n  %a" pp_id id pp_cexpr cexpr pp_aexpr aexpr
-  | <span data-count="171">A</span>CExpr cexpr -&gt; pp_cexpr fmt cexpr
+  | <span data-count="174">A</span>CExpr cexpr -&gt; pp_cexpr fmt cexpr
 ;;
 
 let pp_global_scope_function fmt =
-  <span data-count="103">l</span>et pp_args pp fmt =
-    <span data-count="71">p</span>p_print_list
+  <span data-count="106">l</span>et pp_args pp fmt =
+    <span data-count="73">p</span>p_print_list
       ~pp_sep:(fun fmt _ -&gt; <span data-count="61">f</span>printf fmt " ")
-      (fun fmt value -&gt; <span data-count="132">p</span>p fmt value)
+      (fun fmt value -&gt; <span data-count="134">p</span>p fmt value)
       fmt
   in
   function
-  | <span data-count="103">n</span>ame, arg_list, body -&gt;
+  | <span data-count="106">n</span>ame, arg_list, body -&gt;
     (match arg_list with
-     | <span data-count="32">[</span>] -&gt; Format.fprintf fmt "let %s = %a" name pp_aexpr body
-     | <span data-count="71">a</span>rg_list -&gt;
+     | <span data-count="33">[</span>] -&gt; Format.fprintf fmt "let %s = %a" name pp_aexpr body
+     | <span data-count="73">a</span>rg_list -&gt;
        Format.fprintf
          fmt
          "let %s %a = %a"
          name
-         (fun fmt -&gt; <span data-count="71">p</span>p_args pp_id fmt)
+         (fun fmt -&gt; <span data-count="73">p</span>p_args pp_id fmt)
          arg_list
          pp_aexpr
          body)
@@ -424,28 +424,28 @@ let%expect_test _ =
   <span data-count="1">p</span>rintf "%a" pp_immexpr @@ ImmInt 2;
   <span data-count="1">[</span>%expect {|
   2
-  |}<span data-count="237">]</span>
+  |}<span data-count="251">]</span>
 ;;
 
 let%expect_test _ =
   <span data-count="1">p</span>rintf "%a" pp_immexpr @@ ImmString "abacaba";
   <span data-count="1">[</span>%expect {|
   "abacaba"
-  |}<span data-count="237">]</span>
+  |}<span data-count="251">]</span>
 ;;
 
 let%expect_test _ =
   <span data-count="1">p</span>rintf "%a" pp_immexpr @@ ImmId (AnfId 1);
   <span data-count="1">[</span>%expect {|
   i1
-  |}<span data-count="237">]</span>
+  |}<span data-count="251">]</span>
 ;;
 
 let%expect_test _ =
   <span data-count="1">p</span>rintf "%a" pp_cexpr @@ CBinaryOperation (Add, ImmInt 2, ImmInt 3);
   <span data-count="1">[</span>%expect {|
   2 + 3
-  |}<span data-count="237">]</span>
+  |}<span data-count="251">]</span>
 ;;
 
 let%expect_test _ =
@@ -453,7 +453,7 @@ let%expect_test _ =
   @@ CBinaryOperation (GT, ImmString "greater_than", ImmString "less_than");
   <span data-count="1">[</span>%expect {|
   "greater_than" &gt; "less_than"
-  |}<span data-count="237">]</span>
+  |}<span data-count="251">]</span>
 ;;
 
 let%expect_test _ =
@@ -466,7 +466,7 @@ let%expect_test _ =
   let i1 =
     0 * 100 in
     i1
-  |}<span data-count="237">]</span>
+  |}<span data-count="251">]</span>
 ;;
 
 let%expect_test _ =
@@ -484,7 +484,7 @@ let%expect_test _ =
     let i2 =
     i1 - 10 in
     i2 = i1
-  |}<span data-count="237">]</span>
+  |}<span data-count="251">]</span>
 ;;
 </code></pre>
       </div>
