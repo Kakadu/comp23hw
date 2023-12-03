@@ -33,12 +33,13 @@
 <a id="L9"></a><span > </span>
 <a id="L10"></a><span > </span>
 <a id="L11"></a><span > </span>
-<a id="L12"></a><span class="visited"> </span>
-<a id="L13"></a><span > </span>
+<a id="L12"></a><span > </span>
+<a id="L13"></a><span class="visited"> </span>
 <a id="L14"></a><span > </span>
 <a id="L15"></a><span > </span>
 <a id="L16"></a><span > </span>
 <a id="L17"></a><span > </span>
+<a id="L18"></a><span > </span>
 </pre>
       </div>
       <div id="text-layer">
@@ -60,10 +61,12 @@
 <a href="#L15">15</a>
 <a href="#L16">16</a>
 <a href="#L17">17</a>
+<a href="#L18">18</a>
 </pre>
 <pre><code class="ocaml">(** Copyright 2023-2024, Rustam Shangareev and Danil Yevdokimov *)
 
 (** SPDX-License-Identifier: LGPL-2.1 *)
+
 module type CounterState = sig
   val counter : int ref
   val reset : unit -&gt; unit
