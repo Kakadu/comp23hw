@@ -26,13 +26,14 @@
 <a id="L2"></a><span > </span>
 <a id="L3"></a><span > </span>
 <a id="L4"></a><span > </span>
-<a id="L5"></a><span > </span>
+<a id="L5"></a><span class="visited"> </span>
 <a id="L6"></a><span > </span>
 <a id="L7"></a><span class="visited"> </span>
 <a id="L8"></a><span class="visited"> </span>
 <a id="L9"></a><span > </span>
-<a id="L10"></a><span > </span>
-<a id="L11"></a><span class="visited"> </span>
+<a id="L10"></a><span class="visited"> </span>
+<a id="L11"></a><span > </span>
+<a id="L12"></a><span > </span>
 </pre>
       </div>
       <div id="text-layer">
@@ -48,18 +49,20 @@
 <a href="#L9"> 9</a>
 <a href="#L10">10</a>
 <a href="#L11">11</a>
+<a href="#L12">12</a>
 </pre>
 <pre><code class="ocaml">(** Copyright 2023-2024, Rustam Shangareev and Danil Yevdokimov *)
 
 (** SPDX-License-Identifier: LGPL-2.1 *)
-let count = ref 0
-
-let fresh_var name () =
-  <span data-count="38">i</span>ncr count;
-  <span data-count="38">P</span>rintf.sprintf "%s_%d" name !count
+let create_fresh_var_system () =
+  <span data-count="14">l</span>et count = ref 0 in
+  let fresh_var name () =
+    <span data-count="38">i</span>ncr count;
+    <span data-count="38">P</span>rintf.sprintf "%s_%d" name !count
+  in
+  let reset_counter () = <span data-count="4">c</span>ount := 0 in
+  fresh_var, reset_counter
 ;;
-
-let reset_counter () = <span data-count="4">c</span>ount := 0
 </code></pre>
       </div>
     </div>

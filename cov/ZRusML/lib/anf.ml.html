@@ -974,7 +974,7 @@ open Var_counter
 
 <span data-count="96">t</span>ype abinding = AVal of strin<span data-count="16">g</span> * aexpr [@@deriving show { with_path = false }<span data-count="48">]</span>
 
-let fresh_var = fresh_va<span data-count="14">r</span> "anf"
+let fresh_var, reset_counter = create_fresh_var_syste<span data-count="14">m</span> ()
 
 let rec anf (e : exp) (expr_with_hole : immexpr -&gt; aexpr) : aexpr =
   <span data-count="79">m</span>atch e with
@@ -983,28 +983,28 @@ let rec anf (e : exp) (expr_with_hole : immexpr -&gt; aexpr) : aexpr =
   | <span data-count="27">E</span>Var x -&gt; expr_with_hole (ImmIdentifier x)
   | <span data-count="1">E</span>UnOp (op, exp) -&gt;
     anf exp (fun imm -&gt;
-      <span data-count="1">l</span>et varname = fresh_var () in
+      <span data-count="1">l</span>et varname = fresh_var "anf" () in
       <span data-count="1">A</span>Let (varname, CUnaryOp (op, imm), expr_with_hol<span data-count="1">e</span> (ImmIdentifier varname)))
   | <span data-count="5">E</span>BinOp (op, left, right) -&gt;
     anf left (fun limm -&gt;
       <span data-count="5">a</span>nf right (fun rimm -&gt;
-        <span data-count="5">l</span>et varname = fresh_var () in
+        <span data-count="5">l</span>et varname = fresh_var "anf" () in
         <span data-count="5">A</span>Let (varname, CBinaryOp (op, limm, rimm), expr_with_hol<span data-count="5">e</span> (ImmIdentifier varname))))
   | <span data-count="15">E</span>App (e1, e2) -&gt;
     anf e1 (fun e1imm -&gt;
       <span data-count="15">a</span>nf e2 (fun e2imm -&gt;
-        <span data-count="15">l</span>et varname = fresh_var () in
+        <span data-count="15">l</span>et varname = fresh_var "anf" () in
         <span data-count="15">A</span>Let (varname, CApp (e1imm, e2imm), expr_with_hol<span data-count="15">e</span> (ImmIdentifier varname))))
   | <span data-count="2">E</span>If (cond, e1, e2) -&gt;
     anf cond (fun condimm -&gt;
       <span data-count="2">a</span>nf e1 (fun e1imm -&gt;
         <span data-count="2">a</span>nf e2 (fun e2imm -&gt;
-          <span data-count="2">l</span>et varname = fresh_var () in
+          <span data-count="2">l</span>et varname = fresh_var "anf" () in
           <span data-count="2">A</span>Let
             (varname, CIf (condimm, e1imm, e2imm), expr_with_hol<span data-count="2">e</span> (ImmIdentifier varname)))))
   | <span data-count="2">E</span>Let (bindings, body) -&gt; anf_let_bindings bindings body expr_with_hole
   | <span data-count="14">E</span>Fun (pt, body) -&gt;
-    let varname = fresh_var () in
+    let varname = fresh_var "anf" () in
     <span data-count="14">l</span>et anf_body = anf body (fun imm -&gt; <span data-count="8">A</span>CExpr (CImmExpr imm)) in
     <span data-count="14">A</span>Let (varname, CImmExpr (ImmIdentifier "_"), anf_body)
 
@@ -1013,7 +1013,7 @@ and anf_let_bindings bindings body expr_with_hole =
   | <span data-count="2">[</span>] -&gt; anf body expr_with_hole
   | <span data-count="1">(</span>is_rec, pt, exp) :: rest -&gt;
     anf exp (fun immexpr -&gt;
-      <span data-count="1">l</span>et varname = fresh_var () in
+      <span data-count="1">l</span>et varname = fresh_var "anf" () in
       <span data-count="1">m</span>atch pt with
       | <span data-count="0">P</span>tWild -&gt; anf_let_bindings rest body expr_with_hole
       | <span data-count="1">P</span>tVar id -&gt;
@@ -1052,7 +1052,7 @@ and substitute_in_binding old_id new_id (is_rec, pt, exp) =
   | <span data-count="0">_</span> -&gt; is_rec, pt, substitut<span data-count="0">e</span> old_id new_id exp
 
 and anf_fun pt body expr_with_hole =
-  <span data-count="0">l</span>et varname = fresh_var () in
+  <span data-count="0">l</span>et varname = fresh_var "anf" () in
   <span data-count="0">m</span>atch pt with
   | <span data-count="0">P</span>tVar arg_id -&gt;
     let anf_body =
@@ -1082,8 +1082,8 @@ let anf_program (program : prog) : abinding list =
         <span data-count="10">l</span>et id =
           match pt with
           | <span data-count="10">P</span>tVar id -&gt; id
-          | <span data-count="0">P</span>tWild -&gt; fresh_va<span data-count="0">r</span> ()
-          | <span data-count="0">P</span>tConst _ -&gt; fresh_va<span data-count="0">r</span> ()
+          | <span data-count="0">P</span>tWild -&gt; fresh_va<span data-count="0">r</span> "anf" ()
+          | <span data-count="0">P</span>tConst _ -&gt; fresh_va<span data-count="0">r</span> "anf" ()
         in
         AVal (id, anf_exp) :: acc)
     program
