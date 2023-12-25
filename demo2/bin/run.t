@@ -1,4 +1,4 @@
-  $ clang-14 -c runtime.c -o runtime.o
+  $ clang-16 -c runtime.c -o runtime.o
   $ ./main.exe
   $ ls
   main.exe
@@ -15,6 +15,6 @@
     call void @print_int(i64 70)
     ret i64 0
   }
-  $ clang-14 out.ll runtime.o -o demo1.exe
+  $ clang-16 out.ll runtime.o -o demo1.exe
   $ echo "Press $(./demo1.exe) to pay respect"
   Press F to pay respect
