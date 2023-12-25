@@ -1,5 +1,5 @@
 (executable
- (public_name demo2)
+ (public_name demo)
  (name main)
  (modules LL main)
  (libraries

@@ -10,7 +10,7 @@ depends: [
   "ocaml"
   "dune" {>= "3.8"}
   "bisect_ppx"
-  "llvm" {= "14.0.6"}
+  "llvm" {= "16.0.6+nnp"}
   "odoc" {with-doc}
 ]
 build: [

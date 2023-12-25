@@ -1,6 +1,6 @@
 (lang dune 3.8)
 
-(name demo2)
+(name demo)
 
 (generate_opam_files true)
 
@@ -14,13 +14,13 @@
 (license LGPL-2.1-or-later WITH OCaml-LGPL-linking-exception)
 
 (package
- (name demo2)
+ (name demo)
  (synopsis "A short LLVM demo")
  (depends
   ocaml
   dune
   bisect_ppx
   (llvm
-   (= 14.0.6))))
+   (= "16.0.6+nnp"))))
 
 ; See the complete stanza docs at https://dune.readthedocs.io/en/stable/dune-files.html#dune-project
