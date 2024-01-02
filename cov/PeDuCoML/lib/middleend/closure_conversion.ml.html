@@ -361,158 +361,158 @@ open Util
 open Ast
 
 let closure_conversion global_scope =
-  <span data-count="252">l</span>et empty = Base.Set.empty (module Base.String) in
-  <span data-count="252">l</span>et get_constructor = function
-    | <span data-count="146">D</span>Declaration _ -&gt; ddeclaration
-    | <span data-count="30">D</span>RecursiveDeclaration _ -&gt; drecursivedeclaration
+  <span data-count="401">l</span>et empty = Base.Set.empty (module Base.String) in
+  <span data-count="401">l</span>et get_constructor = function
+    | <span data-count="216">D</span>Declaration _ -&gt; ddeclaration
+    | <span data-count="38">D</span>RecursiveDeclaration _ -&gt; drecursivedeclaration
   in
   let simplify_decl = function
-    | ( <span data-count="73">D</span>Declaration (name, pattern_list, body)
-      | <span data-count="15">D</span>RecursiveDeclaration (name, pattern_list, body) ) as original -&gt;
+    | ( <span data-count="108">D</span>Declaration (name, pattern_list, body)
+      | <span data-count="19">D</span>RecursiveDeclaration (name, pattern_list, body) ) as original -&gt;
       let decl = get_constructor original in
-      <span data-count="88">(</span>match body with
+      <span data-count="127">(</span>match body with
        | <span data-count="6">E</span>Fun (first_arg, other_args, body) -&gt;
          decl name (pattern_list @ (first_arg :: other_args)) body
-       | <span data-count="82">_</span> -&gt; original)
+       | <span data-count="121">_</span> -&gt; original)
   in
   let rec closure_declaration env global_scope declaration =
-    <span data-count="88">m</span>atch simplify_decl declaration with
-    | (<span data-count="35">D</span>Declaration (name, [], body) | <span data-count="0">D</span>RecursiveDeclaration (name, [], body)) as original
+    <span data-count="127">m</span>atch simplify_decl declaration with
+    | (<span data-count="66">D</span>Declaration (name, [], body) | <span data-count="0">D</span>RecursiveDeclaration (name, [], body)) as original
       -&gt;
       let decl = get_constructor original in
-      <span data-count="35">d</span>ec<span data-count="35">l</span> name [] (closure_expressio<span data-count="35">n</span> env global_scope body), env, global_scope
-    | ( <span data-count="38">D</span>Declaration (name, pattern_list, body)
-      | <span data-count="15">D</span>RecursiveDeclaration (name, pattern_list, body) ) as original -&gt;
+      <span data-count="66">d</span>ec<span data-count="66">l</span> name [] (closure_expressio<span data-count="66">n</span> env global_scope body), env, global_scope
+    | ( <span data-count="42">D</span>Declaration (name, pattern_list, body)
+      | <span data-count="19">D</span>RecursiveDeclaration (name, pattern_list, body) ) as original -&gt;
       let pattern_args =
         List.fold_right
-          (fun pattern acc -&gt; <span data-count="83">B</span>ase.Set.union (find_identifiers_patter<span data-count="83">n</span> pattern) acc)
+          (fun pattern acc -&gt; <span data-count="97">B</span>ase.Set.union (find_identifiers_patter<span data-count="97">n</span> pattern) acc)
           pattern_list
           empty
       in
-      <span data-count="53">l</span>et pattern_args =
+      <span data-count="61">l</span>et pattern_args =
         match original with
-        | <span data-count="38">D</span>Declaration _ -&gt; pattern_args
-        | <span data-count="15">D</span>RecursiveDeclaration _ -&gt; Base.Set.ad<span data-count="15">d</span> pattern_args name
+        | <span data-count="42">D</span>Declaration _ -&gt; pattern_args
+        | <span data-count="19">D</span>RecursiveDeclaration _ -&gt; Base.Set.ad<span data-count="19">d</span> pattern_args name
       in
-      let free_vars = Base.Set.diff (find_identifier<span data-count="53">s</span> body) pattern_args in
-      <span data-count="53">l</span>et free_vars = Base.Set.diff free_vars global_scope in
-      <span data-count="53">l</span>et closed_args =
+      let free_vars = Base.Set.diff (find_identifier<span data-count="61">s</span> body) pattern_args in
+      <span data-count="61">l</span>et free_vars = Base.Set.diff free_vars global_scope in
+      <span data-count="61">l</span>et closed_args =
         Base.Set.fold
           free_vars
           ~f:(fun acc var -&gt; <span data-count="26">p</span>identifie<span data-count="26">r</span> var :: acc)
           ~init:pattern_list
       in
-      <span data-count="53">l</span>et decl = get_constructor original in
-      <span data-count="53">l</span>et env = Base.Map.set env ~key:name ~data:free_vars in
-      <span data-count="53">(</span> dec<span data-count="53">l</span> name closed_args (closure_expressio<span data-count="53">n</span> env global_scope body)
+      <span data-count="61">l</span>et decl = get_constructor original in
+      <span data-count="61">l</span>et env = Base.Map.set env ~key:name ~data:free_vars in
+      <span data-count="61">(</span> dec<span data-count="61">l</span> name closed_args (closure_expressio<span data-count="61">n</span> env global_scope body)
       , env
-      , Base.Set.ad<span data-count="53">d</span> global_scope name )
+      , Base.Set.ad<span data-count="61">d</span> global_scope name )
   and closure_expression env global_scope = function
-    | <span data-count="67">E</span>Fun (first_arg, other_args, body) as original -&gt;
+    | <span data-count="78">E</span>Fun (first_arg, other_args, body) as original -&gt;
       let pattern_list = first_arg :: other_args in
       let pattern_args =
         List.fold_right
-          (fun pattern acc -&gt; <span data-count="76">B</span>ase.Set.union (find_identifiers_patter<span data-count="76">n</span> pattern) acc)
+          (fun pattern acc -&gt; <span data-count="89">B</span>ase.Set.union (find_identifiers_patter<span data-count="89">n</span> pattern) acc)
           pattern_list
           empty
       in
-      <span data-count="67">l</span>et free_vars = Base.Set.diff (find_identifier<span data-count="67">s</span> body) pattern_args in
-      <span data-count="67">l</span>et free_vars = Base.Set.diff free_vars global_scope in
-      <span data-count="67">l</span>et closed_args =
+      <span data-count="78">l</span>et free_vars = Base.Set.diff (find_identifier<span data-count="78">s</span> body) pattern_args in
+      <span data-count="78">l</span>et free_vars = Base.Set.diff free_vars global_scope in
+      <span data-count="78">l</span>et closed_args =
         Base.Set.fold
           free_vars
-          ~f:(fun acc var -&gt; <span data-count="66">p</span>identifie<span data-count="66">r</span> var :: acc)
+          ~f:(fun acc var -&gt; <span data-count="73">p</span>identifie<span data-count="73">r</span> var :: acc)
           ~init:pattern_list
       in
-      <span data-count="67">l</span>et body = closure_expression env global_scope body in
-      <span data-count="67">(</span>match closed_args with
+      <span data-count="78">l</span>et body = closure_expression env global_scope body in
+      <span data-count="78">(</span>match closed_args with
        | <span data-count="0">[</span>] -&gt; original
-       | <span data-count="67">h</span>ead :: tail -&gt;
+       | <span data-count="78">h</span>ead :: tail -&gt;
          Base.Set.fold_right
            free_vars
-           ~f:(fun var acc -&gt; <span data-count="66">e</span>application acc (eidentifie<span data-count="66">r</span> var))
-           ~init:(efu<span data-count="67">n</span> head tail body))
-    | <span data-count="88">E</span>LetIn (first_decl, other_decls, body) -&gt;
+           ~f:(fun var acc -&gt; <span data-count="73">e</span>application acc (eidentifie<span data-count="73">r</span> var))
+           ~init:(efu<span data-count="78">n</span> head tail body))
+    | <span data-count="127">E</span>LetIn (first_decl, other_decls, body) -&gt;
       let decl, env, global_scope = closure_declaration env global_scope first_decl in
-      <span data-count="88">l</span>et rec helper decl_list acc global_scope_acc env =
-        <span data-count="88">m</span>atch decl_list with
+      <span data-count="127">l</span>et rec helper decl_list acc global_scope_acc env =
+        <span data-count="127">m</span>atch decl_list with
         | <span data-count="0">h</span>ead :: tail -&gt;
           let head_decl, env, global_scope = closure_declaration env global_scope head in
           <span data-count="0">h</span>elper tail (head_decl :: acc) global_scope env
-        | <span data-count="88">_</span> -&gt; acc, global_scope_acc
+        | <span data-count="127">_</span> -&gt; acc, global_scope_acc
       in
       let decl_acc, global_scope = helper other_decls [] global_scope env in
-      <span data-count="88">e</span>letin decl decl_acc (closure_expressio<span data-count="88">n</span> env global_scope body)
-    | <span data-count="842">E</span>Identifier id as original -&gt;
+      <span data-count="127">e</span>letin decl decl_acc (closure_expressio<span data-count="127">n</span> env global_scope body)
+    | <span data-count="1226">E</span>Identifier id as original -&gt;
       (match Base.Map.find env id with
-       | <span data-count="760">N</span>one -&gt; original
-       | <span data-count="82">S</span>ome free_vars -&gt;
+       | <span data-count="1132">N</span>one -&gt; original
+       | <span data-count="94">S</span>ome free_vars -&gt;
          Base.Set.fold_right
            free_vars
            ~f:(fun var acc -&gt; <span data-count="57">e</span>application acc (eidentifie<span data-count="57">r</span> var))
            ~init:original)
-    | <span data-count="218">E</span>BinaryOperation (bop, left, right) -&gt;
+    | <span data-count="316">E</span>BinaryOperation (bop, left, right) -&gt;
       let left = closure_expression env global_scope left in
-      <span data-count="218">l</span>et right = closure_expression env global_scope right in
-      <span data-count="218">e</span>binary_operation bop left right
-    | <span data-count="5">E</span>UnaryOperation (operator, operand) -&gt;
+      <span data-count="316">l</span>et right = closure_expression env global_scope right in
+      <span data-count="316">e</span>binary_operation bop left right
+    | <span data-count="8">E</span>UnaryOperation (operator, operand) -&gt;
       let operand = closure_expression env global_scope operand in
-      <span data-count="5">e</span>unary_operation operator operand
-    | <span data-count="492">E</span>Application (func, arg) -&gt;
+      <span data-count="8">e</span>unary_operation operator operand
+    | <span data-count="752">E</span>Application (func, arg) -&gt;
       let func = closure_expression env global_scope func in
-      <span data-count="492">l</span>et arg = closure_expression env global_scope arg in
-      <span data-count="492">e</span>application func arg
-    | <span data-count="80">E</span>List expr_list -&gt;
-      let expr_list = Base.List.map expr_list ~f:(closure_expressio<span data-count="80">n</span> env global_scope) in
-      <span data-count="80">e</span>list expr_list
-    | <span data-count="27">E</span>ConstructList (head, tail) -&gt;
+      <span data-count="752">l</span>et arg = closure_expression env global_scope arg in
+      <span data-count="752">e</span>application func arg
+    | <span data-count="115">E</span>List expr_list -&gt;
+      let expr_list = Base.List.map expr_list ~f:(closure_expressio<span data-count="115">n</span> env global_scope) in
+      <span data-count="115">e</span>list expr_list
+    | <span data-count="35">E</span>ConstructList (head, tail) -&gt;
       let head = closure_expression env global_scope head in
-      <span data-count="27">l</span>et tail = closure_expression env global_scope tail in
-      <span data-count="27">e</span>construct_list head tail
-    | <span data-count="38">E</span>Tuple (first_elem, second_elem, other_elems) -&gt;
+      <span data-count="35">l</span>et tail = closure_expression env global_scope tail in
+      <span data-count="35">e</span>construct_list head tail
+    | <span data-count="62">E</span>Tuple (first_elem, second_elem, other_elems) -&gt;
       let first_elem = closure_expression env global_scope first_elem in
-      <span data-count="38">l</span>et second_elem = closure_expression env global_scope second_elem in
-      <span data-count="38">l</span>et other_elems =
-        Base.List.map other_elems ~f:(closure_expressio<span data-count="38">n</span> env global_scope)
+      <span data-count="62">l</span>et second_elem = closure_expression env global_scope second_elem in
+      <span data-count="62">l</span>et other_elems =
+        Base.List.map other_elems ~f:(closure_expressio<span data-count="62">n</span> env global_scope)
       in
-      <span data-count="38">e</span>tuple first_elem second_elem other_elems
-    | <span data-count="38">E</span>If (expr, true_branch, false_branch) -&gt;
+      <span data-count="62">e</span>tuple first_elem second_elem other_elems
+    | <span data-count="60">E</span>If (expr, true_branch, false_branch) -&gt;
       let expr = closure_expression env global_scope expr in
-      <span data-count="38">l</span>et true_branch = closure_expression env global_scope true_branch in
-      <span data-count="38">l</span>et false_branch = closure_expression env global_scope false_branch in
-      <span data-count="38">e</span>if expr true_branch false_branch
-    | <span data-count="39">E</span>MatchWith (matched, first_case, other_cases) -&gt;
+      <span data-count="60">l</span>et true_branch = closure_expression env global_scope true_branch in
+      <span data-count="60">l</span>et false_branch = closure_expression env global_scope false_branch in
+      <span data-count="60">e</span>if expr true_branch false_branch
+    | <span data-count="53">E</span>MatchWith (matched, first_case, other_cases) -&gt;
       let matched = closure_expression env global_scope matched in
-      <span data-count="39">l</span>et first_case =
-        fs<span data-count="39">t</span> first_case, closure_expressio<span data-count="39">n</span> env global_scope (sn<span data-count="39">d</span> first_case)
+      <span data-count="53">l</span>et first_case =
+        fs<span data-count="53">t</span> first_case, closure_expressio<span data-count="53">n</span> env global_scope (sn<span data-count="53">d</span> first_case)
       in
       let other_cases =
         Base.List.map other_cases ~f:(fun (pattern, action) -&gt;
-          <span data-count="27">p</span>attern, closure_expressio<span data-count="27">n</span> env global_scope action)
+          <span data-count="39">p</span>attern, closure_expressio<span data-count="39">n</span> env global_scope action)
       in
-      <span data-count="39">e</span>matchwith matched first_case other_cases
-    | <span data-count="619">e</span>xpr -&gt; expr
+      <span data-count="53">e</span>matchwith matched first_case other_cases
+    | <span data-count="991">e</span>xpr -&gt; expr
   in
-  closure_expression (Base.Map.empt<span data-count="252">y</span> (module Base.String)) global_scope
+  closure_expression (Base.Map.empt<span data-count="401">y</span> (module Base.String)) global_scope
 ;;
 
 let run_closure program =
-  <span data-count="153">l</span>et get_constructor = function
-    | <span data-count="229">D</span>Declaration _ -&gt; ddeclaration
-    | <span data-count="23">D</span>RecursiveDeclaration _ -&gt; drecursivedeclaration
+  <span data-count="242">l</span>et get_constructor = function
+    | <span data-count="366">D</span>Declaration _ -&gt; ddeclaration
+    | <span data-count="35">D</span>RecursiveDeclaration _ -&gt; drecursivedeclaration
   in
   let rec helper acc global_scope = function
-    | <span data-count="153">[</span>] -&gt; acc
-    | <span data-count="252">h</span>ead :: tail -&gt;
+    | <span data-count="242">[</span>] -&gt; acc
+    | <span data-count="401">h</span>ead :: tail -&gt;
       (match head with
-       | ( <span data-count="229">D</span>Declaration (id, pattern_list, body)
-         | <span data-count="23">D</span>RecursiveDeclaration (id, pattern_list, body) ) as original -&gt;
+       | ( <span data-count="366">D</span>Declaration (id, pattern_list, body)
+         | <span data-count="35">D</span>RecursiveDeclaration (id, pattern_list, body) ) as original -&gt;
          let decl = get_constructor original in
-         <span data-count="252">l</span>et body = closure_conversion global_scope body in
-         <span data-count="252">l</span>et global_scope = Base.Set.add global_scope id in
-         <span data-count="252">h</span>elper (dec<span data-count="252">l</span> id pattern_list body :: acc) global_scope tail)
+         <span data-count="401">l</span>et body = closure_conversion global_scope body in
+         <span data-count="401">l</span>et global_scope = Base.Set.add global_scope id in
+         <span data-count="401">h</span>elper (dec<span data-count="401">l</span> id pattern_list body :: acc) global_scope tail)
   in
-  Base.List.rev @@ helpe<span data-count="153">r</span> [] (Base.Set.empt<span data-count="153">y</span> (module Base.String)) program
+  Base.List.rev @@ helpe<span data-count="242">r</span> [] (Base.Set.empt<span data-count="242">y</span> (module Base.String)) program
 ;;
 </code></pre>
       </div>
