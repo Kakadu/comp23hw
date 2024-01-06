@@ -1,10 +1,29 @@
 (library
  (name KREML_lib)
  (public_name KREML.Lib)
- (modules Ast Parser Inferencer Typing Cc_ast Ll_ast Anf Clos_conv Counter Lambda_lifting Anf_conv Anf_pretty_printer Generate_code)
+ (modules
+  Ast
+  Parser
+  Inferencer
+  Typing
+  Cc_ast
+  Ll_ast
+  Anf
+  Clos_conv
+  Counter
+  Lambda_lifting
+  Anf_conv
+  Anf_pretty_printer
+  Generate_code)
  (libraries base angstrom llvm)
  (instrumentation
   (backend bisect_ppx))
  (preprocess
   (pps ppx_expect ppx_deriving.show))
  (inline_tests))
+
+(rule
+ (deps runtime.c)
+ (targets runtime.so)
+ (action
+  (run gcc -fPIC -shared %{deps} -o %{targets})))
