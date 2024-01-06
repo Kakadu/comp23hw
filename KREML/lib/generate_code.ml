@@ -9,7 +9,7 @@ open Ast
 let context = global_context ()
 let the_module = create_module context "main"
 let builder = builder context
-let i32_t = i32_type context
+let i64_t = i64_type context
 let named_values = Hashtbl.create 100
 
 let get_value name =
@@ -18,8 +18,8 @@ let get_value name =
 ;;
 
 let immexpr_to_llvm_ir = function
-  | ImmInt i -> const_int i32_t i
-  | ImmBool b -> const_int i32_t (if b then 1 else 0)
+  | ImmInt i -> const_int i64_t i
+  | ImmBool b -> const_int i64_t (if b then 1 else 0)
   | ImmIdentifier name -> get_value name
 ;;
 
@@ -48,7 +48,19 @@ let rec cexpr_to_llvm_ir = function
   | CApp (limm, rimm) ->
     let limm_val = immexpr_to_llvm_ir limm in
     let rimm_val = immexpr_to_llvm_ir rimm in
-    build_call limm_val [| rimm_val |] "call" builder
+    let limm_ptr =
+      let alloca = build_alloca (type_of limm_val) "tmp" builder in
+      ignore (build_store limm_val alloca builder);
+      alloca
+    in
+    let apply_closure_fn =
+      match lookup_function "apply_closure" the_module with
+      | Some fn -> fn
+      | None -> failwith "Function not found: apply_closure"
+    in
+    let apply_closure_type = type_of apply_closure_fn in
+    let args = [| limm_ptr; rimm_val |] in
+    build_call apply_closure_type apply_closure_fn args "apply_closure" builder
   | CIfThenElse (cond, t_branch, f_branch) ->
     let cond_val = immexpr_to_llvm_ir cond in
     let start_block = insertion_block builder in
@@ -67,7 +79,6 @@ let rec cexpr_to_llvm_ir = function
     let false_block = insertion_block builder in
     position_at_end merge_block builder;
     build_phi [ true_val, true_block; false_val, false_block ] "iftmp" builder
-
 
 and aexpr_to_llvm_ir = function
   | ALet (name, left, right) ->
@@ -92,32 +103,44 @@ let abinding_to_llvm_ir = function
        let bb = append_block context "entry" the_function in
        position_at_end bb builder;
        let params = params the_function in
-       let call_inst = build_call n_function params "call" builder in
+       let arg_types = [| i64_t |] in
+       let ft = function_type i64_t arg_types in
+       let call_inst = build_call ft n_function params "call" builder in
        ignore (build_ret call_inst builder);
        the_function
      | _ ->
        let aexpr_val = aexpr_to_llvm_ir aexpr in
        Hashtbl.add named_values name aexpr_val;
        aexpr_val)
-       | AFun (func_name, arg_names, body) ->
-        let arg_types = Array.make (List.length arg_names) i32_t in
-        let ft = function_type i32_t arg_types in
-        let func_val = declare_function func_name ft the_module in
-        Hashtbl.add named_values func_name func_val;
-        let bb = append_block context "entry" func_val in
-        position_at_end bb builder;
-        Array.iteri
-          (fun i arg ->
-            let name = List.nth arg_names i in
-            set_value_name name arg;
-            Hashtbl.add named_values name arg)
-          (params func_val);
-      
-        let ret_val = aexpr_to_llvm_ir body in
-        let ret_val_conv = build_zext ret_val i32_t "boolToInt" builder in
-      
-        ignore (build_ret ret_val_conv builder);
-        func_val
+  | AFun (func_name, arg_names, body) ->
+    let arg_types = Array.make (List.length arg_names) i64_t in
+    let ft = function_type i64_t arg_types in
+    let func_val = declare_function func_name ft the_module in
+    Hashtbl.add named_values func_name func_val;
+    let bb = append_block context "entry" func_val in
+    position_at_end bb builder;
+    Array.iteri
+      (fun i arg ->
+        let name = List.nth arg_names i in
+        set_value_name name arg;
+        Hashtbl.add named_values name arg)
+      (params func_val);
+    let ret_val = aexpr_to_llvm_ir body in
+    let ret_val_conv = build_zext ret_val i64_t "boolToInt" builder in
+    ignore (build_ret ret_val_conv builder);
+    func_val
 ;;
 
-let llvm_program program = List.map abinding_to_llvm_ir program
+let declare_functions () =
+  let apply_closure_fun =
+    declare_function "apply_closure" (function_type i64_t [| i64_t; i64_t |]) the_module
+  in
+  Hashtbl.add named_values "apply_closure" apply_closure_fun;
+  let print_fun = declare_function "print" (function_type i64_t [| i64_t |]) the_module in
+  Hashtbl.add named_values "print" print_fun
+;;
+
+let llvm_program program =
+  declare_functions ();
+  List.map abinding_to_llvm_ir program
+;;
