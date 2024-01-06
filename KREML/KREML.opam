@@ -9,6 +9,7 @@ license: "LGPL-3.0-or-later"
 depends: [
   "dune" {>= "3.11"}
   "angstrom"
+  "llvm"
   "ppx_inline_test" {with-test}
   "qcheck-core"
   "ppx_expect"
