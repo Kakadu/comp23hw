@@ -68,7 +68,6 @@ let rec cexpr_to_llvm_ir = function
     position_at_end merge_block builder;
     build_phi [ true_val, true_block; false_val, false_block ] "iftmp" builder
 
-
 and aexpr_to_llvm_ir = function
   | ALet (name, left, right) ->
     let av = cexpr_to_llvm_ir left in
@@ -99,25 +98,23 @@ let abinding_to_llvm_ir = function
        let aexpr_val = aexpr_to_llvm_ir aexpr in
        Hashtbl.add named_values name aexpr_val;
        aexpr_val)
-       | AFun (func_name, arg_names, body) ->
-        let arg_types = Array.make (List.length arg_names) i32_t in
-        let ft = function_type i32_t arg_types in
-        let func_val = declare_function func_name ft the_module in
-        Hashtbl.add named_values func_name func_val;
-        let bb = append_block context "entry" func_val in
-        position_at_end bb builder;
-        Array.iteri
-          (fun i arg ->
-            let name = List.nth arg_names i in
-            set_value_name name arg;
-            Hashtbl.add named_values name arg)
-          (params func_val);
-      
-        let ret_val = aexpr_to_llvm_ir body in
-        let ret_val_conv = build_zext ret_val i32_t "boolToInt" builder in
-      
-        ignore (build_ret ret_val_conv builder);
-        func_val
+  | AFun (func_name, arg_names, body) ->
+    let arg_types = Array.make (List.length arg_names) i32_t in
+    let ft = function_type i32_t arg_types in
+    let func_val = declare_function func_name ft the_module in
+    Hashtbl.add named_values func_name func_val;
+    let bb = append_block context "entry" func_val in
+    position_at_end bb builder;
+    Array.iteri
+      (fun i arg ->
+        let name = List.nth arg_names i in
+        set_value_name name arg;
+        Hashtbl.add named_values name arg)
+      (params func_val);
+    let ret_val = aexpr_to_llvm_ir body in
+    let ret_val_conv = build_zext ret_val i32_t "boolToInt" builder in
+    ignore (build_ret ret_val_conv builder);
+    func_val
 ;;
 
 let llvm_program program = List.map abinding_to_llvm_ir program
