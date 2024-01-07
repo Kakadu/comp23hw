@@ -26,10 +26,12 @@ static Node* create_node(ClosurePtr value) {
 
 static void add_closure(Node* head, ClosurePtr value) {
 	Node* new_node = create_node(value);
+	
 	if (head == NULL) {
 		head = new_node;
 		return;
 	}
+	
 	Node* current = head;
 	while (current->next != NULL) {
 		current = current->next;
@@ -39,10 +41,28 @@ static void add_closure(Node* head, ClosurePtr value) {
 
 static void remove_closure(Node** head, ClosurePtr target)
 {
-	while ((*head)->value != target) {
-		head = &(*head)->next;
-	}
-	*head = (*head)->next;
+	if (*head == NULL) {
+        return;
+    }
+
+    Node* curr = *head;    
+	if (curr != NULL && curr->value == target) {
+        *head = curr->next;
+        free(curr);
+        return;
+    }
+    
+	Node* prev = NULL;
+	while (curr != NULL && curr->value != target) {
+        prev = curr;
+        curr = curr->next;
+    }
+    
+	if (curr == NULL) {
+        return;
+    }
+    prev->next = curr->next;
+    free(curr);
 }
 
 static int64_t apply0(Closure* ptr) {
@@ -126,7 +146,7 @@ static int64_t apply8(Closure* ptr) {
 }
 
 static Node* closures_pool = NULL;
-static int64_t(*callees[9])(Closure*) = {
+static int64_t (*callees[9])(Closure*) = {
 	apply0,
 	apply1,
 	apply2,
@@ -156,7 +176,7 @@ extern int64_t alloc_closure(int64_t fun, int64_t args_cnt) {
 extern int64_t apply_closure(int64_t ptr, int64_t arg) {
 	ClosurePtr closure = (ClosurePtr)ptr;
 	closure->applied_args[closure->applied_args_cnt++] = arg;
-
+	
 	if (closure->applied_args_cnt != closure->args_cnt) {
 		return ptr;
 	}
