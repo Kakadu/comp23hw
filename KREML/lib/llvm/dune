@@ -1,0 +1,5 @@
+(rule
+ (deps runtime.c)
+ (targets runtime.so)
+ (action
+  (run gcc -fPIC -shared %{deps} -o %{targets})))
