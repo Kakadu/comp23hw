@@ -14,14 +14,15 @@
   (backend bisect_ppx))
  (libraries KREML_lib stdio))
 
-
 (executable
  (name demoLlvm)
  (public_name demoLlvm)
  (modules DemoLlvm)
  (instrumentation
   (backend bisect_ppx))
- (libraries KREML_lib stdio))
+ (libraries KREML_lib stdio)
+ (link_deps
+  (file ../lib/runtime.so)))
 
 (cram
- (deps ./demoInfer.exe ./demoAnf.exe ./demoLlvm.exe))
+ (deps ./demoInfer.exe ./demoAnf.exe ./demoLlvm.exe ../lib/runtime.so))
