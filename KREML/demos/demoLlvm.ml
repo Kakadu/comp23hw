@@ -12,9 +12,7 @@ let parse_to_llvm program =
     |> Anf_conv.anf_program
     |> Generate_code.llvm_program
   in
-  let llvm_string =
-    llvm |> List.map  Llvm.string_of_llvalue |> String.concat "\n"
-  in
+  let llvm_string = llvm |> List.map Llvm.string_of_llvalue |> String.concat "\n" in
   print_endline llvm_string
 ;;
 
