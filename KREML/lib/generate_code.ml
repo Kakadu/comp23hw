@@ -11,17 +11,24 @@ let the_module = create_module context "main"
 let builder = builder context
 let i64_t = i64_type context
 let named_values = Hashtbl.create 100
-let lookup_function_exn id the_module = Option.get (lookup_function id the_module)
-
-let get_value name =
-  try Hashtbl.find named_values name with
-  | Not_found -> failwith ("unbound value " ^ name)
-;;
+let lookup_function_exn id = Option.get (lookup_function id the_module)
 
 let immexpr_to_llvm_ir = function
   | ImmInt i -> const_int i64_t i
   | ImmBool b -> const_int i64_t (if b then 1 else 0)
-  | ImmIdentifier name -> get_value name
+  | ImmIdentifier name ->
+    (match Hashtbl.find_opt named_values name with
+     | Some v -> build_load i64_t v name builder
+     | None ->
+       let v = lookup_function_exn name in
+       build_call
+         (function_type i64_t [| i64_t; i64_t |])
+         (lookup_function_exn "alloc_closure")
+         [| build_pointercast v i64_t "cast_pointer_to_int" builder
+          ; params v |> Array.length |> const_int i64_t
+         |]
+         "alloc_closure"
+         builder)
 ;;
 
 let rec cexpr_to_llvm_ir = function
@@ -49,15 +56,10 @@ let rec cexpr_to_llvm_ir = function
   | CApp (limm, rimm) ->
     let limm_val = immexpr_to_llvm_ir limm in
     let rimm_val = immexpr_to_llvm_ir rimm in
-    let limm_ptr =
-      let alloca = build_alloca (type_of limm_val) "tmp" builder in
-      ignore (build_store limm_val alloca builder);
-      alloca
-    in
     build_call
       i64_t
-      (lookup_function_exn "apply_closure" the_module)
-      [| limm_ptr; rimm_val |]
+      (lookup_function_exn "apply_closure")
+      [| limm_val; rimm_val |]
       "apply_closure"
       builder
   | CIfThenElse (cond, t_branch, f_branch) ->
@@ -82,7 +84,9 @@ let rec cexpr_to_llvm_ir = function
 and aexpr_to_llvm_ir = function
   | ALet (name, left, right) ->
     let av = cexpr_to_llvm_ir left in
-    Hashtbl.add named_values name av;
+    let alloca = build_alloca i64_t name builder in
+    let (_ : Llvm.llvalue) = build_store av alloca builder in
+    Hashtbl.add named_values name alloca;
     aexpr_to_llvm_ir right
   | ACExpr expr -> cexpr_to_llvm_ir expr
 ;;
@@ -90,55 +94,38 @@ and aexpr_to_llvm_ir = function
 let abinding_to_llvm_ir = function
   | AVal (name, aexpr) ->
     (match aexpr with
-     | ACExpr (CImmExpr (ImmIdentifier n)) ->
-       let n_function = Hashtbl.find named_values n in
-       let return_type = element_type (return_type (type_of n_function)) in
-       let ft =
-         function_type
-           return_type
-           (Array.map (fun param -> type_of param) (params n_function))
-       in
-       let the_function = declare_function name ft the_module in
-       let bb = append_block context "entry" the_function in
-       position_at_end bb builder;
-       let params = params the_function in
-       let arg_types = [| i64_t |] in
-       let ft = function_type i64_t arg_types in
-       let call_inst = build_call ft n_function params "call" builder in
-       ignore (build_ret call_inst builder);
-       the_function
      | _ ->
        let aexpr_val = aexpr_to_llvm_ir aexpr in
-       Hashtbl.add named_values name aexpr_val;
        aexpr_val)
   | AFun (func_name, arg_names, body) ->
+    Hashtbl.clear named_values;
     let arg_types = Array.make (List.length arg_names) i64_t in
     let ft = function_type i64_t arg_types in
     let func_val = declare_function func_name ft the_module in
-    Hashtbl.add named_values func_name func_val;
     let bb = append_block context "entry" func_val in
     position_at_end bb builder;
     Array.iteri
       (fun i arg ->
         let name = List.nth arg_names i in
-        set_value_name name arg;
-        Hashtbl.add named_values name arg)
+        set_value_name name arg)
+      (params func_val);
+    Array.iteri
+      (fun i a ->
+        let name = List.nth arg_names i in
+        let alloca = build_alloca i64_t name builder in
+        let (_ : Llvm.llvalue) = build_store a alloca builder in
+        Hashtbl.add named_values name alloca)
       (params func_val);
     let ret_val = aexpr_to_llvm_ir body in
-    let ret_val_conv = build_zext ret_val i64_t "boolToInt" builder in
-    ignore (build_ret ret_val_conv builder);
+    ignore (build_ret ret_val builder);
     func_val
 ;;
 
 let declare_functions () =
-  let apply_closure_fun =
-    declare_function "apply_closure" (function_type i64_t [| i64_t; i64_t |]) the_module
-  in
-  Hashtbl.add named_values "apply_closure" apply_closure_fun;
-  let alloc_closure_fun =
-    declare_function "alloc_closure" (function_type i64_t [| i64_t |]) the_module
-  in
-  Hashtbl.add named_values "alloc_closure" alloc_closure_fun
+  ignore
+    (declare_function "apply_closure" (function_type i64_t [| i64_t; i64_t |]) the_module);
+  ignore
+    (declare_function "alloc_closure" (function_type i64_t [| i64_t; i64_t |]) the_module)
 ;;
 
 let llvm_program program =

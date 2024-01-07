@@ -14,7 +14,7 @@ typedef struct Closure Closure;
 
 typedef struct Node {
 	ClosurePtr value;
-	Node* next;
+	struct Node* next;
 } Node;
 
 static Node* create_node(ClosurePtr value) {
@@ -24,13 +24,13 @@ static Node* create_node(ClosurePtr value) {
 	return new_node;
 }
 
-static void add_closure(Node** head, ClosurePtr value) {
+static void add_closure(Node* head, ClosurePtr value) {
 	Node* new_node = create_node(value);
-	if (*head == NULL) {
-		*head = new_node;
+	if (head == NULL) {
+		head = new_node;
 		return;
 	}
-	Node* current = *head;
+	Node* current = head;
 	while (current->next != NULL) {
 		current = current->next;
 	}
@@ -149,7 +149,7 @@ extern int64_t alloc_closure(int64_t fun, int64_t args_cnt) {
 		return callees[0](new_closure);
 	}
 
-	add_closure(&closures_pool, new_closure);
+	add_closure(closures_pool, new_closure);
 	return (int64_t)new_closure;
 }
 
