@@ -12,7 +12,7 @@ typedef struct Closure {
 }* ClosurePtr;
 typedef struct Closure Closure;
 
-typedef struct {
+typedef struct Node {
 	ClosurePtr value;
 	Node* next;
 } Node;
@@ -149,7 +149,7 @@ extern int64_t alloc_closure(int64_t fun, int64_t args_cnt) {
 		return callees[0](new_closure);
 	}
 
-	add_closure(closures_pool, new_closure);
+	add_closure(&closures_pool, new_closure);
 	return (int64_t)new_closure;
 }
 
@@ -162,7 +162,7 @@ extern int64_t apply_closure(int64_t ptr, int64_t arg) {
 	}
 
 	int64_t result = callees[closure->args_cnt](closure);
-	remove_closure(closures_pool, closure);
+	remove_closure(&closures_pool, closure);
 	free(closure->applied_args);
 	free(closure);
 	return result;
