@@ -11,6 +11,7 @@ let the_module = create_module context "main"
 let builder = builder context
 let i64_t = i64_type context
 let named_values = Hashtbl.create 100
+let lookup_function_exn id the_module = Option.get (lookup_function id the_module)
 
 let get_value name =
   try Hashtbl.find named_values name with
@@ -53,14 +54,12 @@ let rec cexpr_to_llvm_ir = function
       ignore (build_store limm_val alloca builder);
       alloca
     in
-    let apply_closure_fn =
-      match lookup_function "apply_closure" the_module with
-      | Some fn -> fn
-      | None -> failwith "Function not found: apply_closure"
-    in
-    let apply_closure_type = type_of apply_closure_fn in
-    let args = [| limm_ptr; rimm_val |] in
-    build_call apply_closure_type apply_closure_fn args "apply_closure" builder
+    build_call
+      i64_t
+      (lookup_function_exn "apply_closure" the_module)
+      [| limm_ptr; rimm_val |]
+      "apply_closure"
+      builder
   | CIfThenElse (cond, t_branch, f_branch) ->
     let cond_val = immexpr_to_llvm_ir cond in
     let start_block = insertion_block builder in
@@ -136,8 +135,10 @@ let declare_functions () =
     declare_function "apply_closure" (function_type i64_t [| i64_t; i64_t |]) the_module
   in
   Hashtbl.add named_values "apply_closure" apply_closure_fun;
-  let print_fun = declare_function "print" (function_type i64_t [| i64_t |]) the_module in
-  Hashtbl.add named_values "print" print_fun
+  let alloc_closure_fun =
+    declare_function "alloc_closure" (function_type i64_t [| i64_t |]) the_module
+  in
+  Hashtbl.add named_values "alloc_closure" alloc_closure_fun
 ;;
 
 let llvm_program program =
