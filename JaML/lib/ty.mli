@@ -5,7 +5,7 @@
 (** Ground types *)
 type prim =
   | Int (** Integer type *)
-  | Bool (** Booleam type *)
+  | Bool (** Boolean type *)
 [@@deriving eq]
 
 val show_prim : prim -> string

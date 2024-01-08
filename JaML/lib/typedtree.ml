@@ -3,7 +3,7 @@
 (** SPDX-License-Identifier: LGPL-2.1-or-later *)
 
 open Ast
-open Typetree
+open Ty
 
 type arg = Arg of string * ty (** Typed function argument *)
 

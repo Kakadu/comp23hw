@@ -3,7 +3,7 @@
 (** SPDX-License-Identifier: LGPL-2.1-or-later *)
 
 open Base
-open Typetree
+open Ty
 open Typedtree
 
 type error =
@@ -26,9 +26,9 @@ let pp_error ppf : error -> _ = function
     Stdlib.Format.fprintf
       ppf
       "Typechecker error: unification failed on %a and %a"
-      Pprinttypetree.pp_ty
+      Pprintty.pp_ty
       l
-      Pprinttypetree.pp_ty
+      Pprintty.pp_ty
       r
 ;;
 
@@ -150,7 +150,7 @@ end = struct
   (* let pp ppf subst =
      let open Format in
      Map.Poly.iteri subst ~f:(fun ~key ~data ->
-     fprintf ppf "'_%d -> %a@\n" key (Pprinttypetree.pp_ty_with_subs None) data)
+     fprintf ppf "'_%d -> %a@\n" key (Ty.pp_ty_with_subs None) data)
      ;; *)
 
   let empty = Map.Poly.empty
@@ -237,7 +237,7 @@ module Scheme = struct
   (* let pp =
      let helper ppf =
      let open Stdlib.Format in
-     let open Pprinttypetree in
+     let open Ty in
      function
      | S (set, ty) -> fprintf ppf "S(%s, %a)" (show_binder_set set) pp_ty ty
      in

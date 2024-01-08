@@ -12,19 +12,19 @@ type mode =
 
 let get_texpr_subst =
   let rec helper subs index = function
-    | TVar (_, typ) -> Pprinttypetree.get_ty_subs subs index typ
+    | TVar (_, typ) -> Pprintty.get_ty_subs subs index typ
     | TLetIn (_, e1, e2, typ)
     | TBinop (_, e1, e2, typ)
     | TApp (e1, e2, typ)
     | TLetRecIn (_, e1, e2, typ) ->
-      let subs, index = Pprinttypetree.get_ty_subs subs index typ in
+      let subs, index = Pprintty.get_ty_subs subs index typ in
       let subs, index = helper subs index e1 in
       helper subs index e2
     | TFun (_, e, typ) ->
-      let subs, index = Pprinttypetree.get_ty_subs subs index typ in
+      let subs, index = Pprintty.get_ty_subs subs index typ in
       helper subs index e
     | TIfThenElse (e1, e2, e3, typ) ->
-      let subs, index = Pprinttypetree.get_ty_subs subs index typ in
+      let subs, index = Pprintty.get_ty_subs subs index typ in
       let subs, index = helper subs index e1 in
       let subs, index = helper subs index e2 in
       helper subs index e3
@@ -36,14 +36,14 @@ let get_texpr_subst =
 let space ppf depth = fprintf ppf "\n%*s" (4 * depth) ""
 
 let pp_arg subs ppf =
-  let pp_ty = Pprinttypetree.pp_ty_with_subs subs in
+  let pp_ty = Pprintty.pp_ty_with_subs subs in
   function
   | Arg (name, typ) -> fprintf ppf "(%s: %a)" name pp_ty typ
 ;;
 
 (* A monster that needs refactoring *)
 let pp_texpr_with_subs ppf depth subs texpr =
-  let pp_ty = Pprinttypetree.pp_ty_with_subs (Some subs) in
+  let pp_ty = Pprintty.pp_ty_with_subs (Some subs) in
   let pp_arg = pp_arg (Some subs) in
   let rec helper depth ppf =
     let pp = helper (depth + 1) in
@@ -174,7 +174,7 @@ let show_binding = function
 let pp_tbinding_complete ppf = function
   | (TLetRec (name, e, typ) | TLet (name, e, typ)) as binding ->
     let subs, _ = get_texpr_subst e in
-    let pp_ty = Pprinttypetree.pp_ty_with_subs (Some subs) in
+    let pp_ty = Pprintty.pp_ty_with_subs (Some subs) in
     let pp_expr ppf = pp_texpr_with_subs ppf 2 subs in
     fprintf
       ppf
@@ -193,7 +193,7 @@ let pp_tbinding_complete ppf = function
 
 let pp_tbinding_brief ppf = function
   | TLetRec (name, _, typ) | TLet (name, _, typ) ->
-    let pp_ty = Pprinttypetree.pp_ty in
+    let pp_ty = Pprintty.pp_ty in
     fprintf ppf "%s: %a" name pp_ty typ
 ;;
 
