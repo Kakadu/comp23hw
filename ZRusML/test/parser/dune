@@ -1,0 +1,9 @@
+(library
+ (name parser_test)
+ (modules parser_test)
+ (libraries ZRusML.lib stdlib)
+ (inline_tests)
+ (preprocess
+  (pps ppx_inline_test ppx_assert ppx_expect bisect_ppx))
+ (instrumentation
+  (backend bisect_ppx)))

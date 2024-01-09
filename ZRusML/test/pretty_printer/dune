@@ -1,0 +1,9 @@
+(library
+ (name pretty_printer_test)
+ (modules pretty_printer_test)
+ (libraries ZRusML.lib stdlib)
+ (inline_tests)
+ (preprocess
+  (pps ppx_inline_test ppx_assert ppx_expect bisect_ppx))
+ (instrumentation
+  (backend bisect_ppx)))

@@ -1,4 +1,4 @@
-(** Copyright 2023-2024, Rustam Shangareev and Danil Yevdokimov*)
+(** Copyright 2023-2024, Rustam Shangareev and Danil Yevdokimov *)
 
 (** SPDX-License-Identifier: LGPL-2.1 *)
 
@@ -238,7 +238,7 @@ let pack =
     let eq_op = procl (choice_op [ "=", Eq; "<>", Neq ]) cmp_op @@ d.key d in
     let conj_op = procl (choice_op [ "&&", And ]) eq_op @@ d.key d in
     let disj_op = procl (choice_op [ "||", Or ]) conj_op @@ d.key d in
-    empty_lr @@ disj_op
+    empty_lr disj_op
   in
   { key; op; exp }
 ;;

@@ -1,0 +1,9 @@
+(library
+ (name lambda_lifting_test)
+ (modules lambda_lifting_test)
+ (libraries ZRusML.lib)
+ (inline_tests)
+ (preprocess
+  (pps ppx_inline_test ppx_assert ppx_expect bisect_ppx))
+ (instrumentation
+  (backend bisect_ppx)))

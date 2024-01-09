@@ -1,8 +1,20 @@
 (library
  (name ZRusML_lib)
  (public_name ZRusML.lib)
- (modules Ast Parser Parser_test Code_inferencer Typing Inferencer)
+ (modules
+  Ast
+  Parser
+  Code_inferencer
+  Typing
+  Inferencer
+  Anf
+  Compare
+  Closure_conversion
+  Pretty_printer
+  Lambda_lifting)
  (inline_tests)
- (libraries base angstrom core)
+ (libraries base angstrom stdlib)
  (preprocess
-  (pps ppx_expect ppx_deriving.show ppx_deriving.eq)))
+  (pps ppx_expect ppx_deriving.show ppx_deriving.eq))
+ (instrumentation
+  (backend bisect_ppx)))

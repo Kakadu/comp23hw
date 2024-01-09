@@ -24,6 +24,8 @@
   (ppx_inline_test :with-test)
   qcheck-core
   ppx_expect
+  ppx_assert
+  bisect_ppx
   ppx_deriving
   (odoc :with-doc)
   (ocamlformat :build)
