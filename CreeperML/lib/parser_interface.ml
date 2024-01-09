@@ -1,3 +1,7 @@
+(** Copyright 2023-2024, Arthur Alekseev and Starcev Matvey *)
+
+(** SPDX-License-Identifier: LGPL-3.0-or-later *)
+
 (* https://www.baturin.org/blog/declarative-parse-error-reporting-with-menhir/ *)
 
 module ParserInterface = struct

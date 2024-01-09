@@ -17,8 +17,9 @@ module ParserAst = struct
     | LString of string
     | LBool of bool
     | LUnit
+  [@@deriving show { with_path = false }]
 
-  and loc_literal = literal position [@@deriving show { with_path = false }]
+  type loc_literal = literal position [@@deriving show { with_path = false }]
 
   type let_binding = {
     rec_f : rec_flag;
@@ -89,7 +90,7 @@ module ParserAstUtils = struct
   let build_mul_e_fun start_p end_p hd tl b =
     let b =
       position b |> fun { start_p; end_p } ->
-      value b |> expr_b |> let_body start_p end_p []
+      value b |> expr_b |> let_body start_p end_p (value b |> lets)
     in
     match List.rev tl with
     | [] -> e_fun start_p end_p hd b
@@ -106,8 +107,7 @@ module ParserAstUtils = struct
     match lvs with
     | [] -> b
     | hd :: tl ->
-        value b |> lets |> fun lets ->
-        build_mul_e_fun start_p end_p hd tl b |> let_body start_p end_p lets
+        build_mul_e_fun start_p end_p hd tl b |> let_body start_p end_p []
 end
 
 let%expect_test _ =

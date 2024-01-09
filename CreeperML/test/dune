@@ -14,5 +14,43 @@
  (instrumentation
   (backend bisect_ppx)))
 
+(executable
+ (name test_db)
+ (modules test_db)
+ (public_name test_db)
+ (libraries CreeperML stdio)
+ (instrumentation
+  (backend bisect_ppx)))
+
+(executable
+ (name test_closures)
+ (modules test_closures)
+ (public_name test_closures)
+ (libraries CreeperML stdio)
+ (instrumentation
+  (backend bisect_ppx)))
+
+(executable
+ (name test_anf)
+ (modules test_anf)
+ (public_name test_anf)
+ (libraries CreeperML stdio)
+ (instrumentation
+  (backend bisect_ppx)))
+
+(executable
+ (name test_anf_opt)
+ (modules test_anf_opt)
+ (public_name test_anf_opt)
+ (libraries CreeperML stdio)
+ (instrumentation
+  (backend bisect_ppx)))
+
 (cram
- (deps ./test_infer.exe ./test_parser.exe))
+ (deps
+  ./test_infer.exe
+  ./test_parser.exe
+  ./test_db.exe
+  ./test_closures.exe
+  ./test_anf_opt.exe
+  ./test_anf.exe))

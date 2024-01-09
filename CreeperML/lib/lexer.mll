@@ -15,15 +15,15 @@ let bool_cosnt = "true" | "false"
 let str_const = '"' ['a'-'z' 'A'-'Z' '0'-'9' '_' ' ' '.' ',' ':' ';' '(' ')']* '"'
 
 let startname = ['a'-'z' 'A'-'Z' ''']
-let tailname = ['a'-'z' 'A'-'Z' ''' '_']
+let tailname = ['a'-'z' 'A'-'Z' ''' '_' '0'-'9']
 let name = startname tailname*
 
-let predicate = ['.' '>' '<' '=' '-' '/' '|' '!' '*' '+' '-' ':' '%' '@']
-let hpr = '.' predicate*
-let mhpr = '*' '*' predicate*
-let mpr = ['*' '/' '%'] predicate*
-let lmpr = ['+' '-'] predicate*
-let lpr = predicate*
+let bin_op = ['.' '>' '<' '=' '-' '/' '|' '!' '*' '+' '-' ':' '%' '@']
+let h_prio_op = '.' bin_op*
+let mh_prio_op = '*' '*' bin_op*
+let m_prio_op = ['*' '/' '%'] bin_op*
+let lm_prio_op = ['+' '-'] bin_op*
+let l_prio_op = bin_op*
 
 let whitespace = [' ' '\t' '\n' '\r']+
 
@@ -46,11 +46,12 @@ rule token = parse
     | '=' { EQUALLY }
     | ')' { RIGHTPARENT }
     | '(' { LEFTPARENT }
-    | hpr { HIGHLVLPREDICATE (Lexing.lexeme lexbuf) }
-    | mhpr { MIDHIGHLVLPREDICATE (Lexing.lexeme lexbuf) }
-    | mpr { MIDLVLPREDICATE (Lexing.lexeme lexbuf) }
-    | lmpr { LOWMIDLVLPREDICATE (Lexing.lexeme lexbuf) }
-    | lpr { LOWLVLPREDICATE (Lexing.lexeme lexbuf) }
+    | h_prio_op { HIGHLVLPREDICATE (Lexing.lexeme lexbuf) }
+    | mh_prio_op { MIDHIGHLVLPREDICATE (Lexing.lexeme lexbuf) }
+    | m_prio_op { MIDLVLPREDICATE (Lexing.lexeme lexbuf) }
+    | lm_prio_op { LOWMIDLVLPREDICATE (Lexing.lexeme lexbuf) }
+    | l_prio_op { LOWLVLPREDICATE (Lexing.lexeme lexbuf) }
     | name { NAME (Lexing.lexeme lexbuf) }
     | eof { EOF }
+
     | _ { raise (Failure ("Character not allowed in source text: '" ^ Lexing.lexeme lexbuf ^ "'")) }

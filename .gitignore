@@ -28,5 +28,10 @@ setup.log
 # Local OPAM switch
 _opam/
 
-.DS_Store
+# Thoughts file
+*thoughts.txt
 
+# VS Code files
+.vscode/*
+
+.DS_Store
