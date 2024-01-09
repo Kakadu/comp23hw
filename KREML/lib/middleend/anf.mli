@@ -18,8 +18,6 @@ and aexpr =
   | ALet of string * cexpr * aexpr
   | ACExpr of cexpr
 
-type abinding =
-  | AVal of Ast.identifier * aexpr
-  | AFun of Ast.identifier * Ast.identifier list * aexpr
+type abinding = AFun of Ast.identifier * Ast.identifier list * aexpr
 
 val show_abinding : abinding -> string

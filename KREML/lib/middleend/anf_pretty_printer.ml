@@ -48,9 +48,8 @@ let rec string_of_cexpr depth = function
     Printf.sprintf
       "if %s then \n%s else \n%s"
       (string_of_immexpr ie1)
-      (string_of_aexpr (depth) ie2)
-      (string_of_aexpr (depth) ie3)
-
+      (string_of_aexpr depth ie2)
+      (string_of_aexpr depth ie3)
 
 and string_of_aexpr depth = function
   | ALet (id, ce, ae) ->
@@ -58,18 +57,12 @@ and string_of_aexpr depth = function
       "%slet %s = %s in\n%s"
       (string_of_indents depth)
       id
-      (string_of_cexpr (depth+1) ce)
+      (string_of_cexpr (depth + 1) ce)
       (string_of_aexpr depth ae)
-  | ACExpr ce -> string_of_cexpr (depth+1)  ce 
+  | ACExpr ce -> string_of_cexpr (depth + 1) ce
 ;;
 
 let string_of_abinding' depth = function
-  | AVal (id, ae) ->
-    Printf.sprintf
-      "%sval %s = %s\n"
-      (string_of_indents depth)
-      id
-      (string_of_aexpr (depth + 1) ae)
   | AFun (id, id_list, ae) ->
     Printf.sprintf
       "%sfun %s %s = %s%s\n"

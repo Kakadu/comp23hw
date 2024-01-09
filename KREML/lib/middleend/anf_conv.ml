@@ -39,7 +39,7 @@ let rec anf (e : ll_expr) (expr_with_hole : immexpr -> aexpr) =
 ;;
 
 let anf_binding = function
-  | LVal (id, body) -> AVal (id, anf body (fun imm -> ACExpr (CImmExpr imm)))
+  | LVal (id, body) -> AFun (id, [], anf body (fun imm -> ACExpr (CImmExpr imm)))
   | LFun (id, args, body) -> AFun (id, args, anf body (fun imm -> ACExpr (CImmExpr imm)))
 ;;
 

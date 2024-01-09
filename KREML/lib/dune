@@ -22,8 +22,4 @@
   (pps ppx_expect ppx_deriving.show))
  (inline_tests))
 
-(rule
- (deps runtime.c)
- (targets runtime.so)
- (action
-  (run gcc -fPIC -shared %{deps} -o %{targets})))
+(include_subdirs unqualified)
