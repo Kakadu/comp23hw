@@ -83,14 +83,14 @@ let rec cexpr_to_llvm_ir = function
         "int_to_bool"
         builder
     in
-    ignore @@ build_cond_br cond_val then_block else_block builder;
+    let (_ : Llvm.llvalue) = build_cond_br cond_val then_block else_block builder in
     position_at_end then_block builder;
     let then_val = aexpr_to_llvm_ir t_branch in
-    ignore @@ build_br cond_block builder;
+    let (_ : Llvm.llvalue) = build_br cond_block builder in
     let then_block = insertion_block builder in
     position_at_end else_block builder;
     let else_val = aexpr_to_llvm_ir f_branch in
-    ignore @@ build_br cond_block builder;
+    let (_ : Llvm.llvalue) = build_br cond_block builder in
     let else_block = insertion_block builder in
     position_at_end cond_block builder;
     build_phi [ then_val, then_block; else_val, else_block ] "ite" builder
@@ -98,7 +98,7 @@ let rec cexpr_to_llvm_ir = function
 and aexpr_to_llvm_ir = function
   | ALet (name, left, right) ->
     let alloca = build_alloca i64_t name builder in
-    ignore @@ build_store (cexpr_to_llvm_ir left) alloca builder;
+    let (_ : Llvm.llvalue) = build_store (cexpr_to_llvm_ir left) alloca builder in
     Hashtbl.add named_values name alloca;
     aexpr_to_llvm_ir right
   | ACExpr expr -> cexpr_to_llvm_ir expr
@@ -115,11 +115,11 @@ let abinding_to_llvm_ir = function
       (fun i arg ->
         let name = List.nth arg_names i in
         let alloca = build_alloca i64_t name builder in
-        ignore (build_store arg alloca builder);
+        let (_ : Llvm.llvalue) = build_store arg alloca builder in
         set_value_name name arg;
         Hashtbl.add named_values name alloca)
       (params func_val);
-    ignore @@ build_ret (aexpr_to_llvm_ir body) builder;
+    let (_ : Llvm.llvalue) = build_ret (aexpr_to_llvm_ir body) builder in
     func_val
 ;;
 
