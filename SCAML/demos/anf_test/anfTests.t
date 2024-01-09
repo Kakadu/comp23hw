@@ -9,14 +9,14 @@
    let app_1 = k b_op_0 in
    app_1
   let rec id_0 n k = let b_op_0 = n <= 1 in
-   let app_1 = k 1 in
-   let b_op_2 = n - 1 in
-   let app_3 = id_0 b_op_2 in
-   let app_4 = id_1 k in
-   let app_5 = app_4 n in
-   let app_6 = app_3 app_5 in
-   let if_7 = if b_op_0 then app_1 else app_6 in
-   if_7
+   let if_1 = if b_op_0 then let app_2 = k 1 in
+   app_2 else let b_op_3 = n - 1 in
+   let app_4 = id_0 b_op_3 in
+   let app_5 = id_1 k in
+   let app_6 = app_5 n in
+   let app_7 = app_4 app_6 in
+   app_7 in
+   if_1
   let id_2 x = x
   let fac n = let app_0 = id_0 n in
    let app_1 = app_0 id_2 in
@@ -38,15 +38,15 @@
    let app_4 = app_1 app_3 in
    app_4
   let rec id_0 n acc = let b_op_0 = n < 3 in
-   let app_1 = acc 1 in
-   let b_op_2 = n - 1 in
-   let app_3 = id_0 b_op_2 in
-   let app_4 = id_1 acc in
-   let app_5 = app_4 id_0 in
-   let app_6 = app_5 n in
-   let app_7 = app_3 app_6 in
-   let if_8 = if b_op_0 then app_1 else app_7 in
-   if_8
+   let if_1 = if b_op_0 then let app_2 = acc 1 in
+   app_2 else let b_op_3 = n - 1 in
+   let app_4 = id_0 b_op_3 in
+   let app_5 = id_1 acc in
+   let app_6 = app_5 id_0 in
+   let app_7 = app_6 n in
+   let app_8 = app_4 app_7 in
+   app_8 in
+   if_1
   let id_3 x = x
   let fibo n = let app_0 = id_0 n in
    let app_1 = app_0 id_3 in
@@ -97,11 +97,11 @@
   > let main = factorial 5
   > EOF
   let rec factorial n = let b_op_0 = n <= 1 in
-   let b_op_1 = n - 1 in
-   let app_2 = factorial b_op_1 in
-   let b_op_3 = n * app_2 in
-   let if_4 = if b_op_0 then 1 else b_op_3 in
-   if_4
+   let if_1 = if b_op_0 then 1 else let b_op_2 = n - 1 in
+   let app_3 = factorial b_op_2 in
+   let b_op_4 = n * app_3 in
+   b_op_4 in
+   if_1
   let main  = let app_0 = factorial 5 in
    app_0
   $ ./anfTests.exe <<-EOF

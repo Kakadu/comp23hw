@@ -8,7 +8,7 @@ open Scaml_lib.Inferencer
 open Scaml_lib.Ty
 open Scaml_lib.LambdaLifting
 open Scaml_lib.Anf
-open Scaml_lib.AnfPrinter
+open Scaml_lib.LlvmCompiler
 open Base
 
 let print_prog_result prog =
@@ -19,7 +19,11 @@ let print_prog_result prog =
        let prog_closure = prog_conversion prog in
        let lifted = run_ll prog_closure in
        let anf_prog = anf_program lifted in
-       List.iter anf_prog ~f:(fun bexpr -> Stdlib.Format.printf "%a\n" pp_bexpr bexpr)
+       (match codegen_program anf_prog with
+        | Ok llvalue_list ->
+          Base.List.iter llvalue_list ~f:(fun f ->
+            Stdlib.Format.printf "%s\n" (Llvm.string_of_llvalue f))
+        | Error e -> Stdlib.Format.printf "Error%s" e)
      | Error e -> print_typ_err e)
   | Error e -> Stdlib.Format.printf "Error%s" e
 ;;

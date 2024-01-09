@@ -10,17 +10,17 @@ type immexpr =
   | ImmBool of bool (** true *)
   | ImmUnit (** () *)
 
-type cexpr =
-  | CBinOp of bin_op * immexpr * immexpr (** 1 + 1 *)
-  | CApp of immexpr * immexpr (** f x *)
-  | CImmExpr of immexpr (** 1 *)
-  | CIf of immexpr * immexpr * immexpr (** if true then x else 0 *)
-
 type pexpr =
   | PImmExpr of immexpr (** 1 *)
   | PImmWild (** _ *)
 
-type aexpr =
+type cexpr =
+  | CBinOp of bin_op * immexpr * immexpr (** 1 + 1 *)
+  | CApp of immexpr * immexpr (** f x *)
+  | CImmExpr of immexpr (** 1 *)
+  | CIf of immexpr * aexpr * aexpr (** if true then (then_expr) else (else_expr) *)
+
+and aexpr =
   | ALetIn of id * cexpr * aexpr (** let x = 5 in x *)
   | ACExpr of cexpr (** 1 + 1 *)
 

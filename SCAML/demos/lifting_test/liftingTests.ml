@@ -7,7 +7,7 @@ open Scaml_lib.Closure
 open Scaml_lib.LlastPrinter
 open Scaml_lib.Inferencer
 open Scaml_lib.Ty
-open Scaml_lib.Lambda_lifting
+open Scaml_lib.LambdaLifting
 open Base
 
 let print_prog_result prog =

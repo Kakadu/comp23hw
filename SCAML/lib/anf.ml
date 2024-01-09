@@ -50,11 +50,12 @@ let rec anf_expr
         >>= fun ae -> return (ALetIn (var, CBinOp (op, limm, rimm), ae))))
   | LLIf (cond, t, e) ->
     anf_expr env cond (fun cimm ->
-      anf_expr env t (fun timm ->
-        anf_expr env e (fun eimm ->
-          let* var = gen_var "if_" env in
-          expr_with_imm_hole @@ ImmId var
-          >>= fun ae -> return (ALetIn (var, CIf (cimm, timm, eimm), ae)))))
+      let* var = gen_var "if_" env in
+      expr_with_imm_hole @@ ImmId var
+      >>= fun ae ->
+      let* taexpr = anf_expr env t (fun timm -> return @@ ACExpr (CImmExpr timm)) in
+      let* eaexpr = anf_expr env e (fun eimm -> return @@ ACExpr (CImmExpr eimm)) in
+      return (ALetIn (var, CIf (cimm, taexpr, eaexpr), ae)))
   | LLApp (f, arg) ->
     anf_expr env f (fun fimm ->
       anf_expr env arg (fun argimm ->
@@ -178,14 +179,14 @@ let%expect_test _ =
      let app_1 = k b_op_0 in
      app_1;;
     let rec fack n k = let b_op_0 = n <= 1 in
-     let app_1 = k 1 in
-     let b_op_2 = n - 1 in
-     let app_3 = fack b_op_2 in
-     let app_4 = fack1 k in
-     let app_5 = app_4 n in
-     let app_6 = app_3 app_5 in
-     let if_7 = if b_op_0 then app_1 else app_6 in
-     if_7;;
+     let if_1 = if b_op_0 then let app_2 = k 1 in
+     app_2 else let b_op_3 = n - 1 in
+     let app_4 = fack b_op_3 in
+     let app_5 = fack1 k in
+     let app_6 = app_5 n in
+     let app_7 = app_4 app_6 in
+     app_7 in
+     if_1;;
     let id x = x;;
     let fac n = let app_0 = fack n in
      let app_1 = app_0 id in
@@ -245,15 +246,15 @@ let%expect_test _ =
      let app_4 = app_1 app_3 in
      app_4;;
     let rec fibo_cps n acc = let b_op_0 = n < 3 in
-     let app_1 = acc 1 in
-     let b_op_2 = n - 1 in
-     let app_3 = fibo_cps b_op_2 in
-     let app_4 = acc2 fibo_cps in
-     let app_5 = app_4 n in
-     let app_6 = app_5 acc in
-     let app_7 = app_3 app_6 in
-     let if_8 = if b_op_0 then app_1 else app_7 in
-     if_8;;
+     let if_1 = if b_op_0 then let app_2 = acc 1 in
+     app_2 else let b_op_3 = n - 1 in
+     let app_4 = fibo_cps b_op_3 in
+     let app_5 = acc2 fibo_cps in
+     let app_6 = app_5 n in
+     let app_7 = app_6 acc in
+     let app_8 = app_4 app_7 in
+     app_8 in
+     if_1;;
     let fibo n = let app_0 = fibo_cps n in
      let app_1 = app_0 id in
      app_1 |}]
