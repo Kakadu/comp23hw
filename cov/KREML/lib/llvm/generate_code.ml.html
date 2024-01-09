@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8"/>
     <title>generate_code.ml &mdash; Coverage report</title>
-    <meta name="description" content="94.59% coverage in lib/llvm/generate_code.ml">
+    <meta name="description" content="94.34% coverage in lib/llvm/generate_code.ml">
     <link rel="stylesheet" href="../../coverage.css"/>
     <script src="../../highlight.pack.js"></script>
     <script>hljs.initHighlightingOnLoad();</script>
@@ -15,7 +15,7 @@
           <span class="dirname">lib/llvm/</span>generate_code.ml
         </a>
       </h1>
-      <h2>94.59%</h2>
+      <h2>94.34%</h2>
     </div>
     <div id="navbar">
       <span class="unvisited" style="top:31.34%"></span>
@@ -143,7 +143,7 @@
 <a id="L116"></a><span class="visited"> </span>
 <a id="L117"></a><span class="visited"> </span>
 <a id="L118"></a><span class="visited"> </span>
-<a id="L119"></a><span > </span>
+<a id="L119"></a><span class="visited"> </span>
 <a id="L120"></a><span class="visited"> </span>
 <a id="L121"></a><span class="visited"> </span>
 <a id="L122"></a><span class="visited"> </span>
@@ -383,14 +383,14 @@ let rec cexpr_to_llvm_ir = function
         "int_to_bool"
         builder
     in
-    <span data-count="4">i</span>gnore @@ build_cond_b<span data-count="4">r</span> cond_val then_block else_block builder;
+    <span data-count="4">l</span>et (_ : Llvm.llvalue) = build_cond_br cond_val then_block else_block builder in
     <span data-count="4">p</span>osition_at_end then_block builder;
     <span data-count="4">l</span>et then_val = aexpr_to_llvm_ir t_branch in
-    <span data-count="4">i</span>gnore @@ build_b<span data-count="4">r</span> cond_block builder;
+    <span data-count="4">l</span>et (_ : Llvm.llvalue) = build_br cond_block builder in
     <span data-count="4">l</span>et then_block = insertion_block builder in
     <span data-count="4">p</span>osition_at_end else_block builder;
     <span data-count="4">l</span>et else_val = aexpr_to_llvm_ir f_branch in
-    <span data-count="4">i</span>gnore @@ build_b<span data-count="4">r</span> cond_block builder;
+    <span data-count="4">l</span>et (_ : Llvm.llvalue) = build_br cond_block builder in
     <span data-count="4">l</span>et else_block = insertion_block builder in
     <span data-count="4">p</span>osition_at_end cond_block builder;
     <span data-count="4">b</span>uild_phi [ then_val, then_block; else_val, else_block ] "ite" builder
@@ -398,7 +398,7 @@ let rec cexpr_to_llvm_ir = function
 and aexpr_to_llvm_ir = function
   | <span data-count="60">A</span>Let (name, left, right) -&gt;
     let alloca = build_alloca i64_t name builder in
-    <span data-count="60">i</span>gnore @@ build_stor<span data-count="60">e</span> (cexpr_to_llvm_i<span data-count="60">r</span> left) alloca builder;
+    <span data-count="60">l</span>et (_ : Llvm.llvalue) = build_store (cexpr_to_llvm_i<span data-count="60">r</span> left) alloca builder in
     <span data-count="60">H</span>ashtbl.add named_values name alloca;
     <span data-count="60">a</span>expr_to_llvm_ir right
   | <span data-count="41">A</span>CExpr expr -&gt; cexpr_to_llvm_ir expr
@@ -415,11 +415,11 @@ let abinding_to_llvm_ir = function
       (fun i arg -&gt;
         <span data-count="26">l</span>et name = List.nth arg_names i in
         <span data-count="26">l</span>et alloca = build_alloca i64_t name builder in
-        <span data-count="26">i</span>gnore (build_stor<span data-count="26">e</span> arg alloca builder);
-        set_value_name name arg;
+        <span data-count="26">l</span>et (_ : Llvm.llvalue) = build_store arg alloca builder in
+        <span data-count="26">s</span>et_value_name name arg;
         <span data-count="26">H</span>ashtbl.add named_values name alloca)
       (param<span data-count="33">s</span> func_val);
-    <span data-count="33">i</span>gnore @@ build_re<span data-count="33">t</span> (aexpr_to_llvm_i<span data-count="33">r</span> body) builder;
+    <span data-count="33">l</span>et (_ : Llvm.llvalue) = build_ret (aexpr_to_llvm_i<span data-count="33">r</span> body) builder in
     <span data-count="33">f</span>unc_val
 ;;
 
