@@ -28,21 +28,18 @@ let rec anf (e : ll_expr) (expr_with_hole : immexpr -> aexpr) =
         let varname = gen_var () in
         ALet (varname, CApp (limm, rimm), expr_with_hole (ImmIdentifier varname))))
   | LIfThenElse (condition, true_branch, false_branch) ->
+    let varname = gen_var () in
     anf condition (fun cond ->
-      anf true_branch (fun t_branch ->
-        anf false_branch (fun f_branch ->
-          let varname = gen_var () in
-          ALet
-            ( varname
-            , CIfThenElse (cond, t_branch, f_branch)
-            , expr_with_hole (ImmIdentifier varname) ))))
+      let t = anf true_branch (fun t_branch -> ACExpr (CImmExpr t_branch)) in
+      let f = anf false_branch (fun f_branch -> ACExpr (CImmExpr f_branch)) in
+      ALet (varname, CIfThenElse (cond, t, f), expr_with_hole (ImmIdentifier varname)))
   | LLetIn (id, left, right) ->
     anf left (fun limm ->
       anf right (fun rimm -> ALet (id, CImmExpr limm, expr_with_hole rimm)))
 ;;
 
 let anf_binding = function
-  | LVal (id, body) -> AVal (id, anf body (fun imm -> ACExpr (CImmExpr imm)))
+  | LVal (id, body) -> AFun (id, [], anf body (fun imm -> ACExpr (CImmExpr imm)))
   | LFun (id, args, body) -> AFun (id, args, anf body (fun imm -> ACExpr (CImmExpr imm)))
 ;;
 
@@ -255,34 +252,35 @@ let%test _ =
         ( "fack"
         , [ "n"; "k" ]
         , ALet
-            ( "Anf_3"
+            ( "Anf_4"
             , CBinaryOp (LtOrEq, ImmIdentifier "n", ImmInt 1)
             , ALet
-                ( "Anf_4"
-                , CApp (ImmIdentifier "k", ImmInt 1)
-                , ALet
-                    ( "Anf_5"
-                    , CBinaryOp (Sub, ImmIdentifier "n", ImmInt 1)
+                ( "Anf_3"
+                , CIfThenElse
+                    ( ImmIdentifier "Anf_4"
+                    , ALet
+                        ( "Anf_5"
+                        , CApp (ImmIdentifier "k", ImmInt 1)
+                        , ACExpr (CImmExpr (ImmIdentifier "Anf_5")) )
                     , ALet
                         ( "Anf_6"
-                        , CApp (ImmIdentifier "fack", ImmIdentifier "Anf_5")
+                        , CBinaryOp (Sub, ImmIdentifier "n", ImmInt 1)
                         , ALet
                             ( "Anf_7"
-                            , CApp (ImmIdentifier "fack1", ImmIdentifier "k")
+                            , CApp (ImmIdentifier "fack", ImmIdentifier "Anf_6")
                             , ALet
                                 ( "Anf_8"
-                                , CApp (ImmIdentifier "Anf_7", ImmIdentifier "n")
+                                , CApp (ImmIdentifier "fack1", ImmIdentifier "k")
                                 , ALet
                                     ( "Anf_9"
-                                    , CApp (ImmIdentifier "Anf_6", ImmIdentifier "Anf_8")
+                                    , CApp (ImmIdentifier "Anf_8", ImmIdentifier "n")
                                     , ALet
                                         ( "Anf_10"
-                                        , CIfThenElse
-                                            ( ImmIdentifier "Anf_3"
-                                            , ImmIdentifier "Anf_4"
-                                            , ImmIdentifier "Anf_9" )
+                                        , CApp
+                                            (ImmIdentifier "Anf_7", ImmIdentifier "Anf_9")
                                         , ACExpr (CImmExpr (ImmIdentifier "Anf_10")) ) )
-                                ) ) ) ) ) ) )
+                                ) ) ) )
+                , ACExpr (CImmExpr (ImmIdentifier "Anf_3")) ) ) )
     ; AFun ("ll_1", [ "x" ], ACExpr (CImmExpr (ImmIdentifier "x")))
     ; AFun
         ( "fac"

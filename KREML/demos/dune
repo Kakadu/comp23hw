@@ -1,6 +1,5 @@
 (executable
  (name demoInfer)
- (public_name demoInfer)
  (modules DemoInfer)
  (instrumentation
   (backend bisect_ppx))
@@ -8,12 +7,19 @@
 
 (executable
  (name demoAnf)
- (public_name demoAnf)
  (modules DemoAnf)
  (instrumentation
   (backend bisect_ppx))
  (libraries KREML_lib stdio))
 
+(executable
+ (name demoLlvm)
+ (modules DemoLlvm)
+ (instrumentation
+  (backend bisect_ppx))
+ (libraries KREML_lib stdio)
+ (link_deps
+  (file ../lib/llvm/runtime.so)))
 
 (cram
- (deps ./demoInfer.exe ./demoAnf.exe))
+ (deps ./demoInfer.exe ./demoAnf.exe ./demoLlvm.exe ../lib/llvm/runtime.so))

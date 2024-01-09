@@ -7,15 +7,17 @@
   Anf_2
   
   fun fack n k = 
-    let Anf_3 = (n <= 1) in
-    let Anf_4 = k 1 in
-    let Anf_5 = (n - 1) in
-    let Anf_6 = fack Anf_5 in
-    let Anf_7 = Cc_1 k in
-    let Anf_8 = Anf_7 n in
-    let Anf_9 = Anf_6 Anf_8 in
-    let Anf_10 = if Anf_3 then Anf_4 else Anf_9 in
-  Anf_10
+    let Anf_4 = (n <= 1) in
+    let Anf_3 = if Anf_4 then 
+      let Anf_5 = k 1 in
+  Anf_5 else 
+      let Anf_6 = (n - 1) in
+      let Anf_7 = fack Anf_6 in
+      let Anf_8 = Cc_1 k in
+      let Anf_9 = Anf_8 n in
+      let Anf_10 = Anf_7 Anf_9 in
+  Anf_10 in
+  Anf_3
   
   fun Ll_1 x = x
   
@@ -25,3 +27,4 @@
   Anf_12
   
   int -> int
+
