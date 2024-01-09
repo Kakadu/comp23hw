@@ -63,6 +63,12 @@ and declaration =
 (* Smart constructors for literals *)
 let lint x = LInt x
 let lstring x = LString x
+
+let lstring_with_quotes x =
+  let substring_len = String.length x - 2 in
+  String.sub x 1 substring_len |> lstring
+;;
+
 let lchar x = LChar x
 let lbool x = LBool x
 

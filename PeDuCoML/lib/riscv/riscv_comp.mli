@@ -2,6 +2,6 @@
 
 (** SPDX-License-Identifier: LGPL-3.0-or-later *)
 
-open Ast
+type riscv_error
 
-val parse : string -> (declaration list, string) result
+val codegen : Anf.global_scope_function list -> (unit, riscv_error) Result.t

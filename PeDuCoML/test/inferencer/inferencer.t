@@ -67,3 +67,8 @@
   >   in even 2
   > EOF
   main: bool
+  $ ./inferencer_test.exe <<- EOF
+  > let rec id x = x
+  > let main = print_int (id id 5) 
+  > EOF
+  main: bool

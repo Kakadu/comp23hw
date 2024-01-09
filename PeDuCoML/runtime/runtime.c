@@ -187,71 +187,8 @@ static int64_t peducoml_apply8(closure *closure_ptr)
         closure_ptr->applied_args[7]);
 }
 
-static int64_t peducoml_apply9(closure *closure_ptr)
-{
-    return closure_ptr->func(
-        closure_ptr->applied_args[0],
-        closure_ptr->applied_args[1],
-        closure_ptr->applied_args[2],
-        closure_ptr->applied_args[3],
-        closure_ptr->applied_args[4],
-        closure_ptr->applied_args[5],
-        closure_ptr->applied_args[6],
-        closure_ptr->applied_args[7],
-        closure_ptr->applied_args[8]);
-}
-
-static int64_t peducoml_apply10(closure *closure_ptr)
-{
-    return closure_ptr->func(
-        closure_ptr->applied_args[0],
-        closure_ptr->applied_args[1],
-        closure_ptr->applied_args[2],
-        closure_ptr->applied_args[3],
-        closure_ptr->applied_args[4],
-        closure_ptr->applied_args[5],
-        closure_ptr->applied_args[6],
-        closure_ptr->applied_args[7],
-        closure_ptr->applied_args[8],
-        closure_ptr->applied_args[9]);
-}
-
-static int64_t peducoml_apply11(closure *closure_ptr)
-{
-    return closure_ptr->func(
-        closure_ptr->applied_args[0],
-        closure_ptr->applied_args[1],
-        closure_ptr->applied_args[2],
-        closure_ptr->applied_args[3],
-        closure_ptr->applied_args[4],
-        closure_ptr->applied_args[5],
-        closure_ptr->applied_args[6],
-        closure_ptr->applied_args[7],
-        closure_ptr->applied_args[8],
-        closure_ptr->applied_args[9],
-        closure_ptr->applied_args[10]);
-}
-
-static int64_t peducoml_apply12(closure *closure_ptr)
-{
-    return closure_ptr->func(
-        closure_ptr->applied_args[0],
-        closure_ptr->applied_args[1],
-        closure_ptr->applied_args[2],
-        closure_ptr->applied_args[3],
-        closure_ptr->applied_args[4],
-        closure_ptr->applied_args[5],
-        closure_ptr->applied_args[6],
-        closure_ptr->applied_args[7],
-        closure_ptr->applied_args[8],
-        closure_ptr->applied_args[9],
-        closure_ptr->applied_args[10],
-        closure_ptr->applied_args[11]);
-}
-
 extern int64_t peducoml_apply(int64_t ptr, int64_t arg)
 {
-
     closure *closure_ptr = (closure *)ptr;
     closure_ptr->applied_args[closure_ptr->len_applied_args] = arg;
     closure_ptr->len_applied_args++;
@@ -283,18 +220,6 @@ extern int64_t peducoml_apply(int64_t ptr, int64_t arg)
             break;
         case 8:
             result = peducoml_apply8(closure_ptr);
-            break;
-        case 9:
-            result = peducoml_apply9(closure_ptr);
-            break;
-        case 10:
-            result = peducoml_apply10(closure_ptr);
-            break;
-        case 11:
-            result = peducoml_apply11(closure_ptr);
-            break;
-        case 12:
-            result = peducoml_apply12(closure_ptr);
             break;
         default:
             break;

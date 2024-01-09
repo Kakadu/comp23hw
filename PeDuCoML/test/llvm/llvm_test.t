@@ -507,7 +507,7 @@
   $ ./llvm_test.exe <<- EOF
   > let _ x = x
   > EOF
-  : end_of_input
+  :1:6: syntax error
   $ ./llvm_test.exe <<- EOF | lli-16 -load ../../runtime/peducoml_runtime.so
   > let apply_function f arg1 arg2 = print_int (f arg1 arg2)
   > 

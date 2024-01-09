@@ -63,6 +63,7 @@ and declaration =
 (* Smart constructors for literals *)
 val lint : int -> literal
 val lstring : string -> literal
+val lstring_with_quotes : string -> literal
 val lchar : char -> literal
 val lbool : bool -> literal
 

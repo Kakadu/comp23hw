@@ -1,0 +1,6 @@
+depexts: [
+  [ "nasm" "llvm-16-dev" "clang-16" "gcc-12" "pkg-config" 
+    "qemu-user-static" "binutils-riscv64-linux-gnu" "gcc-riscv64-linux-gnu"
+  ] {os-distribution = "ubuntu"}
+  #["llvm16-dev"] {os-distribution = "alpine"}
+]
