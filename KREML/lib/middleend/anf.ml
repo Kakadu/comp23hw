@@ -15,16 +15,13 @@ type cexpr =
   | CUnaryOp of unary_op * immexpr
   | CBinaryOp of binary_op * immexpr * immexpr
   | CApp of immexpr * immexpr
-  | CIfThenElse of immexpr * immexpr * immexpr
+  | CIfThenElse of immexpr * aexpr * aexpr
 [@@deriving show { with_path = false }]
 
-type aexpr =
+and aexpr =
   | ALet of string * cexpr * aexpr
   | ACExpr of cexpr
 [@@deriving show { with_path = false }]
 
-type abinding =
-  | AVal of identifier * aexpr
-  | AFun of identifier * identifier list * aexpr
+type abinding = AFun of identifier * identifier list * aexpr
 [@@deriving show { with_path = false }]
-
