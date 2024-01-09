@@ -1,7 +1,7 @@
 (library
  (name MimiML_lib)
  (public_name MimiML)
- (modules Ast Parser Typing Inferencer Pp)
+ (modules Ast Parser Typing Inferencer Pp Anf)
  (libraries base angstrom stdio)
  (instrumentation
   (backend bisect_ppx))

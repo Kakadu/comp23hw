@@ -6,3 +6,12 @@
 
 (cram
  (deps ./demoTypeChecker.exe))
+
+(executable
+ (name demoANF)
+ (modules demoANF)
+ (public_name demoANF)
+ (libraries MimiML_lib stdio))
+
+(cram
+ (deps ./demoANF.exe))

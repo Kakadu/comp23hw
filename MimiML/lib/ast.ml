@@ -25,5 +25,5 @@ type expr =
   | EApp of expr * expr (** App f x *)
   | EIfElse of expr * expr * expr (** if expr then expr else expr *)
   | ELam of pattern * expr (** fun pattern -> expr *)
-  | ELet of (rec_flag * pattern * expr) * expr (** let [rec] pattern expr in expr *)
+  | ELet of (rec_flag * pattern * expr) * expr (** let [rec] pattern = expr in expr *)
 [@@deriving variants, show { with_path = false }]

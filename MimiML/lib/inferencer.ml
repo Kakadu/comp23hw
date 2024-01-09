@@ -11,7 +11,7 @@ module Format = Stdlib.Format
 
 (* Original code was taken from
    https://gitlab.com/Kakadu/fp2020course-materials/-/blob/master/code/miniml,
-   (with small updates for printf supporting) *)
+*)
 
 type error =
   [ `Occurs_check
@@ -280,7 +280,8 @@ let infer =
     | EVar "*" | EVar "-" | EVar "+" | EVar "/" ->
       return (Subst.empty, arrowty int_typ (arrowty int_typ int_typ))
     | EVar "^" -> return (Subst.empty, arrowty string_typ (arrowty string_typ string_typ))
-    | EVar "=" -> fresh_var >>| fun tv -> Subst.empty, arrowty tv (arrowty tv bool_typ)
+    | EVar "=" | EVar "<" | EVar ">" | EVar "<=" | EVar ">=" ->
+      fresh_var >>| fun tv -> Subst.empty, arrowty tv (arrowty tv bool_typ)
     | EVar x -> lookup_env x env
     | ELam (PatVar x, e1) ->
       let* tv = fresh_var in
@@ -466,6 +467,7 @@ let%expect_test "let" =
 ;;
 
 let%expect_test "let rec" =
-  parse_and_inference {|let rec fact n = if n = 0 then 1 else n * (fact (n - 1)) in fact 4|};
+  parse_and_inference
+    {|let rec fact n = if n = 0 then 1 else n * (fact (n - 1)) in fact 4|};
   [%expect {| int |}]
 ;;

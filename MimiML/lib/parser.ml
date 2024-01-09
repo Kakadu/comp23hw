@@ -73,7 +73,7 @@ type dispatch =
 
 (** check if we support this operator *)
 let is_op = function
-  | "+" | "-" | "*" | "/" | "=" | "^" -> true
+  | "+" | "-" | "*" | "/" | "=" | "^" | "<" | ">" | "<=" | ">=" -> true
   | _ -> false
 ;;
 
@@ -82,7 +82,11 @@ let both = lift2 (fun x y -> x, y)
 let priors e =
   let pair s = return (fun a -> eapp (eapp (evar s) a)), spaces *> string s in
   let table =
-    [| [ pair "=" ]; [ pair "^" ]; [ pair "+"; pair "-" ]; [ pair "*"; pair "/" ] |]
+    [| [ pair "="; pair "<"; pair ">"; pair ">="; pair "<=" ]
+     ; [ pair "^" ]
+     ; [ pair "+"; pair "-" ]
+     ; [ pair "*"; pair "/" ]
+    |]
   in
   let len = Array.length table in
   let rec helper = function

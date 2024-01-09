@@ -9,6 +9,6 @@
   int
 
   $ ./demoTypeChecker.exe <<-"EOF"
-  > let rec fact n = if n = 0 then 1 else n * fact (n - 1) in fact 4
+  > let rec fact n = if n <= 0 then 1 else n * fact (n - 1) in fact 4
   > EOF
   int

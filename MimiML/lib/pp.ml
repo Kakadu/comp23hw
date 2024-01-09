@@ -1,8 +1,9 @@
-(** Copyright 2022-2023, Lev Golofastov *)
+(** Copyright 2023, Lev Golofastov & Ksenia Kuzmina *)
 
 (** SPDX-License-Identifier: LGPL-3.0-or-later *)
 
 open Ast
+open Anf
 open Format
 
 let show_prim_ty =
@@ -52,4 +53,39 @@ let pp_expr =
       fprintf ppf "let %a%s = %a in %a" pp_rec f name pp body pp in_e
   in
   pp
+;;
+
+let pp_anf_prog ppf p =
+  let pp_imm ppf i =
+    match i with
+    | ImmBool true -> fprintf ppf "true"
+    | ImmBool false -> fprintf ppf "false"
+    | ImmNum i -> fprintf ppf "%d" i
+    | ImmUnit -> fprintf ppf "()"
+    | ImmString s -> fprintf ppf "\"%s\"" s
+    | ImmValue v -> fprintf ppf "%s" v
+  in
+  let rec pp_aex ppf e =
+    match e with
+    | CApp (a, b) -> fprintf ppf "(%a %a)" pp_imm a pp_imm b
+    | CIfElse (i, t, e) ->
+      fprintf ppf "if %a then\n%a  else%a" pp_imm i pp_ablock t pp_ablock e
+    | CImm i -> pp_imm ppf i
+  and pp_alet ppf e =
+    let name, expr = e in
+    fprintf ppf "  %s = %a\n" name pp_aex expr
+  and pp_ablock ppf b =
+    let res, lets = b in
+    List.iter (pp_alet ppf) lets;
+    fprintf ppf "  %a\n" pp_imm res
+  in
+  let pp_afun ppf f =
+    let name, args, body = f in
+    let args = String.concat ", " args in
+    fprintf ppf "fn %s %s =\n%a" name args pp_ablock body
+  in
+  let funs, prog = p in
+  List.iter (pp_afun ppf) funs;
+  fprintf ppf "fn main =\n";
+  pp_ablock ppf prog
 ;;
