@@ -214,15 +214,15 @@ type typ =
   | TGround of ground_type (** int *)
 
 let rec pp_type fmt typ =
-  <span data-count="124">l</span>et open Format in
+  <span data-count="132">l</span>et open Format in
   let arrow_format = function
     | <span data-count="1">T</span>Arr _ -&gt; format_of_string "(%a)"
-    | <span data-count="42">_</span> -&gt; format_of_string "%a"
+    | <span data-count="44">_</span> -&gt; format_of_string "%a"
   in
   match typ with
-  | <span data-count="60">T</span>Ground x -&gt;
+  | <span data-count="64">T</span>Ground x -&gt;
     (match x with
-     | <span data-count="37">I</span>nt -&gt; fprintf fmt "int"
+     | <span data-count="41">I</span>nt -&gt; fprintf fmt "int"
      | <span data-count="6">S</span>tring -&gt; fprintf fmt "string"
      | <span data-count="3">C</span>har -&gt; fprintf fmt "char"
      | <span data-count="14">B</span>ool -&gt; fprintf fmt "bool")
@@ -235,9 +235,9 @@ let rec pp_type fmt typ =
          (fun fmt typ -&gt; <span data-count="18">p</span>p_type fmt typ))
       value_list
   | <span data-count="12">T</span>List typ -&gt; fprintf fmt (arrow_forma<span data-count="12">t</span> typ ^<span data-count="12">^</span> " list") pp_type typ
-  | <span data-count="31">T</span>Arr (typ_left, typ_right) -&gt;
-    fprintf fmt (arrow_forma<span data-count="31">t</span> typ_left ^<span data-count="31">^</span> " -&gt; %a") pp_type typ_left pp_type typ_right
-  | <span data-count="13">T</span>Var var -&gt; fprintf fmt "%s" @@ "'" ^ Char.escape<span data-count="13">d</span> (Char.ch<span data-count="13">r</span> (var + 97))
+  | <span data-count="33">T</span>Arr (typ_left, typ_right) -&gt;
+    fprintf fmt (arrow_forma<span data-count="33">t</span> typ_left ^<span data-count="33">^</span> " -&gt; %a") pp_type typ_left pp_type typ_right
+  | <span data-count="15">T</span>Var var -&gt; fprintf fmt "%s" @@ "'" ^ Char.escape<span data-count="15">d</span> (Char.ch<span data-count="15">r</span> (var + 97))
 ;;
 
 let print_typ typ =
@@ -255,21 +255,21 @@ type error =
   ]
 
 let pp_error fmt (err : error) =
-  <span data-count="8">l</span>et open Format in
+  <span data-count="9">l</span>et open Format in
   match err with
   | <span data-count="0">`</span>Occurs_check -&gt; fprintf fmt "Occurs check failed.\n"
   | <span data-count="3">`</span>NoVariable identifier -&gt; fprintf fmt "No such variable: %s" identifier
   | <span data-count="0">`</span>NoConstructor identifier -&gt; fprintf fmt "No such constructor: %s" identifier
-  | <span data-count="5">`</span>UnificationFailed (t1, t2) -&gt;
+  | <span data-count="6">`</span>UnificationFailed (t1, t2) -&gt;
     fprintf fmt "Unification failed: type of the expression is ";
-    <span data-count="5">p</span>p_type fmt t1;
-    <span data-count="5">f</span>printf fmt " but expected type was ";
-    <span data-count="5">p</span>p_type fmt t2
+    <span data-count="6">p</span>p_type fmt t1;
+    <span data-count="6">f</span>printf fmt " but expected type was ";
+    <span data-count="6">p</span>p_type fmt t2
 ;;
 
 let print_type_error error =
-  <span data-count="8">l</span>et s = Format.asprintf "%a" pp_error error in
-  <span data-count="8">F</span>ormat.printf "%s\n" s
+  <span data-count="9">l</span>et s = Format.asprintf "%a" pp_error error in
+  <span data-count="9">F</span>ormat.printf "%s\n" s
 ;;
 </code></pre>
       </div>

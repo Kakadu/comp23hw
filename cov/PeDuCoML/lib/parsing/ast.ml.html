@@ -401,7 +401,7 @@ and declaration =
   (** let rec factorial n = n * factorial (n - 1) *)
 
 (* Smart constructors for literals *)
-let lint x = <span data-count="1137">L</span>Int x
+let lint x = <span data-count="1142">L</span>Int x
 let lstring x = <span data-count="68">L</span>String x
 
 let lstring_with_quotes x =
@@ -410,46 +410,46 @@ let lstring_with_quotes x =
 ;;
 
 let lchar x = <span data-count="51">L</span>Char x
-let lbool x = <span data-count="231">L</span>Bool x
+let lbool x = <span data-count="233">L</span>Bool x
 
 (* Smart constructors for expressions *)
-let eliteral x = <span data-count="1140">E</span>Literal x
-let eidentifier x = <span data-count="1517">E</span>Identifier x
+let eliteral x = <span data-count="1147">E</span>Literal x
+let eidentifier x = <span data-count="1531">E</span>Identifier x
 
 let etuple first_elem second_elem other_elems =
   <span data-count="134">E</span>Tuple (first_elem, second_elem, other_elems)
 ;;
 
 let elist x = <span data-count="848">E</span>List x
-let efun first_arg other_args fun_body = <span data-count="491">E</span>Fun (first_arg, other_args, fun_body)
+let efun first_arg other_args fun_body = <span data-count="496">E</span>Fun (first_arg, other_args, fun_body)
 
 let ebinary_operation operator left_operand right_operand =
-  <span data-count="689">E</span>BinaryOperation (operator, left_operand, right_operand)
+  <span data-count="692">E</span>BinaryOperation (operator, left_operand, right_operand)
 ;;
 
 let ddeclaration function_name variable_list expression =
-  <span data-count="1024">D</span>Declaration (function_name, variable_list, expression)
+  <span data-count="1033">D</span>Declaration (function_name, variable_list, expression)
 ;;
 
 let drecursivedeclaration function_name variable_list expression =
-  <span data-count="114">D</span>RecursiveDeclaration (function_name, variable_list, expression)
+  <span data-count="115">D</span>RecursiveDeclaration (function_name, variable_list, expression)
 ;;
 
-let eif condition true_branch false_branch = <span data-count="132">E</span>If (condition, true_branch, false_branch)
+let eif condition true_branch false_branch = <span data-count="135">E</span>If (condition, true_branch, false_branch)
 
 let ematchwith matched_expression first_case other_cases =
   <span data-count="196">E</span>MatchWith (matched_expression, first_case, other_cases)
 ;;
 
 let eletin first_declaration other_declarations body =
-  <span data-count="261">E</span>LetIn (first_declaration, other_declarations, body)
+  <span data-count="263">E</span>LetIn (first_declaration, other_declarations, body)
 ;;
 
 let eapplication function_expression operand_expression =
-  <span data-count="1687">E</span>Application (function_expression, operand_expression)
+  <span data-count="1698">E</span>Application (function_expression, operand_expression)
 ;;
 
-let eunary_operation operation expression = <span data-count="20">E</span>UnaryOperation (operation, expression)
+let eunary_operation operation expression = <span data-count="21">E</span>UnaryOperation (operation, expression)
 let econstruct_list head tail = <span data-count="84">E</span>ConstructList (head, tail)
 
 (* Smart constructors for binary operators *)
@@ -482,7 +482,7 @@ let ptuple first_pattern second_pattern other_patterns =
 
 let plist pattern_list = <span data-count="117">P</span>List pattern_list
 let pconstruct_list head tail = <span data-count="52">P</span>ConstructList (head, tail)
-let pidentifier id = <span data-count="724">P</span>Identifier id
+let pidentifier id = <span data-count="729">P</span>Identifier id
 </code></pre>
       </div>
     </div>

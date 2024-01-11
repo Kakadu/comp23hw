@@ -521,30 +521,30 @@ type global_scope_function = string * unique_id list * aexpr
 
 (* Smart constructors *)
 (* unique_id *)
-let anf_id n = <span data-count="3416">A</span>nfId n
-let global_scope_id name = <span data-count="6799">G</span>lobalScopeId name
+let anf_id n = <span data-count="3430">A</span>nfId n
+let global_scope_id name = <span data-count="6832">G</span>lobalScopeId name
 
 (* imm_expr *)
-let imm_int num = <span data-count="863">I</span>mmInt num
+let imm_int num = <span data-count="865">I</span>mmInt num
 let imm_string str = <span data-count="51">I</span>mmString str
 let imm_char sym = <span data-count="39">I</span>mmChar sym
-let imm_bool b = <span data-count="146">I</span>mmBool b
+let imm_bool b = <span data-count="147">I</span>mmBool b
 let imm_list imm_values = <span data-count="103">I</span>mmList imm_values
 let imm_tuple imm_values = <span data-count="89">I</span>mmTuple imm_values
-let imm_id id = <span data-count="2791">I</span>mmId id
+let imm_id id = <span data-count="2802">I</span>mmId id
 
 (* cexpr *)
-let cbinary_operation bop left right = <span data-count="312">C</span>BinaryOperation (bop, left, right)
+let cbinary_operation bop left right = <span data-count="313">C</span>BinaryOperation (bop, left, right)
 let cunary_operation uop expr = <span data-count="4">C</span>UnaryOperation (uop, expr)
-let cimm imm_expr = <span data-count="820">C</span>Imm imm_expr
-let capplication fun_imm arg_imm = <span data-count="934">C</span>Application (fun_imm, arg_imm)
-let cif condition true_branch false_branch = <span data-count="122">C</span>If (condition, true_branch, false_branch)
+let cimm imm_expr = <span data-count="825">C</span>Imm imm_expr
+let capplication fun_imm arg_imm = <span data-count="937">C</span>Application (fun_imm, arg_imm)
+let cif condition true_branch false_branch = <span data-count="123">C</span>If (condition, true_branch, false_branch)
 let cconstruct_list operand imm_expr_list = <span data-count="27">C</span>ConstructList (operand, imm_expr_list)
 
 (* aexpr *)
-let alet id cexpr aexpr = <span data-count="1546">A</span>Let (id, cexpr, aexpr)
-let acexpr cexpr = <span data-count="673">A</span>CExpr cexpr
-let acimm imm_expr = <span data-count="673">a</span>cexpr @@ cim<span data-count="673">m</span> imm_expr
+let alet id cexpr aexpr = <span data-count="1552">A</span>Let (id, cexpr, aexpr)
+let acexpr cexpr = <span data-count="677">A</span>CExpr cexpr
+let acimm imm_expr = <span data-count="677">a</span>cexpr @@ cim<span data-count="677">m</span> imm_expr
 (* ------------------ *)
 
 open State
@@ -560,39 +560,39 @@ open Match_elim
    -------------------------------------*)
 
 let process_id id =
-  <span data-count="2662">i</span>f String.starts_wit<span data-count="2662">h</span> ~prefix:"peducoml_" i<span data-count="2">d</span> || String.starts_wit<span data-count="2660">h</span> ~prefix:"ll_" i<span data-count="17">d</span>
+  <span data-count="2675">i</span>f String.starts_wit<span data-count="2675">h</span> ~prefix:"peducoml_" i<span data-count="2">d</span> || String.starts_wit<span data-count="2673">h</span> ~prefix:"ll_" i<span data-count="17">d</span>
   then <span data-count="19">"</span>user_" ^ id
-  else <span data-count="2643">i</span>f String.starts_with ~prefix:"`" id
+  else <span data-count="2656">i</span>f String.starts_with ~prefix:"`" id
   then <span data-count="357">S</span>tring.sub id 1 (String.lengt<span data-count="357">h</span> id - 1)
-  else <span data-count="2286">i</span>d
+  else <span data-count="2299">i</span>d
 ;;
 
 let rec anf (env : (string, unique_id, Base.String.comparator_witness) Base.Map.t) expr k =
-  <span data-count="4229">m</span>atch expr with
-  | <span data-count="1099">M</span>FLiteral literal -&gt;
+  <span data-count="4244">m</span>atch expr with
+  | <span data-count="1102">M</span>FLiteral literal -&gt;
     (match literal with
-     | <span data-count="863">L</span>Int num -&gt; k (imm_in<span data-count="863">t</span> num)
+     | <span data-count="865">L</span>Int num -&gt; k (imm_in<span data-count="865">t</span> num)
      | <span data-count="51">L</span>String str -&gt; k (imm_strin<span data-count="51">g</span> str)
      | <span data-count="39">L</span>Char sym -&gt; k (imm_cha<span data-count="39">r</span> sym)
-     | <span data-count="146">L</span>Bool b -&gt; k (imm_boo<span data-count="146">l</span> b))
-  | <span data-count="1392">M</span>FIdentifier x -&gt; k @@ imm_i<span data-count="1392">d</span> (Base.Map.find_ex<span data-count="1392">n</span> env (process_i<span data-count="1392">d</span> x))
-  | <span data-count="312">M</span>FBinaryOperation (bop, left, right) -&gt;
+     | <span data-count="147">L</span>Bool b -&gt; k (imm_boo<span data-count="147">l</span> b))
+  | <span data-count="1398">M</span>FIdentifier x -&gt; k @@ imm_i<span data-count="1398">d</span> (Base.Map.find_ex<span data-count="1398">n</span> env (process_i<span data-count="1398">d</span> x))
+  | <span data-count="313">M</span>FBinaryOperation (bop, left, right) -&gt;
     let* fresh_var = fresh in
-    <span data-count="312">l</span>et* body = <span data-count="312">k</span> @@ imm_i<span data-count="312">d</span> (anf_i<span data-count="312">d</span> fresh_var) in
-    <span data-count="312">a</span>nf env left (fun limm -&gt;
-      <span data-count="312">a</span>nf env right (fun rimm -&gt;
-        <span data-count="312">r</span>eturn @@ ale<span data-count="312">t</span> (anf_i<span data-count="312">d</span> fresh_var) (cbinary_operatio<span data-count="312">n</span> bop limm rimm) body))
+    <span data-count="313">l</span>et* body = <span data-count="313">k</span> @@ imm_i<span data-count="313">d</span> (anf_i<span data-count="313">d</span> fresh_var) in
+    <span data-count="313">a</span>nf env left (fun limm -&gt;
+      <span data-count="313">a</span>nf env right (fun rimm -&gt;
+        <span data-count="313">r</span>eturn @@ ale<span data-count="313">t</span> (anf_i<span data-count="313">d</span> fresh_var) (cbinary_operatio<span data-count="313">n</span> bop limm rimm) body))
   | <span data-count="4">M</span>FUnaryOperation (uop, expr) -&gt;
     let* fresh_var = fresh in
     <span data-count="4">l</span>et* body = <span data-count="4">k</span> @@ imm_i<span data-count="4">d</span> (anf_i<span data-count="4">d</span> fresh_var) in
     <span data-count="4">a</span>nf env expr (fun imm -&gt;
       <span data-count="4">r</span>eturn @@ ale<span data-count="4">t</span> (anf_i<span data-count="4">d</span> fresh_var) (cunary_operatio<span data-count="4">n</span> uop imm) body)
-  | <span data-count="934">M</span>FApplication (fun_expr, arg_expr) -&gt;
+  | <span data-count="937">M</span>FApplication (fun_expr, arg_expr) -&gt;
     let* fresh_var = fresh in
-    <span data-count="934">l</span>et* body = <span data-count="934">k</span> @@ imm_i<span data-count="934">d</span> (anf_i<span data-count="934">d</span> fresh_var) in
-    <span data-count="934">a</span>nf env fun_expr (fun imm_fun_expr -&gt;
-      <span data-count="934">a</span>nf env arg_expr (fun imm_arg_expr -&gt;
-        <span data-count="934">r</span>eturn @@ ale<span data-count="934">t</span> (anf_i<span data-count="934">d</span> fresh_var) (capplicatio<span data-count="934">n</span> imm_fun_expr imm_arg_expr) body))
+    <span data-count="937">l</span>et* body = <span data-count="937">k</span> @@ imm_i<span data-count="937">d</span> (anf_i<span data-count="937">d</span> fresh_var) in
+    <span data-count="937">a</span>nf env fun_expr (fun imm_fun_expr -&gt;
+      <span data-count="937">a</span>nf env arg_expr (fun imm_arg_expr -&gt;
+        <span data-count="937">r</span>eturn @@ ale<span data-count="937">t</span> (anf_i<span data-count="937">d</span> fresh_var) (capplicatio<span data-count="937">n</span> imm_fun_expr imm_arg_expr) body))
   | <span data-count="103">M</span>FList expr_list -&gt;
     let rec helper curr_list = function
       | <span data-count="354">h</span>ead :: tail -&gt; anf env head (fun imm -&gt; <span data-count="354">h</span>elper (imm :: curr_list) tail)
@@ -606,13 +606,13 @@ let rec anf (env : (string, unique_id, Base.String.comparator_witness) Base.Map.
       | <span data-count="89">_</span> -&gt; k (imm_tupl<span data-count="89">e</span> @@ Base.List.re<span data-count="89">v</span> curr_list)
     in
     helper [] all_elems
-  | <span data-count="122">M</span>FIf (condition, true_branch, false_branch) -&gt;
+  | <span data-count="123">M</span>FIf (condition, true_branch, false_branch) -&gt;
     let* fresh_var = fresh in
-    <span data-count="122">l</span>et* body = <span data-count="122">k</span> @@ imm_i<span data-count="122">d</span> (anf_i<span data-count="122">d</span> fresh_var) in
-    <span data-count="122">a</span>nf env condition (fun condition_imm -&gt;
-      <span data-count="122">l</span>et* true_branch = an<span data-count="122">f</span> env true_branch (fun x -&gt; <span data-count="122">r</span>eturn @@ acim<span data-count="122">m</span> x) in
-      <span data-count="122">l</span>et* false_branch = an<span data-count="122">f</span> env false_branch (fun x -&gt; <span data-count="122">r</span>eturn @@ acim<span data-count="122">m</span> x) in
-      <span data-count="122">r</span>eturn @@ ale<span data-count="122">t</span> (anf_i<span data-count="122">d</span> fresh_var) (ci<span data-count="122">f</span> condition_imm true_branch false_branch) body)
+    <span data-count="123">l</span>et* body = <span data-count="123">k</span> @@ imm_i<span data-count="123">d</span> (anf_i<span data-count="123">d</span> fresh_var) in
+    <span data-count="123">a</span>nf env condition (fun condition_imm -&gt;
+      <span data-count="123">l</span>et* true_branch = an<span data-count="123">f</span> env true_branch (fun x -&gt; <span data-count="123">r</span>eturn @@ acim<span data-count="123">m</span> x) in
+      <span data-count="123">l</span>et* false_branch = an<span data-count="123">f</span> env false_branch (fun x -&gt; <span data-count="123">r</span>eturn @@ acim<span data-count="123">m</span> x) in
+      <span data-count="123">r</span>eturn @@ ale<span data-count="123">t</span> (anf_i<span data-count="123">d</span> fresh_var) (ci<span data-count="123">f</span> condition_imm true_branch false_branch) body)
     (* anf env true_branch (fun true_branch_imm -&gt;
         anf env false_branch (fun false_branch_imm -&gt;
           return
@@ -626,43 +626,43 @@ let rec anf (env : (string, unique_id, Base.String.comparator_witness) Base.Map.
     <span data-count="27">a</span>nf env operand (fun operand_imm -&gt;
       <span data-count="27">a</span>nf env expr_list (fun expr_list_imm -&gt;
         <span data-count="27">r</span>eturn @@ ale<span data-count="27">t</span> (anf_i<span data-count="27">d</span> fresh_var) (cconstruct_lis<span data-count="27">t</span> operand_imm expr_list_imm) body))
-  | <span data-count="147">M</span>FLetIn (first_declaration, other_declarations, body) -&gt;
+  | <span data-count="148">M</span>FLetIn (first_declaration, other_declarations, body) -&gt;
     let* fresh_var = fresh in
-    <span data-count="147">l</span>et name, expr = first_declaration in
+    <span data-count="148">l</span>et name, expr = first_declaration in
     let name = process_id name in
-    <span data-count="147">l</span>et new_env = Base.Map.set env ~key:name ~data:(anf_i<span data-count="147">d</span> fresh_var) in
-    <span data-count="147">a</span>nf env expr (fun imm_expr -&gt;
-      <span data-count="147">m</span>atch other_declarations with
+    <span data-count="148">l</span>et new_env = Base.Map.set env ~key:name ~data:(anf_i<span data-count="148">d</span> fresh_var) in
+    <span data-count="148">a</span>nf env expr (fun imm_expr -&gt;
+      <span data-count="148">m</span>atch other_declarations with
       | <span data-count="0">h</span>ead :: tail -&gt;
         let* body = an<span data-count="0">f</span> new_env (MFLetIn (head, tail, body)) k in
         <span data-count="0">r</span>eturn @@ ale<span data-count="0">t</span> (anf_i<span data-count="0">d</span> fresh_var) (cim<span data-count="0">m</span> imm_expr) body
-      | <span data-count="147">_</span> -&gt;
-        let* body = an<span data-count="147">f</span> new_env body k in
-        <span data-count="147">r</span>eturn @@ ale<span data-count="147">t</span> (anf_i<span data-count="147">d</span> fresh_var) (cim<span data-count="147">m</span> imm_expr) body)
+      | <span data-count="148">_</span> -&gt;
+        let* body = an<span data-count="148">f</span> new_env body k in
+        <span data-count="148">r</span>eturn @@ ale<span data-count="148">t</span> (anf_i<span data-count="148">d</span> fresh_var) (cim<span data-count="148">m</span> imm_expr) body)
 ;;
 
 let process_declaration env =
-  <span data-count="429">l</span>et update_map env args_list =
-    <span data-count="429">B</span>ase.List.fold_right args_list ~init:(retur<span data-count="429">n</span> env) ~f:(fun id acc -&gt;
-      <span data-count="324">l</span>et* fresh_var = fresh in
-      <span data-count="324">l</span>et* acc = acc in
-      <span data-count="324">l</span>et id = process_id id in
-      <span data-count="324">r</span>eturn @@ Base.Map.se<span data-count="324">t</span> acc ~key:id ~data:(anf_i<span data-count="324">d</span> fresh_var))
+  <span data-count="431">l</span>et update_map env args_list =
+    <span data-count="431">B</span>ase.List.fold_right args_list ~init:(retur<span data-count="431">n</span> env) ~f:(fun id acc -&gt;
+      <span data-count="326">l</span>et* fresh_var = fresh in
+      <span data-count="326">l</span>et* acc = acc in
+      <span data-count="326">l</span>et id = process_id id in
+      <span data-count="326">r</span>eturn @@ Base.Map.se<span data-count="326">t</span> acc ~key:id ~data:(anf_i<span data-count="326">d</span> fresh_var))
   in
   let gen_arg_id env name =
-    <span data-count="324">l</span>et name = process_id name in
-    <span data-count="324">B</span>ase.Map.find_exn env name
+    <span data-count="326">l</span>et name = process_id name in
+    <span data-count="326">B</span>ase.Map.find_exn env name
   in
   let gen_global_scope_function env name args_list expr =
-    <span data-count="429">l</span>et name = process_id name in
-    <span data-count="429">l</span>et* env = update_ma<span data-count="429">p</span> env args_list in
-    <span data-count="429">l</span>et* anf_representation = an<span data-count="429">f</span> env expr (fun imm -&gt; <span data-count="429">r</span>eturn @@ acim<span data-count="429">m</span> imm) in
-    <span data-count="429">r</span>eturn (name, List.ma<span data-count="429">p</span> (gen_arg_i<span data-count="429">d</span> env) args_list, anf_representation)
+    <span data-count="431">l</span>et name = process_id name in
+    <span data-count="431">l</span>et* env = update_ma<span data-count="431">p</span> env args_list in
+    <span data-count="431">l</span>et* anf_representation = an<span data-count="431">f</span> env expr (fun imm -&gt; <span data-count="431">r</span>eturn @@ acim<span data-count="431">m</span> imm) in
+    <span data-count="431">r</span>eturn (name, List.ma<span data-count="431">p</span> (gen_arg_i<span data-count="431">d</span> env) args_list, anf_representation)
   in
   function
-  | <span data-count="383">M</span>FDeclaration (name, args_list, expr) -&gt;
-    let* global_scope_f = gen_global_scope_functio<span data-count="383">n</span> env name args_list expr in
-    <span data-count="383">r</span>eturn global_scope_f
+  | <span data-count="385">M</span>FDeclaration (name, args_list, expr) -&gt;
+    let* global_scope_f = gen_global_scope_functio<span data-count="385">n</span> env name args_list expr in
+    <span data-count="385">r</span>eturn global_scope_f
   | <span data-count="46">M</span>FRecursiveDeclaration (name, args_list, expr) -&gt;
     let processed_name = process_id name in
     <span data-count="46">l</span>et env =
@@ -675,44 +675,44 @@ let process_declaration env =
 open Peducoml_stdlib
 
 let anf_conversion program =
-  <span data-count="204">l</span>et rec helper env current_list = function
-    | <span data-count="429">h</span>ead :: tail -&gt;
-      let* ((name, _, _) as global_scope_f) = process_declaratio<span data-count="429">n</span> env head in
-      <span data-count="429">l</span>et env = Base.Map.set env ~key:name ~data:(global_scope_i<span data-count="429">d</span> name) in
-      <span data-count="429">h</span>elper env (global_scope_f :: current_list) tail
-    | <span data-count="204">_</span> -&gt; return @@ List.re<span data-count="204">v</span> current_list
+  <span data-count="205">l</span>et rec helper env current_list = function
+    | <span data-count="431">h</span>ead :: tail -&gt;
+      let* ((name, _, _) as global_scope_f) = process_declaratio<span data-count="431">n</span> env head in
+      <span data-count="431">l</span>et env = Base.Map.set env ~key:name ~data:(global_scope_i<span data-count="431">d</span> name) in
+      <span data-count="431">h</span>elper env (global_scope_f :: current_list) tail
+    | <span data-count="205">_</span> -&gt; return @@ List.re<span data-count="205">v</span> current_list
   in
   let env = Base.Map.empty (module Base.String) in
-  <span data-count="204">l</span>et env =
+  <span data-count="205">l</span>et env =
     Base.Map.set
       env
       ~key:"peducoml_list_field"
-      ~data:(global_scope_i<span data-count="204">d</span> "peducoml_list_field")
+      ~data:(global_scope_i<span data-count="205">d</span> "peducoml_list_field")
   in
-  <span data-count="204">l</span>et env =
+  <span data-count="205">l</span>et env =
     Base.Map.set
       env
       ~key:"peducoml_tuple_field"
-      ~data:(global_scope_i<span data-count="204">d</span> "peducoml_tuple_field")
+      ~data:(global_scope_i<span data-count="205">d</span> "peducoml_tuple_field")
   in
-  <span data-count="204">l</span>et env =
-    Base.Map.set env ~key:"peducoml_tail" ~data:(global_scope_i<span data-count="204">d</span> "peducoml_tail")
+  <span data-count="205">l</span>et env =
+    Base.Map.set env ~key:"peducoml_tail" ~data:(global_scope_i<span data-count="205">d</span> "peducoml_tail")
   in
-  <span data-count="204">l</span>et env =
+  <span data-count="205">l</span>et env =
     Base.Map.set
       env
       ~key:"peducoml_list_length"
-      ~data:(global_scope_i<span data-count="204">d</span> "peducoml_list_length")
+      ~data:(global_scope_i<span data-count="205">d</span> "peducoml_list_length")
   in
-  <span data-count="204">l</span>et env =
+  <span data-count="205">l</span>et env =
     Base.List.fold stdlib ~init:env ~f:(fun acc (id, _) -&gt;
-      <span data-count="5508">B</span>ase.Map.set acc ~key:id ~data:(global_scope_i<span data-count="5508">d</span> id))
+      <span data-count="5535">B</span>ase.Map.set acc ~key:id ~data:(global_scope_i<span data-count="5535">d</span> id))
   in
-  <span data-count="204">h</span>elper env [] program
+  <span data-count="205">h</span>elper env [] program
 ;;
 
 let run_anf_conversion program : global_scope_function list =
-  <span data-count="204">r</span>un @@ anf_conversio<span data-count="204">n</span> program
+  <span data-count="205">r</span>un @@ anf_conversio<span data-count="205">n</span> program
 ;;
 </code></pre>
       </div>

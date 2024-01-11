@@ -470,22 +470,22 @@ type match_free_decl =
   | MFDeclaration of id * id list * match_free_expr
   | MFRecursiveDeclaration of id * id list * match_free_expr
 
-let mfliteral literal = <span data-count="1200">M</span>FLiteral literal
-let mfbinaryoperation bop left right = <span data-count="312">M</span>FBinaryOperation (bop, left, right)
+let mfliteral literal = <span data-count="1203">M</span>FLiteral literal
+let mfbinaryoperation bop left right = <span data-count="313">M</span>FBinaryOperation (bop, left, right)
 let mfunaryoperation operator operand = <span data-count="4">M</span>FUnaryOperation (operator, operand)
-let mfapplication func arg = <span data-count="1081">M</span>FApplication (func, arg)
-let mfidentifier id = <span data-count="7920">M</span>FIdentifier id
+let mfapplication func arg = <span data-count="1084">M</span>FApplication (func, arg)
+let mfidentifier id = <span data-count="7956">M</span>FIdentifier id
 let mflist list = <span data-count="103">M</span>FList list
 let mfconstructlist head tail = <span data-count="27">M</span>FConstructList (head, tail)
-let mfletin first_let other_lets expr = <span data-count="147">M</span>FLetIn (first_let, other_lets, expr)
+let mfletin first_let other_lets expr = <span data-count="148">M</span>FLetIn (first_let, other_lets, expr)
 
 let mftuple first_elem second_elem other_elems =
   <span data-count="64">M</span>FTuple (first_elem, second_elem, other_elems)
 ;;
 
-let mfif cond true_branch false_branch = <span data-count="122">M</span>FIf (cond, true_branch, false_branch)
-let mflet id body = <span data-count="147">i</span>d, body
-let mfdeclaration name arguments body = <span data-count="383">M</span>FDeclaration (name, arguments, body)
+let mfif cond true_branch false_branch = <span data-count="123">M</span>FIf (cond, true_branch, false_branch)
+let mflet id body = <span data-count="148">i</span>d, body
+let mfdeclaration name arguments body = <span data-count="385">M</span>FDeclaration (name, arguments, body)
 
 let mfrecursivedeclaration name arguments body =
   <span data-count="46">M</span>FRecursiveDeclaration (name, arguments, body)
@@ -494,9 +494,9 @@ let mfrecursivedeclaration name arguments body =
 open Lambda_lift
 
 let rec rewrite_match expr =
-  <span data-count="3314">l</span>et rt_tail = mfapplication (mfidentifie<span data-count="3314">r</span> "`peducoml_tail") in
-  <span data-count="3314">l</span>et rt_length = mfapplication (mfidentifie<span data-count="3314">r</span> "`peducoml_list_length") in
-  <span data-count="3314">l</span>et rt_list_field lst idx =
+  <span data-count="3329">l</span>et rt_tail = mfapplication (mfidentifie<span data-count="3329">r</span> "`peducoml_tail") in
+  <span data-count="3329">l</span>et rt_length = mfapplication (mfidentifie<span data-count="3329">r</span> "`peducoml_list_length") in
+  <span data-count="3329">l</span>et rt_list_field lst idx =
     <span data-count="70">m</span>fapplication
       (mfapplicatio<span data-count="70">n</span> (mfidentifie<span data-count="70">r</span> "`peducoml_list_field") lst)
       (mflitera<span data-count="70">l</span> @@ lin<span data-count="70">t</span> idx)
@@ -508,40 +508,40 @@ let rec rewrite_match expr =
   in
   let rt_head lst = <span data-count="66">r</span>t_list_field lst 0 in
   match expr with
-  | <span data-count="1144">C</span>FIdentifier id -&gt; mfidentifier id
-  | <span data-count="886">C</span>FLiteral literal -&gt; mfliteral literal
-  | <span data-count="243">C</span>FBinaryOperation (bop, left, right) -&gt;
+  | <span data-count="1150">C</span>FIdentifier id -&gt; mfidentifier id
+  | <span data-count="889">C</span>FLiteral literal -&gt; mfliteral literal
+  | <span data-count="244">C</span>FBinaryOperation (bop, left, right) -&gt;
     let left_rewritten = rewrite_match left in
-    <span data-count="243">l</span>et right_rewritten = rewrite_match right in
-    <span data-count="243">m</span>fbinaryoperation bop left_rewritten right_rewritten
+    <span data-count="244">l</span>et right_rewritten = rewrite_match right in
+    <span data-count="244">m</span>fbinaryoperation bop left_rewritten right_rewritten
   | <span data-count="4">C</span>FUnaryOperation (uop, operand) -&gt;
     let operand_rewritten = rewrite_match operand in
     <span data-count="4">m</span>funaryoperation uop operand_rewritten
-  | <span data-count="684">C</span>FApplication (fun_expr, arg_expr) -&gt;
+  | <span data-count="687">C</span>FApplication (fun_expr, arg_expr) -&gt;
     let fun_expr_rewritten = rewrite_match fun_expr in
-    <span data-count="684">l</span>et arg_expr_rewritten = rewrite_match arg_expr in
-    <span data-count="684">m</span>fapplication fun_expr_rewritten arg_expr_rewritten
+    <span data-count="687">l</span>et arg_expr_rewritten = rewrite_match arg_expr in
+    <span data-count="687">m</span>fapplication fun_expr_rewritten arg_expr_rewritten
   | <span data-count="103">C</span>FList expr_list -&gt; mflist @@ List.ma<span data-count="103">p</span> (fun e -&gt; <span data-count="354">r</span>ewrite_match e) expr_list
   | <span data-count="64">C</span>FTuple (first_elem, second_elem, other_elems) -&gt;
     let first_elem_rewritten = rewrite_match first_elem in
     <span data-count="64">l</span>et second_elem_rewritten = rewrite_match second_elem in
     <span data-count="64">m</span>ftuple first_elem_rewritten second_elem_rewritten
     @@ List.ma<span data-count="64">p</span> (fun e -&gt; <span data-count="49">r</span>ewrite_match e) other_elems
-  | <span data-count="50">C</span>FIf (condition, true_branch, false_branch) -&gt;
+  | <span data-count="51">C</span>FIf (condition, true_branch, false_branch) -&gt;
     let condition_rewritten = rewrite_match condition in
-    <span data-count="50">l</span>et true_branch_rewritten = rewrite_match true_branch in
-    <span data-count="50">l</span>et false_branch_rewritten = rewrite_match false_branch in
-    <span data-count="50">m</span>fif condition_rewritten true_branch_rewritten false_branch_rewritten
+    <span data-count="51">l</span>et true_branch_rewritten = rewrite_match true_branch in
+    <span data-count="51">l</span>et false_branch_rewritten = rewrite_match false_branch in
+    <span data-count="51">m</span>fif condition_rewritten true_branch_rewritten false_branch_rewritten
   | <span data-count="27">C</span>FConstructList (operand, expr_list) -&gt;
     let operand_rewritten = rewrite_match operand in
     <span data-count="27">l</span>et expr_list_rewritten = rewrite_match expr_list in
     <span data-count="27">m</span>fconstructlist operand_rewritten expr_list_rewritten
-  | <span data-count="61">C</span>FLetIn (first_declaration, other_declarations, body) -&gt;
-    let rewrite_let (id, body) = <span data-count="61">m</span>flet id (rewrite_matc<span data-count="61">h</span> body) in
+  | <span data-count="62">C</span>FLetIn (first_declaration, other_declarations, body) -&gt;
+    let rewrite_let (id, body) = <span data-count="62">m</span>flet id (rewrite_matc<span data-count="62">h</span> body) in
     mfletin
-      (rewrite_le<span data-count="61">t</span> first_declaration)
-      (List.ma<span data-count="61">p</span> rewrite_let other_declarations)
-      (rewrite_matc<span data-count="61">h</span> body)
+      (rewrite_le<span data-count="62">t</span> first_declaration)
+      (List.ma<span data-count="62">p</span> rewrite_let other_declarations)
+      (rewrite_matc<span data-count="62">h</span> body)
   | <span data-count="48">C</span>FMatchWith (matched_expression, first_case, other_cases) -&gt;
     let cases = first_case :: other_cases in
     let concat_conditions first second =
@@ -642,18 +642,18 @@ let rec rewrite_match expr =
 ;;
 
 let elim_match program =
-  <span data-count="204">B</span>ase.List.map
+  <span data-count="205">B</span>ase.List.map
     program
     ~f:
       (let get_constructor = function
-         | <span data-count="383">C</span>FDeclaration _ -&gt; mfdeclaration
+         | <span data-count="385">C</span>FDeclaration _ -&gt; mfdeclaration
          | <span data-count="46">C</span>FRecursiveDeclaration _ -&gt; mfrecursivedeclaration
        in
        function
-       | (<span data-count="383">C</span>FDeclaration (id, id_list, body) | <span data-count="46">C</span>FRecursiveDeclaration (id, id_list, body))
+       | (<span data-count="385">C</span>FDeclaration (id, id_list, body) | <span data-count="46">C</span>FRecursiveDeclaration (id, id_list, body))
          as original -&gt;
          let decl = get_constructor original in
-         <span data-count="429">d</span>ecl id id_list (rewrite_matc<span data-count="429">h</span> body))
+         <span data-count="431">d</span>ecl id id_list (rewrite_matc<span data-count="431">h</span> body))
 ;;
 </code></pre>
       </div>
