@@ -425,11 +425,11 @@ let codegen_imm = function
           ok
             (build_cal<span data-count="34">l</span>
                (function_typ<span data-count="34">e</span> int_64 [| int_64; int_64 |])
-               (Option.ge<span data-count="34">t</span> (lookup_functio<span data-count="34">n</span> "addNewPaplyClosure" the_module))
+               (Option.ge<span data-count="34">t</span> (lookup_functio<span data-count="34">n</span> "addNewPAppliClosure" the_module))
                [| build_pointercas<span data-count="34">t</span> v int_64 "cast_pointer_to_int" builder
                 ; params v |&gt; <span data-count="34">B</span>ase.Array.length |&gt; <span data-count="34">c</span>onst_in<span data-count="34">t</span> int_64
                |]
-               "paplyClosure"
+               "PAppliClosure"
                builder)
         | <span data-count="0">N</span>one -&gt; error "Unknown variable"))
 ;;
@@ -464,9 +464,9 @@ let rec codegen_cexpr = function
     <span data-count="71">o</span>k
       (build_cal<span data-count="71">l</span>
          (function_typ<span data-count="71">e</span> int_64 [| int_64; int_64 |])
-         (Option.ge<span data-count="71">t</span> (lookup_functio<span data-count="71">n</span> "applyPaply" the_module))
+         (Option.ge<span data-count="71">t</span> (lookup_functio<span data-count="71">n</span> "applyPAppli" the_module))
          [| calee; arg |]
-         "paplyApplication"
+         "PAppliApplication"
          builder)
   | <span data-count="3">C</span>If (cond, then_, else_) -&gt;
     let* cond = codegen_im<span data-count="3">m</span> cond in
@@ -552,10 +552,10 @@ let codegen_bexpr = function
 let codegen_program prog =
   <span data-count="12">l</span>et runtime =
     [ declare_functio<span data-count="12">n</span>
-        "addNewPaplyClosure"
+        "addNewPAppliClosure"
         (function_typ<span data-count="12">e</span> int_64 [| int_64; int_64 |])
         the_module
-    ; declare_functio<span data-count="12">n</span> "applyPaply" (function_typ<span data-count="12">e</span> int_64 [| int_64; int_64 |]) the_module
+    ; declare_functio<span data-count="12">n</span> "applyPAppli" (function_typ<span data-count="12">e</span> int_64 [| int_64; int_64 |]) the_module
     ; declare_functio<span data-count="12">n</span> "print_int" (function_typ<span data-count="12">e</span> int_64 [| int_64 |]) the_module
     ; declare_functio<span data-count="12">n</span> "print_bool" (function_typ<span data-count="12">e</span> int_64 [| int_64 |]) the_module
     ]
