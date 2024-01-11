@@ -3,6 +3,7 @@
 (** SPDX-License-Identifier: LGPL-3.0-or-later *)
 
 %{
+    [@@@coverage exclude_file]
     open Ast
 %}
 
