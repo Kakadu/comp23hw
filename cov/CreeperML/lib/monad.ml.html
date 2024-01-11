@@ -124,25 +124,25 @@
 module Result = struct
   type 'a t = ('a, string) Result.t
 
-  let return x = <span data-count="3649">O</span>k x
+  let return x = <span data-count="2819">O</span>k x
   let error msg = <span data-count="0">E</span>rror msg
   let ( &gt;&gt;= ) = Result.bind
   let ( let* ) = ( &gt;&gt;= )
 
   let ( *&gt; ) : 'a t -&gt; 'b t -&gt; 'b t =
-   fun x y -&gt; <span data-count="281">m</span>atch x with <span data-count="281">O</span>k _ -&gt; y | <span data-count="0">E</span>rror msg -&gt; error msg
+   fun x y -&gt; <span data-count="228">m</span>atch x with <span data-count="228">O</span>k _ -&gt; y | <span data-count="0">E</span>rror msg -&gt; error msg
 
   let ( &gt;&gt;| ) : 'a t -&gt; ('a -&gt; 'b) -&gt; 'b t =
-   fun x f -&gt; <span data-count="548">m</span>atch x with <span data-count="548">O</span>k x -&gt; Ok (<span data-count="548">f</span> x) | <span data-count="0">E</span>rror msg -&gt; error msg
+   fun x f -&gt; <span data-count="443">m</span>atch x with <span data-count="443">O</span>k x -&gt; Ok (<span data-count="443">f</span> x) | <span data-count="0">E</span>rror msg -&gt; error msg
 
   let ( |&lt;&lt; ) x y = <span data-count="0">y</span> &gt;&gt;| x
 
   let monadic_map l f =
-    <span data-count="6">L</span>ist.fold_right
+    <span data-count="9">L</span>ist.fold_right
       (fun e acc -&gt;
-        <span data-count="14">l</span>et* acc = acc in
-        <span data-count="28">f</span> e &gt;&gt;| fun e -&gt; <span data-count="14">e</span> :: acc)
-      l (retur<span data-count="6">n</span> [])
+        <span data-count="21">l</span>et* acc = acc in
+        <span data-count="42">f</span> e &gt;&gt;| fun e -&gt; <span data-count="21">e</span> :: acc)
+      l (retur<span data-count="9">n</span> [])
 
   let monadic_mapi l f =
     <span data-count="0">L</span>ist.fold_left
