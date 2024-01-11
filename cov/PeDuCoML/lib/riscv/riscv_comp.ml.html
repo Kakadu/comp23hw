@@ -647,7 +647,7 @@ let codegen_global_scope_function args_numbers (func : global_scope_function) =
         [ body; const_in<span data-count="2">t</span> num_args ]
     | <span data-count="170">_</span> -&gt; body
   in
-  build_ret body;
+  build_ret function_name body;
   <span data-count="172">o</span>k func_rv_value
 ;;
 
