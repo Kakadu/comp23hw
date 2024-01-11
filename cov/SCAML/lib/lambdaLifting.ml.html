@@ -242,14 +242,14 @@ open IState
 open IState.Syntax
 
 let rec get_args acc = function
-  | <span data-count="84">E</span>Fun (p, e) -&gt; get_args (p :: acc) e
-  | <span data-count="61">e</span> -&gt; List.re<span data-count="61">v</span> acc, e
+  | <span data-count="114">E</span>Fun (p, e) -&gt; get_args (p :: acc) e
+  | <span data-count="65">e</span> -&gt; List.re<span data-count="65">v</span> acc, e
 ;;
 
 let rec get_global_scope prog global =
-  <span data-count="56">m</span>atch prog with
-  | <span data-count="24">[</span>] -&gt; global
-  | <span data-count="32">E</span>Let (_, id, _) :: tl -&gt; Set.add global id |&gt; <span data-count="32">g</span>et_global_scope tl
+  <span data-count="62">m</span>atch prog with
+  | <span data-count="26">[</span>] -&gt; global
+  | <span data-count="36">E</span>Let (_, id, _) :: tl -&gt; Set.add global id |&gt; <span data-count="36">g</span>et_global_scope tl
 ;;
 
 let rec gen_fresh_id global =
@@ -260,16 +260,16 @@ let rec gen_fresh_id global =
 ;;
 
 let prog_lift prog =
-  <span data-count="24">l</span>et rec lift_expr env ll_list global = function
-    | <span data-count="71">E</span>Const c -&gt;
+  <span data-count="26">l</span>et rec lift_expr env ll_list global = function
+    | <span data-count="89">E</span>Const c -&gt;
       (match c with
-       | <span data-count="71">C</span>Int i -&gt; return (LLConst (CInt i), ll_list)
+       | <span data-count="89">C</span>Int i -&gt; return (LLConst (CInt i), ll_list)
        | <span data-count="0">C</span>Bool b -&gt; return (LLConst (CBool b), ll_list)
        | <span data-count="0">C</span>Unit -&gt; return (LLConst CUnit, ll_list))
-    | <span data-count="154">E</span>Var x -&gt;
+    | <span data-count="166">E</span>Var x -&gt;
       (match Map.find env x with
        | <span data-count="22">S</span>ome id -&gt; return (LLVar id, ll_list)
-       | <span data-count="132">N</span>one -&gt; return (LLVar x, ll_list))
+       | <span data-count="144">N</span>one -&gt; return (LLVar x, ll_list))
     | <span data-count="64">E</span>BinOp (op, e1, e2) -&gt;
       let* l1, ll_list = lift_exp<span data-count="64">r</span> env ll_list global e1 in
       <span data-count="64">l</span>et* l2, ll_list = lift_exp<span data-count="64">r</span> env ll_list global e2 in
@@ -279,10 +279,10 @@ let prog_lift prog =
       <span data-count="10">l</span>et* l2, ll_list = lift_exp<span data-count="10">r</span> env ll_list global e2 in
       <span data-count="10">l</span>et* l3, ll_list = lift_exp<span data-count="10">r</span> env ll_list global e3 in
       <span data-count="10">r</span>eturn (LLIf (l1, l2, l3), ll_list)
-    | <span data-count="89">E</span>App (e1, e2) -&gt;
-      let* l1, ll_list = lift_exp<span data-count="89">r</span> env ll_list global e1 in
-      <span data-count="89">l</span>et* l2, ll_list = lift_exp<span data-count="89">r</span> env ll_list global e2 in
-      <span data-count="89">r</span>eturn (LLApp (l1, l2), ll_list)
+    | <span data-count="115">E</span>App (e1, e2) -&gt;
+      let* l1, ll_list = lift_exp<span data-count="115">r</span> env ll_list global e1 in
+      <span data-count="115">l</span>et* l2, ll_list = lift_exp<span data-count="115">r</span> env ll_list global e2 in
+      <span data-count="115">r</span>eturn (LLApp (l1, l2), ll_list)
     | <span data-count="12">E</span>LetIn (is_rec, id, (EFun (_, _) as e1), e2) -&gt;
       let args, exp = get_args [] e1 in
       <span data-count="12">l</span>et* new_id = gen_fresh_i<span data-count="12">d</span> global in
@@ -307,29 +307,29 @@ let prog_lift prog =
       return (LLVar new_id, ll_list)
   in
   let decl_ll global = function
-    | <span data-count="32">E</span>Let (is_rec, id, e) -&gt;
+    | <span data-count="36">E</span>Let (is_rec, id, e) -&gt;
       let p, expr = get_args [] e in
-      <span data-count="32">l</span>et* l1, ll_list = lift_exp<span data-count="32">r</span> (Map.empt<span data-count="32">y</span> (module String)) [] global expr in
-      <span data-count="32">l</span>et ll_list = LLLet (is_rec, id, p, l1) :: ll_list in
+      <span data-count="36">l</span>et* l1, ll_list = lift_exp<span data-count="36">r</span> (Map.empt<span data-count="36">y</span> (module String)) [] global expr in
+      <span data-count="36">l</span>et ll_list = LLLet (is_rec, id, p, l1) :: ll_list in
       return ll_list
   in
   let prog_ll prog =
-    <span data-count="24">l</span>et global = get_global_scope prog (Set.empt<span data-count="24">y</span> (module String)) in
-    <span data-count="24">l</span>et* ll_list =
-      List.fold_lef<span data-count="24">t</span>
+    <span data-count="26">l</span>et global = get_global_scope prog (Set.empt<span data-count="26">y</span> (module String)) in
+    <span data-count="26">l</span>et* ll_list =
+      List.fold_lef<span data-count="26">t</span>
         ~f:(fun acc x -&gt;
-          <span data-count="32">l</span>et* ll_list = decl_l<span data-count="32">l</span> global x in
-          <span data-count="32">l</span>et* acc = acc in
-          <span data-count="32">r</span>eturn (acc @ List.re<span data-count="32">v</span> ll_list))
-        ~init:(retur<span data-count="24">n</span> [])
+          <span data-count="36">l</span>et* ll_list = decl_l<span data-count="36">l</span> global x in
+          <span data-count="36">l</span>et* acc = acc in
+          <span data-count="36">r</span>eturn (acc @ List.re<span data-count="36">v</span> ll_list))
+        ~init:(retur<span data-count="26">n</span> [])
         prog
     in
-    <span data-count="24">r</span>eturn ll_list
+    <span data-count="26">r</span>eturn ll_list
   in
   prog_ll prog
 ;;
 
-let run_ll prog = <span data-count="24">s</span>nd @@ IState.runStat<span data-count="24">e</span> ~init:0 (prog_lif<span data-count="24">t</span> prog)
+let run_ll prog = <span data-count="26">s</span>nd @@ IState.runStat<span data-count="26">e</span> ~init:0 (prog_lif<span data-count="26">t</span> prog)
 </code></pre>
       </div>
     </div>
