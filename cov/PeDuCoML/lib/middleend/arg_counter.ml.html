@@ -241,25 +241,25 @@
 open Anf
 
 let gather_args_numbers (program : global_scope_function list) =
-  <span data-count="167">l</span>et count_args env func =
-    <span data-count="325">l</span>et id, arg_list, body = func in
+  <span data-count="168">l</span>et count_args env func =
+    <span data-count="327">l</span>et id, arg_list, body = func in
     let zero_map =
       Base.List.foldi arg_list ~init:Base.Map.Poly.empty ~f:(fun ind acc arg -&gt;
-        <span data-count="192">B</span>ase.Map.Poly.set acc ~key:ind ~data:(arg, 0))
+        <span data-count="207">B</span>ase.Map.Poly.set acc ~key:ind ~data:(arg, 0))
     in
-    <span data-count="325">l</span>et env = Base.Map.Poly.set env ~key:id ~data:zero_map in
-    <span data-count="325">l</span>et process_immexpr = function
-      | <span data-count="1081">I</span>mmId id -&gt; Some id
-      | <span data-count="271">_</span> -&gt; None
+    <span data-count="327">l</span>et env = Base.Map.Poly.set env ~key:id ~data:zero_map in
+    <span data-count="327">l</span>et process_immexpr = function
+      | <span data-count="1098">I</span>mmId id -&gt; Some id
+      | <span data-count="286">_</span> -&gt; None
     in
     let rec process_cexpr result_id env partials = function
-      | <span data-count="676">C</span>Application (func, arg) -&gt;
+      | <span data-count="692">C</span>Application (func, arg) -&gt;
         let func_id = process_immexpr func in
-        <span data-count="676">l</span>et arg_id = process_immexpr arg in
-        <span data-count="676">(</span>match func_id with
-         | <span data-count="676">S</span>ome func_id -&gt;
+        <span data-count="692">l</span>et arg_id = process_immexpr arg in
+        <span data-count="692">(</span>match func_id with
+         | <span data-count="692">S</span>ome func_id -&gt;
            (match Base.Map.Poly.find partials func_id with
-            | <span data-count="201">S</span>ome (func_id, current_arg_number) -&gt;
+            | <span data-count="215">S</span>ome (func_id, current_arg_number) -&gt;
               ( (match arg_id, func_id with
                  | <span data-count="24">S</span>ome (GlobalScopeId func_arg_name), GlobalScopeId func_name -&gt;
                    (match Base.Map.Poly.find env func_name with
@@ -282,12 +282,12 @@ let gather_args_numbers (program : global_scope_function list) =
                                ~data:(arg_id, args_number)))
                       else <span data-count="2">e</span>nv
                     | <span data-count="14">N</span>one -&gt; env)
-                 | <span data-count="177">_</span> -&gt; env)
-              , Base.Map.Poly.se<span data-count="201">t</span>
+                 | <span data-count="191">_</span> -&gt; env)
+              , Base.Map.Poly.se<span data-count="215">t</span>
                   partials
                   ~key:result_id
                   ~data:(func_id, current_arg_number + 1) )
-            | <span data-count="475">N</span>one -&gt;
+            | <span data-count="477">N</span>one -&gt;
               ( (match arg_id, func_id with
                  | <span data-count="32">S</span>ome (GlobalScopeId func_arg_name), GlobalScopeId func_name -&gt;
                    (match Base.Map.Poly.find env func_name with
@@ -305,37 +305,37 @@ let gather_args_numbers (program : global_scope_function list) =
                              ~key:0
                              ~data:(arg_id, args_number))
                     | <span data-count="22">N</span>one -&gt; env)
-                 | <span data-count="443">_</span> -&gt; env)
-              , Base.Map.Poly.se<span data-count="475">t</span> partials ~key:result_id ~data:(func_id, 1) ))
+                 | <span data-count="445">_</span> -&gt; env)
+              , Base.Map.Poly.se<span data-count="477">t</span> partials ~key:result_id ~data:(func_id, 1) ))
          | <span data-count="0">N</span>one -&gt; env, partials)
       | <span data-count="90">C</span>If (_, true_branch, false_branch) -&gt;
         let env, partials = process_aexpr env partials true_branch in
         <span data-count="90">p</span>rocess_aexpr env partials false_branch
-      | <span data-count="869">_</span> -&gt; env, partials
+      | <span data-count="885">_</span> -&gt; env, partials
     and process_aexpr env partials = function
-      | <span data-count="505">A</span>CExpr cexpr -&gt; process_cexpr (AnfId 0) env partials cexpr
-      | <span data-count="1130">A</span>Let (id, cexpr, aexpr) -&gt;
+      | <span data-count="507">A</span>CExpr cexpr -&gt; process_cexpr (AnfId 0) env partials cexpr
+      | <span data-count="1160">A</span>Let (id, cexpr, aexpr) -&gt;
         let env, partials = process_cexpr id env partials cexpr in
-        <span data-count="1130">p</span>rocess_aexpr env partials aexpr
+        <span data-count="1160">p</span>rocess_aexpr env partials aexpr
     in
     process_aexpr env Base.Map.Poly.empty body
   in
   let intermediate_map =
     Base.List.fold program ~init:Base.Map.Poly.empty ~f:(fun acc func -&gt;
-      <span data-count="325">c</span>ount_args acc func |&gt; <span data-count="325">f</span>st)
+      <span data-count="327">c</span>ount_args acc func |&gt; <span data-count="327">f</span>st)
   in
-  <span data-count="167">l</span>et rec process_one_map curr_ind final_map current_map =
-    <span data-count="517">i</span>f curr_ind &gt;= 0
-    then <span data-count="192">(</span>
+  <span data-count="168">l</span>et rec process_one_map curr_ind final_map current_map =
+    <span data-count="534">i</span>f curr_ind &gt;= 0
+    then <span data-count="207">(</span>
       let arg_id, args_number = Base.Map.Poly.find_exn current_map curr_ind in
-      <span data-count="192">p</span>rocess_one_map
+      <span data-count="207">p</span>rocess_one_map
         (curr_ind - 1)
-        (Base.Map.Poly.se<span data-count="192">t</span> final_map ~key:arg_id ~data:args_number)
+        (Base.Map.Poly.se<span data-count="207">t</span> final_map ~key:arg_id ~data:args_number)
         current_map)
-    else <span data-count="325">f</span>inal_map
+    else <span data-count="327">f</span>inal_map
   in
   Base.Map.Poly.map intermediate_map ~f:(fun map -&gt;
-    <span data-count="325">p</span>rocess_one_map (Base.Map.Poly.lengt<span data-count="325">h</span> map - 1) Base.Map.Poly.empty map)
+    <span data-count="327">p</span>rocess_one_map (Base.Map.Poly.lengt<span data-count="327">h</span> map - 1) Base.Map.Poly.empty map)
 ;;
 </code></pre>
       </div>

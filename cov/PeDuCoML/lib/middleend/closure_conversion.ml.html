@@ -361,8 +361,8 @@ open Util
 open Ast
 
 let closure_conversion global_scope =
-  <span data-count="403">l</span>et empty = Base.Set.empty (module Base.String) in
-  <span data-count="403">l</span>et get_constructor = function
+  <span data-count="405">l</span>et empty = Base.Set.empty (module Base.String) in
+  <span data-count="405">l</span>et get_constructor = function
     | <span data-count="218">D</span>Declaration _ -&gt; ddeclaration
     | <span data-count="38">D</span>RecursiveDeclaration _ -&gt; drecursivedeclaration
   in
@@ -443,25 +443,25 @@ let closure_conversion global_scope =
       in
       let decl_acc, global_scope = helper other_decls [] global_scope env in
       <span data-count="128">e</span>letin decl decl_acc (closure_expressio<span data-count="128">n</span> env global_scope body)
-    | <span data-count="1232">E</span>Identifier id as original -&gt;
+    | <span data-count="1249">E</span>Identifier id as original -&gt;
       (match Base.Map.find env id with
-       | <span data-count="1138">N</span>one -&gt; original
+       | <span data-count="1155">N</span>one -&gt; original
        | <span data-count="94">S</span>ome free_vars -&gt;
          Base.Set.fold_right
            free_vars
            ~f:(fun var acc -&gt; <span data-count="57">e</span>application acc (eidentifie<span data-count="57">r</span> var))
            ~init:original)
-    | <span data-count="317">E</span>BinaryOperation (bop, left, right) -&gt;
+    | <span data-count="331">E</span>BinaryOperation (bop, left, right) -&gt;
       let left = closure_expression env global_scope left in
-      <span data-count="317">l</span>et right = closure_expression env global_scope right in
-      <span data-count="317">e</span>binary_operation bop left right
+      <span data-count="331">l</span>et right = closure_expression env global_scope right in
+      <span data-count="331">e</span>binary_operation bop left right
     | <span data-count="8">E</span>UnaryOperation (operator, operand) -&gt;
       let operand = closure_expression env global_scope operand in
       <span data-count="8">e</span>unary_operation operator operand
-    | <span data-count="755">E</span>Application (func, arg) -&gt;
+    | <span data-count="771">E</span>Application (func, arg) -&gt;
       let func = closure_expression env global_scope func in
-      <span data-count="755">l</span>et arg = closure_expression env global_scope arg in
-      <span data-count="755">e</span>application func arg
+      <span data-count="771">l</span>et arg = closure_expression env global_scope arg in
+      <span data-count="771">e</span>application func arg
     | <span data-count="115">E</span>List expr_list -&gt;
       let expr_list = Base.List.map expr_list ~f:(closure_expressio<span data-count="115">n</span> env global_scope) in
       <span data-count="115">e</span>list expr_list
@@ -491,28 +491,28 @@ let closure_conversion global_scope =
           <span data-count="39">p</span>attern, closure_expressio<span data-count="39">n</span> env global_scope action)
       in
       <span data-count="53">e</span>matchwith matched first_case other_cases
-    | <span data-count="994">e</span>xpr -&gt; expr
+    | <span data-count="1009">e</span>xpr -&gt; expr
   in
-  closure_expression (Base.Map.empt<span data-count="403">y</span> (module Base.String)) global_scope
+  closure_expression (Base.Map.empt<span data-count="405">y</span> (module Base.String)) global_scope
 ;;
 
 let run_closure program =
-  <span data-count="243">l</span>et get_constructor = function
-    | <span data-count="368">D</span>Declaration _ -&gt; ddeclaration
+  <span data-count="244">l</span>et get_constructor = function
+    | <span data-count="370">D</span>Declaration _ -&gt; ddeclaration
     | <span data-count="35">D</span>RecursiveDeclaration _ -&gt; drecursivedeclaration
   in
   let rec helper acc global_scope = function
-    | <span data-count="243">[</span>] -&gt; acc
-    | <span data-count="403">h</span>ead :: tail -&gt;
+    | <span data-count="244">[</span>] -&gt; acc
+    | <span data-count="405">h</span>ead :: tail -&gt;
       (match head with
-       | ( <span data-count="368">D</span>Declaration (id, pattern_list, body)
+       | ( <span data-count="370">D</span>Declaration (id, pattern_list, body)
          | <span data-count="35">D</span>RecursiveDeclaration (id, pattern_list, body) ) as original -&gt;
          let decl = get_constructor original in
-         <span data-count="403">l</span>et body = closure_conversion global_scope body in
-         <span data-count="403">l</span>et global_scope = Base.Set.add global_scope id in
-         <span data-count="403">h</span>elper (dec<span data-count="403">l</span> id pattern_list body :: acc) global_scope tail)
+         <span data-count="405">l</span>et body = closure_conversion global_scope body in
+         <span data-count="405">l</span>et global_scope = Base.Set.add global_scope id in
+         <span data-count="405">h</span>elper (dec<span data-count="405">l</span> id pattern_list body :: acc) global_scope tail)
   in
-  Base.List.rev @@ helpe<span data-count="243">r</span> [] (Base.Set.empt<span data-count="243">y</span> (module Base.String)) program
+  Base.List.rev @@ helpe<span data-count="244">r</span> [] (Base.Set.empt<span data-count="244">y</span> (module Base.String)) program
 ;;
 </code></pre>
       </div>

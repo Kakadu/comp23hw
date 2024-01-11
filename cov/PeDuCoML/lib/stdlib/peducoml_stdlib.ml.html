@@ -183,42 +183,42 @@
 
 open Typing
 
-let print_int_scheme = Base.Set.empt<span data-count="243">y</span> (module Base.Int), TArr (TGround Int, TGround Int)
-let print_char_scheme = Base.Set.empt<span data-count="243">y</span> (module Base.Int), TArr (TGround Char, TGround Int)
-let print_bool_scheme = Base.Set.empt<span data-count="243">y</span> (module Base.Int), TArr (TGround Bool, TGround Int)
-let print_new_line_scheme = Base.Set.empt<span data-count="243">y</span> (module Base.Int), TGround Int
+let print_int_scheme = Base.Set.empt<span data-count="244">y</span> (module Base.Int), TArr (TGround Int, TGround Int)
+let print_char_scheme = Base.Set.empt<span data-count="244">y</span> (module Base.Int), TArr (TGround Char, TGround Int)
+let print_bool_scheme = Base.Set.empt<span data-count="244">y</span> (module Base.Int), TArr (TGround Bool, TGround Int)
+let print_new_line_scheme = Base.Set.empt<span data-count="244">y</span> (module Base.Int), TGround Int
 
 let print_list_scheme =
-  Base.Set.empt<span data-count="243">y</span> (module Base.Int), TArr (TList (TVar (-1)), TGround Int)
+  Base.Set.empt<span data-count="244">y</span> (module Base.Int), TArr (TList (TVar (-1)), TGround Int)
 ;;
 
 let concat_lists_scheme =
-  ( Base.Set.empt<span data-count="243">y</span> (module Base.Int)
+  ( Base.Set.empt<span data-count="244">y</span> (module Base.Int)
   , TArr (TList (TVar (-1)), TArr (TList (TVar (-1)), TList (TVar (-1)))) )
 ;;
 
 let concat_strings_scheme =
-  ( Base.Set.empt<span data-count="243">y</span> (module Base.Int)
+  ( Base.Set.empt<span data-count="244">y</span> (module Base.Int)
   , TArr (TGround String, TArr (TGround String, TGround String)) )
 ;;
 
-let print_tuple_scheme = Base.Set.empt<span data-count="243">y</span> (module Base.Int), TArr (TVar (-1), TGround Int)
+let print_tuple_scheme = Base.Set.empt<span data-count="244">y</span> (module Base.Int), TArr (TVar (-1), TGround Int)
 
 let print_string_scheme =
-  Base.Set.empt<span data-count="243">y</span> (module Base.Int), TArr (TGround String, TGround Int)
+  Base.Set.empt<span data-count="244">y</span> (module Base.Int), TArr (TGround String, TGround Int)
 ;;
 
 let compare_lists_scheme =
-  ( Base.Set.empt<span data-count="243">y</span> (module Base.Int)
+  ( Base.Set.empt<span data-count="244">y</span> (module Base.Int)
   , TArr (TList (TVar (-2)), TArr (TList (TVar (-2)), TGround Bool)) )
 ;;
 
 let compare_tuples_scheme =
-  Base.Set.empt<span data-count="243">y</span> (module Base.Int), TArr (TVar (-3), TArr (TVar (-3), TGround Bool))
+  Base.Set.empt<span data-count="244">y</span> (module Base.Int), TArr (TVar (-3), TArr (TVar (-3), TGround Bool))
 ;;
 
 let compare_strings_scheme =
-  ( Base.Set.empt<span data-count="243">y</span> (module Base.Int)
+  ( Base.Set.empt<span data-count="244">y</span> (module Base.Int)
   , TArr (TGround String, TArr (TGround String, TGround Bool)) )
 ;;
 

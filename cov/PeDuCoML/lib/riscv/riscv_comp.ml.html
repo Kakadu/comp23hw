@@ -463,7 +463,7 @@ open Result
 open Riscv
 
 let ( &gt;&gt;= ) = bind
-let ( &gt;&gt;| ) m f = <span data-count="320">m</span> &gt;&gt;= fun x -&gt; <span data-count="320">o</span>k (<span data-count="320">f</span> x)
+let ( &gt;&gt;| ) m f = <span data-count="322">m</span> &gt;&gt;= fun x -&gt; <span data-count="322">o</span>k (<span data-count="322">f</span> x)
 
 type riscv_error = UnboundVariable of unique_id
 
@@ -480,7 +480,7 @@ let ( let* ) = bind
 open Environment
 
 let build_binary_operation = function
-  | <span data-count="20">A</span>dd -&gt; build_add
+  | <span data-count="34">A</span>dd -&gt; build_add
   | <span data-count="17">S</span>ub -&gt; build_sub
   | <span data-count="26">M</span>ul -&gt; build_mul
   | <span data-count="0">D</span>iv -&gt; build_div
@@ -500,7 +500,7 @@ let build_unary_operation = function
 ;;
 
 let rec codegen_immexpr args_number env =
-  <span data-count="1781">l</span>et list_helper imm_list =
+  <span data-count="1843">l</span>et list_helper imm_list =
     <span data-count="60">l</span>et allocated_list = build_call (lookup_function_ex<span data-count="60">n</span> "peducoml_alloc_list") [] in
     <span data-count="60">l</span>et add = lookup_function_exn "peducoml_add_to_list" in
     <span data-count="60">B</span>ase.List.fold (Base.List.re<span data-count="60">v</span> imm_list) ~init:(o<span data-count="60">k</span> allocated_list) ~f:(fun acc elem -&gt;
@@ -509,23 +509,23 @@ let rec codegen_immexpr args_number env =
       <span data-count="366">o</span>k @@ build_cal<span data-count="366">l</span> add [ acc; elem ])
   in
   function
-  | <span data-count="341">I</span>mmInt num -&gt; ok (const_in<span data-count="341">t</span> num, 0)
+  | <span data-count="356">I</span>mmInt num -&gt; ok (const_in<span data-count="356">t</span> num, 0)
   | <span data-count="263">I</span>mmChar c -&gt; ok (Base.Char.to_int c |&gt; <span data-count="263">c</span>onst_in<span data-count="263">t</span>, 0)
   | <span data-count="57">I</span>mmBool v -&gt; ok (Base.Bool.to_int v |&gt; <span data-count="57">c</span>onst_in<span data-count="57">t</span>, 0)
-  | <span data-count="266">I</span>mmId (GlobalScopeId id) -&gt;
+  | <span data-count="268">I</span>mmId (GlobalScopeId id) -&gt;
     let func = lookup_function_exn id in
-    <span data-count="266">l</span>et args = params func |&gt; <span data-count="266">O</span>ption.get in
-    <span data-count="266">i</span>f args &gt; 0
-    then <span data-count="244">o</span>k (func, args)
+    <span data-count="268">l</span>et args = params func |&gt; <span data-count="268">O</span>ption.get in
+    <span data-count="268">i</span>f args &gt; 0
+    then <span data-count="246">o</span>k (func, args)
     else <span data-count="22">o</span>k @@ (build_cal<span data-count="22">l</span> (lookup_function_ex<span data-count="22">n</span> "peducoml_apply0") [ func ], args)
-  | <span data-count="760">I</span>mmId (AnfId id) -&gt;
+  | <span data-count="805">I</span>mmId (AnfId id) -&gt;
     (match find env (AnfId id) with
      | <span data-count="0">N</span>one -&gt; AnfId id |&gt; unbound |&gt; <span data-count="0">e</span>rror
-     | <span data-count="760">S</span>ome value -&gt;
+     | <span data-count="805">S</span>ome value -&gt;
        let number_of_args =
          match find args_number (AnfId id) with
-         | <span data-count="176">S</span>ome n -&gt; n
-         | <span data-count="584">N</span>one -&gt; 0
+         | <span data-count="191">S</span>ome n -&gt; n
+         | <span data-count="614">N</span>one -&gt; 0
        in
        ok (value, number_of_args))
   | <span data-count="25">I</span>mmString str -&gt;
@@ -552,37 +552,37 @@ let rec codegen_immexpr args_number env =
 ;;
 
 let rec codegen_cexpr args_number env = function
-  | <span data-count="320">C</span>Imm immexpr -&gt; codegen_immexp<span data-count="320">r</span> args_number env immexpr &gt;&gt;| fst
-  | <span data-count="121">C</span>BinaryOperation (bop, left_imm, right_imm) -&gt;
-    let* left, _ = codegen_immexp<span data-count="121">r</span> args_number env left_imm in
-    <span data-count="121">l</span>et* right, _ = codegen_immexp<span data-count="121">r</span> args_number env right_imm in
-    <span data-count="121">(</span>match bop with
+  | <span data-count="322">C</span>Imm immexpr -&gt; codegen_immexp<span data-count="322">r</span> args_number env immexpr &gt;&gt;| fst
+  | <span data-count="135">C</span>BinaryOperation (bop, left_imm, right_imm) -&gt;
+    let* left, _ = codegen_immexp<span data-count="135">r</span> args_number env left_imm in
+    <span data-count="135">l</span>et* right, _ = codegen_immexp<span data-count="135">r</span> args_number env right_imm in
+    <span data-count="135">(</span>match bop with
      | <span data-count="4">D</span>iv -&gt; ok @@ build_cal<span data-count="4">l</span> (lookup_function_ex<span data-count="4">n</span> "peducoml_divide") [ left; right ]
-     | <span data-count="117">_</span> -&gt;
+     | <span data-count="131">_</span> -&gt;
        let result = build_binary_operation bop left right in
-       <span data-count="117">o</span>k result)
-  | <span data-count="347">C</span>Application (callee, arg) -&gt;
-    let* callee, number_of_args = codegen_immexp<span data-count="347">r</span> args_number env callee in
-    <span data-count="347">l</span>et number_of_args =
+       <span data-count="131">o</span>k result)
+  | <span data-count="363">C</span>Application (callee, arg) -&gt;
+    let* callee, number_of_args = codegen_immexp<span data-count="363">r</span> args_number env callee in
+    <span data-count="363">l</span>et number_of_args =
       match params callee with
-      | <span data-count="234">S</span>ome num -&gt; num
-      | <span data-count="113">N</span>one -&gt; number_of_args
+      | <span data-count="236">S</span>ome num -&gt; num
+      | <span data-count="127">N</span>one -&gt; number_of_args
     in
     let func_ptr =
       build_call
-        (lookup_function_ex<span data-count="347">n</span> "peducoml_alloc_closure")
-        [ callee; const_in<span data-count="347">t</span> number_of_args ]
+        (lookup_function_ex<span data-count="363">n</span> "peducoml_alloc_closure")
+        [ callee; const_in<span data-count="363">t</span> number_of_args ]
     in
-    <span data-count="347">l</span>et* arg, _ = codegen_immexp<span data-count="347">r</span> args_number env arg in
-    <span data-count="347">l</span>et arg =
+    <span data-count="363">l</span>et* arg, _ = codegen_immexp<span data-count="363">r</span> args_number env arg in
+    <span data-count="363">l</span>et arg =
       match params arg with
-      | <span data-count="340">N</span>one -&gt; arg
+      | <span data-count="356">N</span>one -&gt; arg
       | <span data-count="7">S</span>ome num_args -&gt;
         build_cal<span data-count="7">l</span>
           (lookup_function_ex<span data-count="7">n</span> "peducoml_alloc_closure")
           [ arg; const_in<span data-count="7">t</span> num_args ]
     in
-    ok @@ build_cal<span data-count="347">l</span> (lookup_function_ex<span data-count="347">n</span> "peducoml_apply") [ func_ptr; arg ]
+    ok @@ build_cal<span data-count="363">l</span> (lookup_function_ex<span data-count="363">n</span> "peducoml_apply") [ func_ptr; arg ]
   | <span data-count="3">C</span>UnaryOperation (op, arg) -&gt;
     let* arg, _ = codegen_immexp<span data-count="3">r</span> args_number env arg in
     <span data-count="3">l</span>et result = build_unary_operation op arg in
@@ -623,41 +623,41 @@ let rec codegen_cexpr args_number env = function
     <span data-count="46">o</span>k alloca
 
 and codegen_aexpr args_number env = function
-  | <span data-count="262">A</span>CExpr cexpr -&gt; codegen_cexpr args_number env cexpr
-  | <span data-count="583">A</span>Let (id, cexpr, aexpr) -&gt;
-    let* cexpr_rv_value = codegen_cexp<span data-count="583">r</span> args_number env cexpr in
-    <span data-count="583">l</span>et env = set env ~key:id ~data:cexpr_rv_value in
-    <span data-count="583">c</span>odegen_aexpr args_number env aexpr
+  | <span data-count="264">A</span>CExpr cexpr -&gt; codegen_cexpr args_number env cexpr
+  | <span data-count="613">A</span>Let (id, cexpr, aexpr) -&gt;
+    let* cexpr_rv_value = codegen_cexp<span data-count="613">r</span> args_number env cexpr in
+    <span data-count="613">l</span>et env = set env ~key:id ~data:cexpr_rv_value in
+    <span data-count="613">c</span>odegen_aexpr args_number env aexpr
 ;;
 
 let codegen_global_scope_function args_numbers (func : global_scope_function) =
-  <span data-count="170">l</span>et function_name, arg_list, body = func in
+  <span data-count="172">l</span>et function_name, arg_list, body = func in
   let func_rv_value, args = declare_function function_name arg_list in
-  <span data-count="170">l</span>et env =
+  <span data-count="172">l</span>et env =
     Base.List.fold_right args ~init:empty ~f:(fun (arg, location) acc -&gt;
-      <span data-count="98">s</span>et acc ~key:arg ~data:location)
+      <span data-count="113">s</span>et acc ~key:arg ~data:location)
   in
-  <span data-count="170">l</span>et* body = codegen_aexp<span data-count="170">r</span> (Base.Map.find_ex<span data-count="170">n</span> args_numbers function_name) env body in
-  <span data-count="170">l</span>et body =
+  <span data-count="172">l</span>et* body = codegen_aexp<span data-count="172">r</span> (Base.Map.find_ex<span data-count="172">n</span> args_numbers function_name) env body in
+  <span data-count="172">l</span>et body =
     match type_of body with
     | <span data-count="2">B</span>inding -&gt;
       let num_args = params body |&gt; <span data-count="2">O</span>ption.get in
       <span data-count="2">b</span>uild_cal<span data-count="2">l</span>
         (lookup_function_ex<span data-count="2">n</span> "peducoml_alloc_closure")
         [ body; const_in<span data-count="2">t</span> num_args ]
-    | <span data-count="168">_</span> -&gt; body
+    | <span data-count="170">_</span> -&gt; body
   in
   build_ret body;
-  <span data-count="170">o</span>k func_rv_value
+  <span data-count="172">o</span>k func_rv_value
 ;;
 
 let codegen program : (unit, riscv_error) Result.t =
-  <span data-count="90">l</span>et args_number = gather_args_numbers program in
-  <span data-count="90">l</span>et rec codegen = function
-    | <span data-count="90">[</span>] -&gt; ok ()
-    | <span data-count="170">h</span>ead :: tail -&gt;
-      let* _ = codegen_global_scope_functio<span data-count="170">n</span> args_number head in
-      <span data-count="170">c</span>odegen tail
+  <span data-count="91">l</span>et args_number = gather_args_numbers program in
+  <span data-count="91">l</span>et rec codegen = function
+    | <span data-count="91">[</span>] -&gt; ok ()
+    | <span data-count="172">h</span>ead :: tail -&gt;
+      let* _ = codegen_global_scope_functio<span data-count="172">n</span> args_number head in
+      <span data-count="172">c</span>odegen tail
   in
   codegen program
 ;;

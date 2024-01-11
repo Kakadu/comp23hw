@@ -178,11 +178,11 @@
 
 open Ast
 
-let empty = Base.Set.empt<span data-count="264">y</span> (module Base.String)
+let empty = Base.Set.empt<span data-count="265">y</span> (module Base.String)
 
 let find_identifiers_pattern =
   let rec helper acc = function
-    | <span data-count="1217">P</span>Identifier id -&gt; Base.Set.add acc id
+    | <span data-count="1232">P</span>Identifier id -&gt; Base.Set.add acc id
     | <span data-count="313">P</span>List pattern_list -&gt;
       (match pattern_list with
        | <span data-count="203">h</span>ead :: tail -&gt; helper (helpe<span data-count="203">r</span> acc head) (PList tail)
@@ -192,7 +192,7 @@ let find_identifiers_pattern =
     | <span data-count="141">P</span>ConstructList (operand, list) -&gt; helper (helpe<span data-count="141">r</span> acc operand) list
     | <span data-count="207">_</span> -&gt; acc
   in
-  helpe<span data-count="264">r</span> empty
+  helpe<span data-count="265">r</span> empty
 ;;
 
 (** Finds all identifiers in an expression. Used in pattern-matching inference *)
@@ -208,10 +208,10 @@ let find_identifiers =
       in
       <span data-count="112">B</span>ase.Set.diff (helpe<span data-count="112">r</span> acc body) pattern_args
   and helper acc = function
-    | <span data-count="535">E</span>BinaryOperation (_, left, right) -&gt; helper (helpe<span data-count="535">r</span> acc left) right
+    | <span data-count="549">E</span>BinaryOperation (_, left, right) -&gt; helper (helpe<span data-count="549">r</span> acc left) right
     | <span data-count="6">E</span>UnaryOperation (_, operand) -&gt; helper acc operand
-    | <span data-count="1090">E</span>Application (func, arg) -&gt; helper (helpe<span data-count="1090">r</span> acc func) arg
-    | <span data-count="2027">E</span>Identifier id -&gt; Base.Set.add acc id
+    | <span data-count="1106">E</span>Application (func, arg) -&gt; helper (helpe<span data-count="1106">r</span> acc func) arg
+    | <span data-count="2044">E</span>Identifier id -&gt; Base.Set.add acc id
     | <span data-count="102">E</span>Fun (first_arg, other_args, body) -&gt;
       let pattern_args =
         Base.List.fold_right
@@ -240,9 +240,9 @@ let find_identifiers =
       <span data-count="140">(</span>match other_cases with
        | <span data-count="60">h</span>ead :: tail -&gt; helper acc (ematchwit<span data-count="60">h</span> matched head tail)
        | <span data-count="80">[</span>] -&gt; helper acc matched)
-    | <span data-count="1029">_</span> -&gt; acc
+    | <span data-count="1044">_</span> -&gt; acc
   in
-  helpe<span data-count="264">r</span> empty
+  helpe<span data-count="265">r</span> empty
 ;;
 </code></pre>
       </div>
