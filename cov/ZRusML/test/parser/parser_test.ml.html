@@ -18,11 +18,11 @@
       <h2>54.55%</h2>
     </div>
     <div id="navbar">
-      <span class="unvisited" style="top:6.17%"></span>
-      <span class="unvisited" style="top:7.41%"></span>
-      <span class="unvisited" style="top:8.64%"></span>
-      <span class="unvisited" style="top:9.88%"></span>
-      <span class="unvisited" style="top:11.11%"></span>
+      <span class="unvisited" style="top:6.75%"></span>
+      <span class="unvisited" style="top:7.98%"></span>
+      <span class="unvisited" style="top:9.20%"></span>
+      <span class="unvisited" style="top:10.43%"></span>
+      <span class="unvisited" style="top:11.66%"></span>
     </div>
     <div id="report">
       <div id="lines-layer">
@@ -35,21 +35,21 @@
 <a id="L6"></a><span > </span>
 <a id="L7"></a><span > </span>
 <a id="L8"></a><span > </span>
-<a id="L9"></a><span class="visited"> </span>
-<a id="L10"></a><span class="unvisited"> </span>
-<a id="L11"></a><span > </span>
-<a id="L12"></a><span class="unvisited"> </span>
-<a id="L13"></a><span class="visited"> </span>
-<a id="L14"></a><span class="unvisited"> </span>
-<a id="L15"></a><span > </span>
-<a id="L16"></a><span class="unvisited"> </span>
-<a id="L17"></a><span > </span>
-<a id="L18"></a><span class="unvisited"> </span>
-<a id="L19"></a><span > </span>
+<a id="L9"></a><span > </span>
+<a id="L10"></a><span class="visited"> </span>
+<a id="L11"></a><span class="unvisited"> </span>
+<a id="L12"></a><span > </span>
+<a id="L13"></a><span class="unvisited"> </span>
+<a id="L14"></a><span class="visited"> </span>
+<a id="L15"></a><span class="unvisited"> </span>
+<a id="L16"></a><span > </span>
+<a id="L17"></a><span class="unvisited"> </span>
+<a id="L18"></a><span > </span>
+<a id="L19"></a><span class="unvisited"> </span>
 <a id="L20"></a><span > </span>
 <a id="L21"></a><span > </span>
-<a id="L22"></a><span class="visited"> </span>
-<a id="L23"></a><span > </span>
+<a id="L22"></a><span > </span>
+<a id="L23"></a><span class="visited"> </span>
 <a id="L24"></a><span > </span>
 <a id="L25"></a><span > </span>
 <a id="L26"></a><span > </span>
@@ -101,8 +101,8 @@
 <a id="L72"></a><span > </span>
 <a id="L73"></a><span > </span>
 <a id="L74"></a><span > </span>
-<a id="L75"></a><span class="visited"> </span>
-<a id="L76"></a><span > </span>
+<a id="L75"></a><span > </span>
+<a id="L76"></a><span class="visited"> </span>
 <a id="L77"></a><span > </span>
 <a id="L78"></a><span > </span>
 <a id="L79"></a><span > </span>
@@ -133,8 +133,8 @@
 <a id="L104"></a><span > </span>
 <a id="L105"></a><span > </span>
 <a id="L106"></a><span > </span>
-<a id="L107"></a><span class="visited"> </span>
-<a id="L108"></a><span > </span>
+<a id="L107"></a><span > </span>
+<a id="L108"></a><span class="visited"> </span>
 <a id="L109"></a><span > </span>
 <a id="L110"></a><span > </span>
 <a id="L111"></a><span > </span>
@@ -189,6 +189,7 @@
 <a id="L160"></a><span > </span>
 <a id="L161"></a><span > </span>
 <a id="L162"></a><span > </span>
+<a id="L163"></a><span > </span>
 </pre>
       </div>
       <div id="text-layer">
@@ -355,6 +356,7 @@
 <a href="#L160">160</a>
 <a href="#L161">161</a>
 <a href="#L162">162</a>
+<a href="#L163">163</a>
 </pre>
 <pre><code class="ocaml">(** Copyright 2023-2024, Rustam Shangareev and Danil Yevdokimov *)
 
@@ -362,6 +364,7 @@
 
 open ZRusML_lib.Ast
 open ZRusML_lib.Parser
+open ZRusML_lib.Pretty_printer
 
 let test_parse ~label ~code ~expected =
   <span data-count="3">m</span>atch parse prog code with

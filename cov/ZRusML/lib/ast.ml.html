@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8"/>
     <title>ast.ml &mdash; Coverage report</title>
-    <meta name="description" content="57.14% coverage in lib/ast.ml">
+    <meta name="description" content="0.00% coverage in lib/ast.ml">
     <link rel="stylesheet" href="../coverage.css"/>
     <script src="../highlight.pack.js"></script>
     <script>hljs.initHighlightingOnLoad();</script>
@@ -15,15 +15,10 @@
           <span class="dirname">lib/</span>ast.ml
         </a>
       </h1>
-      <h2>57.14%</h2>
+      <h2>0.00%</h2>
     </div>
     <div id="navbar">
-      <span class="some-visited" style="top:10.42%"></span>
-      <span class="unvisited" style="top:43.75%"></span>
-      <span class="some-visited" style="bottom:47.92%"></span>
-      <span class="unvisited" style="bottom:45.83%"></span>
-      <span class="unvisited" style="bottom:43.75%"></span>
-      <span class="unvisited" style="bottom:41.67%"></span>
+      <span class="unvisited" style="top:9.80%"></span>
     </div>
     <div id="report">
       <div id="lines-layer">
@@ -32,9 +27,9 @@
 <a id="L2"></a><span > </span>
 <a id="L3"></a><span > </span>
 <a id="L4"></a><span > </span>
-<a id="L5"></a><span class="some-visited"> </span>
+<a id="L5"></a><span class="unvisited"> </span>
 <a id="L6"></a><span > </span>
-<a id="L7"></a><span class="visited"> </span>
+<a id="L7"></a><span > </span>
 <a id="L8"></a><span > </span>
 <a id="L9"></a><span > </span>
 <a id="L10"></a><span > </span>
@@ -48,34 +43,37 @@
 <a id="L18"></a><span > </span>
 <a id="L19"></a><span > </span>
 <a id="L20"></a><span > </span>
-<a id="L21"></a><span class="unvisited"> </span>
+<a id="L21"></a><span > </span>
 <a id="L22"></a><span > </span>
 <a id="L23"></a><span > </span>
 <a id="L24"></a><span > </span>
-<a id="L25"></a><span class="some-visited"> </span>
-<a id="L26"></a><span class="unvisited"> </span>
-<a id="L27"></a><span class="unvisited"> </span>
-<a id="L28"></a><span class="unvisited"> </span>
+<a id="L25"></a><span > </span>
+<a id="L26"></a><span > </span>
+<a id="L27"></a><span > </span>
+<a id="L28"></a><span > </span>
 <a id="L29"></a><span > </span>
-<a id="L30"></a><span class="visited"> </span>
-<a id="L31"></a><span class="visited"> </span>
-<a id="L32"></a><span class="visited"> </span>
+<a id="L30"></a><span > </span>
+<a id="L31"></a><span > </span>
+<a id="L32"></a><span > </span>
 <a id="L33"></a><span > </span>
-<a id="L34"></a><span class="visited"> </span>
+<a id="L34"></a><span > </span>
 <a id="L35"></a><span > </span>
 <a id="L36"></a><span > </span>
 <a id="L37"></a><span > </span>
-<a id="L38"></a><span class="visited"> </span>
+<a id="L38"></a><span > </span>
 <a id="L39"></a><span > </span>
 <a id="L40"></a><span > </span>
 <a id="L41"></a><span > </span>
 <a id="L42"></a><span > </span>
 <a id="L43"></a><span > </span>
-<a id="L44"></a><span class="visited"> </span>
+<a id="L44"></a><span > </span>
 <a id="L45"></a><span > </span>
 <a id="L46"></a><span > </span>
 <a id="L47"></a><span > </span>
-<a id="L48"></a><span class="visited"> </span>
+<a id="L48"></a><span > </span>
+<a id="L49"></a><span > </span>
+<a id="L50"></a><span > </span>
+<a id="L51"></a><span > </span>
 </pre>
       </div>
       <div id="text-layer">
@@ -128,14 +126,17 @@
 <a href="#L46">46</a>
 <a href="#L47">47</a>
 <a href="#L48">48</a>
+<a href="#L49">49</a>
+<a href="#L50">50</a>
+<a href="#L51">51</a>
 </pre>
 <pre><code class="ocaml">(** Copyright 2023-2024, Rustam Shangareev and Danil Yevdokimov *)
 
 (** SPDX-License-Identifier: LGPL-2.1 *)
 
-<span data-count="0">t</span>ype id = <span data-count="2">s</span>tring [@@deriving show { with_path = false }]
+<span data-count="0">t</span>ype id = <span data-count="0">s</span>tring [@@deriving show { with_path = false }]
 
-<span data-count="69">t</span>ype bin_op =
+type bin_op =
   | And (**  and *)
   | Or (**  or *)
   | Less (**  &lt; *)
@@ -149,34 +150,37 @@
   | Mul (**  * *)
   | Div (**  / *)
 
-<span data-count="0">a</span>nd un_op =
+type un_op =
   | Not (**  not *)
   | Minus (** - *)
 
-<span data-count="0">a</span>nd binding = <span data-count="2">b</span>oo<span data-count="1">l</span> * pt * exp
-<span data-count="0">a</span>nd case = <span data-count="0">p</span>t * exp
-<span data-count="0">a</span>nd decl = DLet of binding (**  val y = 256 *)
-<span data-count="0">a</span>nd prog = <span data-count="0">d</span>ecl lis<span data-count="0">t</span>
+type const =
+  | CInt of int
+  | CBool of bool
 
-<span data-count="16">a</span>nd const =
-  | CInt of in<span data-count="7">t</span>
-  | CBool of boo<span data-count="1">l</span>
+type pt =
+  | PtWild (**  _ *)
+  | PtVar of id (**  xyz *)
+  | PtConst of const (**  256 *)
 
-<span data-count="27">a</span>nd exp =
+type binding = bool * pt * exp
+
+and exp =
   | EConst of const (**    false *)
   | EUnOp of un_op * exp (**    not x, -x, !x *)
   | EVar of id (**    x *)
-  | ELet of <span data-count="5">b</span>inding lis<span data-count="1">t</span> * exp (**    let x = 256 in 512 *)
+  | ELet of binding list * exp (**    let x = 256 in 512 *)
   | EFun of pt * exp (**   fn x -&gt; x *)
   | EIf of exp * exp * exp (**    if predicate then x else y *)
   | EBinOp of bin_op * exp * exp (**    25 / (7 + -2) *)
   | EApp of exp * exp (**    fold a list init *)
 
-<span data-count="2">a</span>nd pt =
-  | PtWild (**  _ *)
-  | PtVar of id (**  xyz *)
-  | PtConst of const (**  256 *)
-[@@deriving show { with_path = false }<span data-count="52">]</span>
+type case = pt * exp
+type decl = DLet of binding (**  val y = 256 *)
+type prog = decl list
+
+
+
 </code></pre>
       </div>
     </div>
