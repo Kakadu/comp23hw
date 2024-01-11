@@ -1531,109 +1531,109 @@ open Ast
 open Base
 module Format = Stdlib.Format
 
-let parse_str p s = <span data-count="80">p</span>arse_string ~consume:All p s
+let parse_str p s = <span data-count="82">p</span>arse_string ~consume:All p s
 
 let is_whitespace = function
-  | <span data-count="6901">'</span> ' | <span data-count="888">'</span>\n' | <span data-count="0">'</span>\t' | <span data-count="0">'</span>\r' -&gt; true
-  | <span data-count="18183">_</span> -&gt; false
+  | <span data-count="7009">'</span> ' | <span data-count="952">'</span>\n' | <span data-count="0">'</span>\t' | <span data-count="0">'</span>\r' -&gt; true
+  | <span data-count="18585">_</span> -&gt; false
 ;;
 
 let is_digit = function
-  | <span data-count="243">'</span>0' .. '9' -&gt; true
-  | <span data-count="3223">_</span> -&gt; false
+  | <span data-count="257">'</span>0' .. '9' -&gt; true
+  | <span data-count="3311">_</span> -&gt; false
 ;;
 
 let is_aletter = function
-  | <span data-count="2422">'</span>a' .. 'z' -&gt; true
-  | <span data-count="1902">_</span> -&gt; false
+  | <span data-count="2482">'</span>a' .. 'z' -&gt; true
+  | <span data-count="1946">_</span> -&gt; false
 ;;
 
 let is_cletter = function
   | <span data-count="0">'</span>A' .. 'Z' -&gt; true
-  | <span data-count="1220">_</span> -&gt; false
+  | <span data-count="1244">_</span> -&gt; false
 ;;
 
 let is_underscore = function
-  | <span data-count="1902">c</span> -&gt; Char.equal c '_'
+  | <span data-count="1946">c</span> -&gt; Char.equal c '_'
 ;;
 
 let is_id_char = function
-  | <span data-count="2482">c</span> -&gt; is_digi<span data-count="2482">t</span> <span data-count="58">c</span> || is_alette<span data-count="2424">r</span> <span data-count="1204">c</span> || is_clette<span data-count="1220">r</span> <span data-count="0">c</span> || is_underscore c
+  | <span data-count="2542">c</span> -&gt; is_digi<span data-count="2542">t</span> <span data-count="58">c</span> || is_alette<span data-count="2484">r</span> <span data-count="1240">c</span> || is_clette<span data-count="1244">r</span> <span data-count="0">c</span> || is_underscore c
 ;;
 
 let is_keyword = function
-  | <span data-count="19">"</span>let" | <span data-count="0">"</span>rec" | <span data-count="134">"</span>fun" | <span data-count="22">"</span>in" | <span data-count="81">"</span>if" | <span data-count="0">"</span>then" | <span data-count="15">"</span>else" | <span data-count="4">"</span>true" | <span data-count="2">"</span>false" -&gt; true
-  | <span data-count="941">_</span> -&gt; false
+  | <span data-count="23">"</span>let" | <span data-count="0">"</span>rec" | <span data-count="134">"</span>fun" | <span data-count="22">"</span>in" | <span data-count="81">"</span>if" | <span data-count="0">"</span>then" | <span data-count="15">"</span>else" | <span data-count="4">"</span>true" | <span data-count="2">"</span>false" -&gt; true
+  | <span data-count="961">_</span> -&gt; false
 ;;
 
 let chainl1 e op =
-  <span data-count="1902">l</span>et rec go acc = <span data-count="2476">l</span>ift<span data-count="2476">2</span> (fun f x -&gt; <span data-count="179">f</span> acc x) op e &gt;&gt;<span data-count="2476">=</span> go &lt;|&gt; retur<span data-count="2476">n</span> acc in
-  e &gt;&gt;= fun init -&gt; <span data-count="2297">g</span>o init
+  <span data-count="1914">l</span>et rec go acc = <span data-count="2512">l</span>ift<span data-count="2512">2</span> (fun f x -&gt; <span data-count="179">f</span> acc x) op e &gt;&gt;<span data-count="2512">=</span> go &lt;|&gt; retur<span data-count="2512">n</span> acc in
+  e &gt;&gt;= fun init -&gt; <span data-count="2333">g</span>o init
 ;;
 
-let empty = take_whil<span data-count="44">e</span> is_whitespace
-let empty1 = take_while<span data-count="44">1</span> is_whitespace
-let token s = <span data-count="176">e</span>mpty *&gt; s
-let token1 s = <span data-count="750">e</span>mpty1 *&gt; s
-let str_token s = <span data-count="8600">e</span>mpty *&gt; strin<span data-count="8600">g</span> s
-let str_token1 s = <span data-count="982">e</span>mpty1 *&gt; strin<span data-count="982">g</span> s
-let pparens p = <span data-count="3505">s</span>tr_toke<span data-count="3505">n</span> "(" *<span data-count="3505">&gt;</span> p &lt;* str_toke<span data-count="3505">n</span> ")"
-let parrow = str_toke<span data-count="44">n</span> "-&gt;"
-let pbinding = str_toke<span data-count="44">n</span> "let"
-let pwild = str_toke<span data-count="44">n</span> "_"
+let empty = take_whil<span data-count="46">e</span> is_whitespace
+let empty1 = take_while<span data-count="46">1</span> is_whitespace
+let token s = <span data-count="184">e</span>mpty *&gt; s
+let token1 s = <span data-count="756">e</span>mpty1 *&gt; s
+let str_token s = <span data-count="8708">e</span>mpty *&gt; strin<span data-count="8708">g</span> s
+let str_token1 s = <span data-count="990">e</span>mpty1 *&gt; strin<span data-count="990">g</span> s
+let pparens p = <span data-count="3533">s</span>tr_toke<span data-count="3533">n</span> "(" *<span data-count="3533">&gt;</span> p &lt;* str_toke<span data-count="3533">n</span> ")"
+let parrow = str_toke<span data-count="46">n</span> "-&gt;"
+let pbinding = str_toke<span data-count="46">n</span> "let"
+let pwild = str_toke<span data-count="46">n</span> "_"
 
 (**  Const parsers *)
 let pcint =
-  let ps = token (optio<span data-count="44">n</span> "" (str_toke<span data-count="44">n</span> "-" &lt;|<span data-count="44">&gt;</span> str_toke<span data-count="44">n</span> "+")) in
-  <span data-count="44">l</span>et pd = take_while1 is_digit in
-  <span data-count="44">l</span>ift<span data-count="44">2</span> (fun sign digit -&gt; <span data-count="170">c</span>onstr_cint (Int.of_strin<span data-count="170">g</span> @@ sign ^ digit)) ps pd
+  let ps = token (optio<span data-count="46">n</span> "" (str_toke<span data-count="46">n</span> "-" &lt;|<span data-count="46">&gt;</span> str_toke<span data-count="46">n</span> "+")) in
+  <span data-count="46">l</span>et pd = take_while1 is_digit in
+  <span data-count="46">l</span>ift<span data-count="46">2</span> (fun sign digit -&gt; <span data-count="184">c</span>onstr_cint (Int.of_strin<span data-count="184">g</span> @@ sign ^ digit)) ps pd
 ;;
 
 let pcbool =
-  lif<span data-count="44">t</span> (fun b -&gt; <span data-count="5">c</span>onstr_cbool @@ Bool.of_strin<span data-count="5">g</span> b) (str_toke<span data-count="44">n</span> "false" &lt;|<span data-count="44">&gt;</span> str_toke<span data-count="44">n</span> "true")
+  lif<span data-count="46">t</span> (fun b -&gt; <span data-count="5">c</span>onstr_cbool @@ Bool.of_strin<span data-count="5">g</span> b) (str_toke<span data-count="46">n</span> "false" &lt;|<span data-count="46">&gt;</span> str_toke<span data-count="46">n</span> "true")
 ;;
 
-let pcunit = pparen<span data-count="44">s</span> @@ (str_toke<span data-count="44">n</span> "" *<span data-count="44">&gt;</span> retur<span data-count="44">n</span> CUnit)
-let pconst = toke<span data-count="44">n</span> (choic<span data-count="44">e</span> [ pcint; pcbool; pcunit ])
+let pcunit = pparen<span data-count="46">s</span> @@ (str_toke<span data-count="46">n</span> "" *<span data-count="46">&gt;</span> retur<span data-count="46">n</span> CUnit)
+let pconst = toke<span data-count="46">n</span> (choic<span data-count="46">e</span> [ pcint; pcbool; pcunit ])
 
 (**  Identifier parsers *)
 let ident is_good_entry =
-  <span data-count="44">l</span>et pchar = satisfy is_id_char in
-  <span data-count="44">e</span>mpty *<span data-count="44">&gt;</span> satisf<span data-count="44">y</span> is_good_entry
+  <span data-count="46">l</span>et pchar = satisfy is_id_char in
+  <span data-count="46">e</span>mpty *<span data-count="46">&gt;</span> satisf<span data-count="46">y</span> is_good_entry
   &gt;&gt;= fun h -&gt;
-  <span data-count="1218">m</span>an<span data-count="1218">y</span> pchar
+  <span data-count="1242">m</span>an<span data-count="1242">y</span> pchar
   &gt;&gt;= fun tl -&gt;
-  <span data-count="1218">l</span>et id = String.of_char_list (h :: tl) in
-  <span data-count="1218">i</span>f is_keyword id
-  then <span data-count="277">f</span>ail ("Unexpected keyword '" ^ id ^ "' in binding")
-  else <span data-count="941">i</span>f String.equal id "_"
+  <span data-count="1242">l</span>et id = String.of_char_list (h :: tl) in
+  <span data-count="1242">i</span>f is_keyword id
+  then <span data-count="281">f</span>ail ("Unexpected keyword '" ^ id ^ "' in binding")
+  else <span data-count="961">i</span>f String.equal id "_"
   then <span data-count="0">f</span>ail "Wildcard \"_\" not expected"
-  else <span data-count="941">r</span>eturn id
+  else <span data-count="961">r</span>eturn id
 ;;
 
 let pident =
   let is_entry = function
-    | <span data-count="1900">c</span> -&gt; is_alette<span data-count="1900">r</span> <span data-count="1218">c</span> || is_underscore c
+    | <span data-count="1944">c</span> -&gt; is_alette<span data-count="1944">r</span> <span data-count="1242">c</span> || is_underscore c
   in
-  iden<span data-count="44">t</span> is_entry
+  iden<span data-count="46">t</span> is_entry
 ;;
 
 (**  Pattern parsers *)
 
-let ppwild = constr_pwild &lt;$<span data-count="44">&gt;</span> pwild
-let ppconst = constr_pconst &lt;$<span data-count="44">&gt;</span> pconst
-let ppvar = constr_pvar &lt;$<span data-count="44">&gt;</span> pident
-let pattern = fi<span data-count="44">x</span> @@ fun m -&gt; <span data-count="39">c</span>hoic<span data-count="39">e</span> [ ppwild; ppconst; ppvar ] &lt;|&gt; pparen<span data-count="39">s</span> m
+let ppwild = constr_pwild &lt;$<span data-count="46">&gt;</span> pwild
+let ppconst = constr_pconst &lt;$<span data-count="46">&gt;</span> pconst
+let ppvar = constr_pvar &lt;$<span data-count="46">&gt;</span> pident
+let pattern = fi<span data-count="46">x</span> @@ fun m -&gt; <span data-count="41">c</span>hoic<span data-count="41">e</span> [ ppwild; ppconst; ppvar ] &lt;|&gt; pparen<span data-count="41">s</span> m
 
 (**  Operation parsers *)
 
-let pop ch op = <span data-count="572">s</span>tr_toke<span data-count="572">n</span> ch *&gt; retur<span data-count="572">n</span> (constr_ebino<span data-count="572">p</span> op)
-let pmulti = choic<span data-count="44">e</span> [ po<span data-count="44">p</span> "*" Mul; po<span data-count="44">p</span> "/" Div; po<span data-count="44">p</span> "%" Mod ]
-let padd = po<span data-count="44">p</span> "+" Add &lt;|<span data-count="44">&gt;</span> po<span data-count="44">p</span> "-" Sub
-let pcomp = choic<span data-count="44">e</span> [ po<span data-count="44">p</span> "&gt;=" Geq; po<span data-count="44">p</span> "&gt;" Gre; po<span data-count="44">p</span> "&lt;=" Leq; po<span data-count="44">p</span> "&lt;" Less ]
-let peq = po<span data-count="44">p</span> "=" Eq &lt;|<span data-count="44">&gt;</span> po<span data-count="44">p</span> "&lt;&gt;" Neq
-let pconj = po<span data-count="44">p</span> "&amp;&amp;" And
-let pdisj = po<span data-count="44">p</span> "||" Or
+let pop ch op = <span data-count="598">s</span>tr_toke<span data-count="598">n</span> ch *&gt; retur<span data-count="598">n</span> (constr_ebino<span data-count="598">p</span> op)
+let pmulti = choic<span data-count="46">e</span> [ po<span data-count="46">p</span> "*" Mul; po<span data-count="46">p</span> "/" Div; po<span data-count="46">p</span> "%" Mod ]
+let padd = po<span data-count="46">p</span> "+" Add &lt;|<span data-count="46">&gt;</span> po<span data-count="46">p</span> "-" Sub
+let pcomp = choic<span data-count="46">e</span> [ po<span data-count="46">p</span> "&gt;=" Geq; po<span data-count="46">p</span> "&gt;" Gre; po<span data-count="46">p</span> "&lt;=" Leq; po<span data-count="46">p</span> "&lt;" Less ]
+let peq = po<span data-count="46">p</span> "=" Eq &lt;|<span data-count="46">&gt;</span> po<span data-count="46">p</span> "&lt;&gt;" Neq
+let pconj = po<span data-count="46">p</span> "&amp;&amp;" And
+let pdisj = po<span data-count="46">p</span> "||" Or
 
 (** Expr parsers *)
 
@@ -1648,81 +1648,81 @@ type edispatch =
   ; expr : edispatch -&gt; expr t
   }
 
-let peconst = constr_econst &lt;$<span data-count="44">&gt;</span> pconst
-let pevar = pident &gt;&gt;<span data-count="44">|</span> constr_evar
-let pfun_args = fi<span data-count="44">x</span> @@ fun p -&gt; <span data-count="39">m</span>an<span data-count="39">y</span> pattern &lt;|&gt; pparen<span data-count="39">s</span> p
-let pfun_args1 = fi<span data-count="44">x</span> @@ fun p -&gt; <span data-count="11">m</span>any<span data-count="11">1</span> pattern &lt;|&gt; pparen<span data-count="11">s</span> p
-let pparens_only ps = <span data-count="1041">p</span>parens @@ choic<span data-count="1041">e</span> ps
+let peconst = constr_econst &lt;$<span data-count="46">&gt;</span> pconst
+let pevar = pident &gt;&gt;<span data-count="46">|</span> constr_evar
+let pfun_args = fi<span data-count="46">x</span> @@ fun p -&gt; <span data-count="41">m</span>an<span data-count="41">y</span> pattern &lt;|&gt; pparen<span data-count="41">s</span> p
+let pfun_args1 = fi<span data-count="46">x</span> @@ fun p -&gt; <span data-count="11">m</span>any<span data-count="11">1</span> pattern &lt;|&gt; pparen<span data-count="11">s</span> p
+let pparens_only ps = <span data-count="1047">p</span>parens @@ choic<span data-count="1047">e</span> ps
 
 let plet_body pargs pexpr =
-  <span data-count="388">t</span>oken<span data-count="388">1</span> pargs
-  &gt;&gt;= fun args -&gt; <span data-count="104">s</span>tr_toke<span data-count="104">n</span> "=" *<span data-count="104">&gt;</span> pexpr &gt;&gt;| fun expr -&gt; <span data-count="104">c</span>onstr_efun args expr
+  <span data-count="392">t</span>oken<span data-count="392">1</span> pargs
+  &gt;&gt;= fun args -&gt; <span data-count="110">s</span>tr_toke<span data-count="110">n</span> "=" *<span data-count="110">&gt;</span> pexpr &gt;&gt;| fun expr -&gt; <span data-count="110">c</span>onstr_efun args expr
 ;;
 
 let plet_body_without_args pexpr =
-  <span data-count="349">s</span>tr_toke<span data-count="349">n</span> "=" *<span data-count="349">&gt;</span> pexpr &gt;&gt;| fun expr -&gt; <span data-count="0">c</span>onstr_efun [] expr
+  <span data-count="351">s</span>tr_toke<span data-count="351">n</span> "=" *<span data-count="351">&gt;</span> pexpr &gt;&gt;| fun expr -&gt; <span data-count="0">c</span>onstr_efun [] expr
 ;;
 
-let pbind_with_option_rec = pbinding *<span data-count="44">&gt;</span> optio<span data-count="44">n</span> false (str_token<span data-count="44">1</span> "rec " &gt;&gt;<span data-count="44">|</span> fun _ -&gt; <span data-count="26">t</span>rue)
-let pname_func = pident &gt;&gt;<span data-count="44">|</span> fun name -&gt; <span data-count="104">n</span>ame
-let pbody_with_args pack = <span data-count="388">p</span>let_body pfun_args (pack.exp<span data-count="388">r</span> pack)
+let pbind_with_option_rec = pbinding *<span data-count="46">&gt;</span> optio<span data-count="46">n</span> false (str_token<span data-count="46">1</span> "rec " &gt;&gt;<span data-count="46">|</span> fun _ -&gt; <span data-count="28">t</span>rue)
+let pname_func = pident &gt;&gt;<span data-count="46">|</span> fun name -&gt; <span data-count="110">n</span>ame
+let pbody_with_args pack = <span data-count="392">p</span>let_body pfun_args (pack.exp<span data-count="392">r</span> pack)
 
 let pack =
   let expr pack =
-    <span data-count="1746">c</span>hoice
-      [ pack.o<span data-count="1746">p</span> pack
-      ; pack.ap<span data-count="1746">p</span> pack
-      ; pack.conditio<span data-count="1746">n</span> pack
-      ; pack.fun<span data-count="1746">c</span> pack
-      ; pack.bind_i<span data-count="1746">n</span> pack
+    <span data-count="1758">c</span>hoice
+      [ pack.o<span data-count="1758">p</span> pack
+      ; pack.ap<span data-count="1758">p</span> pack
+      ; pack.conditio<span data-count="1758">n</span> pack
+      ; pack.fun<span data-count="1758">c</span> pack
+      ; pack.bind_i<span data-count="1758">n</span> pack
       ]
   in
-  let econst pack = <span data-count="991">f</span>ix @@ fun _ -&gt; <span data-count="312">p</span>econst &lt;|&gt; pparen<span data-count="312">s</span> @@ pack.econs<span data-count="312">t</span> pack in
-  let evar pack = <span data-count="1824">f</span>ix @@ fun _ -&gt; <span data-count="783">p</span>evar &lt;|&gt; pparen<span data-count="783">s</span> @@ pack.eva<span data-count="783">r</span> pack in
+  let econst pack = <span data-count="997">f</span>ix @@ fun _ -&gt; <span data-count="314">p</span>econst &lt;|&gt; pparen<span data-count="314">s</span> @@ pack.econs<span data-count="314">t</span> pack in
+  let evar pack = <span data-count="1836">f</span>ix @@ fun _ -&gt; <span data-count="789">p</span>evar &lt;|&gt; pparen<span data-count="789">s</span> @@ pack.eva<span data-count="789">r</span> pack in
   let op_parsers pack =
-    <span data-count="317">c</span>hoice
-      [ pack.bind_i<span data-count="317">n</span> pack
-      ; pack.ap<span data-count="317">p</span> pack
-      ; pparens_onl<span data-count="317">y</span> [ pack.o<span data-count="317">p</span> pack; pack.conditio<span data-count="317">n</span> pack ]
-      ; pack.eva<span data-count="317">r</span> pack
-      ; pack.econs<span data-count="317">t</span> pack
+    <span data-count="319">c</span>hoice
+      [ pack.bind_i<span data-count="319">n</span> pack
+      ; pack.ap<span data-count="319">p</span> pack
+      ; pparens_onl<span data-count="319">y</span> [ pack.o<span data-count="319">p</span> pack; pack.conditio<span data-count="319">n</span> pack ]
+      ; pack.eva<span data-count="319">r</span> pack
+      ; pack.econs<span data-count="319">t</span> pack
       ]
   in
   let cond_bool_parsers pack =
     <span data-count="98">c</span>hoice [ pack.o<span data-count="98">p</span> pack; pack.bind_i<span data-count="98">n</span> pack; pack.ap<span data-count="98">p</span> pack; pack.conditio<span data-count="98">n</span> pack ]
   in
   let app_func_parsers pack =
-    <span data-count="362">c</span>hoice
-      [ pack.eva<span data-count="362">r</span> pack
-      ; pparens_onl<span data-count="362">y</span>
-          [ pack.conditio<span data-count="362">n</span> pack; pack.fun<span data-count="362">c</span> pack; pack.ap<span data-count="362">p</span> pack; pack.bind_i<span data-count="362">n</span> pack ]
+    <span data-count="364">c</span>hoice
+      [ pack.eva<span data-count="364">r</span> pack
+      ; pparens_onl<span data-count="364">y</span>
+          [ pack.conditio<span data-count="364">n</span> pack; pack.fun<span data-count="364">c</span> pack; pack.ap<span data-count="364">p</span> pack; pack.bind_i<span data-count="364">n</span> pack ]
       ]
   in
   let app_args_parsers pack =
-    <span data-count="362">c</span>hoice
-      [ pparens_onl<span data-count="362">y</span>
-          [ pack.o<span data-count="362">p</span> pack
-          ; pack.conditio<span data-count="362">n</span> pack
-          ; pack.fun<span data-count="362">c</span> pack
-          ; pack.ap<span data-count="362">p</span> pack
-          ; pack.bind_i<span data-count="362">n</span> pack
+    <span data-count="364">c</span>hoice
+      [ pparens_onl<span data-count="364">y</span>
+          [ pack.o<span data-count="364">p</span> pack
+          ; pack.conditio<span data-count="364">n</span> pack
+          ; pack.fun<span data-count="364">c</span> pack
+          ; pack.ap<span data-count="364">p</span> pack
+          ; pack.bind_i<span data-count="364">n</span> pack
           ]
-      ; pack.eva<span data-count="362">r</span> pack
-      ; pack.econs<span data-count="362">t</span> pack
+      ; pack.eva<span data-count="364">r</span> pack
+      ; pack.econs<span data-count="364">t</span> pack
       ]
   in
   let op pack =
-    <span data-count="2840">f</span>ix
+    <span data-count="2858">f</span>ix
     @@ fun _ -&gt;
-    <span data-count="317">l</span>et multi = chainl1 (op_parser<span data-count="317">s</span> pack) pmulti in
-    <span data-count="317">l</span>et add = chainl1 multi padd in
-    <span data-count="317">l</span>et comp = chainl1 add pcomp in
-    <span data-count="317">l</span>et eq = chainl1 comp peq in
-    <span data-count="317">l</span>et conj = chainl1 eq pconj in
-    <span data-count="317">c</span>hainl<span data-count="317">1</span> conj pdisj &lt;|&gt; pparen<span data-count="317">s</span> @@ pack.o<span data-count="317">p</span> pack
+    <span data-count="319">l</span>et multi = chainl1 (op_parser<span data-count="319">s</span> pack) pmulti in
+    <span data-count="319">l</span>et add = chainl1 multi padd in
+    <span data-count="319">l</span>et comp = chainl1 add pcomp in
+    <span data-count="319">l</span>et eq = chainl1 comp peq in
+    <span data-count="319">l</span>et conj = chainl1 eq pconj in
+    <span data-count="319">c</span>hainl<span data-count="319">1</span> conj pdisj &lt;|&gt; pparen<span data-count="319">s</span> @@ pack.o<span data-count="319">p</span> pack
   in
   let condition pack =
-    <span data-count="2983">f</span>ix
+    <span data-count="3001">f</span>ix
     @@ fun _ -&gt;
     <span data-count="98">l</span>ift<span data-count="98">3</span>
       constr_eif
@@ -1732,53 +1732,53 @@ let pack =
     &lt;|&gt; pparen<span data-count="98">s</span> @@ pack.conditio<span data-count="98">n</span> pack
   in
   let func pack =
-    <span data-count="2541">f</span>ix
+    <span data-count="2557">f</span>ix
     @@ fun _ -&gt;
     <span data-count="71">l</span>ift<span data-count="71">2</span> constr_efun (str_toke<span data-count="71">n</span> "fun" *<span data-count="71">&gt;</span> pfun_args1) (parrow *<span data-count="71">&gt;</span> exp<span data-count="71">r</span> pack)
     &lt;|&gt; pparen<span data-count="71">s</span> @@ pack.fun<span data-count="71">c</span> pack
   in
   let app pack =
-    <span data-count="3247">f</span>ix
+    <span data-count="3267">f</span>ix
     @@ fun _ -&gt;
-    <span data-count="362">l</span>ift<span data-count="362">2</span> constr_eapp (app_func_parser<span data-count="362">s</span> pack) (many<span data-count="362">1</span> (token<span data-count="362">1</span> @@ app_args_parser<span data-count="362">s</span> pack))
-    &lt;|&gt; pparen<span data-count="362">s</span> @@ pack.ap<span data-count="362">p</span> pack
+    <span data-count="364">l</span>ift<span data-count="364">2</span> constr_eapp (app_func_parser<span data-count="364">s</span> pack) (many<span data-count="364">1</span> (token<span data-count="364">1</span> @@ app_args_parser<span data-count="364">s</span> pack))
+    &lt;|&gt; pparen<span data-count="364">s</span> @@ pack.ap<span data-count="364">p</span> pack
   in
-  let pbind_without_rec = pbinding *&gt; retur<span data-count="44">n</span> false in
-  <span data-count="44">l</span>et punderscore_name = str_token<span data-count="44">1</span> "_" *&gt; retur<span data-count="44">n</span> "_" in
-  <span data-count="44">l</span>et pbody_without_args pack = <span data-count="349">p</span>let_body_without_args (exp<span data-count="349">r</span> pack) in
+  let pbind_without_rec = pbinding *&gt; retur<span data-count="46">n</span> false in
+  <span data-count="46">l</span>et punderscore_name = str_token<span data-count="46">1</span> "_" *&gt; retur<span data-count="46">n</span> "_" in
+  <span data-count="46">l</span>et pbody_without_args pack = <span data-count="351">p</span>let_body_without_args (exp<span data-count="351">r</span> pack) in
   let bind_in pack =
-    <span data-count="3234">f</span>ix
+    <span data-count="3254">f</span>ix
     @@ fun _ -&gt;
-    <span data-count="349">l</span>ift<span data-count="349">4</span>
+    <span data-count="351">l</span>ift<span data-count="351">4</span>
       constr_eletin
       pbind_with_option_rec
       pname_func
-      (pbody_with_arg<span data-count="349">s</span> pack)
-      (str_token<span data-count="349">1</span> "in" *<span data-count="349">&gt;</span> exp<span data-count="349">r</span> pack)
-    &lt;|<span data-count="349">&gt;</span> lift<span data-count="349">4</span>
+      (pbody_with_arg<span data-count="351">s</span> pack)
+      (str_token<span data-count="351">1</span> "in" *<span data-count="351">&gt;</span> exp<span data-count="351">r</span> pack)
+    &lt;|<span data-count="351">&gt;</span> lift<span data-count="351">4</span>
           constr_eletin
           pbind_without_rec
           punderscore_name
-          (pbody_without_arg<span data-count="349">s</span> pack)
-          (str_token<span data-count="349">1</span> "in" *<span data-count="349">&gt;</span> exp<span data-count="349">r</span> pack)
-    &lt;|&gt; pparen<span data-count="349">s</span> @@ pack.bind_i<span data-count="349">n</span> pack
+          (pbody_without_arg<span data-count="351">s</span> pack)
+          (str_token<span data-count="351">1</span> "in" *<span data-count="351">&gt;</span> exp<span data-count="351">r</span> pack)
+    &lt;|&gt; pparen<span data-count="351">s</span> @@ pack.bind_i<span data-count="351">n</span> pack
   in
   { evar; econst; op; condition; func; bind_in; app; expr }
 ;;
 
-let expr = pack.exp<span data-count="44">r</span> pack
+let expr = pack.exp<span data-count="46">r</span> pack
 
 (**  Binding parser *)
 let bind =
-  fi<span data-count="44">x</span>
+  fi<span data-count="46">x</span>
   @@ fun m -&gt;
-  <span data-count="39">l</span>ift<span data-count="39">3</span> constr_elet pbind_with_option_rec pname_func (pbody_with_arg<span data-count="39">s</span> pack) &lt;|&gt; pparen<span data-count="39">s</span> m
+  <span data-count="41">l</span>ift<span data-count="41">3</span> constr_elet pbind_with_option_rec pname_func (pbody_with_arg<span data-count="41">s</span> pack) &lt;|&gt; pparen<span data-count="41">s</span> m
 ;;
 
 (**  Program parser *)
-let pprogram = many<span data-count="44">1</span> (toke<span data-count="44">n</span> bind &lt;<span data-count="44">*</span> choic<span data-count="44">e</span> [ toke<span data-count="44">n</span> (str_toke<span data-count="44">n</span> ";;"); empty ])
+let pprogram = many<span data-count="46">1</span> (toke<span data-count="46">n</span> bind &lt;<span data-count="46">*</span> choic<span data-count="46">e</span> [ toke<span data-count="46">n</span> (str_toke<span data-count="46">n</span> ";;"); empty ])
 
-let parse str = <span data-count="38">p</span>arse_str pprogram (String.stri<span data-count="38">p</span> str)
+let parse str = <span data-count="40">p</span>arse_str pprogram (String.stri<span data-count="40">p</span> str)
 
 (**  TESTS *)
 
@@ -1792,27 +1792,27 @@ let show_parsed_result str parser show =
 
 let%expect_test _ =
   <span data-count="1">s</span>how_parsed_result "777" pconst show_const;
-  <span data-count="1">[</span>%expect {| (CInt 777) |}<span data-count="89">]</span>
+  <span data-count="1">[</span>%expect {| (CInt 777) |}<span data-count="93">]</span>
 ;;
 
 let%expect_test _ =
   <span data-count="1">s</span>how_parsed_result "-777" pconst show_const;
-  <span data-count="1">[</span>%expect {| (CInt -777) |}<span data-count="89">]</span>
+  <span data-count="1">[</span>%expect {| (CInt -777) |}<span data-count="93">]</span>
 ;;
 
 let%expect_test _ =
   <span data-count="1">s</span>how_parsed_result "true" pconst show_const;
-  <span data-count="1">[</span>%expect {| (CBool true) |}<span data-count="89">]</span>
+  <span data-count="1">[</span>%expect {| (CBool true) |}<span data-count="93">]</span>
 ;;
 
 let%expect_test _ =
   <span data-count="1">s</span>how_parsed_result "false" pconst show_const;
-  <span data-count="1">[</span>%expect {| (CBool false) |}<span data-count="89">]</span>
+  <span data-count="1">[</span>%expect {| (CBool false) |}<span data-count="93">]</span>
 ;;
 
 let%expect_test _ =
   <span data-count="1">s</span>how_parsed_result "()" pconst show_const;
-  <span data-count="1">[</span>%expect {| CUnit |}<span data-count="89">]</span>
+  <span data-count="1">[</span>%expect {| CUnit |}<span data-count="93">]</span>
 ;;
 
 (**  Pattern tests *)
@@ -1820,25 +1820,25 @@ let%expect_test _ =
 let%expect_test _ =
   <span data-count="1">s</span>how_parsed_result "777" pattern show_pattern;
   <span data-count="1">[</span>%expect {|
-    (PConst (CInt 777)) |}<span data-count="89">]</span>
+    (PConst (CInt 777)) |}<span data-count="93">]</span>
 ;;
 
 let%expect_test _ =
   <span data-count="1">s</span>how_parsed_result "a" pattern show_pattern;
   <span data-count="1">[</span>%expect {|
-    (PVar "a") |}<span data-count="89">]</span>
+    (PVar "a") |}<span data-count="93">]</span>
 ;;
 
 let%expect_test _ =
   <span data-count="1">s</span>how_parsed_result "()" pattern show_pattern;
   <span data-count="1">[</span>%expect {|
-    (PConst CUnit) |}<span data-count="89">]</span>
+    (PConst CUnit) |}<span data-count="93">]</span>
 ;;
 
 let%expect_test _ =
   <span data-count="1">s</span>how_parsed_result "_" pattern show_pattern;
   <span data-count="1">[</span>%expect {|
-    PWild |}<span data-count="89">]</span>
+    PWild |}<span data-count="93">]</span>
 ;;
 
 (**  Expression tests *)
@@ -1848,32 +1848,32 @@ let%expect_test _ =
 let%expect_test _ =
   <span data-count="1">s</span>how_parsed_result "x + 1" expr show_expr;
   <span data-count="1">[</span>%expect {|
-    (EBinOp (Add, (EVar "x"), (EConst (CInt 1)))) |}<span data-count="89">]</span>
+    (EBinOp (Add, (EVar "x"), (EConst (CInt 1)))) |}<span data-count="93">]</span>
 ;;
 
 let%expect_test _ =
   <span data-count="1">s</span>how_parsed_result "x - 1" expr show_expr;
   <span data-count="1">[</span>%expect {|
-    (EBinOp (Sub, (EVar "x"), (EConst (CInt 1)))) |}<span data-count="89">]</span>
+    (EBinOp (Sub, (EVar "x"), (EConst (CInt 1)))) |}<span data-count="93">]</span>
 ;;
 
 let%expect_test _ =
   <span data-count="1">s</span>how_parsed_result "x + y - 1" expr show_expr;
   <span data-count="1">[</span>%expect
     {|
-    (EBinOp (Sub, (EBinOp (Add, (EVar "x"), (EVar "y"))), (EConst (CInt 1)))) |}<span data-count="89">]</span>
+    (EBinOp (Sub, (EBinOp (Add, (EVar "x"), (EVar "y"))), (EConst (CInt 1)))) |}<span data-count="93">]</span>
 ;;
 
 let%expect_test _ =
   <span data-count="1">s</span>how_parsed_result "x * y / z" expr show_expr;
   <span data-count="1">[</span>%expect {|
-    (EBinOp (Div, (EBinOp (Mul, (EVar "x"), (EVar "y"))), (EVar "z"))) |}<span data-count="89">]</span>
+    (EBinOp (Div, (EBinOp (Mul, (EVar "x"), (EVar "y"))), (EVar "z"))) |}<span data-count="93">]</span>
 ;;
 
 let%expect_test _ =
   <span data-count="1">s</span>how_parsed_result "x * (y / z)" expr show_expr;
   <span data-count="1">[</span>%expect {|
-    (EBinOp (Mul, (EVar "x"), (EBinOp (Div, (EVar "y"), (EVar "z"))))) |}<span data-count="89">]</span>
+    (EBinOp (Mul, (EVar "x"), (EBinOp (Div, (EVar "y"), (EVar "z"))))) |}<span data-count="93">]</span>
 ;;
 
 let%expect_test _ =
@@ -1885,49 +1885,49 @@ let%expect_test _ =
           (EBinOp (Mul, (EBinOp (Add, (EVar "x"), (EVar "y"))),
              (EBinOp (Sub, (EVar "z"), (EVar "y"))))),
           (EBinOp (Mul, (EVar "y"), (EVar "x"))))),
-       (EVar "m"))) |}<span data-count="89">]</span>
+       (EVar "m"))) |}<span data-count="93">]</span>
 ;;
 
 let%expect_test _ =
   <span data-count="1">s</span>how_parsed_result "x % 100" expr show_expr;
   <span data-count="1">[</span>%expect {|
-    (EBinOp (Mod, (EVar "x"), (EConst (CInt 100)))) |}<span data-count="89">]</span>
+    (EBinOp (Mod, (EVar "x"), (EConst (CInt 100)))) |}<span data-count="93">]</span>
 ;;
 
 let%expect_test _ =
   <span data-count="1">s</span>how_parsed_result "x &lt; 1" expr show_expr;
   <span data-count="1">[</span>%expect {|
-    (EBinOp (Less, (EVar "x"), (EConst (CInt 1)))) |}<span data-count="89">]</span>
+    (EBinOp (Less, (EVar "x"), (EConst (CInt 1)))) |}<span data-count="93">]</span>
 ;;
 
 let%expect_test _ =
   <span data-count="1">s</span>how_parsed_result "x &gt; 1" expr show_expr;
   <span data-count="1">[</span>%expect {|
-    (EBinOp (Gre, (EVar "x"), (EConst (CInt 1)))) |}<span data-count="89">]</span>
+    (EBinOp (Gre, (EVar "x"), (EConst (CInt 1)))) |}<span data-count="93">]</span>
 ;;
 
 let%expect_test _ =
   <span data-count="1">s</span>how_parsed_result "x &lt;= 1" expr show_expr;
   <span data-count="1">[</span>%expect {|
-    (EBinOp (Leq, (EVar "x"), (EConst (CInt 1)))) |}<span data-count="89">]</span>
+    (EBinOp (Leq, (EVar "x"), (EConst (CInt 1)))) |}<span data-count="93">]</span>
 ;;
 
 let%expect_test _ =
   <span data-count="1">s</span>how_parsed_result "x &gt;= 1" expr show_expr;
   <span data-count="1">[</span>%expect {|
-    (EBinOp (Geq, (EVar "x"), (EConst (CInt 1)))) |}<span data-count="89">]</span>
+    (EBinOp (Geq, (EVar "x"), (EConst (CInt 1)))) |}<span data-count="93">]</span>
 ;;
 
 let%expect_test _ =
   <span data-count="1">s</span>how_parsed_result "x = y" expr show_expr;
   <span data-count="1">[</span>%expect {|
-    (EBinOp (Eq, (EVar "x"), (EVar "y"))) |}<span data-count="89">]</span>
+    (EBinOp (Eq, (EVar "x"), (EVar "y"))) |}<span data-count="93">]</span>
 ;;
 
 let%expect_test _ =
   <span data-count="1">s</span>how_parsed_result "x &lt;&gt; 1" expr show_expr;
   <span data-count="1">[</span>%expect {|
-    (EBinOp (Neq, (EVar "x"), (EConst (CInt 1)))) |}<span data-count="89">]</span>
+    (EBinOp (Neq, (EVar "x"), (EConst (CInt 1)))) |}<span data-count="93">]</span>
 ;;
 
 let%expect_test _ =
@@ -1939,7 +1939,7 @@ let%expect_test _ =
           (EBinOp (Or, (EConst (CBool true)),
              (EBinOp (Gre, (EVar "x"), (EConst (CInt 1)))))),
           (EBinOp (Gre, (EVar "y"), (EConst (CInt 1)))))),
-       (EConst (CBool false)))) |}<span data-count="89">]</span>
+       (EConst (CBool false)))) |}<span data-count="93">]</span>
 ;;
 
 let%expect_test _ =
@@ -1947,7 +1947,7 @@ let%expect_test _ =
   <span data-count="1">[</span>%expect
     {|
     (EBinOp (Or, (EBinOp (And, (EVar "x"), (EVar "y"))),
-       (EBinOp (And, (EVar "z"), (EVar "w"))))) |}<span data-count="89">]</span>
+       (EBinOp (And, (EVar "z"), (EVar "w"))))) |}<span data-count="93">]</span>
 ;;
 
 let%expect_test _ =
@@ -1956,7 +1956,7 @@ let%expect_test _ =
     {|
     (EBinOp (Or,
        (EBinOp (Or, (EVar "x"), (EBinOp (And, (EVar "y"), (EVar "z"))))),
-       (EVar "w"))) |}<span data-count="89">]</span>
+       (EVar "w"))) |}<span data-count="93">]</span>
 ;;
 
 (**  Conditions *)
@@ -1964,7 +1964,7 @@ let%expect_test _ =
 let%expect_test _ =
   <span data-count="1">s</span>how_parsed_result "if true then 1 else 2" expr show_expr;
   <span data-count="1">[</span>%expect {|
-    (EIf ((EConst (CBool true)), (EConst (CInt 1)), (EConst (CInt 2)))) |}<span data-count="89">]</span>
+    (EIf ((EConst (CBool true)), (EConst (CInt 1)), (EConst (CInt 2)))) |}<span data-count="93">]</span>
 ;;
 
 let%expect_test _ =
@@ -1979,7 +1979,7 @@ let%expect_test _ =
           (EBinOp (Sub, (EVar "x"), (EBinOp (Mod, (EVar "x"), (EConst (CInt 5))))
              )),
           (EConst (CInt 5))))
-       )) |}<span data-count="89">]</span>
+       )) |}<span data-count="93">]</span>
 ;;
 
 (**  Lambda functions *)
@@ -1987,7 +1987,7 @@ let%expect_test _ =
 let%expect_test _ =
   <span data-count="1">s</span>how_parsed_result "fun x -&gt; x" expr show_expr;
   <span data-count="1">[</span>%expect {|
-    (EFun ((PVar "x"), (EVar "x"))) |}<span data-count="89">]</span>
+    (EFun ((PVar "x"), (EVar "x"))) |}<span data-count="93">]</span>
 ;;
 
 let%expect_test _ =
@@ -2012,7 +2012,7 @@ let%expect_test _ =
                 ))
              ))
           ))
-       )) |}<span data-count="89">]</span>
+       )) |}<span data-count="93">]</span>
 ;;
 
 (**  Applications *)
@@ -2020,7 +2020,7 @@ let%expect_test _ =
 let%expect_test _ =
   <span data-count="1">s</span>how_parsed_result "f x" expr show_expr;
   <span data-count="1">[</span>%expect {|
-    (EApp ((EVar "f"), (EVar "x"))) |}<span data-count="89">]</span>
+    (EApp ((EVar "f"), (EVar "x"))) |}<span data-count="93">]</span>
 ;;
 
 let%expect_test _ =
@@ -2038,7 +2038,7 @@ let%expect_test _ =
                 )),
              (EVar "x"))),
           (EVar "y"))),
-       (EVar "z"))) |}<span data-count="89">]</span>
+       (EVar "z"))) |}<span data-count="93">]</span>
 ;;
 
 (**  Let and let rec *)
@@ -2046,7 +2046,7 @@ let%expect_test _ =
 let%expect_test _ =
   <span data-count="1">s</span>how_parsed_result "let f x = x" pprogram show_program;
   <span data-count="1">[</span>%expect {|
-    [(ELet (false, "f", (EFun ((PVar "x"), (EVar "x")))))] |}<span data-count="89">]</span>
+    [(ELet (false, "f", (EFun ((PVar "x"), (EVar "x")))))] |}<span data-count="93">]</span>
 ;;
 
 let%expect_test _ =
@@ -2056,7 +2056,7 @@ let%expect_test _ =
     [(ELet (false, "bind",
         (EFun ((PVar "x"), (EFun ((PVar "f"), (EApp ((EVar "f"), (EVar "x")))))))
         ))
-      ] |}<span data-count="89">]</span>
+      ] |}<span data-count="93">]</span>
 ;;
 
 let%expect_test _ =
@@ -2067,12 +2067,12 @@ let%expect_test _ =
         (EFun ((PVar "x"),
            (EFun ((PVar "y"), (EBinOp (Mul, (EVar "x"), (EVar "y")))))))
         ))
-      ] |}<span data-count="89">]</span>
+      ] |}<span data-count="93">]</span>
 ;;
 
 let%expect_test _ =
   <span data-count="1">s</span>how_parsed_result "let x = 10" pprogram show_program;
-  <span data-count="1">[</span>%expect {| [(ELet (false, "x", (EConst (CInt 10))))] |}<span data-count="89">]</span>
+  <span data-count="1">[</span>%expect {| [(ELet (false, "x", (EConst (CInt 10))))] |}<span data-count="93">]</span>
 ;;
 
 let%expect_test _ =
@@ -2093,7 +2093,7 @@ let%expect_test _ =
               ))
            ))
         ))
-      ] |}<span data-count="89">]</span>
+      ] |}<span data-count="93">]</span>
 ;;
 
 let%expect_test _ =
@@ -2113,7 +2113,7 @@ let%expect_test _ =
               ))
            ))
         ))
-      ] |}<span data-count="89">]</span>
+      ] |}<span data-count="93">]</span>
 ;;
 
 let%expect_test _ =
@@ -2136,7 +2136,7 @@ let%expect_test _ =
               ))
            ))
         ))
-      ] |}<span data-count="89">]</span>
+      ] |}<span data-count="93">]</span>
 ;;
 
 let%expect_test _ =
@@ -2173,7 +2173,7 @@ let%expect_test _ =
          (EFun ((PVar "n"),
             (EApp ((EApp ((EVar "fack"), (EVar "n"))), (EVar "id")))))
          ))
-      ] |}<span data-count="89">]</span>
+      ] |}<span data-count="93">]</span>
 ;;
 
 let%expect_test _ =
@@ -2233,7 +2233,7 @@ let%expect_test _ =
          (EFun ((PVar "n"),
             (EApp ((EApp ((EVar "fibo_cps"), (EVar "n"))), (EVar "id")))))
          ))
-      ] |}<span data-count="89">]</span>
+      ] |}<span data-count="93">]</span>
 ;;
 
 (**  Let in and let rec in *)
@@ -2245,7 +2245,7 @@ let%expect_test _ =
     (ELetIn (false, "sum",
        (EFun ((PVar "x"),
           (EFun ((PVar "y"), (EBinOp (Add, (EVar "x"), (EVar "y"))))))),
-       (EApp ((EApp ((EVar "sum"), (EConst (CInt 10)))), (EConst (CInt 5)))))) |}<span data-count="89">]</span>
+       (EApp ((EApp ((EVar "sum"), (EConst (CInt 10)))), (EConst (CInt 5)))))) |}<span data-count="93">]</span>
 ;;
 
 let%expect_test _ =
@@ -2264,7 +2264,7 @@ let%expect_test _ =
                 (EVar "x")))
              ))
           )),
-       (EApp ((EVar "fact"), (EConst (CInt 10)))))) |}<span data-count="89">]</span>
+       (EApp ((EVar "fact"), (EConst (CInt 10)))))) |}<span data-count="93">]</span>
 ;;
 </code></pre>
       </div>
