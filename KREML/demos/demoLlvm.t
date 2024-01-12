@@ -91,3 +91,17 @@
   > val main = fact 3
   > EOF
   [6]
+ 
+  $ ./demoLlvm.exe <<-EOF
+  > fun fact a b = a + b + b
+  > val main = fact 3
+  > EOF
+  int -> int
+
+  $ ./demoLlvm.exe <<- EOF
+  > fun fact a b c = a + b + c
+  > val sum1 = fact 1
+  > val x = sum1 2 3
+  > val main = x + true
+  > EOF
+  Unification failed: type of the expression is bool but expected type was int

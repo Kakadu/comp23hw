@@ -4,3 +4,4 @@
 
 val infer : Ast.binding list -> unit
 val parse_and_infer : string -> unit
+val run_inference : Ast.binding list -> (Typing.typ, Typing.error) result
