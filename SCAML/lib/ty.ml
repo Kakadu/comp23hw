@@ -35,7 +35,7 @@ type error =
   | `Unification_failed of ty * ty
   ]
 
-type scheme = S of binder_set * ty [@@deriving show { with_path = false }]
+type scheme = S of binder_set * ty
 
 let arrow l r = TArrow (l, r)
 let int_typ = TInt

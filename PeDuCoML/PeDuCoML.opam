@@ -12,7 +12,6 @@ depends: [
   "dune" {>= "3.4"}
   "ppx_expect"
   "ppx_deriving"
-  "angstrom"
   "bisect_ppx"
   "odoc" {with-doc}
 ]
@@ -31,3 +30,9 @@ build: [
   ]
 ]
 dev-repo: "git+https://github.com/airh4ck/comp23hw.git"
+depexts: [
+  [ "nasm" "llvm-16-dev" "clang-16" "gcc-12" "pkg-config" 
+    "qemu-user-static" "binutils-riscv64-linux-gnu" "gcc-riscv64-linux-gnu"
+  ] {os-distribution = "ubuntu"}
+  #["llvm16-dev"] {os-distribution = "alpine"}
+]

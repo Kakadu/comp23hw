@@ -6,29 +6,24 @@ module ParserAst : sig
   open Position.Position
 
   type name = string
-  type rec_flag = Rec | NoRec
+  type rec_flag = Rec  (** Recursive *) | NoRec  (** Not recursive *)
 
   type lvalue =
-    (* _ *)
-    | LvAny
-    (* () *)
-    | LvUnit
-    (* a *)
-    | LvValue of name
-    (* (a, b)
-       invariant >= 2 *)
-    | LvTuple of loc_lvalue list
+    | LvAny  (** Value _ *)
+    | LvUnit  (** Value () *)
+    | LvValue of name  (** Values like a *)
+    | LvTuple of loc_lvalue list  (** Values like (a, 3) *)
 
   and loc_lvalue = lvalue position
 
   type literal =
-    | LInt of int
-    | LFloat of float
-    | LString of string
-    | LBool of bool
-    | LUnit
+    | LInt of int  (** Literals like 3 *)
+    | LFloat of float  (** Literals like 3.2 *)
+    | LString of string  (** Literals like "abc" *)
+    | LBool of bool  (** Literals true/false *)
+    | LUnit  (** Literal () *)
 
-  and loc_literal = literal position
+  type loc_literal = literal position
 
   type let_binding = {
     (* is recursive, name, names of args, body *)
@@ -49,20 +44,15 @@ module ParserAst : sig
   and loc_let_body = let_body position
 
   and expr =
-    (* e e *)
-    | EApply of loc_expr * loc_expr
-    (* "among" or 90 *)
-    | ELiteral of loc_literal
-    (* a *)
-    | EValue of name
-    (* fun x -> fun y -> ...
-       fun x y -> ... represented as EFun x {[], EFun y ...} *)
+    | EApply of loc_expr * loc_expr  (** e e *)
+    | ELiteral of loc_literal  (** "among" or 90 *)
+    | EValue of name  (** a *)
     | EFun of { lvalue : loc_lvalue; body : loc_let_body }
-    (* (a, b, c)
-       invariant >= 2 *)
-    | ETuple of loc_expr list
-    (* if else statement *)
+        (** fun x -> fun y -> ...
+       fun x y -> ... represented as EFun x {[], EFun y ...} *)
+    | ETuple of loc_expr list  (** (a, b, c) *)
     | EIfElse of { cond : loc_expr; t_body : loc_expr; f_body : loc_expr }
+        (** if else statement *)
 
   and loc_expr = expr position
 

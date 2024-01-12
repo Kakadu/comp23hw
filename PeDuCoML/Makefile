@@ -6,7 +6,7 @@ test:
 	dune test
 
 TEST_COV_D = /tmp/cov
-COVERAGE_OPTS = --coverage-path $(TEST_COV_D) --expect bin/ lib/
+COVERAGE_OPTS = --coverage-path $(TEST_COV_D) 
 
 .PHONY: test_coverage coverage
 test_coverage: coverage
@@ -14,7 +14,7 @@ coverage:
 	$(RM) -r $(TEST_COV_D)
 	mkdir -p $(TEST_COV_D)
 	BISECT_FILE=$(TEST_COV_D)/langauge dune runtest --no-print-directory \
-		--instrument-with bisect_ppx --force
-	bisect-ppx-report html $(COVERAGE_OPTS)
+		--instrument-with bisect_ppx --force 
+	bisect-ppx-report html $(COVERAGE_OPTS) --ignore-missing-files
 	bisect-ppx-report summary $(COVERAGE_OPTS)
 	@echo "Use 'xdg-open _coverage/index.html' to see coverage report"

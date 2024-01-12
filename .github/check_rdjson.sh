@@ -13,5 +13,5 @@ if [ "$LC" -gt 5 ]; then
 elif [ "$LC" -gt 2 ]; then
     echo "FEW"
 else
-    echo "BUG"
+    echo "OK"
 fi

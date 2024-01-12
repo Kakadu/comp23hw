@@ -1,0 +1,9 @@
+(executable
+ (name llvm_test)
+ (modules llvm_test)
+ (libraries PeDuCoML.Lib stdio llvm)
+ (link_deps
+  (file ../../runtime/peducoml_runtime.so)))
+
+(cram
+ (deps ./llvm_test.exe ../../runtime/peducoml_runtime.so))

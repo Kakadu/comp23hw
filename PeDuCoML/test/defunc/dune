@@ -1,0 +1,15 @@
+(executable
+ (name closure_test)
+ (modules closure_test)
+ (libraries PeDuCoML.Lib stdio))
+
+(cram
+ (deps ./closure_test.exe))
+
+(executable
+ (name defunc_test)
+ (modules defunc_test)
+ (libraries PeDuCoML.Lib stdio))
+
+(cram
+ (deps ./defunc_test.exe))

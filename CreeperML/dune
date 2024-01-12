@@ -3,4 +3,6 @@
  (public_name main)
  (libraries CreeperML)
  (instrumentation
-  (backend bisect_ppx)))
+  (backend bisect_ppx))
+ (modes
+  (byte exe)))

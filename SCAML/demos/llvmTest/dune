@@ -1,0 +1,8 @@
+(executable
+ (name llvmTests)
+ (modules llvmTests)
+ (public_name llvmTests)
+ (libraries scaml_lib stdio))
+
+(cram
+ (deps ./llvmTests.exe ../../lib/runtime/runtime.so))

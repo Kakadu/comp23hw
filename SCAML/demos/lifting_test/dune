@@ -1,0 +1,8 @@
+(executable
+ (name liftingTests)
+ (modules liftingTests)
+ (public_name liftingTests)
+ (libraries scaml_lib stdio))
+
+(cram
+ (deps ./liftingTests.exe))

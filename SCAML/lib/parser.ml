@@ -47,10 +47,8 @@ let chainl1 e op =
   e >>= fun init -> go init
 ;;
 
-let rec chainr1 e op = e >>= fun a -> op >>= (fun f -> chainr1 e op >>| f a) <|> return a
 let empty = take_while is_whitespace
 let empty1 = take_while1 is_whitespace
-let trim s = empty *> s <* empty
 let token s = empty *> s
 let token1 s = empty1 *> s
 let str_token s = empty *> string s
@@ -59,11 +57,6 @@ let pparens p = str_token "(" *> p <* str_token ")"
 let parrow = str_token "->"
 let pbinding = str_token "let"
 let pwild = str_token "_"
-
-(**  Const constructors *)
-let constr_cint n = CInt n
-
-let constr_cbool b = CBool b
 
 (**  Const parsers *)
 let pcint =
@@ -101,48 +94,22 @@ let pident =
   ident is_entry
 ;;
 
-let pident_constr =
-  let is_constr_entry = function
-    | c -> is_cletter c
-  in
-  ident is_constr_entry
-;;
-
-(**  Pattern constructors *)
-
-let constr_pwild _ = PWild
-let constr_pconst c = PConst c
-let constr_pvar id = PVar id
-
 (**  Pattern parsers *)
 
 let ppwild = constr_pwild <$> pwild
 let ppconst = constr_pconst <$> pconst
 let ppvar = constr_pvar <$> pident
-let pattern = fix @@ fun m -> choice [ ppwild; ppconst; ppvar ] <|> pparens @@ m
-
-(**  Operation constructor *)
-let ebinop binary_op expr1 expr2 = EBinOp (binary_op, expr1, expr2)
+let pattern = fix @@ fun m -> choice [ ppwild; ppconst; ppvar ] <|> pparens m
 
 (**  Operation parsers *)
 
-let pop ch op = str_token ch *> return (ebinop op)
+let pop ch op = str_token ch *> return (constr_ebinop op)
 let pmulti = choice [ pop "*" Mul; pop "/" Div; pop "%" Mod ]
 let padd = pop "+" Add <|> pop "-" Sub
 let pcomp = choice [ pop ">=" Geq; pop ">" Gre; pop "<=" Leq; pop "<" Less ]
 let peq = pop "=" Eq <|> pop "<>" Neq
 let pconj = pop "&&" And
 let pdisj = pop "||" Or
-
-(**  Expr constructors *)
-
-let constr_econst e = EConst e
-let constr_ebinop op e1 e2 = EBinOp (op, e1, e2)
-let constr_evar id = EVar id
-let constr_eif e1 e2 e3 = EIf (e1, e2, e3)
-let constr_efun pl e = List.fold_right ~init:e ~f:(fun p e -> EFun (p, e)) pl
-let constr_eletin b id e1 e2 = ELetIn (b, id, e1, e2)
-let constr_eapp f args = List.fold_left ~init:f ~f:(fun f arg -> EApp (f, arg)) args
 
 (** Expr parsers *)
 
@@ -159,8 +126,8 @@ type edispatch =
 
 let peconst = constr_econst <$> pconst
 let pevar = pident >>| constr_evar
-let pfun_args = fix @@ fun p -> many pattern <|> pparens @@ p
-let pfun_args1 = fix @@ fun p -> many1 pattern <|> pparens @@ p
+let pfun_args = fix @@ fun p -> many pattern <|> pparens p
+let pfun_args1 = fix @@ fun p -> many1 pattern <|> pparens p
 let pparens_only ps = pparens @@ choice ps
 
 let plet_body pargs pexpr =
@@ -277,15 +244,11 @@ let pack =
 
 let expr = pack.expr pack
 
-(**  Binding constructor *)
-let constr_elet b id e = ELet (b, id, e)
-
 (**  Binding parser *)
 let bind =
   fix
   @@ fun m ->
-  lift3 constr_elet pbind_with_option_rec pname_func (pbody_with_args pack)
-  <|> pparens @@ m
+  lift3 constr_elet pbind_with_option_rec pname_func (pbody_with_args pack) <|> pparens m
 ;;
 
 (**  Program parser *)
@@ -649,6 +612,103 @@ let%expect_test _ =
               ))
            ))
         ))
+      ] |}]
+;;
+
+let%expect_test _ =
+  show_parsed_result
+    "let fack1 k n m = k (n * m);; let rec fack n k = if n <= 1 then k 1 else fack (n-1) \
+     (fack1 k n);; let id x = x;; let fac n = fack n id"
+    pprogram
+    show_program;
+  [%expect
+    {|
+    [(ELet (false, "fack1",
+        (EFun ((PVar "k"),
+           (EFun ((PVar "n"),
+              (EFun ((PVar "m"),
+                 (EApp ((EVar "k"), (EBinOp (Mul, (EVar "n"), (EVar "m")))))))
+              ))
+           ))
+        ));
+      (ELet (true, "fack",
+         (EFun ((PVar "n"),
+            (EFun ((PVar "k"),
+               (EIf ((EBinOp (Leq, (EVar "n"), (EConst (CInt 1)))),
+                  (EApp ((EVar "k"), (EConst (CInt 1)))),
+                  (EApp (
+                     (EApp ((EVar "fack"),
+                        (EBinOp (Sub, (EVar "n"), (EConst (CInt 1)))))),
+                     (EApp ((EApp ((EVar "fack1"), (EVar "k"))), (EVar "n")))))
+                  ))
+               ))
+            ))
+         ));
+      (ELet (false, "id", (EFun ((PVar "x"), (EVar "x")))));
+      (ELet (false, "fac",
+         (EFun ((PVar "n"),
+            (EApp ((EApp ((EVar "fack"), (EVar "n"))), (EVar "id")))))
+         ))
+      ] |}]
+;;
+
+let%expect_test _ =
+  show_parsed_result
+    "let id x = x;;\n\
+    \     let acc1 acc x y = acc (x + y);;\n\
+    \     let acc2 fib_func n acc x = fib_func (n - 2) (acc1 acc x);;\n\
+    \     let rec fibo_cps n acc = if n < 3 then acc 1 else fibo_cps (n - 1) (acc2 \
+     fibo_cps n acc);;\n\
+    \     let fibo n = fibo_cps n id"
+    pprogram
+    show_program;
+  [%expect
+    {|
+    [(ELet (false, "id", (EFun ((PVar "x"), (EVar "x")))));
+      (ELet (false, "acc1",
+         (EFun ((PVar "acc"),
+            (EFun ((PVar "x"),
+               (EFun ((PVar "y"),
+                  (EApp ((EVar "acc"), (EBinOp (Add, (EVar "x"), (EVar "y")))))))
+               ))
+            ))
+         ));
+      (ELet (false, "acc2",
+         (EFun ((PVar "fib_func"),
+            (EFun ((PVar "n"),
+               (EFun ((PVar "acc"),
+                  (EFun ((PVar "x"),
+                     (EApp (
+                        (EApp ((EVar "fib_func"),
+                           (EBinOp (Sub, (EVar "n"), (EConst (CInt 2)))))),
+                        (EApp ((EApp ((EVar "acc1"), (EVar "acc"))), (EVar "x")))
+                        ))
+                     ))
+                  ))
+               ))
+            ))
+         ));
+      (ELet (true, "fibo_cps",
+         (EFun ((PVar "n"),
+            (EFun ((PVar "acc"),
+               (EIf ((EBinOp (Less, (EVar "n"), (EConst (CInt 3)))),
+                  (EApp ((EVar "acc"), (EConst (CInt 1)))),
+                  (EApp (
+                     (EApp ((EVar "fibo_cps"),
+                        (EBinOp (Sub, (EVar "n"), (EConst (CInt 1)))))),
+                     (EApp (
+                        (EApp ((EApp ((EVar "acc2"), (EVar "fibo_cps"))),
+                           (EVar "n"))),
+                        (EVar "acc")))
+                     ))
+                  ))
+               ))
+            ))
+         ));
+      (ELet (false, "fibo",
+         (EFun ((PVar "n"),
+            (EApp ((EApp ((EVar "fibo_cps"), (EVar "n"))), (EVar "id")))))
+         ))
       ] |}]
 ;;
 

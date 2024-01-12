@@ -1,0 +1,8 @@
+(executable
+ (name anfTests)
+ (modules anfTests)
+ (public_name anfTests)
+ (libraries scaml_lib stdio))
+
+(cram
+ (deps ./anfTests.exe))

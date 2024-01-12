@@ -1,5 +1,7 @@
 (lang dune 3.4)
 
+(using menhir 2.1)
+
 (name PeDuCoML)
 
 (generate_opam_files true)
@@ -17,4 +19,4 @@
  (name PeDuCoML)
  (synopsis "PeDuCoML")
  (description "PeDuCoML -- a MiniML Compiler")
- (depends ocaml dune ppx_expect ppx_deriving angstrom bisect_ppx))
+ (depends ocaml dune ppx_expect ppx_deriving bisect_ppx))

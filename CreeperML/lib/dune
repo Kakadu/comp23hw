@@ -6,6 +6,14 @@
  (infer false))
 
 (rule
+ (deps parser.mly)
+ (targets parse_errors.messages)
+ (action
+  (with-stdout-to
+   %{targets}
+   (run menhir --list-errors %{deps}))))
+
+(rule
  (deps parse_errors.messages parser.mly)
  (targets parser_messages.ml)
  (action

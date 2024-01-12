@@ -1,0 +1,7 @@
+(executable
+ (name anf_test)
+ (modules anf_test)
+ (libraries PeDuCoML.Lib stdio))
+
+(cram
+ (deps ./anf_test.exe))

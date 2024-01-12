@@ -11,23 +11,30 @@ module InferType : sig
   type lvl = int
 
   (* minimal type of expression *)
-  and ground_typ = TInt | TString | TBool | TUnit | TFloat
+  type ground_typ =
+    | TInt  (** int type *)
+    | TString  (** string type *)
+    | TBool  (** bool type *)
+    | TUnit  (** unit type *)
+    | TFloat  (** float type *)
+
+  (* levels of type nesting (for infer) *)
+  type 'a lvls = { value : 'a; mutable old_lvl : lvl; mutable new_lvl : lvl }
 
   (* complex type *)
   type ty =
-    | TArrow of typ * typ
-    | TTuple of typ list
-    | TGround of ground_typ
-    | TVar of tv ref
-
-  (* subtype for infer *)
-  and tv = Unbound of name * lvl | Link of typ
-
-  (* levels of type nesting (for infer) *)
-  and 'a lvls = { value : 'a; mutable old_lvl : lvl; mutable new_lvl : lvl }
+    | TArrow of typ * typ  (** typ -> typ type *)
+    | TTuple of typ list  (** (typ, ...) type *)
+    | TGround of ground_typ  (** int/string/bool/unit/float type *)
+    | TVar of tv ref  (** 'a type *)
 
   (* main type for infering *)
   and typ = ty lvls
+
+  (* subtype for infer *)
+  and tv =
+    | Unbound of name * lvl  (** unbound type var *)
+    | Link of typ  (** link to typ *)
 
   (* environment *)
   type env = (name * typ) list
@@ -62,6 +69,7 @@ module InferTypeUtils : sig
   val t_string : ground_typ
   val t_bool : ground_typ
   val t_unit : ground_typ
+  val t_float : ground_typ
   val t_arrow : typ -> typ -> ty
   val t_tuple : typ list -> ty
   val t_ground : ground_typ -> ty
@@ -90,16 +98,15 @@ module TypeAst : sig
 
   (* types without lvlvs *)
   type ty =
-    | TyArrow of ty * ty
-    | TyTuple of ty list
-    | TyGround of ground_typ
-    | TyVar of name
+    | TyArrow of ty * ty  (** ty -> ty type *)
+    | TyTuple of ty list  (** (ty, ty, ..) type *)
+    | TyGround of ground_typ  (** ground type *)
+    | TyVar of name  (** 'a type *)
 
   (* expresion with his type *)
   (* InferType.typ to infer work *)
   (* TypeAst.ty to infer result *)
-  and ('a, 'b) typed = { value : 'a; typ : 'b }
-
+  type ('a, 'b) typed = { value : 'a; typ : 'b }
   type 'ty typ_lvalue = (lvalue, 'ty) typed
 
   type 'ty typ_let_binding = {
@@ -114,12 +121,12 @@ module TypeAst : sig
   }
 
   and 'ty t_expr =
-    | TApply of 'ty typ_expr * 'ty typ_expr
-    | TLiteral of literal
-    | TValue of name
-    | TFun of 'ty tfun_body
-    | TTuple of 'ty typ_expr list
-    | TIfElse of 'ty tif_else
+    | TApply of 'ty typ_expr * 'ty typ_expr  (** typed application (a b) *)
+    | TLiteral of literal  (** typed literal (3; "123") *)
+    | TValue of name  (** typed value (a; something) *)
+    | TFun of 'ty tfun_body  (** typed fun (fun arg -> ...) *)
+    | TTuple of 'ty typ_expr list  (** typed tuple ((3, b c, (1, 2)))*)
+    | TIfElse of 'ty tif_else  (** typed if-then-else (if a then b else c)*)
 
   and 'ty tfun_body = { lvalue : 'ty typ_lvalue; b : 'ty typ_let_body }
 
