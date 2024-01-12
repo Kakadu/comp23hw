@@ -4,16 +4,25 @@
 
 let parse_to_llvm program =
   let open KREML_lib in
-  let parsed_ast = Parser.parse_optimistically program in
-  let llvm =
-    parsed_ast
-    |> Clos_conv.cc_program
-    |> Lambda_lifting.ll_program
-    |> Anf_conv.anf_program
-    |> Generate_code.llvm_program
+  let ast = Parser.parse_optimistically program in
+  let typecheck = Inferencer.run_inference ast in
+  let result =
+    match typecheck with
+    | Ok typ ->
+      (match typ with
+       | Typing.TArr _ -> Typing.print_type typ
+       | _ ->
+         ast
+         |> Clos_conv.cc_program
+         |> Lambda_lifting.ll_program
+         |> Anf_conv.anf_program
+         |> Generate_code.llvm_program
+         |> List.map Llvm.string_of_llvalue
+         |> String.concat "\n"
+         |> print_endline)
+    | Error err -> Typing.print_type_error err
   in
-  let llvm_string = llvm |> List.map Llvm.string_of_llvalue |> String.concat "\n" in
-  print_endline llvm_string
+  result
 ;;
 
 let () = parse_to_llvm (Stdio.In_channel.input_all stdin)

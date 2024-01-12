@@ -61,3 +61,13 @@ let pp_error fmt (err : error) =
     fprintf fmt " but expected type was ";
     pp_type fmt t2
 ;;
+
+let print_type typ =
+  let s = Format.asprintf "%a" pp_type typ in
+  Format.printf "%s\n" s
+;;
+
+let print_type_error error =
+  let s = Format.asprintf "%a" pp_error error in
+  Format.printf "%s\n" s
+;;
