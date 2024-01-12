@@ -306,13 +306,13 @@ open Llvm
 open Anf
 open Ast
 
-let context = global_contex<span data-count="20">t</span> ()
-let the_module = create_modul<span data-count="20">e</span> context "main"
-let builder = builde<span data-count="20">r</span> context
-let i64_t = i64_typ<span data-count="20">e</span> context
-let runtime_fun_t = function_typ<span data-count="20">e</span> i64_t [| i64_t; i64_t |]
+let context = global_contex<span data-count="22">t</span> ()
+let the_module = create_modul<span data-count="22">e</span> context "main"
+let builder = builde<span data-count="22">r</span> context
+let i64_t = i64_typ<span data-count="22">e</span> context
+let runtime_fun_t = function_typ<span data-count="22">e</span> i64_t [| i64_t; i64_t |]
 let lookup_function_exn id = <span data-count="75">O</span>ption.get @@ lookup_functio<span data-count="75">n</span> id the_module
-let named_values = Hashtbl.creat<span data-count="20">e</span> 32
+let named_values = Hashtbl.creat<span data-count="22">e</span> 32
 
 let immexpr_to_llvm_ir = function
   | <span data-count="35">I</span>mmInt i -&gt; const_int i64_t i

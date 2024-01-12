@@ -30,17 +30,26 @@
 <a id="L6"></a><span class="visited"> </span>
 <a id="L7"></a><span > </span>
 <a id="L8"></a><span class="visited"> </span>
-<a id="L9"></a><span > </span>
+<a id="L9"></a><span class="visited"> </span>
 <a id="L10"></a><span > </span>
 <a id="L11"></a><span class="visited"> </span>
-<a id="L12"></a><span class="visited"> </span>
+<a id="L12"></a><span > </span>
 <a id="L13"></a><span class="visited"> </span>
-<a id="L14"></a><span > </span>
-<a id="L15"></a><span class="visited"> </span>
-<a id="L16"></a><span class="visited"> </span>
-<a id="L17"></a><span > </span>
-<a id="L18"></a><span > </span>
+<a id="L14"></a><span class="visited"> </span>
+<a id="L15"></a><span > </span>
+<a id="L16"></a><span > </span>
+<a id="L17"></a><span class="visited"> </span>
+<a id="L18"></a><span class="visited"> </span>
 <a id="L19"></a><span class="visited"> </span>
+<a id="L20"></a><span class="visited"> </span>
+<a id="L21"></a><span class="visited"> </span>
+<a id="L22"></a><span class="visited"> </span>
+<a id="L23"></a><span class="visited"> </span>
+<a id="L24"></a><span > </span>
+<a id="L25"></a><span > </span>
+<a id="L26"></a><span > </span>
+<a id="L27"></a><span > </span>
+<a id="L28"></a><span class="visited"> </span>
 </pre>
       </div>
       <div id="text-layer">
@@ -64,26 +73,44 @@
 <a href="#L17">17</a>
 <a href="#L18">18</a>
 <a href="#L19">19</a>
+<a href="#L20">20</a>
+<a href="#L21">21</a>
+<a href="#L22">22</a>
+<a href="#L23">23</a>
+<a href="#L24">24</a>
+<a href="#L25">25</a>
+<a href="#L26">26</a>
+<a href="#L27">27</a>
+<a href="#L28">28</a>
 </pre>
 <pre><code class="ocaml">(** Copyright 2023-2024, Anton Kraev and Polina Badreeva *)
 
 (** SPDX-License-Identifier: LGPL-3.0-or-later *)
 
 let parse_to_llvm program =
-  <span data-count="14">l</span>et open KREML_lib in
-  let parsed_ast = Parser.parse_optimistically program in
-  <span data-count="14">l</span>et llvm =
-    parsed_ast
-    |&gt; Clos_conv.cc_program
-    |&gt; <span data-count="14">L</span>ambda_lifting.ll_program
-    |&gt; <span data-count="14">A</span>nf_conv.anf_program
-    |&gt; <span data-count="14">G</span>enerate_code.llvm_program
+  <span data-count="16">l</span>et open KREML_lib in
+  let ast = Parser.parse_optimistically program in
+  <span data-count="16">l</span>et typecheck = Inferencer.run_inference ast in
+  <span data-count="16">l</span>et result =
+    match typecheck with
+    | <span data-count="15">O</span>k typ -&gt;
+      (match typ with
+       | <span data-count="1">T</span>yping.TArr _ -&gt; Typing.print_typ<span data-count="1">e</span> typ
+       | <span data-count="14">_</span> -&gt;
+         ast
+         |&gt; Clos_conv.cc_program
+         |&gt; <span data-count="14">L</span>ambda_lifting.ll_program
+         |&gt; <span data-count="14">A</span>nf_conv.anf_program
+         |&gt; <span data-count="14">G</span>enerate_code.llvm_program
+         |&gt; <span data-count="14">L</span>ist.map Llvm.string_of_llvalue
+         |&gt; <span data-count="14">S</span>tring.concat "\n"
+         |&gt; <span data-count="14">p</span>rint_endlin<span data-count="14">e</span>)
+    | <span data-count="1">E</span>rror err -&gt; Typing.print_type_erro<span data-count="1">r</span> err
   in
-  <span data-count="14">l</span>et llvm_string = llvm |&gt; List.map Llvm.string_of_llvalue |&gt; <span data-count="14">S</span>tring.concat "\n" in
-  <span data-count="14">p</span>rint_endline llvm_string
+  result
 ;;
 
-let () = parse_to_llv<span data-count="14">m</span> (Stdio.In_channel.input_al<span data-count="14">l</span> stdin)
+let () = parse_to_llv<span data-count="16">m</span> (Stdio.In_channel.input_al<span data-count="16">l</span> stdin)
 </code></pre>
       </div>
     </div>

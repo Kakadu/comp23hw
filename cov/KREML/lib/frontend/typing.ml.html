@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8"/>
     <title>typing.ml &mdash; Coverage report</title>
-    <meta name="description" content="77.42% coverage in lib/frontend/typing.ml">
+    <meta name="description" content="80.00% coverage in lib/frontend/typing.ml">
     <link rel="stylesheet" href="../../coverage.css"/>
     <script src="../../highlight.pack.js"></script>
     <script>hljs.initHighlightingOnLoad();</script>
@@ -15,16 +15,16 @@
           <span class="dirname">lib/frontend/</span>typing.ml
         </a>
       </h1>
-      <h2>77.42%</h2>
+      <h2>80.00%</h2>
     </div>
     <div id="navbar">
-      <span class="unvisited" style="top:7.94%"></span>
-      <span class="unvisited" style="top:15.87%"></span>
-      <span class="unvisited" style="top:17.46%"></span>
-      <span class="unvisited" style="top:19.05%"></span>
-      <span class="unvisited" style="top:25.40%"></span>
-      <span class="unvisited" style="bottom:41.27%"></span>
-      <span class="unvisited" style="bottom:11.11%"></span>
+      <span class="unvisited" style="top:6.85%"></span>
+      <span class="unvisited" style="top:13.70%"></span>
+      <span class="unvisited" style="top:15.07%"></span>
+      <span class="unvisited" style="top:16.44%"></span>
+      <span class="unvisited" style="top:21.92%"></span>
+      <span class="unvisited" style="bottom:49.32%"></span>
+      <span class="unvisited" style="bottom:23.29%"></span>
     </div>
     <div id="report">
       <div id="lines-layer">
@@ -92,6 +92,16 @@
 <a id="L61"></a><span class="visited"> </span>
 <a id="L62"></a><span class="visited"> </span>
 <a id="L63"></a><span > </span>
+<a id="L64"></a><span > </span>
+<a id="L65"></a><span > </span>
+<a id="L66"></a><span class="visited"> </span>
+<a id="L67"></a><span class="visited"> </span>
+<a id="L68"></a><span > </span>
+<a id="L69"></a><span > </span>
+<a id="L70"></a><span > </span>
+<a id="L71"></a><span class="visited"> </span>
+<a id="L72"></a><span class="visited"> </span>
+<a id="L73"></a><span > </span>
 </pre>
       </div>
       <div id="text-layer">
@@ -159,6 +169,16 @@
 <a href="#L61">61</a>
 <a href="#L62">62</a>
 <a href="#L63">63</a>
+<a href="#L64">64</a>
+<a href="#L65">65</a>
+<a href="#L66">66</a>
+<a href="#L67">67</a>
+<a href="#L68">68</a>
+<a href="#L69">69</a>
+<a href="#L70">70</a>
+<a href="#L71">71</a>
+<a href="#L72">72</a>
+<a href="#L73">73</a>
 </pre>
 <pre><code class="ocaml">(** Copyright 2023-2024, Anton Kraev and Polina Badreeva *)
 
@@ -181,9 +201,9 @@
 let int_t = TGround Int
 let bool_t = TGround Bool
 let unit_t = TUnit
-let var_t n = <span data-count="349">T</span>Var n
-let var_eq_t n = <span data-count="71">T</span>EqualityVar n
-let arrow_t left_type right_type = <span data-count="390">T</span>Arr (left_type, right_type)
+let var_t n = <span data-count="730">T</span>Var n
+let var_eq_t n = <span data-count="258">T</span>EqualityVar n
+let arrow_t left_type right_type = <span data-count="980">T</span>Arr (left_type, right_type)
 
 type scheme = (int, Base.Int.comparator_witness) Base.Set.t * typ
 
@@ -194,34 +214,44 @@ type error =
   ]
 
 let rec pp_type fmt typ =
-  <span data-count="69">l</span>et open Format in
+  <span data-count="74">l</span>et open Format in
   let arrow_format = function
     | <span data-count="0">T</span>Arr _ -&gt; format_of_string "(%a)"
-    | <span data-count="23">_</span> -&gt; format_of_string "%a"
+    | <span data-count="24">_</span> -&gt; format_of_string "%a"
   in
   match typ with
   | <span data-count="1">T</span>Unit -&gt; fprintf fmt "()"
-  | <span data-count="32">T</span>Ground x -&gt;
+  | <span data-count="36">T</span>Ground x -&gt;
     (match x with
-     | <span data-count="26">I</span>nt -&gt; fprintf fmt "int"
-     | <span data-count="6">B</span>ool -&gt; fprintf fmt "bool")
-  | <span data-count="23">T</span>Arr (typ_left, typ_right) -&gt;
-    fprintf fmt (arrow_forma<span data-count="23">t</span> typ_left ^<span data-count="23">^</span> " -&gt; %a") pp_type typ_left pp_type typ_right
+     | <span data-count="29">I</span>nt -&gt; fprintf fmt "int"
+     | <span data-count="7">B</span>ool -&gt; fprintf fmt "bool")
+  | <span data-count="24">T</span>Arr (typ_left, typ_right) -&gt;
+    fprintf fmt (arrow_forma<span data-count="24">t</span> typ_left ^<span data-count="24">^</span> " -&gt; %a") pp_type typ_left pp_type typ_right
   | <span data-count="5">T</span>Var var -&gt; fprintf fmt "%s" @@ "'" ^ Char.escape<span data-count="5">d</span> (Stdlib.Char.ch<span data-count="5">r</span> (var + 97))
   | <span data-count="8">T</span>EqualityVar var -&gt;
     fprintf fmt "%s" @@ "''" ^ Char.escape<span data-count="8">d</span> (Stdlib.Char.ch<span data-count="8">r</span> (var + 97))
 ;;
 
 let pp_error fmt (err : error) =
-  <span data-count="2">l</span>et open Format in
+  <span data-count="3">l</span>et open Format in
   match err with
   | <span data-count="0">`</span>OccursCheck -&gt; fprintf fmt "Occurs check failed.\n"
   | <span data-count="1">`</span>NoVariable identifier -&gt; fprintf fmt "No such variable: %s" identifier
-  | <span data-count="1">`</span>UnificationFailed (t1, t2) -&gt;
+  | <span data-count="2">`</span>UnificationFailed (t1, t2) -&gt;
     fprintf fmt "Unification failed: type of the expression is ";
-    <span data-count="1">p</span>p_type fmt t1;
-    <span data-count="1">f</span>printf fmt " but expected type was ";
-    <span data-count="1">p</span>p_type fmt t2
+    <span data-count="2">p</span>p_type fmt t1;
+    <span data-count="2">f</span>printf fmt " but expected type was ";
+    <span data-count="2">p</span>p_type fmt t2
+;;
+
+let print_type typ =
+  <span data-count="22">l</span>et s = Format.asprintf "%a" pp_type typ in
+  <span data-count="22">F</span>ormat.printf "%s\n" s
+;;
+
+let print_type_error error =
+  <span data-count="3">l</span>et s = Format.asprintf "%a" pp_error error in
+  <span data-count="3">F</span>ormat.printf "%s\n" s
 ;;
 </code></pre>
       </div>
