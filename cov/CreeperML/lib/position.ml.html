@@ -113,13 +113,13 @@ module Position = struct
   <span data-count="368">t</span>ype 'a position = { value : 'a; pos : loc }
   [@@deriving show { with_path = false }<span data-count="230">]</span>
 
-  let value { value = v; pos = _ } = <span data-count="1238">v</span>
-  let position { value = _; pos = p } = <span data-count="34">p</span>
+  let value { value = v; pos = _ } = <span data-count="1455">v</span>
+  let position { value = _; pos = p } = <span data-count="40">p</span>
   let start_p { start_p = s; end_p = _ } = <span data-count="0">s</span>
   let end_p { start_p = _; end_p = e } = <span data-count="0">e</span>
   let start_position p = <span data-count="0">p</span>osition p |&gt; <span data-count="0">s</span>tart_p
   let end_position p = <span data-count="0">p</span>osition p |&gt; <span data-count="0">e</span>nd_p
-  let with_position start_p end_p v = <span data-count="1052">{</span> value = v; pos = { start_p; end_p } }
+  let with_position start_p end_p v = <span data-count="1208">{</span> value = v; pos = { start_p; end_p } }
 end
 </code></pre>
       </div>

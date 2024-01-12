@@ -327,46 +327,46 @@ module Std = struct
   module Inferencer = struct
     open Type_ast.InferTypeUtils
 
-    let top_lvl = with_lvl<span data-count="21">s</span> 0 0
+    let top_lvl = with_lvl<span data-count="22">s</span> 0 0
 
     (* *)
-    let int_const = t_ground t_int |&gt; <span data-count="21">t</span>op_lv<span data-count="21">l</span>
-    let unit_const = t_ground t_unit |&gt; <span data-count="21">t</span>op_lv<span data-count="21">l</span>
-    let bool_const = t_ground t_bool |&gt; <span data-count="21">t</span>op_lv<span data-count="21">l</span>
-    let float_const = t_ground t_float |&gt; <span data-count="21">t</span>op_lv<span data-count="21">l</span>
-    let string_const = t_ground t_string |&gt; <span data-count="21">t</span>op_lv<span data-count="21">l</span>
-    let arr l r = <span data-count="420">t</span>_arrow l r |&gt; <span data-count="420">t</span>op_lvl
-    let triple fst snd rez = <span data-count="378">a</span>rr snd rez |&gt; <span data-count="378">t</span>_arrow fst |&gt; <span data-count="378">t</span>op_lvl
+    let int_const = t_ground t_int |&gt; <span data-count="22">t</span>op_lv<span data-count="22">l</span>
+    let unit_const = t_ground t_unit |&gt; <span data-count="22">t</span>op_lv<span data-count="22">l</span>
+    let bool_const = t_ground t_bool |&gt; <span data-count="22">t</span>op_lv<span data-count="22">l</span>
+    let float_const = t_ground t_float |&gt; <span data-count="22">t</span>op_lv<span data-count="22">l</span>
+    let string_const = t_ground t_string |&gt; <span data-count="22">t</span>op_lv<span data-count="22">l</span>
+    let arr l r = <span data-count="440">t</span>_arrow l r |&gt; <span data-count="440">t</span>op_lvl
+    let triple fst snd rez = <span data-count="396">a</span>rr snd rez |&gt; <span data-count="396">t</span>_arrow fst |&gt; <span data-count="396">t</span>op_lvl
 
     (* int operations *)
-    let sub = ("-", tripl<span data-count="21">e</span> int_const int_const int_const)
-    let add = ("+", tripl<span data-count="21">e</span> int_const int_const int_const)
-    let mul = ("*", tripl<span data-count="21">e</span> int_const int_const int_const)
-    let div = ("/", tripl<span data-count="21">e</span> int_const int_const int_const)
+    let sub = ("-", tripl<span data-count="22">e</span> int_const int_const int_const)
+    let add = ("+", tripl<span data-count="22">e</span> int_const int_const int_const)
+    let mul = ("*", tripl<span data-count="22">e</span> int_const int_const int_const)
+    let div = ("/", tripl<span data-count="22">e</span> int_const int_const int_const)
 
     (* int bool *)
-    let le = ("&lt;=", tripl<span data-count="21">e</span> int_const int_const bool_const)
-    let less = ("&lt;", tripl<span data-count="21">e</span> int_const int_const bool_const)
-    let eq = ("==", tripl<span data-count="21">e</span> int_const int_const bool_const)
-    let gr = ("&gt;", tripl<span data-count="21">e</span> int_const int_const bool_const)
-    let ge = ("&gt;=", tripl<span data-count="21">e</span> int_const int_const bool_const)
+    let le = ("&lt;=", tripl<span data-count="22">e</span> int_const int_const bool_const)
+    let less = ("&lt;", tripl<span data-count="22">e</span> int_const int_const bool_const)
+    let eq = ("==", tripl<span data-count="22">e</span> int_const int_const bool_const)
+    let gr = ("&gt;", tripl<span data-count="22">e</span> int_const int_const bool_const)
+    let ge = ("&gt;=", tripl<span data-count="22">e</span> int_const int_const bool_const)
 
     (* float operations *)
-    let fsub = ("-.", tripl<span data-count="21">e</span> float_const float_const float_const)
-    let fadd = ("+.", tripl<span data-count="21">e</span> float_const float_const float_const)
-    let fmul = ("*.", tripl<span data-count="21">e</span> float_const float_const float_const)
-    let fdiv = ("/.", tripl<span data-count="21">e</span> float_const float_const float_const)
+    let fsub = ("-.", tripl<span data-count="22">e</span> float_const float_const float_const)
+    let fadd = ("+.", tripl<span data-count="22">e</span> float_const float_const float_const)
+    let fmul = ("*.", tripl<span data-count="22">e</span> float_const float_const float_const)
+    let fdiv = ("/.", tripl<span data-count="22">e</span> float_const float_const float_const)
 
     (* float bool*)
-    let fle = ("&lt;=.", tripl<span data-count="21">e</span> float_const float_const bool_const)
-    let fless = ("&lt;.", tripl<span data-count="21">e</span> float_const float_const bool_const)
-    let feq = ("==.", tripl<span data-count="21">e</span> float_const float_const bool_const)
-    let fgr = ("&gt;=.", tripl<span data-count="21">e</span> float_const float_const bool_const)
-    let fge = ("&gt;.", tripl<span data-count="21">e</span> float_const float_const bool_const)
+    let fle = ("&lt;=.", tripl<span data-count="22">e</span> float_const float_const bool_const)
+    let fless = ("&lt;.", tripl<span data-count="22">e</span> float_const float_const bool_const)
+    let feq = ("==.", tripl<span data-count="22">e</span> float_const float_const bool_const)
+    let fgr = ("&gt;=.", tripl<span data-count="22">e</span> float_const float_const bool_const)
+    let fge = ("&gt;.", tripl<span data-count="22">e</span> float_const float_const bool_const)
 
     (* prints *)
-    let print_int = ("print_int", ar<span data-count="21">r</span> int_const unit_const)
-    let print_string = ("print_string", ar<span data-count="21">r</span> string_const unit_const)
+    let print_int = ("print_int", ar<span data-count="22">r</span> int_const unit_const)
+    let print_string = ("print_string", ar<span data-count="22">r</span> string_const unit_const)
 
     let env =
       [
@@ -396,7 +396,7 @@ module Std = struct
   module Operators = struct
     open Type_ast.TypeAst
 
-    let typed t a : ('a, ty) typed = <span data-count="420">{</span> value = a; typ = t }
+    let typed t a : ('a, ty) typed = <span data-count="440">{</span> value = a; typ = t }
 
     (* *)
     let int_const = TyGround TInt
@@ -404,38 +404,38 @@ module Std = struct
     let bool_const = TyGround TBool
     let float_const = TyGround TFloat
     let string_const = TyGround TString
-    let arr l r = <span data-count="42">T</span>yArrow (l, r)
-    let triple fst snd rez = <span data-count="378">T</span>yArrow (TyArrow (fst, snd), rez)
+    let arr l r = <span data-count="44">T</span>yArrow (l, r)
+    let triple fst snd rez = <span data-count="396">T</span>yArrow (TyArrow (fst, snd), rez)
 
     (* int operations *)
-    let sub = type<span data-count="21">d</span> (tripl<span data-count="21">e</span> int_const int_const int_const) "-"
-    let add = type<span data-count="21">d</span> (tripl<span data-count="21">e</span> int_const int_const int_const) "+"
-    let mul = type<span data-count="21">d</span> (tripl<span data-count="21">e</span> int_const int_const int_const) "*"
-    let div = type<span data-count="21">d</span> (tripl<span data-count="21">e</span> int_const int_const int_const) "/"
+    let sub = type<span data-count="22">d</span> (tripl<span data-count="22">e</span> int_const int_const int_const) "-"
+    let add = type<span data-count="22">d</span> (tripl<span data-count="22">e</span> int_const int_const int_const) "+"
+    let mul = type<span data-count="22">d</span> (tripl<span data-count="22">e</span> int_const int_const int_const) "*"
+    let div = type<span data-count="22">d</span> (tripl<span data-count="22">e</span> int_const int_const int_const) "/"
 
     (* int bool *)
-    let le = type<span data-count="21">d</span> (tripl<span data-count="21">e</span> int_const int_const bool_const) "&lt;="
-    let less = type<span data-count="21">d</span> (tripl<span data-count="21">e</span> int_const int_const bool_const) "&lt;"
-    let eq = type<span data-count="21">d</span> (tripl<span data-count="21">e</span> int_const int_const bool_const) "="
-    let gr = type<span data-count="21">d</span> (tripl<span data-count="21">e</span> int_const int_const bool_const) "&gt;"
-    let ge = type<span data-count="21">d</span> (tripl<span data-count="21">e</span> int_const int_const bool_const) "&gt;="
+    let le = type<span data-count="22">d</span> (tripl<span data-count="22">e</span> int_const int_const bool_const) "&lt;="
+    let less = type<span data-count="22">d</span> (tripl<span data-count="22">e</span> int_const int_const bool_const) "&lt;"
+    let eq = type<span data-count="22">d</span> (tripl<span data-count="22">e</span> int_const int_const bool_const) "=="
+    let gr = type<span data-count="22">d</span> (tripl<span data-count="22">e</span> int_const int_const bool_const) "&gt;"
+    let ge = type<span data-count="22">d</span> (tripl<span data-count="22">e</span> int_const int_const bool_const) "&gt;="
 
     (* float operations *)
-    let fsub = type<span data-count="21">d</span> (tripl<span data-count="21">e</span> float_const float_const float_const) "-."
-    let fadd = type<span data-count="21">d</span> (tripl<span data-count="21">e</span> float_const float_const float_const) "+."
-    let fmul = type<span data-count="21">d</span> (tripl<span data-count="21">e</span> float_const float_const float_const) "*."
-    let fdiv = type<span data-count="21">d</span> (tripl<span data-count="21">e</span> float_const float_const float_const) "/."
+    let fsub = type<span data-count="22">d</span> (tripl<span data-count="22">e</span> float_const float_const float_const) "-."
+    let fadd = type<span data-count="22">d</span> (tripl<span data-count="22">e</span> float_const float_const float_const) "+."
+    let fmul = type<span data-count="22">d</span> (tripl<span data-count="22">e</span> float_const float_const float_const) "*."
+    let fdiv = type<span data-count="22">d</span> (tripl<span data-count="22">e</span> float_const float_const float_const) "/."
 
     (* float bool*)
-    let fle = type<span data-count="21">d</span> (tripl<span data-count="21">e</span> float_const float_const bool_const) "&lt;=."
-    let fless = type<span data-count="21">d</span> (tripl<span data-count="21">e</span> float_const float_const bool_const) "&lt;."
-    let feq = type<span data-count="21">d</span> (tripl<span data-count="21">e</span> float_const float_const bool_const) "=."
-    let fgr = type<span data-count="21">d</span> (tripl<span data-count="21">e</span> float_const float_const bool_const) "&gt;."
-    let fge = type<span data-count="21">d</span> (tripl<span data-count="21">e</span> float_const float_const bool_const) "&gt;=."
+    let fle = type<span data-count="22">d</span> (tripl<span data-count="22">e</span> float_const float_const bool_const) "&lt;=."
+    let fless = type<span data-count="22">d</span> (tripl<span data-count="22">e</span> float_const float_const bool_const) "&lt;."
+    let feq = type<span data-count="22">d</span> (tripl<span data-count="22">e</span> float_const float_const bool_const) "==."
+    let fgr = type<span data-count="22">d</span> (tripl<span data-count="22">e</span> float_const float_const bool_const) "&gt;."
+    let fge = type<span data-count="22">d</span> (tripl<span data-count="22">e</span> float_const float_const bool_const) "&gt;=."
 
     (* prints *)
-    let print_int = type<span data-count="21">d</span> (ar<span data-count="21">r</span> int_const unit_const) "print_int"
-    let print_string = type<span data-count="21">d</span> (ar<span data-count="21">r</span> string_const unit_const) "print_string"
+    let print_int = type<span data-count="22">d</span> (ar<span data-count="22">r</span> int_const unit_const) "print_int"
+    let print_string = type<span data-count="22">d</span> (ar<span data-count="22">r</span> string_const unit_const) "print_string"
 
     let operators =
       [

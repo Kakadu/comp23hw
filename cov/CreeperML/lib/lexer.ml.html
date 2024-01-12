@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8"/>
     <title>lexer.ml &mdash; Coverage report</title>
-    <meta name="description" content="68.18% coverage in lib/lexer.ml">
+    <meta name="description" content="72.73% coverage in lib/lexer.ml">
     <link rel="stylesheet" href="../coverage.css"/>
     <script src="../highlight.pack.js"></script>
     <script>hljs.initHighlightingOnLoad();</script>
@@ -15,7 +15,7 @@
           <span class="dirname">lib/</span>lexer.ml
         </a>
       </h1>
-      <h2>68.18%</h2>
+      <h2>72.73%</h2>
     </div>
     <div id="navbar">
       <span class="unvisited" style="bottom:12.82%"></span>
@@ -23,8 +23,6 @@
       <span class="unvisited" style="bottom:11.79%"></span>
       <span class="unvisited" style="bottom:11.58%"></span>
       <span class="unvisited" style="bottom:11.27%"></span>
-      <span class="unvisited" style="bottom:9.20%"></span>
-      <span class="unvisited" style="bottom:7.14%"></span>
       <span class="unvisited" style="bottom:4.55%"></span>
       <span class="unvisited" style="bottom:4.34%"></span>
       <span class="unvisited" style="bottom:4.03%"></span>
@@ -912,7 +910,7 @@
 <a id="L875"></a><span > </span>
 <a id="L876"></a><span > </span>
 <a id="L877"></a><span > </span>
-<a id="L878"></a><span class="unvisited"> </span>
+<a id="L878"></a><span class="visited"> </span>
 <a id="L879"></a><span > </span>
 <a id="L880"></a><span > </span>
 <a id="L881"></a><span > </span>
@@ -932,7 +930,7 @@
 <a id="L895"></a><span > </span>
 <a id="L896"></a><span > </span>
 <a id="L897"></a><span > </span>
-<a id="L898"></a><span class="unvisited"> </span>
+<a id="L898"></a><span class="visited"> </span>
 <a id="L899"></a><span > </span>
 <a id="L900"></a><span > </span>
 <a id="L901"></a><span > </span>
@@ -2803,17 +2801,17 @@ let __ocaml_lex_tables = {
 }
 
 let rec token lexbuf =
-   <span data-count="1418">_</span>_ocaml_lex_token_rec lexbuf 0
+   <span data-count="1580">_</span>_ocaml_lex_token_rec lexbuf 0
 and __ocaml_lex_token_rec lexbuf __ocaml_lex_state =
-  <span data-count="1460">m</span>atch Lexing.engine __ocaml_lex_tables __ocaml_lex_state lexbuf with
-      | <span data-count="648">0</span> -&gt;
+  <span data-count="1626">m</span>atch Lexing.engine __ocaml_lex_tables __ocaml_lex_state lexbuf with
+      | <span data-count="714">0</span> -&gt;
 # 31 "lib/lexer.mll"
                  ( token lexbuf )
 # 837 "lib/lexer.ml"
 
-  | <span data-count="97">1</span> -&gt;
+  | <span data-count="108">1</span> -&gt;
 # 32 "lib/lexer.mll"
-                ( INT (Lexing.lexeme lexbuf |&gt; <span data-count="97">i</span>nt_of_strin<span data-count="97">g</span>) )
+                ( INT (Lexing.lexeme lexbuf |&gt; <span data-count="108">i</span>nt_of_strin<span data-count="108">g</span>) )
 # 842 "lib/lexer.ml"
 
   | <span data-count="0">2</span> -&gt;
@@ -2836,62 +2834,62 @@ and __ocaml_lex_token_rec lexbuf __ocaml_lex_state =
           ( UNDERBAR )
 # 862 "lib/lexer.ml"
 
-  | <span data-count="6">6</span> -&gt;
+  | <span data-count="8">6</span> -&gt;
 # 37 "lib/lexer.mll"
             ( REC )
 # 867 "lib/lexer.ml"
 
-  | <span data-count="28">7</span> -&gt;
+  | <span data-count="19">7</span> -&gt;
 # 38 "lib/lexer.mll"
            ( IN )
 # 872 "lib/lexer.ml"
 
-  | <span data-count="71">8</span> -&gt;
+  | <span data-count="69">8</span> -&gt;
 # 39 "lib/lexer.mll"
             ( LET )
 # 877 "lib/lexer.ml"
 
-  | <span data-count="0">9</span> -&gt;
+  | <span data-count="2">9</span> -&gt;
 # 40 "lib/lexer.mll"
             ( FUN )
 # 882 "lib/lexer.ml"
 
-  | <span data-count="9">1</span>0 -&gt;
+  | <span data-count="12">1</span>0 -&gt;
 # 41 "lib/lexer.mll"
            ( IF )
 # 887 "lib/lexer.ml"
 
-  | <span data-count="9">1</span>1 -&gt;
+  | <span data-count="12">1</span>1 -&gt;
 # 42 "lib/lexer.mll"
              ( THEN )
 # 892 "lib/lexer.ml"
 
-  | <span data-count="9">1</span>2 -&gt;
+  | <span data-count="12">1</span>2 -&gt;
 # 43 "lib/lexer.mll"
              ( ELSE )
 # 897 "lib/lexer.ml"
 
-  | <span data-count="0">1</span>3 -&gt;
+  | <span data-count="2">1</span>3 -&gt;
 # 44 "lib/lexer.mll"
            ( ARROW )
 # 902 "lib/lexer.ml"
 
-  | <span data-count="24">1</span>4 -&gt;
+  | <span data-count="22">1</span>4 -&gt;
 # 45 "lib/lexer.mll"
           ( COMMA )
 # 907 "lib/lexer.ml"
 
-  | <span data-count="71">1</span>5 -&gt;
+  | <span data-count="69">1</span>5 -&gt;
 # 46 "lib/lexer.mll"
           ( EQUALLY )
 # 912 "lib/lexer.ml"
 
-  | <span data-count="39">1</span>6 -&gt;
+  | <span data-count="57">1</span>6 -&gt;
 # 47 "lib/lexer.mll"
           ( RIGHTPARENT )
 # 917 "lib/lexer.ml"
 
-  | <span data-count="39">1</span>7 -&gt;
+  | <span data-count="57">1</span>7 -&gt;
 # 48 "lib/lexer.mll"
           ( LEFTPARENT )
 # 922 "lib/lexer.ml"
@@ -2906,38 +2904,38 @@ and __ocaml_lex_token_rec lexbuf __ocaml_lex_state =
                  ( MIDHIGHLVLPREDICATE (Lexing.lexem<span data-count="0">e</span> lexbuf) )
 # 932 "lib/lexer.ml"
 
-  | <span data-count="18">2</span>0 -&gt;
+  | <span data-count="17">2</span>0 -&gt;
 # 51 "lib/lexer.mll"
-                ( MIDLVLPREDICATE (Lexing.lexem<span data-count="18">e</span> lexbuf) )
+                ( MIDLVLPREDICATE (Lexing.lexem<span data-count="17">e</span> lexbuf) )
 # 937 "lib/lexer.ml"
 
-  | <span data-count="60">2</span>1 -&gt;
+  | <span data-count="63">2</span>1 -&gt;
 # 52 "lib/lexer.mll"
-                 ( LOWMIDLVLPREDICATE (Lexing.lexem<span data-count="60">e</span> lexbuf) )
+                 ( LOWMIDLVLPREDICATE (Lexing.lexem<span data-count="63">e</span> lexbuf) )
 # 942 "lib/lexer.ml"
 
-  | <span data-count="7">2</span>2 -&gt;
+  | <span data-count="10">2</span>2 -&gt;
 # 53 "lib/lexer.mll"
-                ( LOWLVLPREDICATE (Lexing.lexem<span data-count="7">e</span> lexbuf) )
+                ( LOWLVLPREDICATE (Lexing.lexem<span data-count="10">e</span> lexbuf) )
 # 947 "lib/lexer.ml"
 
-  | <span data-count="259">2</span>3 -&gt;
+  | <span data-count="300">2</span>3 -&gt;
 # 54 "lib/lexer.mll"
-           ( NAME (Lexing.lexem<span data-count="259">e</span> lexbuf) )
+           ( NAME (Lexing.lexem<span data-count="300">e</span> lexbuf) )
 # 952 "lib/lexer.ml"
 
-  | <span data-count="21">2</span>4 -&gt;
+  | <span data-count="24">2</span>4 -&gt;
 # 55 "lib/lexer.mll"
           ( EOF )
 # 957 "lib/lexer.ml"
 
   | <span data-count="0">2</span>5 -&gt;
-# 57 "lib/lexer.mll"
+# 56 "lib/lexer.mll"
         ( raise (Failure ("Character not allowed in source text: '" ^ Lexing.lexem<span data-count="0">e</span> lexbuf ^ "'")) )
 # 962 "lib/lexer.ml"
 
-  | <span data-count="42">_</span>_ocaml_lex_state -&gt; lexbuf.Lexing.refill_buff lexbuf;
-      <span data-count="42">_</span>_ocaml_lex_token_rec lexbuf __ocaml_lex_state
+  | <span data-count="46">_</span>_ocaml_lex_state -&gt; lexbuf.Lexing.refill_buff lexbuf;
+      <span data-count="46">_</span>_ocaml_lex_token_rec lexbuf __ocaml_lex_state
 
 ;;
 

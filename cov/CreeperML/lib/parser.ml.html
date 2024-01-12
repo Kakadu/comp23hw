@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8"/>
     <title>parser.ml &mdash; Coverage report</title>
-    <meta name="description" content="75.28% coverage in lib/parser.ml">
+    <meta name="description" content="79.21% coverage in lib/parser.ml">
     <link rel="stylesheet" href="../coverage.css"/>
     <script src="../highlight.pack.js"></script>
     <script>hljs.initHighlightingOnLoad();</script>
@@ -15,27 +15,20 @@
           <span class="dirname">lib/</span>parser.ml
         </a>
       </h1>
-      <h2>75.28%</h2>
+      <h2>79.21%</h2>
     </div>
     <div id="navbar">
       <span class="unvisited" style="top:0.72%"></span>
-      <span class="unvisited" style="top:5.48%"></span>
       <span class="unvisited" style="top:6.15%"></span>
-      <span class="unvisited" style="top:6.26%"></span>
       <span class="unvisited" style="top:6.37%"></span>
       <span class="unvisited" style="top:7.25%"></span>
       <span class="unvisited" style="top:7.81%"></span>
       <span class="unvisited" style="top:8.03%"></span>
-      <span class="unvisited" style="top:8.53%"></span>
       <span class="unvisited" style="top:9.19%"></span>
-      <span class="unvisited" style="top:9.30%"></span>
       <span class="unvisited" style="top:9.41%"></span>
       <span class="unvisited" style="top:10.30%"></span>
       <span class="unvisited" style="top:10.85%"></span>
       <span class="unvisited" style="top:11.07%"></span>
-      <span class="unvisited" style="top:25.91%"></span>
-      <span class="unvisited" style="top:28.41%"></span>
-      <span class="unvisited" style="top:28.74%"></span>
       <span class="unvisited" style="top:34.61%"></span>
       <span class="unvisited" style="top:36.66%"></span>
       <span class="unvisited" style="top:37.10%"></span>
@@ -159,7 +152,7 @@
 <a id="L96"></a><span > </span>
 <a id="L97"></a><span > </span>
 <a id="L98"></a><span class="visited"> </span>
-<a id="L99"></a><span class="unvisited"> </span>
+<a id="L99"></a><span class="visited"> </span>
 <a id="L100"></a><span > </span>
 <a id="L101"></a><span class="visited"> </span>
 <a id="L102"></a><span > </span>
@@ -173,7 +166,7 @@
 <a id="L110"></a><span > </span>
 <a id="L111"></a><span class="unvisited"> </span>
 <a id="L112"></a><span > </span>
-<a id="L113"></a><span class="unvisited"> </span>
+<a id="L113"></a><span class="visited"> </span>
 <a id="L114"></a><span > </span>
 <a id="L115"></a><span class="unvisited"> </span>
 <a id="L116"></a><span > </span>
@@ -214,7 +207,7 @@
 <a id="L151"></a><span > </span>
 <a id="L152"></a><span > </span>
 <a id="L153"></a><span class="visited"> </span>
-<a id="L154"></a><span class="unvisited"> </span>
+<a id="L154"></a><span class="visited"> </span>
 <a id="L155"></a><span > </span>
 <a id="L156"></a><span class="visited"> </span>
 <a id="L157"></a><span > </span>
@@ -228,7 +221,7 @@
 <a id="L165"></a><span > </span>
 <a id="L166"></a><span class="unvisited"> </span>
 <a id="L167"></a><span > </span>
-<a id="L168"></a><span class="unvisited"> </span>
+<a id="L168"></a><span class="visited"> </span>
 <a id="L169"></a><span > </span>
 <a id="L170"></a><span class="unvisited"> </span>
 <a id="L171"></a><span > </span>
@@ -528,7 +521,7 @@
 <a id="L465"></a><span > </span>
 <a id="L466"></a><span > </span>
 <a id="L467"></a><span > </span>
-<a id="L468"></a><span class="unvisited"> </span>
+<a id="L468"></a><span class="visited"> </span>
 <a id="L469"></a><span > </span>
 <a id="L470"></a><span > </span>
 <a id="L471"></a><span > </span>
@@ -573,13 +566,13 @@
 <a id="L510"></a><span > </span>
 <a id="L511"></a><span > </span>
 <a id="L512"></a><span > </span>
-<a id="L513"></a><span class="unvisited"> </span>
+<a id="L513"></a><span class="visited"> </span>
 <a id="L514"></a><span > </span>
 <a id="L515"></a><span > </span>
 <a id="L516"></a><span > </span>
 <a id="L517"></a><span > </span>
 <a id="L518"></a><span > </span>
-<a id="L519"></a><span class="unvisited"> </span>
+<a id="L519"></a><span class="visited"> </span>
 <a id="L520"></a><span > </span>
 <a id="L521"></a><span > </span>
 <a id="L522"></a><span > </span>
@@ -3775,52 +3768,52 @@ module Tables = struct
   
   let token2terminal : token -&gt; int =
     fun _tok -&gt;
-      <span data-count="1467">m</span>atch _tok with
-      | <span data-count="0">A</span>RROW -&gt;
+      <span data-count="1643">m</span>atch _tok with
+      | <span data-count="4">A</span>RROW -&gt;
           24
       | <span data-count="3">B</span>OOL _ -&gt;
           23
-      | <span data-count="42">C</span>OMMA -&gt;
+      | <span data-count="37">C</span>OMMA -&gt;
           22
-      | <span data-count="21">E</span>LSE -&gt;
+      | <span data-count="29">E</span>LSE -&gt;
           21
-      | <span data-count="103">E</span>OF -&gt;
+      | <span data-count="111">E</span>OF -&gt;
           20
-      | <span data-count="142">E</span>QUALLY -&gt;
+      | <span data-count="138">E</span>QUALLY -&gt;
           19
       | <span data-count="0">F</span>LOAT _ -&gt;
           18
-      | <span data-count="0">F</span>UN -&gt;
+      | <span data-count="2">F</span>UN -&gt;
           17
       | <span data-count="0">H</span>IGHLVLPREDICATE _ -&gt;
           16
-      | <span data-count="16">I</span>F -&gt;
+      | <span data-count="22">I</span>F -&gt;
           15
-      | <span data-count="107">I</span>N -&gt;
+      | <span data-count="77">I</span>N -&gt;
           14
-      | <span data-count="129">I</span>NT _ -&gt;
+      | <span data-count="155">I</span>NT _ -&gt;
           13
-      | <span data-count="67">L</span>EFTPARENT -&gt;
+      | <span data-count="105">L</span>EFTPARENT -&gt;
           12
-      | <span data-count="128">L</span>ET -&gt;
+      | <span data-count="145">L</span>ET -&gt;
           11
-      | <span data-count="16">L</span>OWLVLPREDICATE _ -&gt;
+      | <span data-count="22">L</span>OWLVLPREDICATE _ -&gt;
           10
-      | <span data-count="138">L</span>OWMIDLVLPREDICATE _ -&gt;
+      | <span data-count="151">L</span>OWMIDLVLPREDICATE _ -&gt;
           9
       | <span data-count="0">M</span>IDHIGHLVLPREDICATE _ -&gt;
           8
-      | <span data-count="38">M</span>IDLVLPREDICATE _ -&gt;
+      | <span data-count="36">M</span>IDLVLPREDICATE _ -&gt;
           7
-      | <span data-count="376">N</span>AME _ -&gt;
+      | <span data-count="413">N</span>AME _ -&gt;
           6
-      | <span data-count="6">R</span>EC -&gt;
+      | <span data-count="8">R</span>EC -&gt;
           5
-      | <span data-count="110">R</span>IGHTPARENT -&gt;
+      | <span data-count="151">R</span>IGHTPARENT -&gt;
           4
       | <span data-count="0">S</span>TRING _ -&gt;
           3
-      | <span data-count="25">T</span>HEN -&gt;
+      | <span data-count="34">T</span>HEN -&gt;
           2
       | <span data-count="0">U</span>NDERBAR -&gt;
           1
@@ -3830,52 +3823,52 @@ module Tables = struct
   
   and token2value : token -&gt; Obj.t =
     fun _tok -&gt;
-      <span data-count="1467">m</span>atch _tok with
-      | <span data-count="0">A</span>RROW -&gt;
+      <span data-count="1643">m</span>atch _tok with
+      | <span data-count="4">A</span>RROW -&gt;
           Obj.repr ()
       | <span data-count="3">B</span>OOL _v -&gt;
           Obj.repr _v
-      | <span data-count="42">C</span>OMMA -&gt;
+      | <span data-count="37">C</span>OMMA -&gt;
           Obj.repr ()
-      | <span data-count="21">E</span>LSE -&gt;
+      | <span data-count="29">E</span>LSE -&gt;
           Obj.repr ()
-      | <span data-count="103">E</span>OF -&gt;
+      | <span data-count="111">E</span>OF -&gt;
           Obj.repr ()
-      | <span data-count="142">E</span>QUALLY -&gt;
+      | <span data-count="138">E</span>QUALLY -&gt;
           Obj.repr ()
       | <span data-count="0">F</span>LOAT _v -&gt;
           Obj.repr _v
-      | <span data-count="0">F</span>UN -&gt;
+      | <span data-count="2">F</span>UN -&gt;
           Obj.repr ()
       | <span data-count="0">H</span>IGHLVLPREDICATE _v -&gt;
           Obj.repr _v
-      | <span data-count="16">I</span>F -&gt;
+      | <span data-count="22">I</span>F -&gt;
           Obj.repr ()
-      | <span data-count="107">I</span>N -&gt;
+      | <span data-count="77">I</span>N -&gt;
           Obj.repr ()
-      | <span data-count="129">I</span>NT _v -&gt;
+      | <span data-count="155">I</span>NT _v -&gt;
           Obj.repr _v
-      | <span data-count="67">L</span>EFTPARENT -&gt;
+      | <span data-count="105">L</span>EFTPARENT -&gt;
           Obj.repr ()
-      | <span data-count="128">L</span>ET -&gt;
+      | <span data-count="145">L</span>ET -&gt;
           Obj.repr ()
-      | <span data-count="16">L</span>OWLVLPREDICATE _v -&gt;
+      | <span data-count="22">L</span>OWLVLPREDICATE _v -&gt;
           Obj.repr _v
-      | <span data-count="138">L</span>OWMIDLVLPREDICATE _v -&gt;
+      | <span data-count="151">L</span>OWMIDLVLPREDICATE _v -&gt;
           Obj.repr _v
       | <span data-count="0">M</span>IDHIGHLVLPREDICATE _v -&gt;
           Obj.repr _v
-      | <span data-count="38">M</span>IDLVLPREDICATE _v -&gt;
+      | <span data-count="36">M</span>IDLVLPREDICATE _v -&gt;
           Obj.repr _v
-      | <span data-count="376">N</span>AME _v -&gt;
+      | <span data-count="413">N</span>AME _v -&gt;
           Obj.repr _v
-      | <span data-count="6">R</span>EC -&gt;
+      | <span data-count="8">R</span>EC -&gt;
           Obj.repr ()
-      | <span data-count="110">R</span>IGHTPARENT -&gt;
+      | <span data-count="151">R</span>IGHTPARENT -&gt;
           Obj.repr ()
       | <span data-count="0">S</span>TRING _v -&gt;
           Obj.repr _v
-      | <span data-count="25">T</span>HEN -&gt;
+      | <span data-count="34">T</span>HEN -&gt;
           Obj.repr ()
       | <span data-count="0">U</span>NDERBAR -&gt;
           Obj.repr ()
@@ -3901,7 +3894,7 @@ module Tables = struct
   and semantic_action =
     [|
       (fun _menhir_env -&gt;
-        <span data-count="25">l</span>et _menhir_stack = _menhir_env.MenhirLib.EngineTypes.stack in
+        <span data-count="43">l</span>et _menhir_stack = _menhir_env.MenhirLib.EngineTypes.stack in
         let {
           MenhirLib.EngineTypes.state = _;
           MenhirLib.EngineTypes.semv = _2;
@@ -3925,19 +3918,19 @@ module Tables = struct
           let _startpos = _startpos__1_ in
           (
 # 88 "lib/parser.mly"
-                 ( e_appl<span data-count="25">y</span> _startpos _endpos _1 _2 )
+                 ( e_appl<span data-count="43">y</span> _startpos _endpos _1 _2 )
 # 250 "lib/parser.ml"
            : 'tv_apply)
         in
         {
           MenhirLib.EngineTypes.state = _menhir_s;
-          MenhirLib.EngineTypes.semv = Obj.rep<span data-count="25">r</span> _v;
+          MenhirLib.EngineTypes.semv = Obj.rep<span data-count="43">r</span> _v;
           MenhirLib.EngineTypes.startp = _startpos;
           MenhirLib.EngineTypes.endp = _endpos;
           MenhirLib.EngineTypes.next = _menhir_stack;
         });
       (fun _menhir_env -&gt;
-        <span data-count="23">l</span>et _menhir_stack = _menhir_env.MenhirLib.EngineTypes.stack in
+        <span data-count="43">l</span>et _menhir_stack = _menhir_env.MenhirLib.EngineTypes.stack in
         let {
           MenhirLib.EngineTypes.state = _menhir_s;
           MenhirLib.EngineTypes.semv = _1;
@@ -3956,13 +3949,13 @@ module Tables = struct
          in
         {
           MenhirLib.EngineTypes.state = _menhir_s;
-          MenhirLib.EngineTypes.semv = Obj.rep<span data-count="23">r</span> _v;
+          MenhirLib.EngineTypes.semv = Obj.rep<span data-count="43">r</span> _v;
           MenhirLib.EngineTypes.startp = _startpos;
           MenhirLib.EngineTypes.endp = _endpos;
           MenhirLib.EngineTypes.next = _menhir_stack;
         });
       (fun _menhir_env -&gt;
-        <span data-count="20">l</span>et _menhir_stack = _menhir_env.MenhirLib.EngineTypes.stack in
+        <span data-count="35">l</span>et _menhir_stack = _menhir_env.MenhirLib.EngineTypes.stack in
         let {
           MenhirLib.EngineTypes.state = _;
           MenhirLib.EngineTypes.semv = _3;
@@ -3995,13 +3988,13 @@ module Tables = struct
          in
         {
           MenhirLib.EngineTypes.state = _menhir_s;
-          MenhirLib.EngineTypes.semv = Obj.rep<span data-count="20">r</span> _v;
+          MenhirLib.EngineTypes.semv = Obj.rep<span data-count="35">r</span> _v;
           MenhirLib.EngineTypes.startp = _startpos;
           MenhirLib.EngineTypes.endp = _endpos;
           MenhirLib.EngineTypes.next = _menhir_stack;
         });
       (fun _menhir_env -&gt;
-        <span data-count="100">l</span>et _menhir_stack = _menhir_env.MenhirLib.EngineTypes.stack in
+        <span data-count="111">l</span>et _menhir_stack = _menhir_env.MenhirLib.EngineTypes.stack in
         let {
           MenhirLib.EngineTypes.state = _menhir_s;
           MenhirLib.EngineTypes.semv = _1;
@@ -4018,19 +4011,19 @@ module Tables = struct
           let _startpos = _startpos__1_ in
           (
 # 83 "lib/parser.mly"
-              ( e_litera<span data-count="100">l</span> _startpos _endpos _1 )
+              ( e_litera<span data-count="111">l</span> _startpos _endpos _1 )
 # 343 "lib/parser.ml"
            : 'tv_atom)
         in
         {
           MenhirLib.EngineTypes.state = _menhir_s;
-          MenhirLib.EngineTypes.semv = Obj.rep<span data-count="100">r</span> _v;
+          MenhirLib.EngineTypes.semv = Obj.rep<span data-count="111">r</span> _v;
           MenhirLib.EngineTypes.startp = _startpos;
           MenhirLib.EngineTypes.endp = _endpos;
           MenhirLib.EngineTypes.next = _menhir_stack;
         });
       (fun _menhir_env -&gt;
-        <span data-count="134">l</span>et _menhir_stack = _menhir_env.MenhirLib.EngineTypes.stack in
+        <span data-count="169">l</span>et _menhir_stack = _menhir_env.MenhirLib.EngineTypes.stack in
         let {
           MenhirLib.EngineTypes.state = _menhir_s;
           MenhirLib.EngineTypes.semv = _1;
@@ -4051,19 +4044,19 @@ module Tables = struct
           let _startpos = _startpos__1_ in
           (
 # 84 "lib/parser.mly"
-           ( e_valu<span data-count="134">e</span> _startpos _endpos _1 )
+           ( e_valu<span data-count="169">e</span> _startpos _endpos _1 )
 # 376 "lib/parser.ml"
            : 'tv_atom)
         in
         {
           MenhirLib.EngineTypes.state = _menhir_s;
-          MenhirLib.EngineTypes.semv = Obj.rep<span data-count="134">r</span> _v;
+          MenhirLib.EngineTypes.semv = Obj.rep<span data-count="169">r</span> _v;
           MenhirLib.EngineTypes.startp = _startpos;
           MenhirLib.EngineTypes.endp = _endpos;
           MenhirLib.EngineTypes.next = _menhir_stack;
         });
       (fun _menhir_env -&gt;
-        <span data-count="9">l</span>et _menhir_stack = _menhir_env.MenhirLib.EngineTypes.stack in
+        <span data-count="7">l</span>et _menhir_stack = _menhir_env.MenhirLib.EngineTypes.stack in
         let {
           MenhirLib.EngineTypes.state = _;
           MenhirLib.EngineTypes.semv = _5;
@@ -4108,19 +4101,19 @@ module Tables = struct
           let _startpos = _startpos__1_ in
           (
 # 85 "lib/parser.mly"
-                                                                             ( _2 :: _4 |&gt; e_tupl<span data-count="9">e</span> _startpos _endpos )
+                                                                             ( _2 :: _4 |&gt; e_tupl<span data-count="7">e</span> _startpos _endpos )
 # 433 "lib/parser.ml"
            : 'tv_atom)
         in
         {
           MenhirLib.EngineTypes.state = _menhir_s;
-          MenhirLib.EngineTypes.semv = Obj.rep<span data-count="9">r</span> _v;
+          MenhirLib.EngineTypes.semv = Obj.rep<span data-count="7">r</span> _v;
           MenhirLib.EngineTypes.startp = _startpos;
           MenhirLib.EngineTypes.endp = _endpos;
           MenhirLib.EngineTypes.next = _menhir_stack;
         });
       (fun _menhir_env -&gt;
-        <span data-count="215">l</span>et _menhir_stack = _menhir_env.MenhirLib.EngineTypes.stack in
+        <span data-count="236">l</span>et _menhir_stack = _menhir_env.MenhirLib.EngineTypes.stack in
         let {
           MenhirLib.EngineTypes.state = _menhir_s;
           MenhirLib.EngineTypes.semv = _1;
@@ -4139,13 +4132,13 @@ module Tables = struct
          in
         {
           MenhirLib.EngineTypes.state = _menhir_s;
-          MenhirLib.EngineTypes.semv = Obj.rep<span data-count="215">r</span> _v;
+          MenhirLib.EngineTypes.semv = Obj.rep<span data-count="236">r</span> _v;
           MenhirLib.EngineTypes.startp = _startpos;
           MenhirLib.EngineTypes.endp = _endpos;
           MenhirLib.EngineTypes.next = _menhir_stack;
         });
       (fun _menhir_env -&gt;
-        <span data-count="0">l</span>et _menhir_stack = _menhir_env.MenhirLib.EngineTypes.stack in
+        <span data-count="2">l</span>et _menhir_stack = _menhir_env.MenhirLib.EngineTypes.stack in
         let {
           MenhirLib.EngineTypes.state = _;
           MenhirLib.EngineTypes.semv = _5;
@@ -4190,19 +4183,19 @@ module Tables = struct
           let _startpos = _startpos__1_ in
           (
 # 76 "lib/parser.mly"
-                                             ( build_mul_e_fu<span data-count="0">n</span> _startpos _endpos _2 _3 _5 )
+                                             ( build_mul_e_fu<span data-count="2">n</span> _startpos _endpos _2 _3 _5 )
 # 515 "lib/parser.ml"
            : 'tv_expr)
         in
         {
           MenhirLib.EngineTypes.state = _menhir_s;
-          MenhirLib.EngineTypes.semv = Obj.rep<span data-count="0">r</span> _v;
+          MenhirLib.EngineTypes.semv = Obj.rep<span data-count="2">r</span> _v;
           MenhirLib.EngineTypes.startp = _startpos;
           MenhirLib.EngineTypes.endp = _endpos;
           MenhirLib.EngineTypes.next = _menhir_stack;
         });
       (fun _menhir_env -&gt;
-        <span data-count="23">l</span>et _menhir_stack = _menhir_env.MenhirLib.EngineTypes.stack in
+        <span data-count="43">l</span>et _menhir_stack = _menhir_env.MenhirLib.EngineTypes.stack in
         let {
           MenhirLib.EngineTypes.state = _;
           MenhirLib.EngineTypes.semv = _2;
@@ -4226,19 +4219,19 @@ module Tables = struct
           let _startpos = _startpos__1_ in
           (
 # 77 "lib/parser.mly"
-                 ( e_appl<span data-count="23">y</span> _startpos _endpos _1 _2 )
+                 ( e_appl<span data-count="43">y</span> _startpos _endpos _1 _2 )
 # 551 "lib/parser.ml"
            : 'tv_expr)
         in
         {
           MenhirLib.EngineTypes.state = _menhir_s;
-          MenhirLib.EngineTypes.semv = Obj.rep<span data-count="23">r</span> _v;
+          MenhirLib.EngineTypes.semv = Obj.rep<span data-count="43">r</span> _v;
           MenhirLib.EngineTypes.startp = _startpos;
           MenhirLib.EngineTypes.endp = _endpos;
           MenhirLib.EngineTypes.next = _menhir_stack;
         });
       (fun _menhir_env -&gt;
-        <span data-count="9">l</span>et _menhir_stack = _menhir_env.MenhirLib.EngineTypes.stack in
+        <span data-count="12">l</span>et _menhir_stack = _menhir_env.MenhirLib.EngineTypes.stack in
         let {
           MenhirLib.EngineTypes.state = _;
           MenhirLib.EngineTypes.semv = _6;
@@ -4290,13 +4283,13 @@ module Tables = struct
           let _startpos = _startpos__1_ in
           (
 # 78 "lib/parser.mly"
-                                  ( e_if_els<span data-count="9">e</span> _startpos _endpos _2 _4 _6 )
+                                  ( e_if_els<span data-count="12">e</span> _startpos _endpos _2 _4 _6 )
 # 615 "lib/parser.ml"
            : 'tv_expr)
         in
         {
           MenhirLib.EngineTypes.state = _menhir_s;
-          MenhirLib.EngineTypes.semv = Obj.rep<span data-count="9">r</span> _v;
+          MenhirLib.EngineTypes.semv = Obj.rep<span data-count="12">r</span> _v;
           MenhirLib.EngineTypes.startp = _startpos;
           MenhirLib.EngineTypes.endp = _endpos;
           MenhirLib.EngineTypes.next = _menhir_stack;
@@ -4416,7 +4409,7 @@ module Tables = struct
           MenhirLib.EngineTypes.next = _menhir_stack;
         });
       (fun _menhir_env -&gt;
-        <span data-count="18">l</span>et _menhir_stack = _menhir_env.MenhirLib.EngineTypes.stack in
+        <span data-count="17">l</span>et _menhir_stack = _menhir_env.MenhirLib.EngineTypes.stack in
         let {
           MenhirLib.EngineTypes.state = _;
           MenhirLib.EngineTypes.semv = _3;
@@ -4453,7 +4446,7 @@ module Tables = struct
             let _startpos = _startpos__1_ in
             
 # 94 "lib/parser.mly"
-                      ( e_valu<span data-count="18">e</span> _startpos _endpos _1 )
+                      ( e_valu<span data-count="17">e</span> _startpos _endpos _1 )
 # 778 "lib/parser.ml"
             
           in
@@ -4461,19 +4454,19 @@ module Tables = struct
           let _startpos = _startpos__1_ in
           (
 # 79 "lib/parser.mly"
-                          ( e_apply _startpos _endpos _2 _1 |&gt; <span data-count="18">f</span>un e -&gt; <span data-count="18">e</span>_apply _startpos _endpos e _<span data-count="18">3</span>)
+                          ( e_apply _startpos _endpos _2 _1 |&gt; <span data-count="17">f</span>un e -&gt; <span data-count="17">e</span>_apply _startpos _endpos e _<span data-count="17">3</span>)
 # 786 "lib/parser.ml"
            : 'tv_expr)
         in
         {
           MenhirLib.EngineTypes.state = _menhir_s;
-          MenhirLib.EngineTypes.semv = Obj.rep<span data-count="18">r</span> _v;
+          MenhirLib.EngineTypes.semv = Obj.rep<span data-count="17">r</span> _v;
           MenhirLib.EngineTypes.startp = _startpos;
           MenhirLib.EngineTypes.endp = _endpos;
           MenhirLib.EngineTypes.next = _menhir_stack;
         });
       (fun _menhir_env -&gt;
-        <span data-count="60">l</span>et _menhir_stack = _menhir_env.MenhirLib.EngineTypes.stack in
+        <span data-count="63">l</span>et _menhir_stack = _menhir_env.MenhirLib.EngineTypes.stack in
         let {
           MenhirLib.EngineTypes.state = _;
           MenhirLib.EngineTypes.semv = _3;
@@ -4510,7 +4503,7 @@ module Tables = struct
             let _startpos = _startpos__1_ in
             
 # 95 "lib/parser.mly"
-                         ( e_valu<span data-count="60">e</span> _startpos _endpos _1 )
+                         ( e_valu<span data-count="63">e</span> _startpos _endpos _1 )
 # 835 "lib/parser.ml"
             
           in
@@ -4518,19 +4511,19 @@ module Tables = struct
           let _startpos = _startpos__1_ in
           (
 # 79 "lib/parser.mly"
-                          ( e_apply _startpos _endpos _2 _1 |&gt; <span data-count="60">f</span>un e -&gt; <span data-count="60">e</span>_apply _startpos _endpos e _<span data-count="60">3</span>)
+                          ( e_apply _startpos _endpos _2 _1 |&gt; <span data-count="63">f</span>un e -&gt; <span data-count="63">e</span>_apply _startpos _endpos e _<span data-count="63">3</span>)
 # 843 "lib/parser.ml"
            : 'tv_expr)
         in
         {
           MenhirLib.EngineTypes.state = _menhir_s;
-          MenhirLib.EngineTypes.semv = Obj.rep<span data-count="60">r</span> _v;
+          MenhirLib.EngineTypes.semv = Obj.rep<span data-count="63">r</span> _v;
           MenhirLib.EngineTypes.startp = _startpos;
           MenhirLib.EngineTypes.endp = _endpos;
           MenhirLib.EngineTypes.next = _menhir_stack;
         });
       (fun _menhir_env -&gt;
-        <span data-count="7">l</span>et _menhir_stack = _menhir_env.MenhirLib.EngineTypes.stack in
+        <span data-count="10">l</span>et _menhir_stack = _menhir_env.MenhirLib.EngineTypes.stack in
         let {
           MenhirLib.EngineTypes.state = _;
           MenhirLib.EngineTypes.semv = _3;
@@ -4567,7 +4560,7 @@ module Tables = struct
             let _startpos = _startpos__1_ in
             
 # 96 "lib/parser.mly"
-                      ( e_valu<span data-count="7">e</span> _startpos _endpos _1 )
+                      ( e_valu<span data-count="10">e</span> _startpos _endpos _1 )
 # 892 "lib/parser.ml"
             
           in
@@ -4575,19 +4568,19 @@ module Tables = struct
           let _startpos = _startpos__1_ in
           (
 # 79 "lib/parser.mly"
-                          ( e_apply _startpos _endpos _2 _1 |&gt; <span data-count="7">f</span>un e -&gt; <span data-count="7">e</span>_apply _startpos _endpos e _<span data-count="7">3</span>)
+                          ( e_apply _startpos _endpos _2 _1 |&gt; <span data-count="10">f</span>un e -&gt; <span data-count="10">e</span>_apply _startpos _endpos e _<span data-count="10">3</span>)
 # 900 "lib/parser.ml"
            : 'tv_expr)
         in
         {
           MenhirLib.EngineTypes.state = _menhir_s;
-          MenhirLib.EngineTypes.semv = Obj.rep<span data-count="7">r</span> _v;
+          MenhirLib.EngineTypes.semv = Obj.rep<span data-count="10">r</span> _v;
           MenhirLib.EngineTypes.startp = _startpos;
           MenhirLib.EngineTypes.endp = _endpos;
           MenhirLib.EngineTypes.next = _menhir_stack;
         });
       (fun _menhir_env -&gt;
-        <span data-count="28">l</span>et _menhir_stack = _menhir_env.MenhirLib.EngineTypes.stack in
+        <span data-count="19">l</span>et _menhir_stack = _menhir_env.MenhirLib.EngineTypes.stack in
         let {
           MenhirLib.EngineTypes.state = _;
           MenhirLib.EngineTypes.semv = _2;
@@ -4613,13 +4606,13 @@ module Tables = struct
          in
         {
           MenhirLib.EngineTypes.state = _menhir_s;
-          MenhirLib.EngineTypes.semv = Obj.rep<span data-count="28">r</span> _v;
+          MenhirLib.EngineTypes.semv = Obj.rep<span data-count="19">r</span> _v;
           MenhirLib.EngineTypes.startp = _startpos;
           MenhirLib.EngineTypes.endp = _endpos;
           MenhirLib.EngineTypes.next = _menhir_stack;
         });
       (fun _menhir_env -&gt;
-        <span data-count="71">l</span>et _menhir_stack = _menhir_env.MenhirLib.EngineTypes.stack in
+        <span data-count="69">l</span>et _menhir_stack = _menhir_env.MenhirLib.EngineTypes.stack in
         let {
           MenhirLib.EngineTypes.state = _;
           MenhirLib.EngineTypes.semv = _6;
@@ -4671,13 +4664,13 @@ module Tables = struct
           let _startpos = _startpos__1_ in
           (
 # 49 "lib/parser.mly"
-    ( let_bindin<span data-count="71">g</span> ~rec_flag:_2 _startpos _endpos _3 _4 (build_let_bod<span data-count="71">y</span> _startpos _endpos _4 _6) )
+    ( let_bindin<span data-count="69">g</span> ~rec_flag:_2 _startpos _endpos _3 _4 (build_let_bod<span data-count="69">y</span> _startpos _endpos _4 _6) )
 # 996 "lib/parser.ml"
            : 'tv_let_binding)
         in
         {
           MenhirLib.EngineTypes.state = _menhir_s;
-          MenhirLib.EngineTypes.semv = Obj.rep<span data-count="71">r</span> _v;
+          MenhirLib.EngineTypes.semv = Obj.rep<span data-count="69">r</span> _v;
           MenhirLib.EngineTypes.startp = _startpos;
           MenhirLib.EngineTypes.endp = _endpos;
           MenhirLib.EngineTypes.next = _menhir_stack;
@@ -4737,7 +4730,7 @@ module Tables = struct
           MenhirLib.EngineTypes.next = _menhir_stack;
         });
       (fun _menhir_env -&gt;
-        <span data-count="28">l</span>et _menhir_stack = _menhir_env.MenhirLib.EngineTypes.stack in
+        <span data-count="19">l</span>et _menhir_stack = _menhir_env.MenhirLib.EngineTypes.stack in
         let {
           MenhirLib.EngineTypes.state = _;
           MenhirLib.EngineTypes.semv = xs;
@@ -4763,7 +4756,7 @@ module Tables = struct
          in
         {
           MenhirLib.EngineTypes.state = _menhir_s;
-          MenhirLib.EngineTypes.semv = Obj.rep<span data-count="28">r</span> _v;
+          MenhirLib.EngineTypes.semv = Obj.rep<span data-count="19">r</span> _v;
           MenhirLib.EngineTypes.startp = _startpos;
           MenhirLib.EngineTypes.endp = _endpos;
           MenhirLib.EngineTypes.next = _menhir_stack;
@@ -4787,7 +4780,7 @@ module Tables = struct
           MenhirLib.EngineTypes.next = _menhir_stack;
         });
       (fun _menhir_env -&gt;
-        <span data-count="43">l</span>et _menhir_stack = _menhir_env.MenhirLib.EngineTypes.stack in
+        <span data-count="57">l</span>et _menhir_stack = _menhir_env.MenhirLib.EngineTypes.stack in
         let {
           MenhirLib.EngineTypes.state = _;
           MenhirLib.EngineTypes.semv = xs;
@@ -4813,13 +4806,13 @@ module Tables = struct
          in
         {
           MenhirLib.EngineTypes.state = _menhir_s;
-          MenhirLib.EngineTypes.semv = Obj.rep<span data-count="43">r</span> _v;
+          MenhirLib.EngineTypes.semv = Obj.rep<span data-count="57">r</span> _v;
           MenhirLib.EngineTypes.startp = _startpos;
           MenhirLib.EngineTypes.endp = _endpos;
           MenhirLib.EngineTypes.next = _menhir_stack;
         });
       (fun _menhir_env -&gt;
-        <span data-count="97">l</span>et _menhir_stack = _menhir_env.MenhirLib.EngineTypes.stack in
+        <span data-count="108">l</span>et _menhir_stack = _menhir_env.MenhirLib.EngineTypes.stack in
         let {
           MenhirLib.EngineTypes.state = _menhir_s;
           MenhirLib.EngineTypes.semv = _1;
@@ -4840,13 +4833,13 @@ module Tables = struct
           let _startpos = _startpos__1_ in
           (
 # 68 "lib/parser.mly"
-          ( l_in<span data-count="97">t</span> _startpos _endpos _1 )
+          ( l_in<span data-count="108">t</span> _startpos _endpos _1 )
 # 1165 "lib/parser.ml"
            : 'tv_literal)
         in
         {
           MenhirLib.EngineTypes.state = _menhir_s;
-          MenhirLib.EngineTypes.semv = Obj.rep<span data-count="97">r</span> _v;
+          MenhirLib.EngineTypes.semv = Obj.rep<span data-count="108">r</span> _v;
           MenhirLib.EngineTypes.startp = _startpos;
           MenhirLib.EngineTypes.endp = _endpos;
           MenhirLib.EngineTypes.next = _menhir_stack;
@@ -5009,7 +5002,7 @@ module Tables = struct
           MenhirLib.EngineTypes.next = _menhir_stack;
         });
       (fun _menhir_env -&gt;
-        <span data-count="1">l</span>et _menhir_stack = _menhir_env.MenhirLib.EngineTypes.stack in
+        <span data-count="8">l</span>et _menhir_stack = _menhir_env.MenhirLib.EngineTypes.stack in
         let {
           MenhirLib.EngineTypes.state = _menhir_s;
           MenhirLib.EngineTypes.semv = _1;
@@ -5026,19 +5019,19 @@ module Tables = struct
           let _startpos = _startpos__1_ in
           (
 # 63 "lib/parser.mly"
-           ( lv_uni<span data-count="1">t</span> _startpos _endpos )
+           ( lv_uni<span data-count="8">t</span> _startpos _endpos )
 # 1351 "lib/parser.ml"
            : 'tv_lvalue)
         in
         {
           MenhirLib.EngineTypes.state = _menhir_s;
-          MenhirLib.EngineTypes.semv = Obj.rep<span data-count="1">r</span> _v;
+          MenhirLib.EngineTypes.semv = Obj.rep<span data-count="8">r</span> _v;
           MenhirLib.EngineTypes.startp = _startpos;
           MenhirLib.EngineTypes.endp = _endpos;
           MenhirLib.EngineTypes.next = _menhir_stack;
         });
       (fun _menhir_env -&gt;
-        <span data-count="125">l</span>et _menhir_stack = _menhir_env.MenhirLib.EngineTypes.stack in
+        <span data-count="131">l</span>et _menhir_stack = _menhir_env.MenhirLib.EngineTypes.stack in
         let {
           MenhirLib.EngineTypes.state = _menhir_s;
           MenhirLib.EngineTypes.semv = _1;
@@ -5059,19 +5052,19 @@ module Tables = struct
           let _startpos = _startpos__1_ in
           (
 # 64 "lib/parser.mly"
-           ( lv_valu<span data-count="125">e</span> _startpos _endpos _1 )
+           ( lv_valu<span data-count="131">e</span> _startpos _endpos _1 )
 # 1384 "lib/parser.ml"
            : 'tv_lvalue)
         in
         {
           MenhirLib.EngineTypes.state = _menhir_s;
-          MenhirLib.EngineTypes.semv = Obj.rep<span data-count="125">r</span> _v;
+          MenhirLib.EngineTypes.semv = Obj.rep<span data-count="131">r</span> _v;
           MenhirLib.EngineTypes.startp = _startpos;
           MenhirLib.EngineTypes.endp = _endpos;
           MenhirLib.EngineTypes.next = _menhir_stack;
         });
       (fun _menhir_env -&gt;
-        <span data-count="9">l</span>et _menhir_stack = _menhir_env.MenhirLib.EngineTypes.stack in
+        <span data-count="7">l</span>et _menhir_stack = _menhir_env.MenhirLib.EngineTypes.stack in
         let {
           MenhirLib.EngineTypes.state = _;
           MenhirLib.EngineTypes.semv = _5;
@@ -5116,19 +5109,19 @@ module Tables = struct
           let _startpos = _startpos__1_ in
           (
 # 65 "lib/parser.mly"
-                                                                                 ( _2 :: _4 |&gt; lv_tupl<span data-count="9">e</span> _startpos _endpos )
+                                                                                 ( _2 :: _4 |&gt; lv_tupl<span data-count="7">e</span> _startpos _endpos )
 # 1441 "lib/parser.ml"
            : 'tv_lvalue)
         in
         {
           MenhirLib.EngineTypes.state = _menhir_s;
-          MenhirLib.EngineTypes.semv = Obj.rep<span data-count="9">r</span> _v;
+          MenhirLib.EngineTypes.semv = Obj.rep<span data-count="7">r</span> _v;
           MenhirLib.EngineTypes.startp = _startpos;
           MenhirLib.EngineTypes.endp = _endpos;
           MenhirLib.EngineTypes.next = _menhir_stack;
         });
       (fun _menhir_env -&gt;
-        <span data-count="21">l</span>et _menhir_stack = _menhir_env.MenhirLib.EngineTypes.stack in
+        <span data-count="22">l</span>et _menhir_stack = _menhir_env.MenhirLib.EngineTypes.stack in
         let {
           MenhirLib.EngineTypes.state = _menhir_s;
           MenhirLib.EngineTypes.semv = x;
@@ -5147,13 +5140,13 @@ module Tables = struct
          in
         {
           MenhirLib.EngineTypes.state = _menhir_s;
-          MenhirLib.EngineTypes.semv = Obj.rep<span data-count="21">r</span> _v;
+          MenhirLib.EngineTypes.semv = Obj.rep<span data-count="22">r</span> _v;
           MenhirLib.EngineTypes.startp = _startpos;
           MenhirLib.EngineTypes.endp = _endpos;
           MenhirLib.EngineTypes.next = _menhir_stack;
         });
       (fun _menhir_env -&gt;
-        <span data-count="22">l</span>et _menhir_stack = _menhir_env.MenhirLib.EngineTypes.stack in
+        <span data-count="28">l</span>et _menhir_stack = _menhir_env.MenhirLib.EngineTypes.stack in
         let {
           MenhirLib.EngineTypes.state = _;
           MenhirLib.EngineTypes.semv = xs;
@@ -5179,13 +5172,13 @@ module Tables = struct
          in
         {
           MenhirLib.EngineTypes.state = _menhir_s;
-          MenhirLib.EngineTypes.semv = Obj.rep<span data-count="22">r</span> _v;
+          MenhirLib.EngineTypes.semv = Obj.rep<span data-count="28">r</span> _v;
           MenhirLib.EngineTypes.startp = _startpos;
           MenhirLib.EngineTypes.endp = _endpos;
           MenhirLib.EngineTypes.next = _menhir_stack;
         });
       (fun _menhir_env -&gt;
-        <span data-count="21">l</span>et _menhir_stack = _menhir_env.MenhirLib.EngineTypes.stack in
+        <span data-count="22">l</span>et _menhir_stack = _menhir_env.MenhirLib.EngineTypes.stack in
         let {
           MenhirLib.EngineTypes.state = _;
           MenhirLib.EngineTypes.semv = _2;
@@ -5215,13 +5208,13 @@ module Tables = struct
          in
         {
           MenhirLib.EngineTypes.state = _menhir_s;
-          MenhirLib.EngineTypes.semv = Obj.rep<span data-count="21">r</span> _v;
+          MenhirLib.EngineTypes.semv = Obj.rep<span data-count="22">r</span> _v;
           MenhirLib.EngineTypes.startp = _startpos;
           MenhirLib.EngineTypes.endp = _endpos;
           MenhirLib.EngineTypes.next = _menhir_stack;
         });
       (fun _menhir_env -&gt;
-        <span data-count="21">l</span>et _menhir_stack = _menhir_env.MenhirLib.EngineTypes.stack in
+        <span data-count="22">l</span>et _menhir_stack = _menhir_env.MenhirLib.EngineTypes.stack in
         let {
           MenhirLib.EngineTypes.state = _menhir_s;
           MenhirLib.EngineTypes.semv = _1;
@@ -5240,13 +5233,13 @@ module Tables = struct
          in
         {
           MenhirLib.EngineTypes.state = _menhir_s;
-          MenhirLib.EngineTypes.semv = Obj.rep<span data-count="21">r</span> _v;
+          MenhirLib.EngineTypes.semv = Obj.rep<span data-count="22">r</span> _v;
           MenhirLib.EngineTypes.startp = _startpos;
           MenhirLib.EngineTypes.endp = _endpos;
           MenhirLib.EngineTypes.next = _menhir_stack;
         });
       (fun _menhir_env -&gt;
-        <span data-count="6">l</span>et _menhir_stack = _menhir_env.MenhirLib.EngineTypes.stack in
+        <span data-count="8">l</span>et _menhir_stack = _menhir_env.MenhirLib.EngineTypes.stack in
         let {
           MenhirLib.EngineTypes.state = _menhir_s;
           MenhirLib.EngineTypes.semv = _1;
@@ -5265,13 +5258,13 @@ module Tables = struct
          in
         {
           MenhirLib.EngineTypes.state = _menhir_s;
-          MenhirLib.EngineTypes.semv = Obj.rep<span data-count="6">r</span> _v;
+          MenhirLib.EngineTypes.semv = Obj.rep<span data-count="8">r</span> _v;
           MenhirLib.EngineTypes.startp = _startpos;
           MenhirLib.EngineTypes.endp = _endpos;
           MenhirLib.EngineTypes.next = _menhir_stack;
         });
       (fun _menhir_env -&gt;
-        <span data-count="65">l</span>et _menhir_stack = _menhir_env.MenhirLib.EngineTypes.stack in
+        <span data-count="61">l</span>et _menhir_stack = _menhir_env.MenhirLib.EngineTypes.stack in
         let _menhir_s = _menhir_env.MenhirLib.EngineTypes.current in
         let _endpos__0_ = _menhir_stack.MenhirLib.EngineTypes.endp in
         let _startpos = _menhir_stack.MenhirLib.EngineTypes.endp in
@@ -5283,13 +5276,13 @@ module Tables = struct
          in
         {
           MenhirLib.EngineTypes.state = _menhir_s;
-          MenhirLib.EngineTypes.semv = Obj.rep<span data-count="65">r</span> _v;
+          MenhirLib.EngineTypes.semv = Obj.rep<span data-count="61">r</span> _v;
           MenhirLib.EngineTypes.startp = _startpos;
           MenhirLib.EngineTypes.endp = _endpos;
           MenhirLib.EngineTypes.next = _menhir_stack;
         });
       (fun _menhir_env -&gt;
-        <span data-count="9">l</span>et _menhir_stack = _menhir_env.MenhirLib.EngineTypes.stack in
+        <span data-count="7">l</span>et _menhir_stack = _menhir_env.MenhirLib.EngineTypes.stack in
         let {
           MenhirLib.EngineTypes.state = _menhir_s;
           MenhirLib.EngineTypes.semv = x;
@@ -5308,13 +5301,13 @@ module Tables = struct
          in
         {
           MenhirLib.EngineTypes.state = _menhir_s;
-          MenhirLib.EngineTypes.semv = Obj.rep<span data-count="9">r</span> _v;
+          MenhirLib.EngineTypes.semv = Obj.rep<span data-count="7">r</span> _v;
           MenhirLib.EngineTypes.startp = _startpos;
           MenhirLib.EngineTypes.endp = _endpos;
           MenhirLib.EngineTypes.next = _menhir_stack;
         });
       (fun _menhir_env -&gt;
-        <span data-count="3">l</span>et _menhir_stack = _menhir_env.MenhirLib.EngineTypes.stack in
+        <span data-count="4">l</span>et _menhir_stack = _menhir_env.MenhirLib.EngineTypes.stack in
         let {
           MenhirLib.EngineTypes.state = _;
           MenhirLib.EngineTypes.semv = xs;
@@ -5347,13 +5340,13 @@ module Tables = struct
          in
         {
           MenhirLib.EngineTypes.state = _menhir_s;
-          MenhirLib.EngineTypes.semv = Obj.rep<span data-count="3">r</span> _v;
+          MenhirLib.EngineTypes.semv = Obj.rep<span data-count="4">r</span> _v;
           MenhirLib.EngineTypes.startp = _startpos;
           MenhirLib.EngineTypes.endp = _endpos;
           MenhirLib.EngineTypes.next = _menhir_stack;
         });
       (fun _menhir_env -&gt;
-        <span data-count="9">l</span>et _menhir_stack = _menhir_env.MenhirLib.EngineTypes.stack in
+        <span data-count="7">l</span>et _menhir_stack = _menhir_env.MenhirLib.EngineTypes.stack in
         let {
           MenhirLib.EngineTypes.state = _menhir_s;
           MenhirLib.EngineTypes.semv = x;
@@ -5372,13 +5365,13 @@ module Tables = struct
          in
         {
           MenhirLib.EngineTypes.state = _menhir_s;
-          MenhirLib.EngineTypes.semv = Obj.rep<span data-count="9">r</span> _v;
+          MenhirLib.EngineTypes.semv = Obj.rep<span data-count="7">r</span> _v;
           MenhirLib.EngineTypes.startp = _startpos;
           MenhirLib.EngineTypes.endp = _endpos;
           MenhirLib.EngineTypes.next = _menhir_stack;
         });
       (fun _menhir_env -&gt;
-        <span data-count="3">l</span>et _menhir_stack = _menhir_env.MenhirLib.EngineTypes.stack in
+        <span data-count="4">l</span>et _menhir_stack = _menhir_env.MenhirLib.EngineTypes.stack in
         let {
           MenhirLib.EngineTypes.state = _;
           MenhirLib.EngineTypes.semv = xs;
@@ -5411,13 +5404,13 @@ module Tables = struct
          in
         {
           MenhirLib.EngineTypes.state = _menhir_s;
-          MenhirLib.EngineTypes.semv = Obj.rep<span data-count="3">r</span> _v;
+          MenhirLib.EngineTypes.semv = Obj.rep<span data-count="4">r</span> _v;
           MenhirLib.EngineTypes.startp = _startpos;
           MenhirLib.EngineTypes.endp = _endpos;
           MenhirLib.EngineTypes.next = _menhir_stack;
         });
       (fun _menhir_env -&gt;
-        <span data-count="1">l</span>et _menhir_stack = _menhir_env.MenhirLib.EngineTypes.stack in
+        <span data-count="8">l</span>et _menhir_stack = _menhir_env.MenhirLib.EngineTypes.stack in
         let {
           MenhirLib.EngineTypes.state = _;
           MenhirLib.EngineTypes.semv = _2;
@@ -5443,7 +5436,7 @@ module Tables = struct
          in
         {
           MenhirLib.EngineTypes.state = _menhir_s;
-          MenhirLib.EngineTypes.semv = Obj.rep<span data-count="1">r</span> _v;
+          MenhirLib.EngineTypes.semv = Obj.rep<span data-count="8">r</span> _v;
           MenhirLib.EngineTypes.startp = _startpos;
           MenhirLib.EngineTypes.endp = _endpos;
           MenhirLib.EngineTypes.next = _menhir_stack;
@@ -5477,7 +5470,7 @@ module Incremental = struct
   
   let parse =
     fun initial_position -&gt;
-      (<span data-count="21">O</span>bj.magic (MenhirInterpreter.star<span data-count="21">t</span> 0 initial_position) : (
+      (<span data-count="24">O</span>bj.magic (MenhirInterpreter.star<span data-count="24">t</span> 0 initial_position) : (
 # 37 "lib/parser.mly"
       (Parser_ast.ParserAst.program)
 # 1804 "lib/parser.ml"
