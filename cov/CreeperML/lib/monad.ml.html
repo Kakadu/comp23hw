@@ -116,38 +116,38 @@
 module Result = struct
   type 'a t = ('a, string) Result.t
 
-  let return x = <span data-count="9746">O</span>k x
+  let return x = <span data-count="10475">O</span>k x
   let error msg = <span data-count="65">E</span>rror msg
   let ( &gt;&gt;= ) = Result.bind
   let ( let* ) = ( &gt;&gt;= )
 
   let ( *&gt; ) : 'a t -&gt; 'b t -&gt; 'b t =
-   fun x y -&gt; <span data-count="549">m</span>atch x with <span data-count="549">O</span>k _ -&gt; y | <span data-count="0">E</span>rror msg -&gt; error msg
+   fun x y -&gt; <span data-count="624">m</span>atch x with <span data-count="624">O</span>k _ -&gt; y | <span data-count="0">E</span>rror msg -&gt; error msg
 
   let ( &gt;&gt;| ) : 'a t -&gt; ('a -&gt; 'b) -&gt; 'b t =
-   fun x f -&gt; <span data-count="3456">m</span>atch x with <span data-count="3456">O</span>k x -&gt; Ok (<span data-count="3456">f</span> x) | <span data-count="0">E</span>rror msg -&gt; error msg
+   fun x f -&gt; <span data-count="3818">m</span>atch x with <span data-count="3818">O</span>k x -&gt; Ok (<span data-count="3818">f</span> x) | <span data-count="0">E</span>rror msg -&gt; error msg
 
-  let ( |&lt;&lt; ) x y = <span data-count="60">y</span> &gt;&gt;| x
+  let ( |&lt;&lt; ) x y = <span data-count="78">y</span> &gt;&gt;| x
 
   let monadic_map l f =
-    <span data-count="337">L</span>ist.fold_right
+    <span data-count="352">L</span>ist.fold_right
       (fun e acc -&gt;
-        <span data-count="702">l</span>et* acc = acc in
-        <span data-count="1404">f</span> e &gt;&gt;| fun e -&gt; <span data-count="702">e</span> :: acc)
-      l (retur<span data-count="337">n</span> [])
+        <span data-count="743">l</span>et* acc = acc in
+        <span data-count="1486">f</span> e &gt;&gt;| fun e -&gt; <span data-count="743">e</span> :: acc)
+      l (retur<span data-count="352">n</span> [])
 
   let monadic_mapi l f =
-    <span data-count="95">L</span>ist.fold_left
+    <span data-count="117">L</span>ist.fold_left
       (fun (acc, index) e -&gt;
-        <span data-count="116">(</span> (let* acc = acc in
-           <span data-count="232">f</span> index e &gt;&gt;| fun e -&gt; <span data-count="116">e</span> :: acc),
+        <span data-count="138">(</span> (let* acc = acc in
+           <span data-count="276">f</span> index e &gt;&gt;| fun e -&gt; <span data-count="138">e</span> :: acc),
           index + 1 ))
-      (retur<span data-count="95">n</span> [], 0)
+      (retur<span data-count="117">n</span> [], 0)
       l
-    |&gt; <span data-count="95">f</span>st
+    |&gt; <span data-count="117">f</span>st
 
   let monadic_fold f initial lst =
-    <span data-count="132">L</span>ist.fold_left (fun acc x -&gt; <span data-count="423">a</span>cc &gt;&gt;= fun acc -&gt; <span data-count="423">f</span> acc x) (Ok initial) lst
+    <span data-count="137">L</span>ist.fold_left (fun acc x -&gt; <span data-count="432">a</span>cc &gt;&gt;= fun acc -&gt; <span data-count="432">f</span> acc x) (Ok initial) lst
 end
 </code></pre>
       </div>

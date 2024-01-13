@@ -326,68 +326,68 @@ module ParserAstUtils = struct
 
   let rec_f = Rec
   let norec_f = NoRec
-  let is_rec = function <span data-count="14">R</span>ec -&gt; true | <span data-count="113">N</span>oRec -&gt; false
+  let is_rec = function <span data-count="15">R</span>ec -&gt; true | <span data-count="123">N</span>oRec -&gt; false
   let lv_any start_p end_p = <span data-count="0">L</span>vAny |&gt; with_position start_p end_p
-  let lv_unit start_p end_p = <span data-count="33">L</span>vUnit |&gt; with_position start_p end_p
-  let lv_value start_p end_p n = <span data-count="245">L</span>vValue n |&gt; with_position start_p end_p
-  let lv_tuple start_p end_p lvs = <span data-count="11">L</span>vTuple lvs |&gt; with_position start_p end_p
-  let l_int start_p end_p n = <span data-count="196">L</span>Int n |&gt; with_position start_p end_p
+  let lv_unit start_p end_p = <span data-count="34">L</span>vUnit |&gt; with_position start_p end_p
+  let lv_value start_p end_p n = <span data-count="272">L</span>vValue n |&gt; with_position start_p end_p
+  let lv_tuple start_p end_p lvs = <span data-count="15">L</span>vTuple lvs |&gt; with_position start_p end_p
+  let l_int start_p end_p n = <span data-count="203">L</span>Int n |&gt; with_position start_p end_p
   let l_float start_p end_p n = <span data-count="0">L</span>Float n |&gt; with_position start_p end_p
   let l_string start_p end_p s = <span data-count="0">L</span>String s |&gt; with_position start_p end_p
   let l_bool start_p end_p f = <span data-count="3">L</span>Bool f |&gt; with_position start_p end_p
   let l_unit start_p end_p = <span data-count="1">L</span>Unit |&gt; with_position start_p end_p
 
   let e_apply start_p end_p e1 e2 =
-    <span data-count="516">E</span>Apply (e1, e2) |&gt; with_position start_p end_p
+    <span data-count="541">E</span>Apply (e1, e2) |&gt; with_position start_p end_p
 
-  let e_literal start_p end_p l = <span data-count="200">E</span>Literal l |&gt; with_position start_p end_p
-  let e_value start_p end_p n = <span data-count="499">E</span>Value n |&gt; with_position start_p end_p
+  let e_literal start_p end_p l = <span data-count="207">E</span>Literal l |&gt; with_position start_p end_p
+  let e_value start_p end_p n = <span data-count="534">E</span>Value n |&gt; with_position start_p end_p
 
   let e_fun start_p end_p l b =
-    <span data-count="133">E</span>Fun { lvalue = l; body = b } |&gt; with_position start_p end_p
+    <span data-count="146">E</span>Fun { lvalue = l; body = b } |&gt; with_position start_p end_p
 
-  let e_tuple start_p end_p es = <span data-count="11">E</span>Tuple es |&gt; with_position start_p end_p
+  let e_tuple start_p end_p es = <span data-count="13">E</span>Tuple es |&gt; with_position start_p end_p
 
   let e_if_else start_p end_p c t f =
-    <span data-count="19">E</span>IfElse { cond = c; t_body = t; f_body = f } |&gt; with_position start_p end_p
+    <span data-count="21">E</span>IfElse { cond = c; t_body = t; f_body = f } |&gt; with_position start_p end_p
 
   let let_binding ?(rec_flag = <span data-count="0">n</span>orec_f) start_p end_p lv args body =
-    <span data-count="129">{</span> rec_f = rec_flag; l_v = lv; args; body } |&gt; with_position start_p end_p
+    <span data-count="140">{</span> rec_f = rec_flag; l_v = lv; args; body } |&gt; with_position start_p end_p
 
   let let_body start_p end_p ls e =
-    <span data-count="340">{</span> lets = ls; expr = e } |&gt; with_position start_p end_p
+    <span data-count="371">{</span> lets = ls; expr = e } |&gt; with_position start_p end_p
 
   let body { rec_f = _; l_v = _; args = _; body = b } = <span data-count="0">b</span>
   let args { rec_f = _; l_v = _; args; body = _ } = <span data-count="0">a</span>rgs
-  let expr_b { lets = _; expr = e } = <span data-count="208">e</span>
-  let lets { lets; expr = _ } = <span data-count="208">l</span>ets
+  let expr_b { lets = _; expr = e } = <span data-count="228">e</span>
+  let lets { lets; expr = _ } = <span data-count="228">l</span>ets
 
   let build_mul_e_fun start_p end_p hd tl b =
-    <span data-count="78">l</span>et b =
-      position b |&gt; <span data-count="78">f</span>un { start_p; end_p } -&gt;
-      <span data-count="78">v</span>alue b |&gt; <span data-count="78">e</span>xpr_b |&gt; <span data-count="78">l</span>et_body start_p end_p (value b |&gt; <span data-count="78">l</span>et<span data-count="78">s</span>)
+    <span data-count="85">l</span>et b =
+      position b |&gt; <span data-count="85">f</span>un { start_p; end_p } -&gt;
+      <span data-count="85">v</span>alue b |&gt; <span data-count="85">e</span>xpr_b |&gt; <span data-count="85">l</span>et_body start_p end_p (value b |&gt; <span data-count="85">l</span>et<span data-count="85">s</span>)
     in
-    <span data-count="78">m</span>atch List.rev tl with
-    | <span data-count="42">[</span>] -&gt; e_fun start_p end_p hd b
-    | <span data-count="36">l</span> :: tl -&gt;
+    <span data-count="85">m</span>atch List.rev tl with
+    | <span data-count="43">[</span>] -&gt; e_fun start_p end_p hd b
+    | <span data-count="42">l</span> :: tl -&gt;
         let e_body_fun arg body =
-          <span data-count="55">l</span>et_body start_p end_p [] body |&gt; <span data-count="55">e</span>_fun start_p end_p arg
+          <span data-count="61">l</span>et_body start_p end_p [] body |&gt; <span data-count="61">e</span>_fun start_p end_p arg
         in
         List.fold_left
           (fun acc l -&gt; <span data-count="19">e</span>_body_fun l acc)
-          (e_fu<span data-count="36">n</span> start_p end_p l b) tl
-        |&gt; <span data-count="36">e</span>_body_fun hd
+          (e_fu<span data-count="42">n</span> start_p end_p l b) tl
+        |&gt; <span data-count="42">e</span>_body_fun hd
 
   let build_let_body start_p end_p lvs b =
-    <span data-count="129">m</span>atch lvs with
-    | <span data-count="63">[</span>] -&gt; b
-    | <span data-count="66">h</span>d :: tl -&gt;
-        build_mul_e_fun start_p end_p hd tl b |&gt; <span data-count="66">l</span>et_body start_p end_p []
+    <span data-count="140">m</span>atch lvs with
+    | <span data-count="69">[</span>] -&gt; b
+    | <span data-count="71">h</span>d :: tl -&gt;
+        build_mul_e_fun start_p end_p hd tl b |&gt; <span data-count="71">l</span>et_body start_p end_p []
 end
 
 let%expect_test _ =
   <span data-count="1">P</span>rintf.printf {|Hello, world!|};
-  <span data-count="1">[</span>%expect {|Hello, world!|}<span data-count="81">]</span>
+  <span data-count="1">[</span>%expect {|Hello, world!|}<span data-count="83">]</span>
 </code></pre>
       </div>
     </div>

@@ -2801,17 +2801,17 @@ let __ocaml_lex_tables = {
 }
 
 let rec token lexbuf =
-   <span data-count="3037">_</span>_ocaml_lex_token_rec lexbuf 0
+   <span data-count="3283">_</span>_ocaml_lex_token_rec lexbuf 0
 and __ocaml_lex_token_rec lexbuf __ocaml_lex_state =
-  <span data-count="3115">m</span>atch Lexing.engine __ocaml_lex_tables __ocaml_lex_state lexbuf with
-      | <span data-count="1358">0</span> -&gt;
+  <span data-count="3363">m</span>atch Lexing.engine __ocaml_lex_tables __ocaml_lex_state lexbuf with
+      | <span data-count="1463">0</span> -&gt;
 # 31 "lib/lexer.mll"
                  ( token lexbuf )
 # 837 "lib/lexer.ml"
 
-  | <span data-count="196">1</span> -&gt;
+  | <span data-count="203">1</span> -&gt;
 # 32 "lib/lexer.mll"
-                ( INT (Lexing.lexeme lexbuf |&gt; <span data-count="196">i</span>nt_of_strin<span data-count="196">g</span>) )
+                ( INT (Lexing.lexeme lexbuf |&gt; <span data-count="203">i</span>nt_of_strin<span data-count="203">g</span>) )
 # 842 "lib/lexer.ml"
 
   | <span data-count="0">2</span> -&gt;
@@ -2834,62 +2834,62 @@ and __ocaml_lex_token_rec lexbuf __ocaml_lex_state =
           ( UNDERBAR )
 # 862 "lib/lexer.ml"
 
-  | <span data-count="15">6</span> -&gt;
+  | <span data-count="16">6</span> -&gt;
 # 37 "lib/lexer.mll"
             ( REC )
 # 867 "lib/lexer.ml"
 
-  | <span data-count="26">7</span> -&gt;
+  | <span data-count="30">7</span> -&gt;
 # 38 "lib/lexer.mll"
            ( IN )
 # 872 "lib/lexer.ml"
 
-  | <span data-count="129">8</span> -&gt;
+  | <span data-count="140">8</span> -&gt;
 # 39 "lib/lexer.mll"
             ( LET )
 # 877 "lib/lexer.ml"
 
-  | <span data-count="12">9</span> -&gt;
+  | <span data-count="14">9</span> -&gt;
 # 40 "lib/lexer.mll"
             ( FUN )
 # 882 "lib/lexer.ml"
 
-  | <span data-count="19">1</span>0 -&gt;
+  | <span data-count="21">1</span>0 -&gt;
 # 41 "lib/lexer.mll"
            ( IF )
 # 887 "lib/lexer.ml"
 
-  | <span data-count="19">1</span>1 -&gt;
+  | <span data-count="21">1</span>1 -&gt;
 # 42 "lib/lexer.mll"
              ( THEN )
 # 892 "lib/lexer.ml"
 
-  | <span data-count="19">1</span>2 -&gt;
+  | <span data-count="21">1</span>2 -&gt;
 # 43 "lib/lexer.mll"
              ( ELSE )
 # 897 "lib/lexer.ml"
 
-  | <span data-count="12">1</span>3 -&gt;
+  | <span data-count="14">1</span>3 -&gt;
 # 44 "lib/lexer.mll"
            ( ARROW )
 # 902 "lib/lexer.ml"
 
-  | <span data-count="32">1</span>4 -&gt;
+  | <span data-count="38">1</span>4 -&gt;
 # 45 "lib/lexer.mll"
           ( COMMA )
 # 907 "lib/lexer.ml"
 
-  | <span data-count="129">1</span>5 -&gt;
+  | <span data-count="140">1</span>5 -&gt;
 # 46 "lib/lexer.mll"
           ( EQUALLY )
 # 912 "lib/lexer.ml"
 
-  | <span data-count="142">1</span>6 -&gt;
+  | <span data-count="156">1</span>6 -&gt;
 # 47 "lib/lexer.mll"
           ( RIGHTPARENT )
 # 917 "lib/lexer.ml"
 
-  | <span data-count="142">1</span>7 -&gt;
+  | <span data-count="156">1</span>7 -&gt;
 # 48 "lib/lexer.mll"
           ( LEFTPARENT )
 # 922 "lib/lexer.ml"
@@ -2909,22 +2909,22 @@ and __ocaml_lex_token_rec lexbuf __ocaml_lex_state =
                 ( MIDLVLPREDICATE (Lexing.lexem<span data-count="29">e</span> lexbuf) )
 # 937 "lib/lexer.ml"
 
-  | <span data-count="111">2</span>1 -&gt;
+  | <span data-count="113">2</span>1 -&gt;
 # 52 "lib/lexer.mll"
-                 ( LOWMIDLVLPREDICATE (Lexing.lexem<span data-count="111">e</span> lexbuf) )
+                 ( LOWMIDLVLPREDICATE (Lexing.lexem<span data-count="113">e</span> lexbuf) )
 # 942 "lib/lexer.ml"
 
-  | <span data-count="17">2</span>2 -&gt;
+  | <span data-count="19">2</span>2 -&gt;
 # 53 "lib/lexer.mll"
-                ( LOWLVLPREDICATE (Lexing.lexem<span data-count="17">e</span> lexbuf) )
+                ( LOWLVLPREDICATE (Lexing.lexem<span data-count="19">e</span> lexbuf) )
 # 947 "lib/lexer.ml"
 
-  | <span data-count="587">2</span>3 -&gt;
+  | <span data-count="645">2</span>3 -&gt;
 # 54 "lib/lexer.mll"
-           ( NAME (Lexing.lexem<span data-count="587">e</span> lexbuf) )
+           ( NAME (Lexing.lexem<span data-count="645">e</span> lexbuf) )
 # 952 "lib/lexer.ml"
 
-  | <span data-count="40">2</span>4 -&gt;
+  | <span data-count="41">2</span>4 -&gt;
 # 55 "lib/lexer.mll"
           ( EOF )
 # 957 "lib/lexer.ml"
@@ -2934,8 +2934,8 @@ and __ocaml_lex_token_rec lexbuf __ocaml_lex_state =
         ( raise (Failure ("Character not allowed in source text: '" ^ Lexing.lexem<span data-count="0">e</span> lexbuf ^ "'")) )
 # 962 "lib/lexer.ml"
 
-  | <span data-count="78">_</span>_ocaml_lex_state -&gt; lexbuf.Lexing.refill_buff lexbuf;
-      <span data-count="78">_</span>_ocaml_lex_token_rec lexbuf __ocaml_lex_state
+  | <span data-count="80">_</span>_ocaml_lex_state -&gt; lexbuf.Lexing.refill_buff lexbuf;
+      <span data-count="80">_</span>_ocaml_lex_token_rec lexbuf __ocaml_lex_state
 
 ;;
 

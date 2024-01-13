@@ -87,19 +87,19 @@ open Asm
 
 let () =
   let program = from_channel stdin in
-  <span data-count="15">l</span>et ( &gt;&gt;= ) = Result.bind in
-  let apply_db_renaming p = <span data-count="15">O</span>k (index_of_type<span data-count="15">d</span> p) in
-  let apply_closure_convert p = <span data-count="15">O</span>k (cf_of_inde<span data-count="15">x</span> p) in
-  let apply_anf_convert p = <span data-count="15">O</span>k (AnfConvert.anf_of_c<span data-count="15">f</span> p) in
-  let apply_anf_optimizations p = <span data-count="15">O</span>k (AnfOptimizations.optimize_move<span data-count="15">s</span> p) in
-  let apply_infer p = <span data-count="15">t</span>op_infer Std.typeenv p in
-  program &gt;&gt;<span data-count="15">=</span> apply_infer &gt;&gt;<span data-count="15">=</span> apply_db_renaming &gt;&gt;<span data-count="15">=</span> apply_closure_convert
-  &gt;&gt;<span data-count="15">=</span> apply_anf_convert &gt;&gt;<span data-count="15">=</span> apply_anf_optimizations &gt;&gt;= Asm.compile
-  |&gt; <span data-count="15">f</span>unction
-  | <span data-count="15">O</span>k x -&gt;
+  <span data-count="16">l</span>et ( &gt;&gt;= ) = Result.bind in
+  let apply_db_renaming p = <span data-count="16">O</span>k (index_of_type<span data-count="16">d</span> p) in
+  let apply_closure_convert p = <span data-count="16">O</span>k (cf_of_inde<span data-count="16">x</span> p) in
+  let apply_anf_convert p = <span data-count="16">O</span>k (AnfConvert.anf_of_c<span data-count="16">f</span> p) in
+  let apply_anf_optimizations p = <span data-count="16">O</span>k (AnfOptimizations.optimize_move<span data-count="16">s</span> p) in
+  let apply_infer p = <span data-count="16">t</span>op_infer Std.typeenv p in
+  program &gt;&gt;<span data-count="16">=</span> apply_infer &gt;&gt;<span data-count="16">=</span> apply_db_renaming &gt;&gt;<span data-count="16">=</span> apply_closure_convert
+  &gt;&gt;<span data-count="16">=</span> apply_anf_convert &gt;&gt;<span data-count="16">=</span> apply_anf_optimizations &gt;&gt;= Asm.compile
+  |&gt; <span data-count="16">f</span>unction
+  | <span data-count="16">O</span>k x -&gt;
       AsmOptimizer.optimize x
-      |&gt; <span data-count="15">B</span>uild.make_exe "../build.sh" " -d -b \"../../lib/bindings.o\""
-  | <span data-count="0">E</span>rror x -&gt; print_endline <span data-count="15">x</span>
+      |&gt; <span data-count="16">B</span>uild.make_exe "../build.sh" " -d -b \"../../lib/bindings.o\""
+  | <span data-count="0">E</span>rror x -&gt; print_endline <span data-count="16">x</span>
 </code></pre>
       </div>
     </div>

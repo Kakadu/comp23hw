@@ -486,24 +486,24 @@ module InferTypeUtils = struct
   let t_bool = TBool
   let t_unit = TUnit
   let t_float = TFloat
-  let t_arrow t1 t2 = <span data-count="2602">T</span>Arrow (t1, t2)
-  let t_tuple ts = <span data-count="26">T</span>Tuple ts
-  let t_ground t = <span data-count="440">T</span>Ground t
-  let t_var t = <span data-count="893">T</span>Var t
-  let tv_unbound n l = <span data-count="942">U</span>nbound (n, l)
-  let tv_link t = <span data-count="657">L</span>ink t
-  let lvl_value { value = v; old_lvl = _; new_lvl = _ } = <span data-count="19422">v</span>
+  let t_arrow t1 t2 = <span data-count="2708">T</span>Arrow (t1, t2)
+  let t_tuple ts = <span data-count="47">T</span>Tuple ts
+  let t_ground t = <span data-count="455">T</span>Ground t
+  let t_var t = <span data-count="971">T</span>Var t
+  let tv_unbound n l = <span data-count="1040">U</span>nbound (n, l)
+  let tv_link t = <span data-count="708">L</span>ink t
+  let lvl_value { value = v; old_lvl = _; new_lvl = _ } = <span data-count="23248">v</span>
 
   let is_unit typ =
     <span data-count="0">m</span>atch lvl_value typ with <span data-count="0">T</span>Ground TUnit -&gt; true | <span data-count="0">_</span> -&gt; false
 
-  let with_lvls old_l new_l v = <span data-count="3961">{</span> value = v; old_lvl = old_l; new_lvl = new_l }
+  let with_lvls old_l new_l v = <span data-count="4181">{</span> value = v; old_lvl = old_l; new_lvl = new_l }
   let assoc = List.assoc
 
   let convert_const l =
-    <span data-count="197">l</span>et l = Position.Position.value l in
-    <span data-count="197">(</span>match l with
-    | <span data-count="193">L</span>Int _ -&gt; TInt
+    <span data-count="204">l</span>et l = Position.Position.value l in
+    <span data-count="204">(</span>match l with
+    | <span data-count="200">L</span>Int _ -&gt; TInt
     | <span data-count="0">L</span>String _ -&gt; TString
     | <span data-count="3">L</span>Bool _ -&gt; TBool
     | <span data-count="0">L</span>Float _ -&gt; TFloat
@@ -511,12 +511,12 @@ module InferTypeUtils = struct
     |&gt; t_ground
 
   let rec repr t =
-    <span data-count="5440">m</span>atch lvl_value t with
-    | <span data-count="791">T</span>Var ({ contents = Link t } as tvar) -&gt;
+    <span data-count="5842">m</span>atch lvl_value t with
+    | <span data-count="856">T</span>Var ({ contents = Link t } as tvar) -&gt;
         let t = repr t in
-        <span data-count="791">t</span>var := Link t;
+        <span data-count="856">t</span>var := Link t;
         t
-    | <span data-count="4649">_</span> -&gt; t
+    | <span data-count="4986">_</span> -&gt; t
 end
 
 module TypeAst = struct
@@ -585,57 +585,57 @@ module TypeAstUtils = struct
   open TypeAst
   open InferTypeUtils
 
-  let ty_arrow t1 t2 = <span data-count="1969">T</span>yArrow (t1, t2)
-  let ty_tuple ts = <span data-count="48">T</span>yTuple ts
-  let ty_ground t = <span data-count="3151">T</span>yGround t
-  let ty_var n = <span data-count="94">T</span>yVar n
+  let ty_arrow t1 t2 = <span data-count="2490">T</span>yArrow (t1, t2)
+  let ty_tuple ts = <span data-count="234">T</span>yTuple ts
+  let ty_ground t = <span data-count="3922">T</span>yGround t
+  let ty_var n = <span data-count="138">T</span>yVar n
   let typed_value { value = v; typ = _ } = <span data-count="1248">v</span>
-  let with_typ t v = <span data-count="3556">{</span> value = v; typ = t }
+  let with_typ t v = <span data-count="3772">{</span> value = v; typ = t }
   let typ { value = _; typ = t } = <span data-count="868">t</span>
   let ty_typ : ('a, ty) typed -&gt; ty = fun { value = _; typ = t } -&gt; <span data-count="1">t</span>
-  let typ_let_binding rec_f l_v b = <span data-count="254">{</span> rec_f; l_v; body = b }
-  let typ_let_body ls e = <span data-count="514">{</span> lets = ls; expr = e }
-  let t_apply e1 e2 = <span data-count="1012">T</span>Apply (e1, e2)
-  let t_literal l = <span data-count="394">T</span>Literal l
-  let t_value n = <span data-count="976">T</span>Value n
-  let t_fun l_v b = <span data-count="260">T</span>Fun { lvalue = l_v; b }
-  let t_tuple es = <span data-count="22">T</span>Tuple es
-  let t_if_else c t f = <span data-count="36">T</span>IfElse { cond = c; t_body = t; f_body = f }
+  let typ_let_binding rec_f l_v b = <span data-count="276">{</span> rec_f; l_v; body = b }
+  let typ_let_body ls e = <span data-count="562">{</span> lets = ls; expr = e }
+  let t_apply e1 e2 = <span data-count="1062">T</span>Apply (e1, e2)
+  let t_literal l = <span data-count="408">T</span>Literal l
+  let t_value n = <span data-count="1046">T</span>Value n
+  let t_fun l_v b = <span data-count="286">T</span>Fun { lvalue = l_v; b }
+  let t_tuple es = <span data-count="26">T</span>Tuple es
+  let t_if_else c t f = <span data-count="40">T</span>IfElse { cond = c; t_body = t; f_body = f }
 
   let rec remove_lvl typ =
-    <span data-count="7201">l</span>et open InferType in
+    <span data-count="10012">l</span>et open InferType in
     match lvl_value typ with
-    | <span data-count="94">T</span>Var { contents = Unbound (n, _) } -&gt; ty_var n
-    | <span data-count="2330">T</span>Var { contents = Link t } -&gt; remove_lvl t
-    | <span data-count="1578">T</span>Arrow (t1, t2) -&gt; ty_arrow (remove_lv<span data-count="1578">l</span> t1) (remove_lv<span data-count="1578">l</span> t2)
-    | <span data-count="48">T</span>Tuple ts -&gt; List.map remove_lvl ts |&gt; <span data-count="48">t</span>y_tuple
-    | <span data-count="3151">T</span>Ground t -&gt; ty_ground t
+    | <span data-count="138">T</span>Var { contents = Unbound (n, _) } -&gt; ty_var n
+    | <span data-count="3619">T</span>Var { contents = Link t } -&gt; remove_lvl t
+    | <span data-count="2099">T</span>Arrow (t1, t2) -&gt; ty_arrow (remove_lv<span data-count="2099">l</span> t1) (remove_lv<span data-count="2099">l</span> t2)
+    | <span data-count="234">T</span>Tuple ts -&gt; List.map remove_lvl ts |&gt; <span data-count="234">t</span>y_tuple
+    | <span data-count="3922">T</span>Ground t -&gt; ty_ground t
 
   let rec convert_expr : InferType.typ typ_expr -&gt; ty typ_expr =
    fun { value = expr; typ } -&gt;
-    <span data-count="1350">l</span>et e : ty t_expr =
+    <span data-count="1434">l</span>et e : ty t_expr =
       match expr with
-      | <span data-count="506">T</span>Apply (l, r) -&gt; convert_expr r |&gt; <span data-count="506">t</span>_appl<span data-count="506">y</span> (convert_exp<span data-count="506">r</span> l)
-      | <span data-count="197">T</span>Literal l -&gt; t_litera<span data-count="197">l</span> l
-      | <span data-count="488">T</span>Value n -&gt; t_valu<span data-count="488">e</span> n
-      | <span data-count="11">T</span>Tuple es -&gt; List.map convert_expr es |&gt; <span data-count="11">t</span>_tupl<span data-count="11">e</span>
-      | <span data-count="18">T</span>IfElse { cond; t_body; f_body } -&gt;
-          t_if_els<span data-count="18">e</span> (convert_exp<span data-count="18">r</span> cond) (convert_exp<span data-count="18">r</span> t_body)
-            (convert_exp<span data-count="18">r</span> f_body)
-      | <span data-count="130">T</span>Fun { lvalue; b } -&gt;
-          with_typ (remove_lv<span data-count="130">l</span> lvalue.typ) lvalue.value |&gt; <span data-count="130">f</span>un l_v -&gt;
-          <span data-count="130">c</span>onvert_body b |&gt; <span data-count="130">t</span>_fun l_<span data-count="130">v</span>
+      | <span data-count="531">T</span>Apply (l, r) -&gt; convert_expr r |&gt; <span data-count="531">t</span>_appl<span data-count="531">y</span> (convert_exp<span data-count="531">r</span> l)
+      | <span data-count="204">T</span>Literal l -&gt; t_litera<span data-count="204">l</span> l
+      | <span data-count="523">T</span>Value n -&gt; t_valu<span data-count="523">e</span> n
+      | <span data-count="13">T</span>Tuple es -&gt; List.map convert_expr es |&gt; <span data-count="13">t</span>_tupl<span data-count="13">e</span>
+      | <span data-count="20">T</span>IfElse { cond; t_body; f_body } -&gt;
+          t_if_els<span data-count="20">e</span> (convert_exp<span data-count="20">r</span> cond) (convert_exp<span data-count="20">r</span> t_body)
+            (convert_exp<span data-count="20">r</span> f_body)
+      | <span data-count="143">T</span>Fun { lvalue; b } -&gt;
+          with_typ (remove_lv<span data-count="143">l</span> lvalue.typ) lvalue.value |&gt; <span data-count="143">f</span>un l_v -&gt;
+          <span data-count="143">c</span>onvert_body b |&gt; <span data-count="143">t</span>_fun l_<span data-count="143">v</span>
     in
-    e |&gt; with_typ (remove_lv<span data-count="1350">l</span> typ)
+    e |&gt; with_typ (remove_lv<span data-count="1434">l</span> typ)
 
   and convert_body : InferType.typ typ_let_body -&gt; ty typ_let_body =
    fun body -&gt;
-    <span data-count="257">t</span>yp_let_body (List.ma<span data-count="257">p</span> convert_let body.lets) (convert_exp<span data-count="257">r</span> body.expr)
+    <span data-count="281">t</span>yp_let_body (List.ma<span data-count="281">p</span> convert_let body.lets) (convert_exp<span data-count="281">r</span> body.expr)
 
   and convert_let : InferType.typ typ_let_binding -&gt; ty typ_let_binding =
    fun { rec_f; l_v; body } -&gt;
-    <span data-count="127">l</span>et l_v = with_typ (remove_lv<span data-count="127">l</span> l_v.typ) l_v.value in
-    <span data-count="127">c</span>onvert_body body |&gt; <span data-count="127">t</span>yp_let_binding rec_f l_v
+    <span data-count="138">l</span>et l_v = with_typ (remove_lv<span data-count="138">l</span> l_v.typ) l_v.value in
+    <span data-count="138">c</span>onvert_body body |&gt; <span data-count="138">t</span>yp_let_binding rec_f l_v
 end
 </code></pre>
       </div>

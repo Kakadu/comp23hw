@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8"/>
     <title>asm.ml &mdash; Coverage report</title>
-    <meta name="description" content="91.45% coverage in lib/asm.ml">
+    <meta name="description" content="92.87% coverage in lib/asm.ml">
     <link rel="stylesheet" href="../coverage.css"/>
     <script src="../highlight.pack.js"></script>
     <script>hljs.initHighlightingOnLoad();</script>
@@ -15,13 +15,11 @@
           <span class="dirname">lib/</span>asm.ml
         </a>
       </h1>
-      <h2>91.45%</h2>
+      <h2>92.87%</h2>
     </div>
     <div id="navbar">
       <span class="unvisited" style="top:14.17%"></span>
-      <span class="unvisited" style="top:14.58%"></span>
       <span class="some-visited" style="top:32.08%"></span>
-      <span class="unvisited" style="top:34.38%"></span>
       <span class="unvisited" style="top:34.79%"></span>
       <span class="unvisited" style="top:35.21%"></span>
       <span class="unvisited" style="top:35.42%"></span>
@@ -43,7 +41,6 @@
       <span class="unvisited" style="bottom:10.62%"></span>
       <span class="unvisited" style="bottom:9.58%"></span>
       <span class="unvisited" style="bottom:9.38%"></span>
-      <span class="unvisited" style="bottom:8.54%"></span>
       <span class="some-visited" style="bottom:4.58%"></span>
     </div>
     <div id="report">
@@ -118,7 +115,7 @@
 <a id="L67"></a><span class="visited"> </span>
 <a id="L68"></a><span class="unvisited"> </span>
 <a id="L69"></a><span class="visited"> </span>
-<a id="L70"></a><span class="unvisited"> </span>
+<a id="L70"></a><span class="visited"> </span>
 <a id="L71"></a><span class="visited"> </span>
 <a id="L72"></a><span class="visited"> </span>
 <a id="L73"></a><span class="visited"> </span>
@@ -213,7 +210,7 @@
 <a id="L162"></a><span class="visited"> </span>
 <a id="L163"></a><span class="visited"> </span>
 <a id="L164"></a><span class="visited"> </span>
-<a id="L165"></a><span class="unvisited"> </span>
+<a id="L165"></a><span class="visited"> </span>
 <a id="L166"></a><span class="visited"> </span>
 <a id="L167"></a><span class="unvisited"> </span>
 <a id="L168"></a><span class="visited"> </span>
@@ -487,7 +484,7 @@
 <a id="L436"></a><span class="visited"> </span>
 <a id="L437"></a><span class="visited"> </span>
 <a id="L438"></a><span class="visited"> </span>
-<a id="L439"></a><span class="unvisited"> </span>
+<a id="L439"></a><span class="visited"> </span>
 <a id="L440"></a><span class="visited"> </span>
 <a id="L441"></a><span > </span>
 <a id="L442"></a><span > </span>
@@ -1071,25 +1068,25 @@
   let r8 = Reg "r8"
   let r9 = Reg "r9"
   let r12 = Reg "r12"
-  let pop l = <span data-count="210">P</span>op l
-  let add r1 r2 = <span data-count="270">A</span>dd (r1, r2)
+  let pop l = <span data-count="264">P</span>op l
+  let add r1 r2 = <span data-count="313">A</span>dd (r1, r2)
   let imul r1 r2 = <span data-count="8">I</span>mul (r1, r2)
-  let sub r1 r2 = <span data-count="296">S</span>ub (r1, r2)
+  let sub r1 r2 = <span data-count="349">S</span>ub (r1, r2)
   let idiv r = <span data-count="4">I</span>div r
-  let push l = <span data-count="210">P</span>ush l
-  let ic i = <span data-count="858">I</span>ntConst i
-  let mov r1 r2 = <span data-count="1063">M</span>ov (r1, r2)
+  let push l = <span data-count="264">P</span>ush l
+  let ic i = <span data-count="1012">I</span>ntConst i
+  let mov r1 r2 = <span data-count="1283">M</span>ov (r1, r2)
   let setle r = <span data-count="4">S</span>etle r
   let setl r = <span data-count="1">S</span>etl r
   let setge r = <span data-count="0">S</span>etge r
   let setg r = <span data-count="1">S</span>etg r
-  let sete r = <span data-count="0">S</span>ete r
-  let movzx r1 r2 = <span data-count="6">M</span>ovzx (r1, r2)
-  let cmp r1 r2 = <span data-count="12">C</span>mp (r1, r2)
-  let call r = <span data-count="206">C</span>all r
-  let je x = <span data-count="6">J</span>e x
+  let sete r = <span data-count="2">S</span>ete r
+  let movzx r1 r2 = <span data-count="8">M</span>ovzx (r1, r2)
+  let cmp r1 r2 = <span data-count="16">C</span>mp (r1, r2)
+  let call r = <span data-count="249">C</span>all r
+  let je x = <span data-count="8">J</span>e x
   let cqo = Cqo
-  let dp reg d = <span data-count="125">D</span>isplacement (reg, d)
+  let dp reg d = <span data-count="155">D</span>isplacement (reg, d)
 
   module SMap = Map.Make (String)
 
@@ -1102,93 +1099,93 @@
   let latest_if_id = ref 0
 
   let gen_next_if_id () =
-    <span data-count="6">l</span>atest_if_id := !latest_if_id + 1;
+    <span data-count="8">l</span>atest_if_id := !latest_if_id + 1;
     !latest_if_id
 
-  let ( &gt;&gt; ) x y = <span data-count="373">x</span> @ [ y ]
+  let ( &gt;&gt; ) x y = <span data-count="445">x</span> @ [ y ]
   let ( &gt;&gt;&gt; ) = ( @ )
-  let ( =&gt;&gt; ) x y = <span data-count="194">x</span> &gt;&gt;| fun x -&gt; <span data-count="194">x</span> @ [ y ]
-  let ( =&gt;&gt;&gt; ) x y = <span data-count="6">x</span> &gt;&gt;| fun x -&gt; <span data-count="6">x</span> @ y
-  let ( -&gt;&gt;&gt; ) x y = <span data-count="16">y</span> &gt;&gt;| fun y -&gt; <span data-count="16">x</span> @ y
+  let ( =&gt;&gt; ) x y = <span data-count="250">x</span> &gt;&gt;| fun x -&gt; <span data-count="250">x</span> @ [ y ]
+  let ( =&gt;&gt;&gt; ) x y = <span data-count="8">x</span> &gt;&gt;| fun x -&gt; <span data-count="8">x</span> @ y
+  let ( -&gt;&gt;&gt; ) x y = <span data-count="22">y</span> &gt;&gt;| fun y -&gt; <span data-count="22">x</span> @ y
 
   let ( |&gt;&gt;&gt; ) x y =
-    <span data-count="102">x</span> &gt;&gt;= fun x -&gt;
-    <span data-count="102">y</span> &gt;&gt;| fun y -&gt; <span data-count="102">x</span> @ y
+    <span data-count="113">x</span> &gt;&gt;= fun x -&gt;
+    <span data-count="113">y</span> &gt;&gt;| fun y -&gt; <span data-count="113">x</span> @ y
 
-  let lst x = <span data-count="47">[</span> x ]
+  let lst x = <span data-count="65">[</span> x ]
   let concat = List.concat
 
   let rec arity_of t =
-    <span data-count="832">m</span>atch t with <span data-count="448">T</span>yArrow (_, t2) -&gt; 1 + arity_o<span data-count="448">f</span> t2 | <span data-count="384">_</span> -&gt; 0
+    <span data-count="886">m</span>atch t with <span data-count="477">T</span>yArrow (_, t2) -&gt; 1 + arity_o<span data-count="477">f</span> t2 | <span data-count="409">_</span> -&gt; 0
 
-  let std_functions = Std.operators |&gt; List.ma<span data-count="17">p</span> (fun x -&gt; <span data-count="340">x</span>.value)
-  let sizeof _ = <span data-count="534">8</span>
-  let align16 x = <span data-count="134">i</span>f Int.re<span data-count="134">m</span> x 16 &lt;&gt; 0 then <span data-count="17">x</span> - Int.re<span data-count="17">m</span> x 16 + 16 else <span data-count="117">x</span>
-  let sum_by f = <span data-count="162">L</span>ist.fold_left (fun xs x -&gt; <span data-count="245">x</span>s + <span data-count="245">f</span> x) 0
+  let std_functions = Std.operators |&gt; List.ma<span data-count="18">p</span> (fun x -&gt; <span data-count="360">x</span>.value)
+  let sizeof _ = <span data-count="630">8</span>
+  let align16 x = <span data-count="147">i</span>f Int.re<span data-count="147">m</span> x 16 &lt;&gt; 0 then <span data-count="22">x</span> - Int.re<span data-count="22">m</span> x 16 + 16 else <span data-count="125">x</span>
+  let sum_by f = <span data-count="190">L</span>ist.fold_left (fun xs x -&gt; <span data-count="290">x</span>s + <span data-count="290">f</span> x) 0
 
   (*  %rdi, %rsi, %rdx, %rcx, %r8, and %r9 then stack *)
   let get_arg_loc = function
-    | <span data-count="268">0</span> -&gt; Some rdi
-    | <span data-count="198">1</span> -&gt; Some rsi
-    | <span data-count="46">2</span> -&gt; Some rdx
-    | <span data-count="28">3</span> -&gt; Some rcx
-    | <span data-count="10">4</span> -&gt; Some r8
+    | <span data-count="294">0</span> -&gt; Some rdi
+    | <span data-count="220">1</span> -&gt; Some rsi
+    | <span data-count="58">2</span> -&gt; Some rdx
+    | <span data-count="30">3</span> -&gt; Some rcx
+    | <span data-count="12">4</span> -&gt; Some r8
     | <span data-count="8">5</span> -&gt; Some r9
     | <span data-count="13">_</span> -&gt; None
 
   let split_args lst =
-    <span data-count="50">l</span>et rec helper lst i (acc1, acc2) =
-      <span data-count="140">m</span>atch (lst, get_arg_lo<span data-count="140">c</span> i) with
-      | <span data-count="50">[</span>], _ -&gt; (acc1, acc2)
-      | <span data-count="85">h</span>d :: tl, Some _ -&gt; helper tl (i + 1) (hd :: acc1, acc2)
+    <span data-count="58">l</span>et rec helper lst i (acc1, acc2) =
+      <span data-count="163">m</span>atch (lst, get_arg_lo<span data-count="163">c</span> i) with
+      | <span data-count="58">[</span>], _ -&gt; (acc1, acc2)
+      | <span data-count="100">h</span>d :: tl, Some _ -&gt; helper tl (i + 1) (hd :: acc1, acc2)
       | <span data-count="5">h</span>d :: tl, None -&gt; helper tl (i + 1) (acc1, hd :: acc2)
     in
     helper lst 0 ([], [])
 
   let rec collect_locals l =
-    <span data-count="155">m</span>atch l.e with
-    | <span data-count="6">A</span>ite (_, t, e) -&gt;
-        List.concat_ma<span data-count="6">p</span> collect_locals t.lets
-        @ List.concat_ma<span data-count="6">p</span> collect_locals e.lets
+    <span data-count="185">m</span>atch l.e with
+    | <span data-count="8">A</span>ite (_, t, e) -&gt;
+        List.concat_ma<span data-count="8">p</span> collect_locals t.lets
+        @ List.concat_ma<span data-count="8">p</span> collect_locals e.lets
         @ [ l.name ]
-    | <span data-count="149">_</span> -&gt; [ l.name ]
+    | <span data-count="177">_</span> -&gt; [ l.name ]
 
   let map_fn_stack (fn : anf_fun_binding) =
-    <span data-count="50">l</span>et empty = SMap.empty in
+    <span data-count="58">l</span>et empty = SMap.empty in
     let inner sign (mm, li) x =
-      <span data-count="245">(</span>SMap.ad<span data-count="245">d</span> x.value (Stack li) mm, sig<span data-count="245">n</span> li (sizeo<span data-count="245">f</span> x.typ))
+      <span data-count="290">(</span>SMap.ad<span data-count="290">d</span> x.value (Stack li) mm, sig<span data-count="290">n</span> li (sizeo<span data-count="290">f</span> x.typ))
     in
     let reg_args, stack_args = split_args (fn.env @ fn.args) in
-    <span data-count="50">l</span>et all_local_vars = List.concat_map collect_locals fn.body.lets in
-    <span data-count="50">l</span>et args, last = List.fold_left (inne<span data-count="50">r</span> ( - )) (empty, <span data-count="50">-</span>reg_size) reg_args in
-    <span data-count="50">l</span>et args, _ = List.fold_left (inne<span data-count="50">r</span> ( + )) (args, reg_size) stack_args in
-    <span data-count="50">L</span>ist.fold_left (inne<span data-count="50">r</span> ( - )) (args, last) all_local_vars |&gt; <span data-count="50">f</span>st
+    <span data-count="58">l</span>et all_local_vars = List.concat_map collect_locals fn.body.lets in
+    <span data-count="58">l</span>et args, last = List.fold_left (inne<span data-count="58">r</span> ( - )) (empty, <span data-count="58">-</span>reg_size) reg_args in
+    <span data-count="58">l</span>et args, _ = List.fold_left (inne<span data-count="58">r</span> ( + )) (args, reg_size) stack_args in
+    <span data-count="58">L</span>ist.fold_left (inne<span data-count="58">r</span> ( - )) (args, last) all_local_vars |&gt; <span data-count="58">f</span>st
 
   let compile_fn_call fn args =
-    <span data-count="84">l</span>et stack_len =
-      List.filteri (fun i _ -&gt; <span data-count="148">O</span>ption.is_none (get_arg_lo<span data-count="148">c</span> i)) args
-      |&gt; <span data-count="84">L</span>ist.fold_left (fun xs x -&gt; <span data-count="0">x</span>s + sizeo<span data-count="0">f</span> x) 0
+    <span data-count="89">l</span>et stack_len =
+      List.filteri (fun i _ -&gt; <span data-count="157">O</span>ption.is_none (get_arg_lo<span data-count="157">c</span> i)) args
+      |&gt; <span data-count="89">L</span>ist.fold_left (fun xs x -&gt; <span data-count="0">x</span>s + sizeo<span data-count="0">f</span> x) 0
     in
-    <span data-count="84">l</span>et stack_fix = [ ad<span data-count="84">d</span> rsp (stack_len |&gt; align16 |&gt; <span data-count="84">i</span><span data-count="84">c</span>) ] in
+    <span data-count="89">l</span>et stack_fix = [ ad<span data-count="89">d</span> rsp (stack_len |&gt; align16 |&gt; <span data-count="89">i</span><span data-count="89">c</span>) ] in
     match fn with
     (* Inline function call here *)
-    | <span data-count="11">"</span>-" -&gt; return [ su<span data-count="11">b</span> rdi rsi; mo<span data-count="11">v</span> rax rdi ] (* - *)
+    | <span data-count="13">"</span>-" -&gt; return [ su<span data-count="13">b</span> rdi rsi; mo<span data-count="13">v</span> rax rdi ] (* - *)
     | <span data-count="35">"</span>+" -&gt; return [ ad<span data-count="35">d</span> rdi rsi; mo<span data-count="35">v</span> rax rdi ] (* + *)
     | <span data-count="8">"</span>*" -&gt; return [ imu<span data-count="8">l</span> rdi rsi; mo<span data-count="8">v</span> rax rdi ] (* * *)
     | <span data-count="4">"</span>/" -&gt; return [ mo<span data-count="4">v</span> rax rdi; cqo; idi<span data-count="4">v</span> rsi ] (* / *)
     | <span data-count="4">"</span>&lt;=" -&gt; return [ cm<span data-count="4">p</span> rdi rsi; setl<span data-count="4">e</span> al; movz<span data-count="4">x</span> eax al ] (* &lt;= *)
     | <span data-count="1">"</span>&lt;" -&gt; return [ cm<span data-count="1">p</span> rdi rsi; set<span data-count="1">l</span> al; movz<span data-count="1">x</span> eax al ] (* &lt; *)
-    | <span data-count="0">"</span>=" -&gt; return [ cm<span data-count="0">p</span> rdi rsi; set<span data-count="0">e</span> al; movz<span data-count="0">x</span> eax al ] (* == *)
+    | <span data-count="2">"</span>==" -&gt; return [ cm<span data-count="2">p</span> rdi rsi; set<span data-count="2">e</span> al; movz<span data-count="2">x</span> eax al ] (* == *)
     | <span data-count="1">"</span>&gt;" -&gt; return [ cm<span data-count="1">p</span> rdi rsi; set<span data-count="1">g</span> al; movz<span data-count="1">x</span> eax al ] (* &gt; *)
     | <span data-count="0">"</span>&gt;=" -&gt; return [ cm<span data-count="0">p</span> rdi rsi; setg<span data-count="0">e</span> al; movz<span data-count="0">x</span> eax al ] (* &gt;= *)
-    | <span data-count="20">"</span>print_int" -&gt; [ cal<span data-count="20">l</span> "bin_print_int" ] &gt;&gt;&gt; stack_fix |&gt; <span data-count="20">r</span>eturn
+    | <span data-count="21">"</span>print_int" -&gt; [ cal<span data-count="21">l</span> "bin_print_int" ] &gt;&gt;&gt; stack_fix |&gt; <span data-count="21">r</span>eturn
     | <span data-count="0">x</span> when String.ends_wit<span data-count="0">h</span> ~suffix:"." x -&gt;
         <span data-count="0">e</span>rror "Compiler error: Float point functions not done"
     | <span data-count="0">o</span>ther -&gt; [ cal<span data-count="0">l</span> other ] &gt;&gt;&gt; stack_fix |&gt; <span data-count="0">r</span>eturn
 
   let int_of_literal x =
-    <span data-count="99">m</span>atch x.value with
-    | <span data-count="98">L</span>Int x -&gt; return x
+    <span data-count="107">m</span>atch x.value with
+    | <span data-count="106">L</span>Int x -&gt; return x
     | <span data-count="0">L</span>Bool true -&gt; return 1
     | <span data-count="0">L</span>Bool false -&gt; return 0
     | <span data-count="1">L</span>Unit -&gt; return 0
@@ -1196,172 +1193,172 @@
     | <span data-count="0">L</span>Float _ -&gt; error "Compiler error: Floats are not supported yet"
 
   let preserve_reg reg prog =
-    <span data-count="107">[</span> pus<span data-count="107">h</span> reg; su<span data-count="107">b</span> rsp (i<span data-count="107">c</span> 8) ] &gt;&gt;<span data-count="107">&gt;</span> prog &gt;&gt;&gt; [ ad<span data-count="107">d</span> rsp (i<span data-count="107">c</span> 8); po<span data-count="107">p</span> reg ]
+    <span data-count="133">[</span> pus<span data-count="133">h</span> reg; su<span data-count="133">b</span> rsp (i<span data-count="133">c</span> 8) ] &gt;&gt;<span data-count="133">&gt;</span> prog &gt;&gt;&gt; [ ad<span data-count="133">d</span> rsp (i<span data-count="133">c</span> 8); po<span data-count="133">p</span> reg ]
 
   let mem_imm cinfo imm =
-    <span data-count="346">m</span>atch imm with
-    | <span data-count="247">I</span>mmVal v when List.me<span data-count="247">m</span> v.value cinfo.functions -&gt; <span data-count="0">F</span>ndef v.value |&gt; return
-    | <span data-count="247">I</span>mmVal x -&gt; (
+    <span data-count="404">m</span>atch imm with
+    | <span data-count="297">I</span>mmVal v when List.me<span data-count="297">m</span> v.value cinfo.functions -&gt; <span data-count="0">F</span>ndef v.value |&gt; return
+    | <span data-count="297">I</span>mmVal x -&gt; (
         match SMap.find_opt x.value cinfo.memory with
-        | <span data-count="247">S</span>ome x -&gt; return x
+        | <span data-count="297">S</span>ome x -&gt; return x
         | <span data-count="0">N</span>one -&gt; error "Compiler error: Could not find variable in memory")
-    | <span data-count="99">I</span>mmLit l -&gt; int_of_litera<span data-count="99">l</span> l &gt;&gt;| ic
+    | <span data-count="107">I</span>mmLit l -&gt; int_of_litera<span data-count="107">l</span> l &gt;&gt;| ic
 
-  let rename_fn name = <span data-count="47">m</span>atch name with <span data-count="3">"</span>print_int" -&gt; "bin_print_int" | <span data-count="44">e</span> -&gt; e
+  let rename_fn name = <span data-count="55">m</span>atch name with <span data-count="3">"</span>print_int" -&gt; "bin_print_int" | <span data-count="52">e</span> -&gt; e
 
   let alloc_closure cinfo fn args =
-    <span data-count="47">l</span>et arity = SMap.find fn.value cinfo.arities in
-    <span data-count="47">l</span>et fn_name = rename_fn fn.value in
-    <span data-count="47">l</span>et load_size = mov rdi (arity * ptr_size |&gt; i<span data-count="47">c</span>) in
-    <span data-count="47">l</span>et create_env_ptr = [ cal<span data-count="47">l</span> "cm_malloc"; mo<span data-count="47">v</span> r12 rax ] in
+    <span data-count="55">l</span>et arity = SMap.find fn.value cinfo.arities in
+    <span data-count="55">l</span>et fn_name = rename_fn fn.value in
+    <span data-count="55">l</span>et load_size = mov rdi (arity * ptr_size |&gt; i<span data-count="55">c</span>) in
+    <span data-count="55">l</span>et create_env_ptr = [ cal<span data-count="55">l</span> "cm_malloc"; mo<span data-count="55">v</span> r12 rax ] in
     let inner i arg =
-      <span data-count="23">m</span>em_im<span data-count="23">m</span> cinfo arg &gt;&gt;<span data-count="23">|</span> mo<span data-count="23">v</span> r9 &gt;&gt;<span data-count="23">|</span> lst =&gt;&gt; mo<span data-count="23">v</span> (d<span data-count="23">p</span> "r12" (i * ptr_size)) r9
+      <span data-count="25">m</span>em_im<span data-count="25">m</span> cinfo arg &gt;&gt;<span data-count="25">|</span> mo<span data-count="25">v</span> r9 &gt;&gt;<span data-count="25">|</span> lst =&gt;&gt; mo<span data-count="25">v</span> (d<span data-count="25">p</span> "r12" (i * ptr_size)) r9
     in
     let* store_args =
-      preserve_re<span data-count="47">g</span> r9 |&lt;<span data-count="47">&lt;</span> (monadic_map<span data-count="47">i</span> args inner &gt;&gt;<span data-count="47">|</span> List.concat)
+      preserve_re<span data-count="55">g</span> r9 |&lt;<span data-count="55">&lt;</span> (monadic_map<span data-count="55">i</span> args inner &gt;&gt;<span data-count="55">|</span> List.concat)
     in
-    <span data-count="47">l</span>et load_argv = mov rdx r12 in
-    <span data-count="47">l</span>et load_argc = mov rsi (List.length args |&gt; <span data-count="47">i</span><span data-count="47">c</span>) in
-    <span data-count="47">l</span>et load_fn = mov rdi (Fndef fn_name) in
-    <span data-count="47">l</span>et load_arity = mov rcx (arity |&gt; i<span data-count="47">c</span>) in
-    <span data-count="47">l</span>et create_closure = call "create_function" in
-    <span data-count="47">p</span>reserve_reg r12
-      ([ load_size ] &gt;&gt;<span data-count="47">&gt;</span> create_env_ptr &gt;&gt;<span data-count="47">&gt;</span> store_args &gt;<span data-count="47">&gt;</span> load_argv &gt;<span data-count="47">&gt;</span> load_argc
-     &gt;<span data-count="47">&gt;</span> load_fn &gt;<span data-count="47">&gt;</span> load_arity &gt;<span data-count="47">&gt;</span> create_closure)
-    |&gt; <span data-count="47">r</span>eturn
+    <span data-count="55">l</span>et load_argv = mov rdx r12 in
+    <span data-count="55">l</span>et load_argc = mov rsi (List.length args |&gt; <span data-count="55">i</span><span data-count="55">c</span>) in
+    <span data-count="55">l</span>et load_fn = mov rdi (Fndef fn_name) in
+    <span data-count="55">l</span>et load_arity = mov rcx (arity |&gt; i<span data-count="55">c</span>) in
+    <span data-count="55">l</span>et create_closure = call "create_function" in
+    <span data-count="55">p</span>reserve_reg r12
+      ([ load_size ] &gt;&gt;<span data-count="55">&gt;</span> create_env_ptr &gt;&gt;<span data-count="55">&gt;</span> store_args &gt;<span data-count="55">&gt;</span> load_argv &gt;<span data-count="55">&gt;</span> load_argc
+     &gt;<span data-count="55">&gt;</span> load_fn &gt;<span data-count="55">&gt;</span> load_arity &gt;<span data-count="55">&gt;</span> create_closure)
+    |&gt; <span data-count="55">r</span>eturn
 
   let ld_imm cinfo imm =
-    <span data-count="111">m</span>atch imm with
-    | <span data-count="66">I</span>mmVal v when List.me<span data-count="66">m</span> v.value cinfo.functions -&gt; <span data-count="7">a</span>lloc_closure cinfo v []
-    | <span data-count="59">I</span>mmVal v when List.me<span data-count="59">m</span> v.value std_functions -&gt; <span data-count="3">a</span>lloc_closure cinfo v []
-    | <span data-count="101">_</span> -&gt; mem_im<span data-count="101">m</span> cinfo imm &gt;&gt;| fun x -&gt; <span data-count="101">[</span> mo<span data-count="101">v</span> rax x ]
+    <span data-count="137">m</span>atch imm with
+    | <span data-count="89">I</span>mmVal v when List.me<span data-count="89">m</span> v.value cinfo.functions -&gt; <span data-count="10">a</span>lloc_closure cinfo v []
+    | <span data-count="79">I</span>mmVal v when List.me<span data-count="79">m</span> v.value std_functions -&gt; <span data-count="3">a</span>lloc_closure cinfo v []
+    | <span data-count="124">_</span> -&gt; mem_im<span data-count="124">m</span> cinfo imm &gt;&gt;| fun x -&gt; <span data-count="124">[</span> mo<span data-count="124">v</span> rax x ]
 
   let fix_align_16 instructions size =
-    <span data-count="84">i</span>nstructions @ [ su<span data-count="84">b</span> rsp (Int.rem size 16 |&gt; <span data-count="84">i</span><span data-count="84">c</span>) ]
+    <span data-count="89">i</span>nstructions @ [ su<span data-count="89">b</span> rsp (Int.rem size 16 |&gt; <span data-count="89">i</span><span data-count="89">c</span>) ]
 
   let compile_push_args cinfo (args : imm list) =
-    <span data-count="84">l</span>et inner (xs, arg_i, s) arg =
-      <span data-count="148">l</span>et* loc = mem_im<span data-count="148">m</span> cinfo arg in
-      <span data-count="148">m</span>atch get_arg_loc arg_i with
-      | <span data-count="148">S</span>ome reg -&gt; (xs @ [ Mov (reg, loc) ], arg_i + 1, s) |&gt; return
+    <span data-count="89">l</span>et inner (xs, arg_i, s) arg =
+      <span data-count="157">l</span>et* loc = mem_im<span data-count="157">m</span> cinfo arg in
+      <span data-count="157">m</span>atch get_arg_loc arg_i with
+      | <span data-count="157">S</span>ome reg -&gt; (xs @ [ Mov (reg, loc) ], arg_i + 1, s) |&gt; return
       | <span data-count="0">N</span>one -&gt;
           let* arg_load = ld_im<span data-count="0">m</span> cinfo arg in
           <span data-count="0">(</span>xs @ arg_load, arg_i + 1, s + sizeo<span data-count="0">f</span> arg) |&gt; return
     in
-    let* instr, _, size = monadic_fol<span data-count="84">d</span> inner ([], 0, 0) args in
-    <span data-count="84">f</span>ix_align_16 instr size |&gt; <span data-count="84">r</span>eturn
+    let* instr, _, size = monadic_fol<span data-count="89">d</span> inner ([], 0, 0) args in
+    <span data-count="89">f</span>ix_align_16 instr size |&gt; <span data-count="89">r</span>eturn
 
   let rec compile_expr cinfo (e : anf_expr) =
-    <span data-count="155">m</span>atch e with
-    | <span data-count="128">A</span>Apply (ImmVal fn, args)
-      when List.me<span data-count="128">m</span> fn.value std_functions
-           &amp;&amp; <span data-count="84">L</span>ist.lengt<span data-count="84">h</span> args == arity_o<span data-count="84">f</span> fn.typ -&gt;
-        <span data-count="84">c</span>ompile_push_arg<span data-count="84">s</span> cinfo args |&gt;&gt;&gt; compile_fn_cal<span data-count="84">l</span> fn.value args
-    | <span data-count="44">A</span>Apply (ImmVal fn, args) -&gt;
+    <span data-count="185">m</span>atch e with
+    | <span data-count="145">A</span>Apply (ImmVal fn, args)
+      when List.me<span data-count="145">m</span> fn.value std_functions
+           &amp;&amp; <span data-count="89">L</span>ist.lengt<span data-count="89">h</span> args == arity_o<span data-count="89">f</span> fn.typ -&gt;
+        <span data-count="89">c</span>ompile_push_arg<span data-count="89">s</span> cinfo args |&gt;&gt;&gt; compile_fn_cal<span data-count="89">l</span> fn.value args
+    | <span data-count="56">A</span>Apply (ImmVal fn, args) -&gt;
         let argc = List.length args in
-        <span data-count="44">l</span>et alloc_arr =
-          [ mo<span data-count="44">v</span> rdi (argc * ptr_size |&gt; i<span data-count="44">c</span>); cal<span data-count="44">l</span> "cm_malloc"; mo<span data-count="44">v</span> r12 rax ]
+        <span data-count="56">l</span>et alloc_arr =
+          [ mo<span data-count="56">v</span> rdi (argc * ptr_size |&gt; i<span data-count="56">c</span>); cal<span data-count="56">l</span> "cm_malloc"; mo<span data-count="56">v</span> r12 rax ]
         in
         let store_arg i arg =
-          <span data-count="84">l</span>d_im<span data-count="84">m</span> cinfo arg =&gt;&gt; mo<span data-count="84">v</span> (d<span data-count="84">p</span> "r12" (i * ptr_size)) rax
+          <span data-count="100">l</span>d_im<span data-count="100">m</span> cinfo arg =&gt;&gt; mo<span data-count="100">v</span> (d<span data-count="100">p</span> "r12" (i * ptr_size)) rax
         in
-        let* store_args = monadic_map<span data-count="44">i</span> args store_arg &gt;&gt;<span data-count="44">|</span> concat in
-        <span data-count="44">l</span>et push_array = [ pus<span data-count="44">h</span> r12; su<span data-count="44">b</span> rsp (i<span data-count="44">c</span> 8) ] in
+        let* store_args = monadic_map<span data-count="56">i</span> args store_arg &gt;&gt;<span data-count="56">|</span> concat in
+        <span data-count="56">l</span>et push_array = [ pus<span data-count="56">h</span> r12; su<span data-count="56">b</span> rsp (i<span data-count="56">c</span> 8) ] in
         let* load_self =
           if List.mem fn.value cinfo.functions then
-            alloc_closur<span data-count="29">e</span> cinfo fn [] <span data-count="29">=</span>&gt;<span data-count="29">&gt;</span> mo<span data-count="29">v</span> rdi rax
-          else mem_im<span data-count="15">m</span> cinfo (ImmVal fn) &gt;&gt;<span data-count="15">|</span> mo<span data-count="15">v</span> rax &gt;&gt;<span data-count="15">|</span> lst <span data-count="15">=</span>&gt;<span data-count="15">&gt;</span> mo<span data-count="15">v</span> rdi rax
+            alloc_closur<span data-count="33">e</span> cinfo fn [] <span data-count="33">=</span>&gt;<span data-count="33">&gt;</span> mo<span data-count="33">v</span> rdi rax
+          else mem_im<span data-count="23">m</span> cinfo (ImmVal fn) &gt;&gt;<span data-count="23">|</span> mo<span data-count="23">v</span> rax &gt;&gt;<span data-count="23">|</span> lst <span data-count="23">=</span>&gt;<span data-count="23">&gt;</span> mo<span data-count="23">v</span> rdi rax
         in
-        <span data-count="44">l</span>et load_argc = mov rsi (argc |&gt; i<span data-count="44">c</span>) in
-        <span data-count="44">l</span>et pop_argv = [ ad<span data-count="44">d</span> rsp (i<span data-count="44">c</span> 8); po<span data-count="44">p</span> rdx ] in
+        <span data-count="56">l</span>et load_argc = mov rsi (argc |&gt; i<span data-count="56">c</span>) in
+        <span data-count="56">l</span>et pop_argv = [ ad<span data-count="56">d</span> rsp (i<span data-count="56">c</span> 8); po<span data-count="56">p</span> rdx ] in
         let call_apply = call "apply_args" in
-        <span data-count="44">a</span>lloc_arr &gt;&gt;<span data-count="44">&gt;</span> store_args &gt;&gt;<span data-count="44">&gt;</span> push_array &gt;&gt;<span data-count="44">&gt;</span> load_self &gt;<span data-count="44">&gt;</span> load_argc
-        &gt;&gt;<span data-count="44">&gt;</span> pop_argv &gt;&gt; call_apply |&gt; <span data-count="44">r</span>eturn
+        <span data-count="56">a</span>lloc_arr &gt;&gt;<span data-count="56">&gt;</span> store_args &gt;&gt;<span data-count="56">&gt;</span> push_array &gt;&gt;<span data-count="56">&gt;</span> load_self &gt;<span data-count="56">&gt;</span> load_argc
+        &gt;&gt;<span data-count="56">&gt;</span> pop_argv &gt;&gt; call_apply |&gt; <span data-count="56">r</span>eturn
     | <span data-count="0">A</span>Imm i -&gt; ld_imm cinfo i
-    | <span data-count="6">A</span>ite (i, t, e) -&gt;
-        let compile_block x = <span data-count="12">m</span>onadic_ma<span data-count="12">p</span> x (compile_v<span data-count="12">b</span> cinfo) &gt;&gt;| concat in
+    | <span data-count="8">A</span>ite (i, t, e) -&gt;
+        let compile_block x = <span data-count="16">m</span>onadic_ma<span data-count="16">p</span> x (compile_v<span data-count="16">b</span> cinfo) &gt;&gt;| concat in
         let if_id = gen_next_if_id () in
-        <span data-count="6">l</span>et mklabel name = <span data-count="12">L</span>abel (Format.sprint<span data-count="12">f</span> "%s_%d" name if_id) in
+        <span data-count="8">l</span>et mklabel name = <span data-count="16">L</span>abel (Format.sprint<span data-count="16">f</span> "%s_%d" name if_id) in
         let cont = mklabel "cont" in
-        <span data-count="6">l</span>et jmp_to_cont = Jmp (Format.sprint<span data-count="6">f</span> "cont_%d" if_id) in
+        <span data-count="8">l</span>et jmp_to_cont = Jmp (Format.sprint<span data-count="8">f</span> "cont_%d" if_id) in
         let then_branch =
-          compile_bloc<span data-count="6">k</span> t.lets |&gt;&gt;<span data-count="6">&gt;</span> ld_im<span data-count="6">m</span> cinfo t.res =&gt;&gt; jmp_to_cont
+          compile_bloc<span data-count="8">k</span> t.lets |&gt;&gt;<span data-count="8">&gt;</span> ld_im<span data-count="8">m</span> cinfo t.res =&gt;&gt; jmp_to_cont
         in
-        <span data-count="6">l</span>et else_branch =
-          [ mklabe<span data-count="6">l</span> "else" ] -&gt;&gt;<span data-count="6">&gt;</span> compile_bloc<span data-count="6">k</span> e.lets
-          |&gt;&gt;<span data-count="6">&gt;</span> ld_im<span data-count="6">m</span> cinfo e.res =&gt;&gt; cont
+        <span data-count="8">l</span>et else_branch =
+          [ mklabe<span data-count="8">l</span> "else" ] -&gt;&gt;<span data-count="8">&gt;</span> compile_bloc<span data-count="8">k</span> e.lets
+          |&gt;&gt;<span data-count="8">&gt;</span> ld_im<span data-count="8">m</span> cinfo e.res =&gt;&gt; cont
         in
-        <span data-count="6">l</span>et* if_part =
-          ld_im<span data-count="6">m</span> cinfo i
-          =&gt;&gt;<span data-count="6">&gt;</span> [ cm<span data-count="6">p</span> rax (i<span data-count="6">c</span> 0); j<span data-count="6">e</span> (Format.sprint<span data-count="6">f</span> "else_%d" if_id) ]
+        <span data-count="8">l</span>et* if_part =
+          ld_im<span data-count="8">m</span> cinfo i
+          =&gt;&gt;<span data-count="8">&gt;</span> [ cm<span data-count="8">p</span> rax (i<span data-count="8">c</span> 0); j<span data-count="8">e</span> (Format.sprint<span data-count="8">f</span> "else_%d" if_id) ]
         in
-        <span data-count="6">i</span>f_part -&gt;&gt;<span data-count="6">&gt;</span> then_branch |&gt;&gt;&gt; else_branch
-    | <span data-count="8">A</span>Closure (fn, args) -&gt; alloc_closure cinfo fn args
-    | <span data-count="4">A</span>Tuple elements -&gt;
+        <span data-count="8">i</span>f_part -&gt;&gt;<span data-count="8">&gt;</span> then_branch |&gt;&gt;&gt; else_branch
+    | <span data-count="9">A</span>Closure (fn, args) -&gt; alloc_closure cinfo fn args
+    | <span data-count="6">A</span>Tuple elements -&gt;
         let argc = List.length elements in
-        <span data-count="4">l</span>et alloc_tuple =
-          [ mo<span data-count="4">v</span> rdi (argc * ptr_size |&gt; i<span data-count="4">c</span>); cal<span data-count="4">l</span> "cm_malloc"; mo<span data-count="4">v</span> r12 rax ]
+        <span data-count="6">l</span>et alloc_tuple =
+          [ mo<span data-count="6">v</span> rdi (argc * ptr_size |&gt; i<span data-count="6">c</span>); cal<span data-count="6">l</span> "cm_malloc"; mo<span data-count="6">v</span> r12 rax ]
         in
         let inner i arg =
-          <span data-count="9">l</span>d_im<span data-count="9">m</span> cinfo arg =&gt;&gt; mo<span data-count="9">v</span> (d<span data-count="9">p</span> "r12" (i * ptr_size)) rax
+          <span data-count="13">l</span>d_im<span data-count="13">m</span> cinfo arg =&gt;&gt; mo<span data-count="13">v</span> (d<span data-count="13">p</span> "r12" (i * ptr_size)) rax
         in
-        let store_elements = monadic_map<span data-count="4">i</span> elements inner &gt;&gt;| concat in
-        <span data-count="4">p</span>reserve_re<span data-count="4">g</span> r12 |&lt;&lt; (alloc_tuple -&gt;&gt;<span data-count="4">&gt;</span> store_elements =&gt;<span data-count="4">&gt;</span> mo<span data-count="4">v</span> rax r12)
-    | <span data-count="9">A</span>TupleAccess (tuple, index) -&gt;
-        preserve_re<span data-count="9">g</span> r9
-        |&lt;&lt; (mem_im<span data-count="9">m</span> cinfo tuple &gt;&gt;<span data-count="9">|</span> mo<span data-count="9">v</span> r9 &gt;&gt;<span data-count="9">|</span> lst
-            =&gt;<span data-count="9">&gt;</span> pus<span data-count="9">h</span> (d<span data-count="9">p</span> "r9" (index * ptr_size))
-            =&gt;<span data-count="9">&gt;</span> po<span data-count="9">p</span> rax)
+        let store_elements = monadic_map<span data-count="6">i</span> elements inner &gt;&gt;| concat in
+        <span data-count="6">p</span>reserve_re<span data-count="6">g</span> r12 |&lt;&lt; (alloc_tuple -&gt;&gt;<span data-count="6">&gt;</span> store_elements =&gt;<span data-count="6">&gt;</span> mo<span data-count="6">v</span> rax r12)
+    | <span data-count="17">A</span>TupleAccess (tuple, index) -&gt;
+        preserve_re<span data-count="17">g</span> r9
+        |&lt;&lt; (mem_im<span data-count="17">m</span> cinfo tuple &gt;&gt;<span data-count="17">|</span> mo<span data-count="17">v</span> r9 &gt;&gt;<span data-count="17">|</span> lst
+            =&gt;<span data-count="17">&gt;</span> pus<span data-count="17">h</span> (d<span data-count="17">p</span> "r9" (index * ptr_size))
+            =&gt;<span data-count="17">&gt;</span> po<span data-count="17">p</span> rax)
     | <span data-count="0">A</span>Apply (ImmLit _, _) -&gt; error "Compiler error: Cannot apply literal"
 
   and compile_vb cinfo (vb : anf_val_binding) =
-    <span data-count="155">l</span>et store =
+    <span data-count="185">l</span>et store =
       match vb.name.typ with
-      | <span data-count="34">T</span>yGround TUnit -&gt; []
-      | <span data-count="121">_</span> -&gt; SMap.find vb.name.value cinfo.memory |&gt; <span data-count="121">f</span>un x -&gt; <span data-count="121">[</span> mo<span data-count="121">v</span> x rax <span data-count="121">]</span>
+      | <span data-count="35">T</span>yGround TUnit -&gt; []
+      | <span data-count="150">_</span> -&gt; SMap.find vb.name.value cinfo.memory |&gt; <span data-count="150">f</span>un x -&gt; <span data-count="150">[</span> mo<span data-count="150">v</span> x rax <span data-count="150">]</span>
     in
-    let* expr = compile_exp<span data-count="155">r</span> cinfo vb.e in
-    <span data-count="155">e</span>xpr &gt;&gt;&gt; store |&gt; <span data-count="155">r</span>eturn
+    let* expr = compile_exp<span data-count="185">r</span> cinfo vb.e in
+    <span data-count="185">e</span>xpr &gt;&gt;&gt; store |&gt; <span data-count="185">r</span>eturn
 
   let rec collect_expr_size (e : anf_val_binding) =
-    <span data-count="155">m</span>atch e.e with
-    | <span data-count="6">A</span>ite (_, t, e) -&gt;
-        (sum_b<span data-count="12">y</span> collect_expr_size) t.lets + (sum_b<span data-count="12">y</span> collect_expr_size) e.lets
-    | <span data-count="149">_</span> -&gt; sizeof e.name
+    <span data-count="185">m</span>atch e.e with
+    | <span data-count="8">A</span>ite (_, t, e) -&gt;
+        (sum_b<span data-count="16">y</span> collect_expr_size) t.lets + (sum_b<span data-count="16">y</span> collect_expr_size) e.lets
+    | <span data-count="177">_</span> -&gt; sizeof e.name
 
   let add_fn_stuff x =
-    <span data-count="50">l</span>et save_base = [ pus<span data-count="50">h</span> rbp; mo<span data-count="50">v</span> rbp rsp ] in
-    let ret = [ mo<span data-count="50">v</span> rsp rbp; po<span data-count="50">p</span> rbp; Ret ] in
-    save_base &gt;&gt;<span data-count="50">&gt;</span> x &gt;&gt;&gt; ret
+    <span data-count="58">l</span>et save_base = [ pus<span data-count="58">h</span> rbp; mo<span data-count="58">v</span> rbp rsp ] in
+    let ret = [ mo<span data-count="58">v</span> rsp rbp; po<span data-count="58">p</span> rbp; Ret ] in
+    save_base &gt;&gt;<span data-count="58">&gt;</span> x &gt;&gt;&gt; ret
 
   let compile_fn cinfo (fn : anf_fun_binding) =
-    <span data-count="50">l</span>et name = fn.name.value in
-    let cinfo = { cinfo with memory = map_fn_stac<span data-count="50">k</span> fn } in
+    <span data-count="58">l</span>et name = fn.name.value in
+    let cinfo = { cinfo with memory = map_fn_stac<span data-count="58">k</span> fn } in
     let stack_len =
-      (sum_b<span data-count="100">y</span> sizeof) fn.args
-      + (sum_b<span data-count="100">y</span> sizeof) fn.env
-      + (sum_b<span data-count="100">y</span> collect_expr_size) fn.body.lets
-      + sizeo<span data-count="50">f</span> fn.body.res
+      (sum_b<span data-count="116">y</span> sizeof) fn.args
+      + (sum_b<span data-count="116">y</span> sizeof) fn.env
+      + (sum_b<span data-count="116">y</span> collect_expr_size) fn.body.lets
+      + sizeo<span data-count="58">f</span> fn.body.res
     in
-    let sub_esp = sub rsp (stack_len + reg_size |&gt; align16 |&gt; <span data-count="50">i</span><span data-count="50">c</span>) in
-    <span data-count="50">l</span>et* body = monadic_ma<span data-count="50">p</span> fn.body.lets (compile_v<span data-count="50">b</span> cinfo) &gt;&gt;<span data-count="50">|</span> concat in
-    <span data-count="50">l</span>et* res = mem_im<span data-count="50">m</span> cinfo fn.body.res &gt;&gt;<span data-count="50">|</span> mo<span data-count="50">v</span> rax in
-    <span data-count="50">l</span>et save_args =
+    let sub_esp = sub rsp (stack_len + reg_size |&gt; align16 |&gt; <span data-count="58">i</span><span data-count="58">c</span>) in
+    <span data-count="58">l</span>et* body = monadic_ma<span data-count="58">p</span> fn.body.lets (compile_v<span data-count="58">b</span> cinfo) &gt;&gt;<span data-count="58">|</span> concat in
+    <span data-count="58">l</span>et* res = mem_im<span data-count="58">m</span> cinfo fn.body.res &gt;&gt;<span data-count="58">|</span> mo<span data-count="58">v</span> rax in
+    <span data-count="58">l</span>et save_args =
       let rec helper lst i instrs =
-        <span data-count="135">m</span>atch (lst, get_arg_lo<span data-count="135">c</span> i) with
-        | <span data-count="48">[</span>], _ -&gt; instrs
-        | <span data-count="85">h</span>d :: tl, Some reg -&gt;
-            Mov (SMap.fin<span data-count="85">d</span> hd.value cinfo.memory, reg) :: instrs
+        <span data-count="158">m</span>atch (lst, get_arg_lo<span data-count="158">c</span> i) with
+        | <span data-count="56">[</span>], _ -&gt; instrs
+        | <span data-count="100">h</span>d :: tl, Some reg -&gt;
+            Mov (SMap.fin<span data-count="100">d</span> hd.value cinfo.memory, reg) :: instrs
             |&gt; helper tl (i + 1)
         | <span data-count="2">_</span>, None -&gt; instrs
       in
-      helpe<span data-count="50">r</span> (fn.env &gt;&gt;<span data-count="50">&gt;</span> fn.args) 0 []
+      helpe<span data-count="58">r</span> (fn.env &gt;&gt;<span data-count="58">&gt;</span> fn.args) 0 []
     in
     return
-      { name; body = add_fn_stuf<span data-count="50">f</span> ([ sub_esp ] &gt;&gt;<span data-count="50">&gt;</span> save_args &gt;&gt;<span data-count="50">&gt;</span> body &gt;<span data-count="50">&gt;</span> res) }
+      { name; body = add_fn_stuf<span data-count="58">f</span> ([ sub_esp ] &gt;&gt;<span data-count="58">&gt;</span> save_args &gt;&gt;<span data-count="58">&gt;</span> body &gt;<span data-count="58">&gt;</span> res) }
 
   let main_fn body =
-    <span data-count="15">{</span>
+    <span data-count="16">{</span>
       args = [];
       env = [];
       name = { value = "main"; typ = TyGround TInt };
@@ -1370,36 +1367,36 @@
     }
 
   let compile ast : (fn list, string) Result.t =
-    <span data-count="15">l</span>et fn_defs, main_fn_body =
+    <span data-count="16">l</span>et fn_defs, main_fn_body =
       List.partition_map
-        (function <span data-count="35">A</span>nfFun fn -&gt; Left fn | <span data-count="57">A</span>nfVal v -&gt; Right v)
+        (function <span data-count="42">A</span>nfFun fn -&gt; Left fn | <span data-count="63">A</span>nfVal v -&gt; Right v)
         ast
     in
-    <span data-count="15">l</span>et l = List.length in
+    <span data-count="16">l</span>et l = List.length in
     let arities =
       List.map
-        (fun (fn : anf_fun_binding) -&gt; <span data-count="35">(</span>fn.name.value, <span data-count="35">l</span> fn.args + <span data-count="35">l</span> fn.env))
+        (fun (fn : anf_fun_binding) -&gt; <span data-count="42">(</span>fn.name.value, <span data-count="42">l</span> fn.args + <span data-count="42">l</span> fn.env))
         fn_defs
-      |&gt; <span data-count="15">L</span>ist.to_seq
-      |&gt; <span data-count="15">S</span>eq.append
+      |&gt; <span data-count="16">L</span>ist.to_seq
+      |&gt; <span data-count="16">S</span>eq.append
            (Std.operators
-           |&gt; List.map (fun x -&gt; <span data-count="300">(</span>x.value, arity_o<span data-count="300">f</span> x.typ))
-           |&gt; <span data-count="15">L</span>ist.to_se<span data-count="15">q</span>)
-      |&gt; <span data-count="15">S</span>Map.of_seq
+           |&gt; List.map (fun x -&gt; <span data-count="320">(</span>x.value, arity_o<span data-count="320">f</span> x.typ))
+           |&gt; <span data-count="16">L</span>ist.to_se<span data-count="16">q</span>)
+      |&gt; <span data-count="16">S</span>Map.of_seq
     in
-    <span data-count="15">l</span>et cinfo =
+    <span data-count="16">l</span>et cinfo =
       {
-        functions = List.ma<span data-count="15">p</span> (fun (x : anf_fun_binding) -&gt; <span data-count="35">x</span>.name.value) fn_defs;
+        functions = List.ma<span data-count="16">p</span> (fun (x : anf_fun_binding) -&gt; <span data-count="42">x</span>.name.value) fn_defs;
         memory = SMap.empty;
         arities;
       }
     in
     let* main_fn =
-      main_fn main_fn_body |&gt; <span data-count="15">c</span>ompile_f<span data-count="15">n</span> cinfo &gt;&gt;<span data-count="15">|</span> fun x -&gt;
-      <span data-count="15">{</span> x with name = "main" }
+      main_fn main_fn_body |&gt; <span data-count="16">c</span>ompile_f<span data-count="16">n</span> cinfo &gt;&gt;<span data-count="16">|</span> fun x -&gt;
+      <span data-count="16">{</span> x with name = "main" }
     in
-    <span data-count="15">l</span>et* all_fns = monadic_ma<span data-count="15">p</span> fn_defs (compile_f<span data-count="15">n</span> cinfo) in
-    <span data-count="15">m</span>ain_fn :: all_fns |&gt; return
+    <span data-count="16">l</span>et* all_fns = monadic_ma<span data-count="16">p</span> fn_defs (compile_f<span data-count="16">n</span> cinfo) in
+    <span data-count="16">m</span>ain_fn :: all_fns |&gt; return
 end
 
 module AsmRenderer = struct
@@ -1417,82 +1414,82 @@ global main
 |}
 
   let rm = function
-    | <span data-count="453">S</span>tack d when d &gt; 0 -&gt; <span data-count="5">F</span>ormat.sprintf "qword [rbp+%d]" d
-    | <span data-count="448">S</span>tack d when d &lt; 0 -&gt; <span data-count="448">F</span>ormat.sprintf "qword [rbp%d]" d
+    | <span data-count="547">S</span>tack d when d &gt; 0 -&gt; <span data-count="5">F</span>ormat.sprintf "qword [rbp+%d]" d
+    | <span data-count="542">S</span>tack d when d &lt; 0 -&gt; <span data-count="542">F</span>ormat.sprintf "qword [rbp%d]" d
     | <span data-count="0">S</span>tack _ -&gt; Format.sprintf "qword [rbp]"
-    | <span data-count="2555">R</span>eg r -&gt; r
-    | <span data-count="690">I</span>ntConst c -&gt; Format.sprintf "%d" c
-    | <span data-count="125">D</span>isplacement (r, d) when d &gt; 0 -&gt; <span data-count="65">F</span>ormat.sprintf "qword [%s+%d]" r d
-    | <span data-count="60">D</span>isplacement (r, d) when d &lt; 0 -&gt; <span data-count="0">F</span>ormat.sprintf "qword [%s%d]" r d
-    | <span data-count="60">D</span>isplacement (r, _) -&gt; Format.sprintf "qword [%s]" r
-    | <span data-count="47">F</span>ndef fname -&gt; fname
+    | <span data-count="3061">R</span>eg r -&gt; r
+    | <span data-count="834">I</span>ntConst c -&gt; Format.sprintf "%d" c
+    | <span data-count="155">D</span>isplacement (r, d) when d &gt; 0 -&gt; <span data-count="76">F</span>ormat.sprintf "qword [%s+%d]" r d
+    | <span data-count="79">D</span>isplacement (r, d) when d &lt; 0 -&gt; <span data-count="0">F</span>ormat.sprintf "qword [%s%d]" r d
+    | <span data-count="79">D</span>isplacement (r, _) -&gt; Format.sprintf "qword [%s]" r
+    | <span data-count="55">F</span>ndef fname -&gt; fname
 
-  let not_reg = function <span data-count="1296">R</span>eg _ -&gt; false | <span data-count="322">_</span> -&gt; true
+  let not_reg = function <span data-count="1540">R</span>eg _ -&gt; false | <span data-count="388">_</span> -&gt; true
 
   let render_instr = function
-    | <span data-count="1296">M</span>ov (src, dst) when not_re<span data-count="1296">g</span> src &amp;&amp; <span data-count="322">n</span>ot_re<span data-count="322">g</span> dst -&gt;
+    | <span data-count="1540">M</span>ov (src, dst) when not_re<span data-count="1540">g</span> src &amp;&amp; <span data-count="388">n</span>ot_re<span data-count="388">g</span> dst -&gt;
         <span data-count="0">F</span>ormat.sprintf "mov r9, %s\n  mov %s, r9" (r<span data-count="0">m</span> dst) (r<span data-count="0">m</span> src)
-    | <span data-count="1296">M</span>ov (src, dst) -&gt; Format.sprintf "mov %s, %s" (r<span data-count="1296">m</span> src) (r<span data-count="1296">m</span> dst)
-    | <span data-count="6">M</span>ovzx (src, dst) -&gt; Format.sprintf "movzx %s, %s" (r<span data-count="6">m</span> src) (r<span data-count="6">m</span> dst)
-    | <span data-count="186">A</span>dd (src, dst) -&gt; Format.sprintf "add %s, %s" (r<span data-count="186">m</span> src) (r<span data-count="186">m</span> dst)
-    | <span data-count="212">S</span>ub (src, dst) -&gt; Format.sprintf "sub %s, %s" (r<span data-count="212">m</span> src) (r<span data-count="212">m</span> dst)
-    | <span data-count="12">C</span>mp (src, dst) -&gt; Format.sprintf "cmp %s, %s" (r<span data-count="12">m</span> src) (r<span data-count="12">m</span> dst)
+    | <span data-count="1540">M</span>ov (src, dst) -&gt; Format.sprintf "mov %s, %s" (r<span data-count="1540">m</span> src) (r<span data-count="1540">m</span> dst)
+    | <span data-count="8">M</span>ovzx (src, dst) -&gt; Format.sprintf "movzx %s, %s" (r<span data-count="8">m</span> src) (r<span data-count="8">m</span> dst)
+    | <span data-count="224">A</span>dd (src, dst) -&gt; Format.sprintf "add %s, %s" (r<span data-count="224">m</span> src) (r<span data-count="224">m</span> dst)
+    | <span data-count="260">S</span>ub (src, dst) -&gt; Format.sprintf "sub %s, %s" (r<span data-count="260">m</span> src) (r<span data-count="260">m</span> dst)
+    | <span data-count="16">C</span>mp (src, dst) -&gt; Format.sprintf "cmp %s, %s" (r<span data-count="16">m</span> src) (r<span data-count="16">m</span> dst)
     | <span data-count="8">I</span>mul (src, dst) -&gt; Format.sprintf "imul %s, %s" (r<span data-count="8">m</span> src) (r<span data-count="8">m</span> dst)
     | <span data-count="4">I</span>div r -&gt; Format.sprintf "idiv %s" (r<span data-count="4">m</span> r)
-    | <span data-count="206">C</span>all fn -&gt; Format.sprintf "call %s" fn
-    | <span data-count="210">P</span>ush src -&gt; rm src |&gt; <span data-count="210">F</span>ormat.sprintf "push %s"
-    | <span data-count="210">P</span>op dst -&gt; rm dst |&gt; <span data-count="210">F</span>ormat.sprintf "pop %s"
+    | <span data-count="249">C</span>all fn -&gt; Format.sprintf "call %s" fn
+    | <span data-count="264">P</span>ush src -&gt; rm src |&gt; <span data-count="264">F</span>ormat.sprintf "push %s"
+    | <span data-count="264">P</span>op dst -&gt; rm dst |&gt; <span data-count="264">F</span>ormat.sprintf "pop %s"
     | <span data-count="0">I</span>nt _ -&gt; "int 0x80"
-    | <span data-count="50">R</span>et -&gt; "ret"
-    | <span data-count="12">L</span>abel m -&gt; Format.sprintf "%s:" m
-    | <span data-count="6">J</span>mp d -&gt; Format.sprintf "jmp %s" d
-    | <span data-count="6">J</span>e d -&gt; Format.sprintf "je %s" d
+    | <span data-count="58">R</span>et -&gt; "ret"
+    | <span data-count="16">L</span>abel m -&gt; Format.sprintf "%s:" m
+    | <span data-count="8">J</span>mp d -&gt; Format.sprintf "jmp %s" d
+    | <span data-count="8">J</span>e d -&gt; Format.sprintf "je %s" d
     | <span data-count="0">J</span>ne d -&gt; Format.sprintf "jne %s" d
     | <span data-count="0">S</span>etge d -&gt; Format.sprintf "setge %s" (r<span data-count="0">m</span> d)
     | <span data-count="4">S</span>etle d -&gt; Format.sprintf "setle %s" (r<span data-count="4">m</span> d)
     | <span data-count="1">S</span>etl d -&gt; Format.sprintf "setl %s" (r<span data-count="1">m</span> d)
     | <span data-count="1">S</span>etg d -&gt; Format.sprintf "setg %s" (r<span data-count="1">m</span> d)
-    | <span data-count="0">S</span>ete d -&gt; Format.sprintf "sete %s" (r<span data-count="0">m</span> d)
+    | <span data-count="2">S</span>ete d -&gt; Format.sprintf "sete %s" (r<span data-count="2">m</span> d)
     | <span data-count="4">C</span>qo -&gt; "cqo"
 
   let render_instrs il =
-    <span data-count="50">l</span>et add_offset s = <span data-count="2434">F</span>ormat.sprintf "  %s" s in
-    List.map render_instr il |&gt; <span data-count="50">L</span>ist.map add_offset |&gt; <span data-count="50">S</span>tring.concat "\n"
+    <span data-count="58">l</span>et add_offset s = <span data-count="2939">F</span>ormat.sprintf "  %s" s in
+    List.map render_instr il |&gt; <span data-count="58">L</span>ist.map add_offset |&gt; <span data-count="58">S</span>tring.concat "\n"
 
   let render_fn p =
-    <span data-count="50">l</span>et nm_dec = Format.sprintf "%s:\n" p.name in
-    <span data-count="50">F</span>ormat.sprintf "%s%s" nm_dec (render_instr<span data-count="50">s</span> p.body)
+    <span data-count="58">l</span>et nm_dec = Format.sprintf "%s:\n" p.name in
+    <span data-count="58">F</span>ormat.sprintf "%s%s" nm_dec (render_instr<span data-count="58">s</span> p.body)
 
   let render (p : fn list) =
-    <span data-count="15">L</span>ist.map render_fn p |&gt; <span data-count="15">S</span>tring.concat "\n\n" |&gt; <span data-count="15">F</span>ormat.sprintf "%s%s" header
+    <span data-count="16">L</span>ist.map render_fn p |&gt; <span data-count="16">S</span>tring.concat "\n\n" |&gt; <span data-count="16">F</span>ormat.sprintf "%s%s" header
 end
 
 module AsmOptimizer = struct
   open Asm
 
   let meaningful_instr = function
-    | <span data-count="1296">M</span>ov (x, y) when x = y -&gt; <span data-count="0">f</span>alse
-    | <span data-count="20">A</span>dd (_, IntConst 0) -&gt; false
-    | <span data-count="84">S</span>ub (_, IntConst 0) -&gt; false
-    | <span data-count="2434">_</span> -&gt; true
+    | <span data-count="1540">M</span>ov (x, y) when x = y -&gt; <span data-count="0">f</span>alse
+    | <span data-count="21">A</span>dd (_, IntConst 0) -&gt; false
+    | <span data-count="89">S</span>ub (_, IntConst 0) -&gt; false
+    | <span data-count="2939">_</span> -&gt; true
 
-  let optimize_fn fn = <span data-count="50">{</span> fn with body = List.filte<span data-count="50">r</span> meaningful_instr fn.body }
-  let optimize = List.ma<span data-count="17">p</span> optimize_fn
+  let optimize_fn fn = <span data-count="58">{</span> fn with body = List.filte<span data-count="58">r</span> meaningful_instr fn.body }
+  let optimize = List.ma<span data-count="18">p</span> optimize_fn
 end
 
 module Build = struct
   let create_newdir path perm =
-    <span data-count="15">i</span>f not (Sys.file_exist<span data-count="15">s</span> path) then <span data-count="1">S</span>ys.mkdir path perm
+    <span data-count="16">i</span>f not (Sys.file_exist<span data-count="16">s</span> path) then <span data-count="1">S</span>ys.mkdir path perm
 
   let build_dir = "cm_build"
 
   let make_exe build_loc args program =
-    <span data-count="15">l</span>et () = create_newdir build_dir 0o727 in
-    <span data-count="15">l</span>et asm_out = open_out (build_dir ^ "/program.asm") in
-    <span data-count="15">l</span>et () = Printf.fprintf asm_out "%s" (AsmRenderer.rende<span data-count="15">r</span> program) in
-    <span data-count="15">l</span>et () = close_out asm_out in
-    <span data-count="15">l</span>et _ = Sys.command (build_loc ^ args) in
-    <span data-count="15">(</span>)
+    <span data-count="16">l</span>et () = create_newdir build_dir 0o727 in
+    <span data-count="16">l</span>et asm_out = open_out (build_dir ^ "/program.asm") in
+    <span data-count="16">l</span>et () = Printf.fprintf asm_out "%s" (AsmRenderer.rende<span data-count="16">r</span> program) in
+    <span data-count="16">l</span>et () = close_out asm_out in
+    <span data-count="16">l</span>et _ = Sys.command (build_loc ^ args) in
+    <span data-count="16">(</span>)
 end
 </code></pre>
       </div>
