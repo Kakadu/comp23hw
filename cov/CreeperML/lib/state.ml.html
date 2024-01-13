@@ -136,48 +136,48 @@ type state = { next : int }
 type 'a t = state -&gt; 'a * state
 
 let bind (t : 'a t) (f : 'a -&gt; 'b t) : 'b t =
- <span data-count="6238">f</span>un state -&gt;
-  <span data-count="6238">l</span>et a, transient_state = t state in
-  <span data-count="6238">l</span>et b, final_state = f a transient_state in
-  <span data-count="6238">(</span>b, final_state)
+ <span data-count="4007">f</span>un state -&gt;
+  <span data-count="4007">l</span>et a, transient_state = t state in
+  <span data-count="4007">l</span>et b, final_state = f a transient_state in
+  <span data-count="4007">(</span>b, final_state)
 
 let ( &gt;&gt;= ) = bind
 let ( let* ) = ( &gt;&gt;= )
-let return (a : 'a) (state : state) = <span data-count="4775">(</span>a, state)
+let return (a : 'a) (state : state) = <span data-count="3038">(</span>a, state)
 
 let new_var prefix (state : state) =
-  <span data-count="1546">l</span>et var = Format.sprintf "%s_%d" prefix state.next in
-  <span data-count="1546">l</span>et state = { next = state.next + 1 } in
+  <span data-count="1027">l</span>et var = Format.sprintf "%s_%d" prefix state.next in
+  <span data-count="1027">l</span>et state = { next = state.next + 1 } in
   (var, state)
 
 let ( &gt;&gt;| ) : 'a t -&gt; ('a -&gt; 'b) -&gt; 'b t =
  fun m f state -&gt;
-  <span data-count="1697">l</span>et v, s = m state in
-  <span data-count="1697">(</span><span data-count="1697">f</span> v, s)
+  <span data-count="1058">l</span>et v, s = m state in
+  <span data-count="1058">(</span><span data-count="1058">f</span> v, s)
 
 let ( |&lt;&lt; ) x y = <span data-count="0">y</span> &gt;&gt;| x
 
 let monadic_map l f =
-  <span data-count="423">L</span>ist.fold_right
+  <span data-count="272">L</span>ist.fold_right
     (fun e acc -&gt;
-      <span data-count="601">l</span>et* acc = acc in
-      <span data-count="1202">f</span> e &gt;&gt;| fun e -&gt; <span data-count="601">e</span> :: acc)
-    l (retur<span data-count="423">n</span> [])
+      <span data-count="393">l</span>et* acc = acc in
+      <span data-count="786">f</span> e &gt;&gt;| fun e -&gt; <span data-count="393">e</span> :: acc)
+    l (retur<span data-count="272">n</span> [])
 
 let monadic_mapi l f =
-  <span data-count="7">L</span>ist.fold_left
+  <span data-count="4">L</span>ist.fold_left
     (fun (acc, index) e -&gt;
-      <span data-count="16">(</span> (let* acc = acc in
-         <span data-count="32">f</span> index e &gt;&gt;| fun e -&gt; <span data-count="16">e</span> :: acc),
+      <span data-count="11">(</span> (let* acc = acc in
+         <span data-count="22">f</span> index e &gt;&gt;| fun e -&gt; <span data-count="11">e</span> :: acc),
         index + 1 ))
-    (retur<span data-count="7">n</span> [], 0)
+    (retur<span data-count="4">n</span> [], 0)
     l
-  |&gt; <span data-count="7">f</span>st
+  |&gt; <span data-count="4">f</span>st
 
 let monadic_fold f initial lst =
-  <span data-count="584">L</span>ist.fold_left (fun acc x -&gt; <span data-count="367">a</span>cc &gt;&gt;= fun acc -&gt; <span data-count="367">f</span> acc x) (retur<span data-count="584">n</span> initial) lst
+  <span data-count="348">L</span>ist.fold_left (fun acc x -&gt; <span data-count="209">a</span>cc &gt;&gt;= fun acc -&gt; <span data-count="209">f</span> acc x) (retur<span data-count="348">n</span> initial) lst
 
-let run : 'a t -&gt; 'a = fun m -&gt; <span data-count="83">m</span> { next = 0 } |&gt; <span data-count="83">f</span>st
+let run : 'a t -&gt; 'a = fun m -&gt; <span data-count="58">m</span> { next = 0 } |&gt; <span data-count="58">f</span>st
 </code></pre>
       </div>
     </div>

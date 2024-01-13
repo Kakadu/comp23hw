@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8"/>
     <title>indexed_ast.ml &mdash; Coverage report</title>
-    <meta name="description" content="98.15% coverage in lib/indexed_ast.ml">
+    <meta name="description" content="95.37% coverage in lib/indexed_ast.ml">
     <link rel="stylesheet" href="../coverage.css"/>
     <script src="../highlight.pack.js"></script>
     <script>hljs.initHighlightingOnLoad();</script>
@@ -15,11 +15,13 @@
           <span class="dirname">lib/</span>indexed_ast.ml
         </a>
       </h1>
-      <h2>98.15%</h2>
+      <h2>95.37%</h2>
     </div>
     <div id="navbar">
       <span class="some-visited" style="top:31.85%"></span>
       <span class="unvisited" style="top:35.67%"></span>
+      <span class="unvisited" style="bottom:24.20%"></span>
+      <span class="unvisited" style="bottom:23.57%"></span>
     </div>
     <div id="report">
       <div id="lines-layer">
@@ -142,8 +144,8 @@
 <a id="L116"></a><span class="visited"> </span>
 <a id="L117"></a><span class="visited"> </span>
 <a id="L118"></a><span > </span>
-<a id="L119"></a><span class="visited"> </span>
-<a id="L120"></a><span class="visited"> </span>
+<a id="L119"></a><span class="unvisited"> </span>
+<a id="L120"></a><span class="unvisited"> </span>
 <a id="L121"></a><span > </span>
 <a id="L122"></a><span class="visited"> </span>
 <a id="L123"></a><span > </span>
@@ -388,117 +390,117 @@ module IndexedTypeAst = struct
   type nm = string NameMap.t
   type 'a res = 'a * nm
 
-  let typed typ value : ('a, 'b) typed = <span data-count="1432">{</span> typ; value }
+  let typed typ value : ('a, 'b) typed = <span data-count="870">{</span> typ; value }
 
   let rec names_of_lvalue (l : lvalue) =
-    <span data-count="257">m</span>atch l with
-    | <span data-count="0">L</span>vAny | <span data-count="25">L</span>vUnit -&gt; [ "any" ]
-    | <span data-count="219">L</span>vValue v -&gt; [ v ]
-    | <span data-count="13">L</span>vTuple vs -&gt; List.concat_map (fun x -&gt; <span data-count="30">v</span>alue x |&gt; <span data-count="30">n</span>ames_of_lvalue) vs
+    <span data-count="147">m</span>atch l with
+    | <span data-count="0">L</span>vAny | <span data-count="9">L</span>vUnit -&gt; [ "any" ]
+    | <span data-count="131">L</span>vValue v -&gt; [ v ]
+    | <span data-count="7">L</span>vTuple vs -&gt; List.concat_map (fun x -&gt; <span data-count="18">v</span>alue x |&gt; <span data-count="18">n</span>ames_of_lvalue) vs
 
   let rec index_lv (nm : nm) (l : lvalue) =
-    <span data-count="257">m</span>atch l with
+    <span data-count="147">m</span>atch l with
     | <span data-count="0">L</span>vAny -&gt; DLvAny
-    | <span data-count="25">L</span>vUnit -&gt; DLvUnit
-    | <span data-count="219">L</span>vValue v -&gt; DLvValue (NameMap.fin<span data-count="219">d</span> v nm)
-    | <span data-count="13">L</span>vTuple vs -&gt;
-        List.map (fun x -&gt; <span data-count="30">v</span>alue x |&gt; <span data-count="30">i</span>ndex_lv nm) vs |&gt; <span data-count="13">f</span>un x -&gt; <span data-count="13">D</span>LvTuple x
+    | <span data-count="9">L</span>vUnit -&gt; DLvUnit
+    | <span data-count="131">L</span>vValue v -&gt; DLvValue (NameMap.fin<span data-count="131">d</span> v nm)
+    | <span data-count="7">L</span>vTuple vs -&gt;
+        List.map (fun x -&gt; <span data-count="18">v</span>alue x |&gt; <span data-count="18">i</span>ndex_lv nm) vs |&gt; <span data-count="7">f</span>un x -&gt; <span data-count="7">D</span>LvTuple x
 
   let rec index_expr (nm : nm) (e : ty typ_expr) : index_expr t =
-    <span data-count="1156">m</span>atch e.value with
-    | <span data-count="430">T</span>Apply (l, r) -&gt;
-        let* lr = index_exp<span data-count="430">r</span> nm l in
-        <span data-count="430">l</span>et* rr = index_exp<span data-count="430">r</span> nm r in
-        <span data-count="430">D</span>Apply (lr, rr) |&gt; typed e.typ |&gt; <span data-count="430">r</span>eturn
-    | <span data-count="13">T</span>IfElse ite -&gt;
-        let* ir = index_exp<span data-count="13">r</span> nm ite.cond in
-        <span data-count="13">l</span>et* tr = index_exp<span data-count="13">r</span> nm ite.t_body in
-        <span data-count="13">l</span>et* er = index_exp<span data-count="13">r</span> nm ite.f_body in
-        <span data-count="13">l</span>et cond = ir in
+    <span data-count="708">m</span>atch e.value with
+    | <span data-count="264">T</span>Apply (l, r) -&gt;
+        let* lr = index_exp<span data-count="264">r</span> nm l in
+        <span data-count="264">l</span>et* rr = index_exp<span data-count="264">r</span> nm r in
+        <span data-count="264">D</span>Apply (lr, rr) |&gt; typed e.typ |&gt; <span data-count="264">r</span>eturn
+    | <span data-count="11">T</span>IfElse ite -&gt;
+        let* ir = index_exp<span data-count="11">r</span> nm ite.cond in
+        <span data-count="11">l</span>et* tr = index_exp<span data-count="11">r</span> nm ite.t_body in
+        <span data-count="11">l</span>et* er = index_exp<span data-count="11">r</span> nm ite.f_body in
+        <span data-count="11">l</span>et cond = ir in
         let t_body = tr in
         let f_body = er in
-        DIfElse { cond; t_body; f_body } |&gt; typed e.typ |&gt; <span data-count="13">r</span>eturn
-    | <span data-count="178">T</span>Literal l -&gt; DLiteral l |&gt; typed e.typ |&gt; <span data-count="178">r</span>eturn
-    | <span data-count="418">T</span>Value v -&gt; (
+        DIfElse { cond; t_body; f_body } |&gt; typed e.typ |&gt; <span data-count="11">r</span>eturn
+    | <span data-count="110">T</span>Literal l -&gt; DLiteral l |&gt; typed e.typ |&gt; <span data-count="110">r</span>eturn
+    | <span data-count="256">T</span>Value v -&gt; (
         match NameMap.find_opt v nm with
-        | <span data-count="251">S</span>ome x -&gt; DValue x |&gt; typed e.typ |&gt; <span data-count="251">r</span>eturn
-        | <span data-count="167">N</span>one -&gt; DValue v |&gt; typed e.typ |&gt; <span data-count="167">r</span>eturn)
-    | <span data-count="13">T</span>Tuple vs -&gt;
-        monadic_ma<span data-count="13">p</span> vs (index_exp<span data-count="13">r</span> nm) &gt;&gt;| fun x -&gt; <span data-count="13">D</span>Tuple x |&gt; typed e.typ
-    | <span data-count="104">T</span>Fun f -&gt;
+        | <span data-count="160">S</span>ome x -&gt; DValue x |&gt; typed e.typ |&gt; <span data-count="160">r</span>eturn
+        | <span data-count="96">N</span>one -&gt; DValue v |&gt; typed e.typ |&gt; <span data-count="96">r</span>eturn)
+    | <span data-count="7">T</span>Tuple vs -&gt;
+        monadic_ma<span data-count="7">p</span> vs (index_exp<span data-count="7">r</span> nm) &gt;&gt;| fun x -&gt; <span data-count="7">D</span>Tuple x |&gt; typed e.typ
+    | <span data-count="60">T</span>Fun f -&gt;
         let all_names = names_of_lvalue f.lvalue.value in
-        <span data-count="104">l</span>et* nm =
-          monadic_fol<span data-count="104">d</span>
+        <span data-count="60">l</span>et* nm =
+          monadic_fol<span data-count="60">d</span>
             (fun nm n -&gt;
-              <span data-count="106">l</span>et* nxt = new_va<span data-count="106">r</span> n in
-              <span data-count="106">N</span>ameMap.add n ("u" ^ nxt) nm |&gt; <span data-count="106">r</span>eturn)
+              <span data-count="60">l</span>et* nxt = new_va<span data-count="60">r</span> n in
+              <span data-count="60">N</span>ameMap.add n ("u" ^ nxt) nm |&gt; <span data-count="60">r</span>eturn)
             nm all_names
         in
-        <span data-count="104">l</span>et* lets, nm_inners =
-          monadic_fol<span data-count="104">d</span>
+        <span data-count="60">l</span>et* lets, nm_inners =
+          monadic_fol<span data-count="60">d</span>
             (fun (xs, nm) x -&gt;
-              <span data-count="23">l</span>et* inner_r, nm = index_le<span data-count="23">t</span> x nm in
-              <span data-count="23">r</span>eturn (inner_r :: xs, nm))
+              <span data-count="18">l</span>et* inner_r, nm = index_le<span data-count="18">t</span> x nm in
+              <span data-count="18">r</span>eturn (inner_r :: xs, nm))
             ([], nm) f.b.lets
-          &gt;&gt;<span data-count="104">|</span> fun (xs, nm) -&gt; <span data-count="104">(</span>List.re<span data-count="104">v</span> xs, nm)
+          &gt;&gt;<span data-count="60">|</span> fun (xs, nm) -&gt; <span data-count="60">(</span>List.re<span data-count="60">v</span> xs, nm)
         in
-        <span data-count="104">l</span>et* expr = index_exp<span data-count="104">r</span> nm_inners f.b.expr in
-        <span data-count="104">l</span>et b = { lets; expr } in
-        let lvalue = index_lv nm f.lvalue.value |&gt; <span data-count="104">t</span>yped f.lvalue.typ in
-        <span data-count="104">l</span>et f = { lvalue; b } in
-        DFun f |&gt; typed e.typ |&gt; <span data-count="104">r</span>eturn
+        <span data-count="60">l</span>et* expr = index_exp<span data-count="60">r</span> nm_inners f.b.expr in
+        <span data-count="60">l</span>et b = { lets; expr } in
+        let lvalue = index_lv nm f.lvalue.value |&gt; <span data-count="60">t</span>yped f.lvalue.typ in
+        <span data-count="60">l</span>et f = { lvalue; b } in
+        DFun f |&gt; typed e.typ |&gt; <span data-count="60">r</span>eturn
 
   and index_let (l : ty typ_let_binding) nm : index_let_binding res t =
-    <span data-count="123">l</span>et all_names = names_of_lvalue l.l_v.value in
-    <span data-count="123">l</span>et* nm =
+    <span data-count="69">l</span>et all_names = names_of_lvalue l.l_v.value in
+    <span data-count="69">l</span>et* nm =
       match l.rec_f with
-      | <span data-count="10">R</span>ec -&gt;
-          monadic_fol<span data-count="10">d</span>
-            (fun nm n -&gt; <span data-count="10">n</span>ew_va<span data-count="10">r</span> n &gt;&gt;| fun x -&gt; <span data-count="10">N</span>ameMap.add n ("u" ^ x) nm)
+      | <span data-count="7">R</span>ec -&gt;
+          monadic_fol<span data-count="7">d</span>
+            (fun nm n -&gt; <span data-count="7">n</span>ew_va<span data-count="7">r</span> n &gt;&gt;| fun x -&gt; <span data-count="7">N</span>ameMap.add n ("u" ^ x) nm)
             nm all_names
-      | <span data-count="113">N</span>oRec -&gt; retur<span data-count="113">n</span> nm
+      | <span data-count="62">N</span>oRec -&gt; retur<span data-count="62">n</span> nm
     in
-    <span data-count="123">l</span>et* lets, nm_inners =
-      monadic_fol<span data-count="123">d</span>
+    <span data-count="69">l</span>et* lets, nm_inners =
+      monadic_fol<span data-count="69">d</span>
         (fun (xs, nm) x -&gt;
-          <span data-count="9">l</span>et* inner_r, nm = index_le<span data-count="9">t</span> x nm in
-          <span data-count="9">r</span>eturn (inner_r :: xs, nm))
+          <span data-count="0">l</span>et* inner_r, nm = index_le<span data-count="0">t</span> x nm in
+          <span data-count="0">r</span>eturn (inner_r :: xs, nm))
         ([], nm) l.body.lets
-      &gt;&gt;<span data-count="123">|</span> fun (xs, nm) -&gt; <span data-count="123">(</span>List.re<span data-count="123">v</span> xs, nm)
+      &gt;&gt;<span data-count="69">|</span> fun (xs, nm) -&gt; <span data-count="69">(</span>List.re<span data-count="69">v</span> xs, nm)
     in
-    <span data-count="123">l</span>et* expr = l.body.expr |&gt; index_exp<span data-count="123">r</span> nm_inners in
-    <span data-count="123">l</span>et body = { lets; expr } in
+    <span data-count="69">l</span>et* expr = l.body.expr |&gt; index_exp<span data-count="69">r</span> nm_inners in
+    <span data-count="69">l</span>et body = { lets; expr } in
     let* nm =
       match l.rec_f with
-      | <span data-count="10">R</span>ec -&gt; retur<span data-count="10">n</span> nm
-      | <span data-count="113">N</span>oRec -&gt;
-          monadic_fol<span data-count="113">d</span>
-            (fun nm n -&gt; <span data-count="128">n</span>ew_va<span data-count="128">r</span> n &gt;&gt;| fun x -&gt; <span data-count="128">N</span>ameMap.add n ("u" ^ x) nm)
+      | <span data-count="7">R</span>ec -&gt; retur<span data-count="7">n</span> nm
+      | <span data-count="62">N</span>oRec -&gt;
+          monadic_fol<span data-count="62">d</span>
+            (fun nm n -&gt; <span data-count="73">n</span>ew_va<span data-count="73">r</span> n &gt;&gt;| fun x -&gt; <span data-count="73">N</span>ameMap.add n ("u" ^ x) nm)
             nm all_names
     in
-    <span data-count="123">l</span>et l_v = index_lv nm l.l_v.value |&gt; <span data-count="123">t</span>yped l.l_v.typ in
-    <span data-count="123">l</span>et rec_f = l.rec_f in
+    <span data-count="69">l</span>et l_v = index_lv nm l.l_v.value |&gt; <span data-count="69">t</span>yped l.l_v.typ in
+    <span data-count="69">l</span>et rec_f = l.rec_f in
     return ({ rec_f; body; l_v }, nm)
 
   (* Move declarations of let inside of fun *)
   let rec move_lets (l : ty typ_let_binding) : ty typ_let_binding =
-    <span data-count="108">m</span>atch l.body.expr.value with
-    | <span data-count="49">T</span>Fun f -&gt;
+    <span data-count="65">m</span>atch l.body.expr.value with
+    | <span data-count="33">T</span>Fun f -&gt;
         let inners = l.body.lets @ f.b.lets in
         let inners = List.map move_lets inners in
-        <span data-count="49">l</span>et new_fun = { f with b = { f.b with lets = inners } } in
+        <span data-count="33">l</span>et new_fun = { f with b = { f.b with lets = inners } } in
         let expr = TFun new_fun |&gt; typed l.body.expr.typ in
-        <span data-count="49">{</span> l with body = { lets = []; expr } }
-    | <span data-count="59">_</span> -&gt; l
+        <span data-count="33">{</span> l with body = { lets = []; expr } }
+    | <span data-count="32">_</span> -&gt; l
 
   let index_of_typed (p : ty typ_program) : index_program =
-    <span data-count="34">l</span>et p = List.map move_lets p in
-    <span data-count="34">m</span>onadic_fol<span data-count="34">d</span>
+    <span data-count="21">l</span>et p = List.map move_lets p in
+    <span data-count="21">m</span>onadic_fol<span data-count="21">d</span>
       (fun (xs, nm) x -&gt;
-        <span data-count="91">l</span>et* res, nm = index_le<span data-count="91">t</span> x nm in
-        <span data-count="91">r</span>eturn (res :: xs, nm))
+        <span data-count="51">l</span>et* res, nm = index_le<span data-count="51">t</span> x nm in
+        <span data-count="51">r</span>eturn (res :: xs, nm))
       ([], NameMap.empty) p
-    &gt;&gt;<span data-count="34">|</span> fst &gt;&gt;| List.rev |&gt; <span data-count="34">r</span>un
+    &gt;&gt;<span data-count="21">|</span> fst &gt;&gt;| List.rev |&gt; <span data-count="21">r</span>un
 end
 </code></pre>
       </div>
