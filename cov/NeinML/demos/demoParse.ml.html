@@ -59,8 +59,8 @@ open Neinml_lib
 
 let () =
   let s = Stdio.In_channel.input_all Stdlib.stdin in
-  <span data-count="18">m</span>atch Neinml_lib.Parser.parse s with
-  | <span data-count="17">R</span>esult.Ok ast -&gt; Format.print<span data-count="17">f</span> "%a\n%!" Ast.pp_statements_list ast
+  <span data-count="20">m</span>atch Neinml_lib.Parser.parse s with
+  | <span data-count="19">R</span>esult.Ok ast -&gt; Format.print<span data-count="19">f</span> "%a\n%!" (Ast.pp_statements_lis<span data-count="19">t</span> (fun _ _ -&gt; <span data-count="222">(</span>))) ast
   | <span data-count="1">E</span>rror _ -&gt; Format.print<span data-count="1">f</span> "Parsing error"
 ;;
 </code></pre>
