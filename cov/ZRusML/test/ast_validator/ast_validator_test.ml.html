@@ -2,8 +2,8 @@
 <html lang="en">
   <head>
     <meta charset="utf-8"/>
-    <title>anf_test.ml &mdash; Coverage report</title>
-    <meta name="description" content="90.00% coverage in test/anf/anf_test.ml">
+    <title>ast_validator_test.ml &mdash; Coverage report</title>
+    <meta name="description" content="92.31% coverage in test/ast_validator/ast_validator_test.ml">
     <link rel="stylesheet" href="../../coverage.css"/>
     <script src="../../highlight.pack.js"></script>
     <script>hljs.initHighlightingOnLoad();</script>
@@ -12,13 +12,13 @@
     <div id="header">
       <h1>
         <a href="../../index.html">
-          <span class="dirname">test/anf/</span>anf_test.ml
+          <span class="dirname">test/ast_validator/</span>ast_validator_test.ml
         </a>
       </h1>
-      <h2>90.00%</h2>
+      <h2>92.31%</h2>
     </div>
     <div id="navbar">
-      <span class="unvisited" style="top:23.19%"></span>
+      <span class="unvisited" style="top:13.48%"></span>
     </div>
     <div id="report">
       <div id="lines-layer">
@@ -33,25 +33,25 @@
 <a id="L8"></a><span > </span>
 <a id="L9"></a><span > </span>
 <a id="L10"></a><span > </span>
-<a id="L11"></a><span > </span>
-<a id="L12"></a><span > </span>
-<a id="L13"></a><span > </span>
+<a id="L11"></a><span class="visited"> </span>
+<a id="L12"></a><span class="unvisited"> </span>
+<a id="L13"></a><span class="visited"> </span>
 <a id="L14"></a><span > </span>
-<a id="L15"></a><span class="visited"> </span>
-<a id="L16"></a><span class="unvisited"> </span>
+<a id="L15"></a><span > </span>
+<a id="L16"></a><span > </span>
 <a id="L17"></a><span class="visited"> </span>
 <a id="L18"></a><span > </span>
 <a id="L19"></a><span > </span>
-<a id="L20"></a><span class="visited"> </span>
+<a id="L20"></a><span > </span>
 <a id="L21"></a><span > </span>
 <a id="L22"></a><span > </span>
 <a id="L23"></a><span > </span>
-<a id="L24"></a><span class="visited"> </span>
+<a id="L24"></a><span > </span>
 <a id="L25"></a><span > </span>
 <a id="L26"></a><span > </span>
 <a id="L27"></a><span > </span>
 <a id="L28"></a><span > </span>
-<a id="L29"></a><span > </span>
+<a id="L29"></a><span class="visited"> </span>
 <a id="L30"></a><span > </span>
 <a id="L31"></a><span > </span>
 <a id="L32"></a><span > </span>
@@ -59,11 +59,11 @@
 <a id="L34"></a><span > </span>
 <a id="L35"></a><span > </span>
 <a id="L36"></a><span > </span>
-<a id="L37"></a><span > </span>
-<a id="L38"></a><span class="visited"> </span>
+<a id="L37"></a><span class="visited"> </span>
+<a id="L38"></a><span > </span>
 <a id="L39"></a><span > </span>
 <a id="L40"></a><span > </span>
-<a id="L41"></a><span > </span>
+<a id="L41"></a><span class="visited"> </span>
 <a id="L42"></a><span > </span>
 <a id="L43"></a><span > </span>
 <a id="L44"></a><span > </span>
@@ -75,23 +75,43 @@
 <a id="L50"></a><span > </span>
 <a id="L51"></a><span > </span>
 <a id="L52"></a><span > </span>
-<a id="L53"></a><span > </span>
+<a id="L53"></a><span class="visited"> </span>
 <a id="L54"></a><span > </span>
 <a id="L55"></a><span > </span>
 <a id="L56"></a><span > </span>
 <a id="L57"></a><span > </span>
 <a id="L58"></a><span > </span>
-<a id="L59"></a><span > </span>
+<a id="L59"></a><span class="visited"> </span>
 <a id="L60"></a><span > </span>
 <a id="L61"></a><span > </span>
 <a id="L62"></a><span > </span>
-<a id="L63"></a><span > </span>
+<a id="L63"></a><span class="visited"> </span>
 <a id="L64"></a><span > </span>
 <a id="L65"></a><span > </span>
 <a id="L66"></a><span > </span>
 <a id="L67"></a><span > </span>
-<a id="L68"></a><span class="visited"> </span>
+<a id="L68"></a><span > </span>
 <a id="L69"></a><span > </span>
+<a id="L70"></a><span > </span>
+<a id="L71"></a><span > </span>
+<a id="L72"></a><span > </span>
+<a id="L73"></a><span > </span>
+<a id="L74"></a><span > </span>
+<a id="L75"></a><span > </span>
+<a id="L76"></a><span > </span>
+<a id="L77"></a><span class="visited"> </span>
+<a id="L78"></a><span > </span>
+<a id="L79"></a><span > </span>
+<a id="L80"></a><span > </span>
+<a id="L81"></a><span > </span>
+<a id="L82"></a><span > </span>
+<a id="L83"></a><span > </span>
+<a id="L84"></a><span > </span>
+<a id="L85"></a><span > </span>
+<a id="L86"></a><span > </span>
+<a id="L87"></a><span > </span>
+<a id="L88"></a><span class="visited"> </span>
+<a id="L89"></a><span > </span>
 </pre>
       </div>
       <div id="text-layer">
@@ -165,30 +185,67 @@
 <a href="#L67">67</a>
 <a href="#L68">68</a>
 <a href="#L69">69</a>
+<a href="#L70">70</a>
+<a href="#L71">71</a>
+<a href="#L72">72</a>
+<a href="#L73">73</a>
+<a href="#L74">74</a>
+<a href="#L75">75</a>
+<a href="#L76">76</a>
+<a href="#L77">77</a>
+<a href="#L78">78</a>
+<a href="#L79">79</a>
+<a href="#L80">80</a>
+<a href="#L81">81</a>
+<a href="#L82">82</a>
+<a href="#L83">83</a>
+<a href="#L84">84</a>
+<a href="#L85">85</a>
+<a href="#L86">86</a>
+<a href="#L87">87</a>
+<a href="#L88">88</a>
+<a href="#L89">89</a>
 </pre>
 <pre><code class="ocaml">(** Copyright 2023-2024, Rustam Shangareev and Danil Yevdokimov *)
 
 (** SPDX-License-Identifier: LGPL-2.1 *)
 
-open ZRusML_lib.Anf
-open ZRusML_lib.Anf_pretty
 open ZRusML_lib.Ast
 open ZRusML_lib.Parser
 open ZRusML_lib.Pretty_printer
-open ZRusML_lib.Closure_conversion
-open ZRusML_lib.Lambda_lifting
 open ZRusML_lib.Ast_validator
 
 let helper code =
-  <span data-count="1">m</span>atch parse prog code with
-  | <span data-count="0">E</span>rror _ -&gt; Printf.printf "PARSE ERROR"
-  | <span data-count="1">R</span>esult.Ok res -&gt;
-    pp_abinding_list
-      Format.std_formatter
-      (transform_decls res |&gt; <span data-count="1">l</span>ift_prog |&gt; <span data-count="1">v</span>alidate_prog |&gt; <span data-count="1">a</span>nf_progra<span data-count="1">m</span>)
+  <span data-count="3">m</span>atch parse prog code with
+  | <span data-count="0">E</span>rror _ -&gt; Printf.printf "PARSE ERROR!"
+  | <span data-count="3">R</span>esult.Ok res -&gt; pp_prog Format.std_formatter (validate_pro<span data-count="3">g</span> res)
 ;;
 
-let%expect_test "anf test sample" =
+let%expect_test _ =
+  <span data-count="1">l</span>et code =
+    {|
+  let f x y = x + y;;
+
+  let t =
+    let m x = f 15 x in
+    let tmp = 15 in
+  m 14 + tmp
+;;
+  |}
+  in
+  helper code;
+  <span data-count="1">[</span>%expect
+    {|
+let ast_0 ast_1 ast_2 = (ast_1 + ast_2);;
+let ast_3 =
+    let ast_4 ast_5 = ast_0 15 ast_5 in
+    let ast_6 = 15 in
+    (ast_4 14 + ast_6)
+;;
+  |}<span data-count="5">]</span>
+;;
+
+let%expect_test _ =
   <span data-count="1">l</span>et code =
     {|
     let fac n =
@@ -198,41 +255,44 @@ let%expect_test "anf test sample" =
       in
       fack n (fun x -&gt; x)
     ;;
-
-    let ans = fac 5;;
   |}
   in
   helper code;
   <span data-count="1">[</span>%expect
     {|
-let ast_0 ast_1 ast_2 ast_3 =
-    let anf_12 = ast_3 * ast_2 in
-    let anf_13 = ast_1 anf_12 in
-anf_13;;
+  let ast_0 ast_1 =
+      let rec ast_2 ast_3 ast_4 = if (ast_3 &lt;= 1) then 1 else ast_2 (ast_3 - 1) (fun ast_5 -&gt; ast_4 (ast_5 * ast_3)) in
+      ast_2 ast_1 (fun ast_6 -&gt; ast_6)
+  ;;
+  |}<span data-count="5">]</span>
+;;
 
-let rec ast_4 ast_5 ast_6 =
-    let anf_5 = ast_5 &lt;= 1 in
-    let anf_6 = ast_5 - 1 in
-    let anf_7 = ast_4 anf_6 in
-    let anf_8 = ast_0 ast_6 in
-    let anf_9 = anf_8 ast_5 in
-    let anf_10 = anf_7 anf_9 in
-    let anf_11 = if anf_5 then 1 else anf_10 in
-anf_11;;
-
-let ast_7 ast_8 = ast_8;;
-
-let ast_9 ast_10 =
-    let ast_11 = ast_4 in
-    let anf_3 = ast_11 ast_10 in
-    let anf_4 = anf_3 ast_7 in
-anf_4;;
-
-let ast_12 = ast_9;;
-
-let ast_13 =
-    let anf_1 = ast_12 5 in
-anf_1;;
+let%expect_test _ =
+  <span data-count="1">l</span>et code =
+    {|
+    let rec lambda0 x y = (x + lambda0 y);;
+    let rec lambda1 x y = (lambda1 x + (lambda1 y + 3));;
+    let lambda2 b c = 
+        let t = 15 in
+        let rec f = lambda1 in
+        f (f x) y
+    ;;
+    let rec f = lambda0;;
+    let a = lambda2;;
+  |}
+  in
+  helper code;
+  <span data-count="1">[</span>%expect
+    {|
+    let rec ast_0 ast_1 ast_2 = (ast_1 + ast_0 ast_2);;
+    let rec ast_3 ast_4 ast_5 = (ast_3 ast_4 + (ast_3 ast_5 + 3));;
+    let ast_6 ast_7 ast_8 =
+        let ast_9 = 15 in
+        let rec ast_10 = ast_3 in
+        ast_10 (ast_10 x) y
+    ;;
+    let rec ast_11 = ast_0;;
+    let ast_12 = ast_6;;
   |}<span data-count="5">]</span>
 ;;
 </code></pre>
