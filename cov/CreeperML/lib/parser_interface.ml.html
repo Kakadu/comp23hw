@@ -464,28 +464,28 @@ module ParserInterface = struct
     | <span data-count="0">(</span>lazy (Cons (I.Element (state, _, _, _), _))) -&gt; message (I.numbe<span data-count="0">r</span> state)
 
   let rec parse lexbuf checkpoint =
-    <span data-count="3600">m</span>atch checkpoint with
-    | <span data-count="924">I</span>.InputNeeded _env -&gt;
+    <span data-count="6563">m</span>atch checkpoint with
+    | <span data-count="1679">I</span>.InputNeeded _env -&gt;
         let token = Lexer.token lexbuf in
-        <span data-count="924">l</span>et startp = lexbuf.lex_start_p and endp = lexbuf.lex_curr_p in
+        <span data-count="1679">l</span>et startp = lexbuf.lex_start_p and endp = lexbuf.lex_curr_p in
         let checkpoint = I.offer checkpoint (token, startp, endp) in
-        <span data-count="924">p</span>arse lexbuf checkpoint
-    | <span data-count="922">I</span>.Shifting _ | <span data-count="1729">I</span>.AboutToReduce _ -&gt;
+        <span data-count="1679">p</span>arse lexbuf checkpoint
+    | <span data-count="1677">I</span>.Shifting _ | <span data-count="3167">I</span>.AboutToReduce _ -&gt;
         let checkpoint = I.resume checkpoint in
-        <span data-count="2651">p</span>arse lexbuf checkpoint
+        <span data-count="4844">p</span>arse lexbuf checkpoint
     | <span data-count="2">I</span>.HandlingError _env -&gt;
         let line, pos = get_lexing_position lexbuf in
         <span data-count="2">l</span>et err = get_parse_error _env in
         <span data-count="2">r</span>aise (Syntax_error (Some (line, pos), err))
-    | <span data-count="23">I</span>.Accepted v -&gt; v
+    | <span data-count="38">I</span>.Accepted v -&gt; v
     | <span data-count="0">I</span>.Rejected -&gt;
         raise
           (Syntax_error (None, "invalid syntax (parser rejected the input)"))
 
   let parser lexbuf =
-    <span data-count="25">t</span>ry
-      let code = parse lexbuf (Parser.Incremental.pars<span data-count="25">e</span> lexbuf.lex_curr_p) in
-      <span data-count="23">r</span>etur<span data-count="23">n</span> code
+    <span data-count="40">t</span>ry
+      let code = parse lexbuf (Parser.Incremental.pars<span data-count="40">e</span> lexbuf.lex_curr_p) in
+      <span data-count="38">r</span>etur<span data-count="38">n</span> code
     with <span data-count="2">S</span>yntax_error (pos, err) -&gt; (
       match pos with
       | <span data-count="2">S</span>ome (line, pos) -&gt;
@@ -499,8 +499,8 @@ module ParserInterface = struct
     <span data-count="0">p</span>arser lexbuf
 
   let from_channel ic =
-    <span data-count="25">l</span>et lexbuf = Lexing.from_channel ic in
-    <span data-count="25">p</span>arser lexbuf
+    <span data-count="40">l</span>et lexbuf = Lexing.from_channel ic in
+    <span data-count="40">p</span>arser lexbuf
 
   let from_file file =
     <span data-count="0">l</span>et ic = open_in file in

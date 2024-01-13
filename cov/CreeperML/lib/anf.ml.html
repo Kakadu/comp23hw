@@ -559,122 +559,122 @@ module AnfConvert = struct
   open State
 
   (* constructors *)
-  let app l r = <span data-count="113">A</span>Apply (l, r)
-  let tup l = <span data-count="4">A</span>Tuple l
-  let aite i t e = <span data-count="10">A</span>ite (i, t, e)
-  let aval x = <span data-count="106">A</span>nfVal x
-  let imm i = <span data-count="86">A</span>Imm i
-  let imml l = <span data-count="93">I</span>mmLit l
-  let immv v = <span data-count="418">I</span>mmVal v
-  let tname t name : tname = <span data-count="492">{</span> typ = t; value = name }
-  let tliteral t literal : tliteral = <span data-count="93">{</span> typ = t; value = literal }
-  let binding name expr : anf_val_binding = <span data-count="230">{</span> name; e = expr }
-  let body lets res : anf_body = <span data-count="20">{</span> lets; res }
-  let tlvalue typ value : tlvalue = <span data-count="11">{</span> value; typ }
+  let app l r = <span data-count="241">A</span>Apply (l, r)
+  let tup l = <span data-count="8">A</span>Tuple l
+  let aite i t e = <span data-count="16">A</span>ite (i, t, e)
+  let aval x = <span data-count="196">A</span>nfVal x
+  let imm i = <span data-count="193">A</span>Imm i
+  let imml l = <span data-count="177">I</span>mmLit l
+  let immv v = <span data-count="890">I</span>mmVal v
+  let tname t name : tname = <span data-count="1056">{</span> typ = t; value = name }
+  let tliteral t literal : tliteral = <span data-count="177">{</span> typ = t; value = literal }
+  let binding name expr : anf_val_binding = <span data-count="492">{</span> name; e = expr }
+  let body lets res : anf_body = <span data-count="32">{</span> lets; res }
+  let tlvalue typ value : tlvalue = <span data-count="20">{</span> value; typ }
 
   let rec anf_of_expr (e : cf_typ_expr) : (anf_val_binding list * imm) t =
-    <span data-count="435">m</span>atch e.value with
-    | <span data-count="113">C</span>FApply (fn, args) -&gt;
+    <span data-count="892">m</span>atch e.value with
+    | <span data-count="241">C</span>FApply (fn, args) -&gt;
         let rec apply_inner fn args =
-          <span data-count="222">m</span>atch fn.value with
-          | <span data-count="109">C</span>FApply (fn, old_args) -&gt; apply_inner fn (old_args @ args)
-          | <span data-count="113">_</span> -&gt;
-              let* fn_bindings, fn_imm = anf_of_exp<span data-count="113">r</span> fn in
-              <span data-count="113">l</span>et* arg_bindings, arg_imms =
-                monadic_ma<span data-count="113">p</span> args anf_of_expr &gt;&gt;<span data-count="113">|</span> List.split
+          <span data-count="454">m</span>atch fn.value with
+          | <span data-count="213">C</span>FApply (fn, old_args) -&gt; apply_inner fn (old_args @ args)
+          | <span data-count="241">_</span> -&gt;
+              let* fn_bindings, fn_imm = anf_of_exp<span data-count="241">r</span> fn in
+              <span data-count="241">l</span>et* arg_bindings, arg_imms =
+                monadic_ma<span data-count="241">p</span> args anf_of_expr &gt;&gt;<span data-count="241">|</span> List.split
               in
-              <span data-count="113">l</span>et arg_bindings = List.concat arg_bindings in
-              <span data-count="113">l</span>et* self_tname = new_va<span data-count="113">r</span> "i" &gt;&gt;<span data-count="113">|</span> tnam<span data-count="113">e</span> e.typ in
-              <span data-count="113">l</span>et self_binding = app fn_imm arg_imms |&gt; <span data-count="113">b</span>inding self_tname in
-              <span data-count="113">r</span>eturn
+              <span data-count="241">l</span>et arg_bindings = List.concat arg_bindings in
+              <span data-count="241">l</span>et* self_tname = new_va<span data-count="241">r</span> "i" &gt;&gt;<span data-count="241">|</span> tnam<span data-count="241">e</span> e.typ in
+              <span data-count="241">l</span>et self_binding = app fn_imm arg_imms |&gt; <span data-count="241">b</span>inding self_tname in
+              <span data-count="241">r</span>eturn
                 ( (self_binding :: arg_bindings) @ fn_bindings,
-                  self_tname |&gt; imm<span data-count="113">v</span> )
+                  self_tname |&gt; imm<span data-count="241">v</span> )
         in
         apply_inner fn args
-    | <span data-count="10">C</span>FIfElse ite -&gt;
-        let* i_bindings, if_imm = anf_of_exp<span data-count="10">r</span> ite.cond in
-        <span data-count="10">l</span>et* t_bindings, then_imm = anf_of_exp<span data-count="10">r</span> ite.t_body in
-        <span data-count="10">l</span>et* e_bindings, else_imm = anf_of_exp<span data-count="10">r</span> ite.f_body in
-        <span data-count="10">l</span>et t_body = body (List.re<span data-count="10">v</span> t_bindings) then_imm in
-        <span data-count="10">l</span>et e_body = body (List.re<span data-count="10">v</span> e_bindings) else_imm in
-        <span data-count="10">l</span>et* self_tname = new_va<span data-count="10">r</span> "i" &gt;&gt;<span data-count="10">|</span> tnam<span data-count="10">e</span> e.typ in
-        <span data-count="10">l</span>et self_binding = aite if_imm t_body e_body |&gt; <span data-count="10">b</span>inding self_tname in
-        <span data-count="10">r</span>eturn (self_binding :: i_bindings, self_tname |&gt; imm<span data-count="10">v</span>)
-    | <span data-count="93">C</span>FLiteral l -&gt; return ([], l |&gt; tliteral e.typ |&gt; <span data-count="93">i</span>mm<span data-count="93">l</span>)
-    | <span data-count="209">C</span>FValue v -&gt; return ([], v |&gt; tname e.typ |&gt; <span data-count="209">i</span>mm<span data-count="209">v</span>)
-    | <span data-count="4">C</span>FTuple els -&gt;
+    | <span data-count="16">C</span>FIfElse ite -&gt;
+        let* i_bindings, if_imm = anf_of_exp<span data-count="16">r</span> ite.cond in
+        <span data-count="16">l</span>et* t_bindings, then_imm = anf_of_exp<span data-count="16">r</span> ite.t_body in
+        <span data-count="16">l</span>et* e_bindings, else_imm = anf_of_exp<span data-count="16">r</span> ite.f_body in
+        <span data-count="16">l</span>et t_body = body (List.re<span data-count="16">v</span> t_bindings) then_imm in
+        <span data-count="16">l</span>et e_body = body (List.re<span data-count="16">v</span> e_bindings) else_imm in
+        <span data-count="16">l</span>et* self_tname = new_va<span data-count="16">r</span> "i" &gt;&gt;<span data-count="16">|</span> tnam<span data-count="16">e</span> e.typ in
+        <span data-count="16">l</span>et self_binding = aite if_imm t_body e_body |&gt; <span data-count="16">b</span>inding self_tname in
+        <span data-count="16">r</span>eturn (self_binding :: i_bindings, self_tname |&gt; imm<span data-count="16">v</span>)
+    | <span data-count="177">C</span>FLiteral l -&gt; return ([], l |&gt; tliteral e.typ |&gt; <span data-count="177">i</span>mm<span data-count="177">l</span>)
+    | <span data-count="436">C</span>FValue v -&gt; return ([], v |&gt; tname e.typ |&gt; <span data-count="436">i</span>mm<span data-count="436">v</span>)
+    | <span data-count="8">C</span>FTuple els -&gt;
         let* bindings, tuple_imms =
-          monadic_ma<span data-count="4">p</span> els anf_of_expr &gt;&gt;<span data-count="4">|</span> List.split
+          monadic_ma<span data-count="8">p</span> els anf_of_expr &gt;&gt;<span data-count="8">|</span> List.split
         in
-        <span data-count="4">l</span>et bindings = bindings |&gt; List.concat in
-        <span data-count="4">l</span>et* self_tname = new_va<span data-count="4">r</span> "i" &gt;&gt;<span data-count="4">|</span> tnam<span data-count="4">e</span> e.typ in
-        <span data-count="4">l</span>et self_binding = tup tuple_imms |&gt; <span data-count="4">b</span>inding self_tname in
-        <span data-count="4">r</span>eturn (self_binding :: bindings, self_tname |&gt; imm<span data-count="4">v</span>)
-    | <span data-count="6">C</span>FClosure (c, env) -&gt;
+        <span data-count="8">l</span>et bindings = bindings |&gt; List.concat in
+        <span data-count="8">l</span>et* self_tname = new_va<span data-count="8">r</span> "i" &gt;&gt;<span data-count="8">|</span> tnam<span data-count="8">e</span> e.typ in
+        <span data-count="8">l</span>et self_binding = tup tuple_imms |&gt; <span data-count="8">b</span>inding self_tname in
+        <span data-count="8">r</span>eturn (self_binding :: bindings, self_tname |&gt; imm<span data-count="8">v</span>)
+    | <span data-count="14">C</span>FClosure (c, env) -&gt;
         let env = List.map immv env in
-        <span data-count="6">l</span>et* self_tname = new_va<span data-count="6">r</span> "i" &gt;&gt;<span data-count="6">|</span> tnam<span data-count="6">e</span> e.typ in
-        <span data-count="6">l</span>et self_binding =
-          AClosure (c |&gt; tnam<span data-count="6">e</span> e.typ, env) |&gt; binding self_tname
+        <span data-count="14">l</span>et* self_tname = new_va<span data-count="14">r</span> "i" &gt;&gt;<span data-count="14">|</span> tnam<span data-count="14">e</span> e.typ in
+        <span data-count="14">l</span>et self_binding =
+          AClosure (c |&gt; tnam<span data-count="14">e</span> e.typ, env) |&gt; binding self_tname
         in
-        <span data-count="6">r</span>eturn ([ self_binding ], self_tname |&gt; imm<span data-count="6">v</span>)
+        <span data-count="14">r</span>eturn ([ self_binding ], self_tname |&gt; imm<span data-count="14">v</span>)
 
   let rec lv_binds (lv : tlvalue) (er : imm) : anf_val_binding list t =
-    <span data-count="90">m</span>atch (lv.value, lv.typ) with
-    | <span data-count="77">D</span>LvValue name, _ -&gt; return [ bindin<span data-count="77">g</span> (tnam<span data-count="77">e</span> lv.typ name) (im<span data-count="77">m</span> er) ]
-    | <span data-count="4">D</span>LvTuple lvalues, TyTuple typs -&gt;
+    <span data-count="201">m</span>atch (lv.value, lv.typ) with
+    | <span data-count="160">D</span>LvValue name, _ -&gt; return [ bindin<span data-count="160">g</span> (tnam<span data-count="160">e</span> lv.typ name) (im<span data-count="160">m</span> er) ]
+    | <span data-count="8">D</span>LvTuple lvalues, TyTuple typs -&gt;
         let inner index (elem, etyp) =
-          <span data-count="11">l</span>et* t_name = new_va<span data-count="11">r</span> "i" &gt;&gt;<span data-count="11">|</span> tnam<span data-count="11">e</span> etyp in
-          <span data-count="11">l</span>et access = ATupleAccess (er, index) |&gt; binding t_name in
-          <span data-count="11">l</span>et telem = tlvalue etyp elem in
-          <span data-count="11">l</span>et* lvbnds = lv_bind<span data-count="11">s</span> telem (t_name |&gt; imm<span data-count="11">v</span>) in
-          <span data-count="11">a</span>ccess :: lvbnds |&gt; return
+          <span data-count="20">l</span>et* t_name = new_va<span data-count="20">r</span> "i" &gt;&gt;<span data-count="20">|</span> tnam<span data-count="20">e</span> etyp in
+          <span data-count="20">l</span>et access = ATupleAccess (er, index) |&gt; binding t_name in
+          <span data-count="20">l</span>et telem = tlvalue etyp elem in
+          <span data-count="20">l</span>et* lvbnds = lv_bind<span data-count="20">s</span> telem (t_name |&gt; imm<span data-count="20">v</span>) in
+          <span data-count="20">a</span>ccess :: lvbnds |&gt; return
         in
-        let zipped = List.map2 (fun x y -&gt; <span data-count="11">(</span>x, y)) lvalues typs in
-        <span data-count="4">l</span>et* decs = monadic_map<span data-count="4">i</span> zipped inner in
-        <span data-count="4">L</span>ist.concat decs |&gt; <span data-count="4">r</span>eturn
-    | <span data-count="9">D</span>LvUnit, _ -&gt;
-        let* new_name = new_va<span data-count="9">r</span> "i" in
-        <span data-count="9">r</span>eturn [ bindin<span data-count="9">g</span> (tnam<span data-count="9">e</span> lv.typ new_name) (im<span data-count="9">m</span> er) ]
+        let zipped = List.map2 (fun x y -&gt; <span data-count="20">(</span>x, y)) lvalues typs in
+        <span data-count="8">l</span>et* decs = monadic_map<span data-count="8">i</span> zipped inner in
+        <span data-count="8">L</span>ist.concat decs |&gt; <span data-count="8">r</span>eturn
+    | <span data-count="33">D</span>LvUnit, _ -&gt;
+        let* new_name = new_va<span data-count="33">r</span> "i" in
+        <span data-count="33">r</span>eturn [ bindin<span data-count="33">g</span> (tnam<span data-count="33">e</span> lv.typ new_name) (im<span data-count="33">m</span> er) ]
     | <span data-count="0">_</span>, _ -&gt; return []
 
   let rec anf_of_let_binding (l : cf_typ_let_binding) : anf_val_binding list t =
-    <span data-count="32">l</span>et reversed_lets = l.cf_body.cf_lets |&gt; List.rev in
-    <span data-count="32">l</span>et* bindings = monadic_ma<span data-count="32">p</span> reversed_lets anf_of_let_binding in
-    <span data-count="32">l</span>et bindings = List.concat bindings in
-    <span data-count="32">l</span>et* expr_bindings, expr_res = anf_of_exp<span data-count="32">r</span> l.cf_body.cf_expr in
-    <span data-count="32">l</span>et* lv_res = lv_bind<span data-count="32">s</span> l.l_v expr_res in
-    <span data-count="32">L</span>ist.re<span data-count="32">v</span> lv_res @ expr_bindings @ bindings |&gt; return
+    <span data-count="67">l</span>et reversed_lets = l.cf_body.cf_lets |&gt; List.rev in
+    <span data-count="67">l</span>et* bindings = monadic_ma<span data-count="67">p</span> reversed_lets anf_of_let_binding in
+    <span data-count="67">l</span>et bindings = List.concat bindings in
+    <span data-count="67">l</span>et* expr_bindings, expr_res = anf_of_exp<span data-count="67">r</span> l.cf_body.cf_expr in
+    <span data-count="67">l</span>et* lv_res = lv_bind<span data-count="67">s</span> l.l_v expr_res in
+    <span data-count="67">L</span>ist.re<span data-count="67">v</span> lv_res @ expr_bindings @ bindings |&gt; return
 
   let anf_of_fun_binding (l : cf_fun_let_binding) : anf_fun_binding t =
-    <span data-count="27">l</span>et reversed_lets = l.b.cf_lets |&gt; List.rev in
-    <span data-count="27">l</span>et* bindings = monadic_ma<span data-count="27">p</span> reversed_lets anf_of_let_binding in
-    <span data-count="27">l</span>et bindings = List.concat bindings in
-    <span data-count="27">l</span>et* expr_bindings, res = anf_of_exp<span data-count="27">r</span> l.b.cf_expr in
-    <span data-count="27">l</span>et inner2 a =
-      <span data-count="47">l</span>et* arg_name = new_va<span data-count="47">r</span> "i" &gt;&gt;<span data-count="47">|</span> tnam<span data-count="47">e</span> a.typ in
-      <span data-count="47">l</span>et arg_imm = arg_name |&gt; immv in
-      <span data-count="47">l</span>et* arg_decs = lv_bind<span data-count="47">s</span> a arg_imm in
-      <span data-count="47">r</span>eturn (arg_decs, arg_name)
+    <span data-count="62">l</span>et reversed_lets = l.b.cf_lets |&gt; List.rev in
+    <span data-count="62">l</span>et* bindings = monadic_ma<span data-count="62">p</span> reversed_lets anf_of_let_binding in
+    <span data-count="62">l</span>et bindings = List.concat bindings in
+    <span data-count="62">l</span>et* expr_bindings, res = anf_of_exp<span data-count="62">r</span> l.b.cf_expr in
+    <span data-count="62">l</span>et inner2 a =
+      <span data-count="114">l</span>et* arg_name = new_va<span data-count="114">r</span> "i" &gt;&gt;<span data-count="114">|</span> tnam<span data-count="114">e</span> a.typ in
+      <span data-count="114">l</span>et arg_imm = arg_name |&gt; immv in
+      <span data-count="114">l</span>et* arg_decs = lv_bind<span data-count="114">s</span> a arg_imm in
+      <span data-count="114">r</span>eturn (arg_decs, arg_name)
     in
-    let* arg_decs, arg_names = monadic_ma<span data-count="27">p</span> l.args inner2 &gt;&gt;<span data-count="27">|</span> List.split in
-    <span data-count="27">l</span>et arg_decs = List.concat arg_decs in
-    <span data-count="27">l</span>et lets = expr_bindings @ bindings @ arg_decs |&gt; List.rev in
-    <span data-count="27">l</span>et body = { lets; res } in
+    let* arg_decs, arg_names = monadic_ma<span data-count="62">p</span> l.args inner2 &gt;&gt;<span data-count="62">|</span> List.split in
+    <span data-count="62">l</span>et arg_decs = List.concat arg_decs in
+    <span data-count="62">l</span>et lets = expr_bindings @ bindings @ arg_decs |&gt; List.rev in
+    <span data-count="62">l</span>et body = { lets; res } in
     let name = l.name in
     return { name; args = arg_names; env = l.env_vars; body }
 
   let anf_of_cf (p : cf_typ_program) : anf_program =
-    <span data-count="16">l</span>et is_val_binding = function <span data-count="27">A</span>nfFun _ -&gt; false | <span data-count="106">A</span>nfVal _ -&gt; true in
+    <span data-count="31">l</span>et is_val_binding = function <span data-count="62">A</span>nfFun _ -&gt; false | <span data-count="196">A</span>nfVal _ -&gt; true in
     let inner = function
-      | <span data-count="27">F</span>unBinding fb -&gt;
-          let* binding = anf_of_fun_bindin<span data-count="27">g</span> fb in
-          <span data-count="27">r</span>eturn [ AnfFun binding ]
-      | <span data-count="27">V</span>alBinding vb -&gt; anf_of_let_bindin<span data-count="27">g</span> vb &gt;&gt;<span data-count="27">|</span> List.rev &gt;&gt;| List.ma<span data-count="27">p</span> aval
+      | <span data-count="62">F</span>unBinding fb -&gt;
+          let* binding = anf_of_fun_bindin<span data-count="62">g</span> fb in
+          <span data-count="62">r</span>eturn [ AnfFun binding ]
+      | <span data-count="57">V</span>alBinding vb -&gt; anf_of_let_bindin<span data-count="57">g</span> vb &gt;&gt;<span data-count="57">|</span> List.rev &gt;&gt;| List.ma<span data-count="57">p</span> aval
     in
-    let im_res = monadic_map p inner |&gt; <span data-count="16">r</span>un in
-    <span data-count="16">L</span>ist.concat im_res |&gt; <span data-count="16">L</span>ist.partition is_val_binding
-    |&gt; <span data-count="16">f</span>un (main_statements, function_bindings) -&gt;
-    <span data-count="16">f</span>unction_bindings @ main_statements
+    let im_res = monadic_map p inner |&gt; <span data-count="31">r</span>un in
+    <span data-count="31">L</span>ist.concat im_res |&gt; <span data-count="31">L</span>ist.partition is_val_binding
+    |&gt; <span data-count="31">f</span>un (main_statements, function_bindings) -&gt;
+    <span data-count="31">f</span>unction_bindings @ main_statements
 end
 
 module AnfOptimizations = struct
@@ -684,7 +684,7 @@ module AnfOptimizations = struct
   module DbName = struct
     type t = tname
 
-    let compare (x : t) (y : t) = <span data-count="1320">c</span>ompare x.value y.value
+    let compare (x : t) (y : t) = <span data-count="2910">c</span>ompare x.value y.value
   end
 
   module NameMoveMap = Map.Make (DbName)
@@ -693,72 +693,72 @@ module AnfOptimizations = struct
   type nmm = tname NameMoveMap.t
 
   let try_rename (nmm : nmm) (n : tname) : tname =
-    <span data-count="517">m</span>atch NameMoveMap.find_opt n nmm with <span data-count="102">S</span>ome v -&gt; v | <span data-count="415">N</span>one -&gt; n
+    <span data-count="1109">m</span>atch NameMoveMap.find_opt n nmm with <span data-count="208">S</span>ome v -&gt; v | <span data-count="901">N</span>one -&gt; n
 
   let apply_moves_to_imm (nmm : nmm) (i : imm) : imm =
-    <span data-count="518">m</span>atch i with <span data-count="425">I</span>mmVal x -&gt; ImmVal (try_renam<span data-count="425">e</span> nmm x) | <span data-count="93">l</span>it -&gt; lit
+    <span data-count="1079">m</span>atch i with <span data-count="902">I</span>mmVal x -&gt; ImmVal (try_renam<span data-count="902">e</span> nmm x) | <span data-count="177">l</span>it -&gt; lit
 
   let rec apply_moves_to_expr (nmm : nmm) (e : anf_expr) : anf_expr =
-    <span data-count="230">l</span>et rn_imm = apply_moves_to_imm nmm in
-    <span data-count="230">m</span>atch e with
-    | <span data-count="113">A</span>Apply (x, args) -&gt;
+    <span data-count="492">l</span>et rn_imm = apply_moves_to_imm nmm in
+    <span data-count="492">m</span>atch e with
+    | <span data-count="241">A</span>Apply (x, args) -&gt;
         let args = List.map rn_imm args in
-        <span data-count="113">A</span>Apply (rn_im<span data-count="113">m</span> x, args)
-    | <span data-count="4">A</span>Tuple xs -&gt; ATuple (List.ma<span data-count="4">p</span> rn_imm xs)
-    | <span data-count="10">A</span>ite (i, t, e) -&gt;
+        <span data-count="241">A</span>Apply (rn_im<span data-count="241">m</span> x, args)
+    | <span data-count="8">A</span>Tuple xs -&gt; ATuple (List.ma<span data-count="8">p</span> rn_imm xs)
+    | <span data-count="16">A</span>ite (i, t, e) -&gt;
         let i = rn_imm i in
-        <span data-count="10">l</span>et tlets, nmm = apply_moves_to_vals nmm t.lets in
-        <span data-count="10">l</span>et tres = apply_moves_to_imm nmm t.res in
-        <span data-count="10">l</span>et t = { lets = tlets; res = tres } in
+        <span data-count="16">l</span>et tlets, nmm = apply_moves_to_vals nmm t.lets in
+        <span data-count="16">l</span>et tres = apply_moves_to_imm nmm t.res in
+        <span data-count="16">l</span>et t = { lets = tlets; res = tres } in
         let elets, nmm = apply_moves_to_vals nmm e.lets in
-        <span data-count="10">l</span>et eres = apply_moves_to_imm nmm e.res in
-        <span data-count="10">l</span>et e = { lets = elets; res = eres } in
+        <span data-count="16">l</span>et eres = apply_moves_to_imm nmm e.res in
+        <span data-count="16">l</span>et e = { lets = elets; res = eres } in
         Aite (i, t, e)
-    | <span data-count="86">A</span>Imm i -&gt; AImm (rn_im<span data-count="86">m</span> i)
-    | <span data-count="11">A</span>TupleAccess (t, i) -&gt; ATupleAccess (rn_im<span data-count="11">m</span> t, i)
-    | <span data-count="6">A</span>Closure (cl, env) -&gt; AClosure (try_renam<span data-count="6">e</span> nmm cl, List.ma<span data-count="6">p</span> rn_imm env)
+    | <span data-count="193">A</span>Imm i -&gt; AImm (rn_im<span data-count="193">m</span> i)
+    | <span data-count="20">A</span>TupleAccess (t, i) -&gt; ATupleAccess (rn_im<span data-count="20">m</span> t, i)
+    | <span data-count="14">A</span>Closure (cl, env) -&gt; AClosure (try_renam<span data-count="14">e</span> nmm cl, List.ma<span data-count="14">p</span> rn_imm env)
 
   and apply_moves_to_val (nmm : nmm) (b : anf_val_binding) =
-    <span data-count="230">l</span>et nmm =
+    <span data-count="492">l</span>et nmm =
       match b.e with
-      | <span data-count="86">A</span>Imm (ImmVal x) -&gt; NameMoveMap.ad<span data-count="86">d</span> b.name (try_renam<span data-count="86">e</span> nmm x) nmm
-      | <span data-count="144">_</span> -&gt; nmm
+      | <span data-count="193">A</span>Imm (ImmVal x) -&gt; NameMoveMap.ad<span data-count="193">d</span> b.name (try_renam<span data-count="193">e</span> nmm x) nmm
+      | <span data-count="299">_</span> -&gt; nmm
     in
     let e = apply_moves_to_expr nmm b.e in
 
-    <span data-count="230">l</span>et b = { b with e } in
-    let b = match b.e with <span data-count="86">A</span>Imm (ImmVal _) -&gt; None | <span data-count="144">_</span> -&gt; Some b in
+    <span data-count="492">l</span>et b = { b with e } in
+    let b = match b.e with <span data-count="193">A</span>Imm (ImmVal _) -&gt; None | <span data-count="299">_</span> -&gt; Some b in
     (b, nmm)
 
   and apply_moves_to_vals (nmm : nmm) (vals : avbl) : avbl * nmm =
-    <span data-count="47">l</span>et deopt_lst = List.filter_map (fun x -&gt; <span data-count="124">x</span>) in
-    <span data-count="47">l</span>et inner (binds, nmm) bind =
-      <span data-count="124">l</span>et bind, nmm = apply_moves_to_val nmm bind in
-      <span data-count="124">(</span>bind :: binds, nmm)
+    <span data-count="94">l</span>et deopt_lst = List.filter_map (fun x -&gt; <span data-count="296">x</span>) in
+    <span data-count="94">l</span>et inner (binds, nmm) bind =
+      <span data-count="296">l</span>et bind, nmm = apply_moves_to_val nmm bind in
+      <span data-count="296">(</span>bind :: binds, nmm)
     in
     let res, nmm =
-      List.fold_left inner ([], nmm) vals |&gt; <span data-count="47">f</span>un (bs, nm) -&gt; <span data-count="47">(</span>List.re<span data-count="47">v</span> bs, nm)
+      List.fold_left inner ([], nmm) vals |&gt; <span data-count="94">f</span>un (bs, nm) -&gt; <span data-count="94">(</span>List.re<span data-count="94">v</span> bs, nm)
     in
-    <span data-count="47">(</span>deopt_ls<span data-count="47">t</span> res, nmm)
+    <span data-count="94">(</span>deopt_ls<span data-count="94">t</span> res, nmm)
 
   let apply_moves_to_fun (nmm : nmm) (fn : anf_fun_binding) =
-    <span data-count="27">l</span>et lets, nmm = apply_moves_to_vals nmm fn.body.lets in
-    <span data-count="27">l</span>et res = apply_moves_to_imm nmm fn.body.res in
-    <span data-count="27">l</span>et body = { lets; res } in
+    <span data-count="62">l</span>et lets, nmm = apply_moves_to_vals nmm fn.body.lets in
+    <span data-count="62">l</span>et res = apply_moves_to_imm nmm fn.body.res in
+    <span data-count="62">l</span>et body = { lets; res } in
     ({ fn with body }, nmm)
 
   let optimize_moves (p : anf_program) =
-    <span data-count="16">l</span>et deopt_val x = <span data-count="106">m</span>atch x with <span data-count="34">N</span>one -&gt; [] | <span data-count="72">S</span>ome x -&gt; [ AnfVal x ] in
+    <span data-count="31">l</span>et deopt_val x = <span data-count="196">m</span>atch x with <span data-count="67">N</span>one -&gt; [] | <span data-count="129">S</span>ome x -&gt; [ AnfVal x ] in
     let inner (bindings, nmm) = function
-      | <span data-count="106">A</span>nfVal b -&gt;
+      | <span data-count="196">A</span>nfVal b -&gt;
           let b, nmm = apply_moves_to_val nmm b in
-          <span data-count="106">(</span>deopt_va<span data-count="106">l</span> b @ bindings, nmm)
-      | <span data-count="27">A</span>nfFun fn -&gt;
+          <span data-count="196">(</span>deopt_va<span data-count="196">l</span> b @ bindings, nmm)
+      | <span data-count="62">A</span>nfFun fn -&gt;
           let fn, nmm = apply_moves_to_fun nmm fn in
-          <span data-count="27">(</span>AnfFun fn :: bindings, nmm)
+          <span data-count="62">(</span>AnfFun fn :: bindings, nmm)
     in
     let nmm = NameMoveMap.empty in
-    List.fold_left inner ([], nmm) p |&gt; <span data-count="16">f</span>st |&gt; <span data-count="16">L</span>ist.rev
+    List.fold_left inner ([], nmm) p |&gt; <span data-count="31">f</span>st |&gt; <span data-count="31">L</span>ist.rev
 end
 </code></pre>
       </div>
