@@ -124,8 +124,13 @@ let abinding_to_llvm_ir = function
 ;;
 
 let llvm_program program =
-  let declare_global name = declare_function name runtime_fun_t the_module in
-  let runtime = [ declare_global "alloc_closure"; declare_global "apply_closure" ] in
+  let runtime =
+    [ declare_function "alloc_closure" runtime_fun_t the_module
+    ; declare_function "apply_closure" runtime_fun_t the_module
+    ; declare_function "print_int" (function_type i64_t [| i64_t |]) the_module
+    ; declare_function "print_bool" (function_type i64_t [| i64_t |]) the_module
+    ]
+  in
   List.rev
   @@ List.fold_left
        (fun processed ab -> abinding_to_llvm_ir ab :: processed)
