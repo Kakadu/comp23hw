@@ -399,7 +399,17 @@ let infer =
   infer_program
 ;;
 
-let run_inference program = Result.map (run (infer TypeEnv.empty program)) ~f:snd
+let run_inference program =
+  let stdlib =
+    List.fold_left
+      [ "print_int", (Set.empty (module Int), arrow_t int_t unit_t)
+      ; "print_bool", (Set.empty (module Int), arrow_t bool_t unit_t)
+      ]
+      ~init:TypeEnv.empty
+      ~f:(fun acc (id, scheme) -> TypeEnv.extend acc id scheme)
+  in
+  Result.map (run (infer stdlib program)) ~f:snd
+;;
 
 let infer ast =
   match run_inference ast with
