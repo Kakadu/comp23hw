@@ -88,29 +88,29 @@
 (** SPDX-License-Identifier: LGPL-3.0-or-later *)
 
 let parse_to_llvm program =
-  <span data-count="16">l</span>et open KREML_lib in
+  <span data-count="17">l</span>et open KREML_lib in
   let ast = Parser.parse_optimistically program in
-  <span data-count="16">l</span>et typecheck = Inferencer.run_inference ast in
-  <span data-count="16">l</span>et result =
+  <span data-count="17">l</span>et typecheck = Inferencer.run_inference ast in
+  <span data-count="17">l</span>et result =
     match typecheck with
-    | <span data-count="15">O</span>k typ -&gt;
+    | <span data-count="16">O</span>k typ -&gt;
       (match typ with
        | <span data-count="1">T</span>yping.TArr _ -&gt; Typing.print_typ<span data-count="1">e</span> typ
-       | <span data-count="14">_</span> -&gt;
+       | <span data-count="15">_</span> -&gt;
          ast
          |&gt; Clos_conv.cc_program
-         |&gt; <span data-count="14">L</span>ambda_lifting.ll_program
-         |&gt; <span data-count="14">A</span>nf_conv.anf_program
-         |&gt; <span data-count="14">G</span>enerate_code.llvm_program
-         |&gt; <span data-count="14">L</span>ist.map Llvm.string_of_llvalue
-         |&gt; <span data-count="14">S</span>tring.concat "\n"
-         |&gt; <span data-count="14">p</span>rint_endlin<span data-count="14">e</span>)
+         |&gt; <span data-count="15">L</span>ambda_lifting.ll_program
+         |&gt; <span data-count="15">A</span>nf_conv.anf_program
+         |&gt; <span data-count="15">G</span>enerate_code.llvm_program
+         |&gt; <span data-count="15">L</span>ist.map Llvm.string_of_llvalue
+         |&gt; <span data-count="15">S</span>tring.concat "\n"
+         |&gt; <span data-count="15">p</span>rint_endlin<span data-count="15">e</span>)
     | <span data-count="1">E</span>rror err -&gt; Typing.print_type_erro<span data-count="1">r</span> err
   in
   result
 ;;
 
-let () = parse_to_llv<span data-count="16">m</span> (Stdio.In_channel.input_al<span data-count="16">l</span> stdin)
+let () = parse_to_llv<span data-count="17">m</span> (Stdio.In_channel.input_al<span data-count="17">l</span> stdin)
 </code></pre>
       </div>
     </div>

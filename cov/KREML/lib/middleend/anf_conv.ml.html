@@ -657,46 +657,46 @@ open Ll_ast
 open Anf
 open Counter
 
-let gen_var = gen_va<span data-count="23">r</span> "Anf"
+let gen_var = gen_va<span data-count="24">r</span> "Anf"
 
 let rec anf (e : ll_expr) (expr_with_hole : immexpr -&gt; aexpr) =
-  <span data-count="242">m</span>atch e with
-  | <span data-count="41">L</span>Literal (LInt n) -&gt; expr_with_hole (ImmInt n)
+  <span data-count="296">m</span>atch e with
+  | <span data-count="45">L</span>Literal (LInt n) -&gt; expr_with_hole (ImmInt n)
   | <span data-count="2">L</span>Literal (LBool n) -&gt; expr_with_hole (ImmBool n)
-  | <span data-count="104">L</span>Identifier x -&gt; expr_with_hole (ImmIdentifier x)
+  | <span data-count="129">L</span>Identifier x -&gt; expr_with_hole (ImmIdentifier x)
   | <span data-count="4">L</span>UnaryOp (op, body) -&gt;
     anf body (fun imm -&gt;
       <span data-count="4">l</span>et varname = gen_var () in
       <span data-count="4">A</span>Let (varname, CUnaryOp (op, imm), expr_with_hol<span data-count="4">e</span> (ImmIdentifier varname)))
-  | <span data-count="33">L</span>BinaryOp (op, left, right) -&gt;
+  | <span data-count="36">L</span>BinaryOp (op, left, right) -&gt;
     anf left (fun limm -&gt;
-      <span data-count="33">a</span>nf right (fun rimm -&gt;
-        <span data-count="33">l</span>et varname = gen_var () in
-        <span data-count="33">A</span>Let (varname, CBinaryOp (op, limm, rimm), expr_with_hol<span data-count="33">e</span> (ImmIdentifier varname))))
-  | <span data-count="50">L</span>App (left, right) -&gt;
+      <span data-count="36">a</span>nf right (fun rimm -&gt;
+        <span data-count="36">l</span>et varname = gen_var () in
+        <span data-count="36">A</span>Let (varname, CBinaryOp (op, limm, rimm), expr_with_hol<span data-count="36">e</span> (ImmIdentifier varname))))
+  | <span data-count="71">L</span>App (left, right) -&gt;
     anf left (fun limm -&gt;
-      <span data-count="50">a</span>nf right (fun rimm -&gt;
-        <span data-count="50">l</span>et varname = gen_var () in
-        <span data-count="50">A</span>Let (varname, CApp (limm, rimm), expr_with_hol<span data-count="50">e</span> (ImmIdentifier varname))))
-  | <span data-count="6">L</span>IfThenElse (condition, true_branch, false_branch) -&gt;
+      <span data-count="71">a</span>nf right (fun rimm -&gt;
+        <span data-count="71">l</span>et varname = gen_var () in
+        <span data-count="71">A</span>Let (varname, CApp (limm, rimm), expr_with_hol<span data-count="71">e</span> (ImmIdentifier varname))))
+  | <span data-count="7">L</span>IfThenElse (condition, true_branch, false_branch) -&gt;
     let varname = gen_var () in
-    <span data-count="6">a</span>nf condition (fun cond -&gt;
-      <span data-count="6">l</span>et t = anf true_branch (fun t_branch -&gt; <span data-count="6">A</span>CExpr (CImmExpr t_branch)) in
-      <span data-count="6">l</span>et f = anf false_branch (fun f_branch -&gt; <span data-count="6">A</span>CExpr (CImmExpr f_branch)) in
-      <span data-count="6">A</span>Let (varname, CIfThenElse (cond, t, f), expr_with_hol<span data-count="6">e</span> (ImmIdentifier varname)))
+    <span data-count="7">a</span>nf condition (fun cond -&gt;
+      <span data-count="7">l</span>et t = anf true_branch (fun t_branch -&gt; <span data-count="7">A</span>CExpr (CImmExpr t_branch)) in
+      <span data-count="7">l</span>et f = anf false_branch (fun f_branch -&gt; <span data-count="7">A</span>CExpr (CImmExpr f_branch)) in
+      <span data-count="7">A</span>Let (varname, CIfThenElse (cond, t, f), expr_with_hol<span data-count="7">e</span> (ImmIdentifier varname)))
   | <span data-count="2">L</span>LetIn (id, left, right) -&gt;
     anf left (fun limm -&gt;
       <span data-count="2">a</span>nf right (fun rimm -&gt; <span data-count="2">A</span>Let (id, CImmExpr limm, expr_with_hol<span data-count="2">e</span> rimm)))
 ;;
 
 let anf_binding = function
-  | <span data-count="17">L</span>Val (id, body) -&gt; AFun (id, [], an<span data-count="17">f</span> body (fun imm -&gt; <span data-count="17">A</span>CExpr (CImmExpr imm)))
-  | <span data-count="33">L</span>Fun (id, args, body) -&gt; AFun (id, args, an<span data-count="33">f</span> body (fun imm -&gt; <span data-count="33">A</span>CExpr (CImmExpr imm)))
+  | <span data-count="18">L</span>Val (id, body) -&gt; AFun (id, [], an<span data-count="18">f</span> body (fun imm -&gt; <span data-count="18">A</span>CExpr (CImmExpr imm)))
+  | <span data-count="35">L</span>Fun (id, args, body) -&gt; AFun (id, args, an<span data-count="35">f</span> body (fun imm -&gt; <span data-count="35">A</span>CExpr (CImmExpr imm)))
 ;;
 
 let anf_program program =
-  <span data-count="22">r</span>eset ();
-  <span data-count="22">L</span>ist.map anf_binding program
+  <span data-count="23">r</span>eset ();
+  <span data-count="23">L</span>ist.map anf_binding program
 ;;
 
 (* tests *)

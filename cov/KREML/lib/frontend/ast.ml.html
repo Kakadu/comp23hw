@@ -248,27 +248,27 @@
 (* smart constructors *)
 
 (* expressions *)
-let e_literal x = <span data-count="150">E</span>Literal x
-let e_identifier x = <span data-count="519">E</span>Identifier x
+let e_literal x = <span data-count="154">E</span>Literal x
+let e_identifier x = <span data-count="550">E</span>Identifier x
 let e_unary_op op x = <span data-count="10">E</span>UnaryOp (op, x)
-let e_app x1 x2 = <span data-count="66">E</span>App (x1, x2)
+let e_app x1 x2 = <span data-count="87">E</span>App (x1, x2)
 let e_abs arg body = <span data-count="45">E</span>Abs (arg, body)
-let e_if_then_else cond if_true if_false = <span data-count="19">E</span>IfThenElse (cond, if_true, if_false)
-let e_binary_op op left right = <span data-count="121">E</span>BinaryOp (op, left, right)
-let e_let_in bindings body = <span data-count="53">E</span>LetIn (bindings, body)
+let e_if_then_else cond if_true if_false = <span data-count="20">E</span>IfThenElse (cond, if_true, if_false)
+let e_binary_op op left right = <span data-count="124">E</span>BinaryOp (op, left, right)
+let e_let_in bindings body = <span data-count="54">E</span>LetIn (bindings, body)
 
 (* bindings *)
-let b_val value_id expression = <span data-count="83">B</span>Val (value_id, expression)
-let b_fun fun_id args body = <span data-count="35">B</span>Fun (fun_id, args, body)
+let b_val value_id expression = <span data-count="84">B</span>Val (value_id, expression)
+let b_fun fun_id args body = <span data-count="37">B</span>Fun (fun_id, args, body)
 
 (* binary operations *)
 let badd _ = <span data-count="37">A</span>dd
-let bsub _ = <span data-count="13">S</span>ub
-let bmul _ = <span data-count="29">M</span>ult
+let bsub _ = <span data-count="14">S</span>ub
+let bmul _ = <span data-count="30">M</span>ult
 let bdiv _ = <span data-count="6">D</span>iv
 let beq _ = <span data-count="1">E</span>q
 let blt _ = <span data-count="4">L</span>t
-let blte _ = <span data-count="12">L</span>tOrEq
+let blte _ = <span data-count="13">L</span>tOrEq
 let bgt _ = <span data-count="7">G</span>t
 let bgte _ = <span data-count="2">G</span>tOrEq
 let band _ = <span data-count="6">A</span>nd
@@ -279,7 +279,7 @@ let uneg _ = <span data-count="6">N</span>eg
 let unot _ = <span data-count="6">N</span>ot
 
 (* literals *)
-let lint x = <span data-count="140">L</span>Int x
+let lint x = <span data-count="144">L</span>Int x
 let lbool x = <span data-count="10">L</span>Bool x
 </code></pre>
       </div>

@@ -526,33 +526,33 @@ open Cc_ast
 open Counter
 open Base
 
-let gen_var = gen_va<span data-count="23">r</span> "Ll"
+let gen_var = gen_va<span data-count="24">r</span> "Ll"
 let extend_env env func = <span data-count="15">f</span>unc :: env
 
 let rec lift_expr env = function
-  | <span data-count="51">C</span>Literal l -&gt; LLiteral l, env
-  | <span data-count="95">C</span>Identifier id -&gt; LIdentifier id, env
+  | <span data-count="55">C</span>Literal l -&gt; LLiteral l, env
+  | <span data-count="120">C</span>Identifier id -&gt; LIdentifier id, env
   | <span data-count="2">C</span>UnaryOp (op, body) -&gt;
     let ll_body, env' = lift_expr env body in
     <span data-count="2">L</span>UnaryOp (op, ll_body), env'
-  | <span data-count="31">C</span>BinaryOp (op, left, right) -&gt;
+  | <span data-count="34">C</span>BinaryOp (op, left, right) -&gt;
     let ll_left, env' = lift_expr env left in
-    <span data-count="31">l</span>et ll_right, env'' = lift_expr env' right in
-    <span data-count="31">L</span>BinaryOp (op, ll_left, ll_right), env''
-  | <span data-count="56">C</span>App (left, right) -&gt;
+    <span data-count="34">l</span>et ll_right, env'' = lift_expr env' right in
+    <span data-count="34">L</span>BinaryOp (op, ll_left, ll_right), env''
+  | <span data-count="77">C</span>App (left, right) -&gt;
     let ll_left, env' = lift_expr env left in
-    <span data-count="56">l</span>et ll_right, env'' = lift_expr env' right in
-    <span data-count="56">L</span>App (ll_left, ll_right), env''
+    <span data-count="77">l</span>et ll_right, env'' = lift_expr env' right in
+    <span data-count="77">L</span>App (ll_left, ll_right), env''
   | <span data-count="7">C</span>Abs (args, body) -&gt;
     let ll_body, env' = lift_expr env body in
     <span data-count="7">l</span>et new_fun_name = gen_var () in
     <span data-count="7">l</span>et ll_body_name = LIdentifier new_fun_name in
     ll_body_name, extend_env env<span data-count="7">'</span> @@ LFun (new_fun_name, args, ll_body)
-  | <span data-count="7">C</span>IfThenElse (cond, if_true, if_false) -&gt;
+  | <span data-count="8">C</span>IfThenElse (cond, if_true, if_false) -&gt;
     let ll_cond, env' = lift_expr env cond in
-    <span data-count="7">l</span>et ll_if_true, env'' = lift_expr env' if_true in
-    <span data-count="7">l</span>et ll_if_false, env''' = lift_expr env'' if_false in
-    <span data-count="7">L</span>IfThenElse (ll_cond, ll_if_true, ll_if_false), env'''
+    <span data-count="8">l</span>et ll_if_true, env'' = lift_expr env' if_true in
+    <span data-count="8">l</span>et ll_if_false, env''' = lift_expr env'' if_false in
+    <span data-count="8">L</span>IfThenElse (ll_cond, ll_if_true, ll_if_false), env'''
   | <span data-count="9">C</span>LetIn (binding, body) -&gt;
     let ll_let_body, env' = lift_expr env body in
     <span data-count="9">(</span>match binding with
@@ -565,19 +565,19 @@ let rec lift_expr env = function
 ;;
 
 let lift_binding = function
-  | <span data-count="21">C</span>Val (id, body) -&gt;
+  | <span data-count="22">C</span>Val (id, body) -&gt;
     let ll_body, new_funcs = lift_expr [] body in
-    <span data-count="21">l</span>et new_funcs_rev = List.rev new_funcs in
-    <span data-count="21">L</span>ist.rev @@ (LVal (id, ll_body) :: new_funcs_rev)
-  | <span data-count="15">C</span>Fun (id, args, body) -&gt;
+    <span data-count="22">l</span>et new_funcs_rev = List.rev new_funcs in
+    <span data-count="22">L</span>ist.rev @@ (LVal (id, ll_body) :: new_funcs_rev)
+  | <span data-count="17">C</span>Fun (id, args, body) -&gt;
     let ll_body, new_funcs = lift_expr [] body in
-    <span data-count="15">l</span>et new_funcs_rev = List.rev new_funcs in
-    <span data-count="15">L</span>ist.rev @@ (LFun (id, args, ll_body) :: new_funcs_rev)
+    <span data-count="17">l</span>et new_funcs_rev = List.rev new_funcs in
+    <span data-count="17">L</span>ist.rev @@ (LFun (id, args, ll_body) :: new_funcs_rev)
 ;;
 
 let ll_program program =
-  <span data-count="22">r</span>eset ();
-  <span data-count="22">L</span>ist.fold_left program ~f:(fun l r -&gt; <span data-count="36">l</span> @ lift_bindin<span data-count="36">g</span> r) ~init:[]
+  <span data-count="23">r</span>eset ();
+  <span data-count="23">L</span>ist.fold_left program ~f:(fun l r -&gt; <span data-count="39">l</span> @ lift_bindin<span data-count="39">g</span> r) ~init:[]
 ;;
 
 (* tests *)

@@ -1394,13 +1394,13 @@ open Angstrom
 
 (* helpers *)
 let is_space = function
-  | <span data-count="4827">'</span> ' | <span data-count="0">'</span>\t' | <span data-count="555">'</span>\n' | <span data-count="0">'</span>\r' -&gt; true
-  | <span data-count="12901">_</span> -&gt; false
+  | <span data-count="5025">'</span> ' | <span data-count="0">'</span>\t' | <span data-count="631">'</span>\n' | <span data-count="0">'</span>\r' -&gt; true
+  | <span data-count="13610">_</span> -&gt; false
 ;;
 
-let skip = take_whil<span data-count="24">e</span> is_space
+let skip = take_whil<span data-count="25">e</span> is_space
 let trim p = <span data-count="0">s</span>kip *<span data-count="0">&gt;</span> p &lt;* skip
-let parens p = <span data-count="3359">s</span>kip *<span data-count="3359">&gt;</span> cha<span data-count="3359">r</span> '(' *<span data-count="3359">&gt;</span> skip *<span data-count="3359">&gt;</span> p &lt;<span data-count="3359">*</span> skip &lt;* cha<span data-count="3359">r</span> ')'
+let parens p = <span data-count="3463">s</span>kip *<span data-count="3463">&gt;</span> cha<span data-count="3463">r</span> '(' *<span data-count="3463">&gt;</span> skip *<span data-count="3463">&gt;</span> p &lt;<span data-count="3463">*</span> skip &lt;* cha<span data-count="3463">r</span> ')'
 
 let varname =
   let keywords =
@@ -1421,22 +1421,22 @@ let varname =
     ]
   in
   let is_valid_first_char = function
-    | <span data-count="745">'</span>a' .. 'z' | <span data-count="0">'</span>_' -&gt; true
-    | <span data-count="287">_</span> -&gt; false
+    | <span data-count="783">'</span>a' .. 'z' | <span data-count="0">'</span>_' -&gt; true
+    | <span data-count="309">_</span> -&gt; false
   in
   let is_varname_char = function
-    | <span data-count="1350">'</span>a' .. 'z' | <span data-count="0">'</span>A' .. 'Z' | <span data-count="13">'</span>0' .. '9' | <span data-count="4">'</span>_' -&gt; true
-    | <span data-count="696">_</span> -&gt; false
+    | <span data-count="1521">'</span>a' .. 'z' | <span data-count="0">'</span>A' .. 'Z' | <span data-count="12">'</span>0' .. '9' | <span data-count="19">'</span>_' -&gt; true
+    | <span data-count="734">_</span> -&gt; false
   in
-  skip *<span data-count="24">&gt;</span> peek_char
-  &gt;&gt;<span data-count="24">=</span> function
-  | <span data-count="1032">S</span>ome c when is_valid_first_cha<span data-count="1032">r</span> c -&gt;
-    <span data-count="745">t</span>ake_whil<span data-count="745">e</span> is_varname_char
+  skip *<span data-count="25">&gt;</span> peek_char
+  &gt;&gt;<span data-count="25">=</span> function
+  | <span data-count="1092">S</span>ome c when is_valid_first_cha<span data-count="1092">r</span> c -&gt;
+    <span data-count="783">t</span>ake_whil<span data-count="783">e</span> is_varname_char
     &gt;&gt;= fun s -&gt;
-    <span data-count="745">i</span>f List.exists (fun keyword -&gt; <span data-count="9400">k</span>eyword = s) keywords
-    then <span data-count="166">f</span>ail "Invalid variable name: keyword used"
-    else <span data-count="579">r</span>eturn s
-  | <span data-count="334">_</span> -&gt; fail "Invalid variable name: bad first char"
+    <span data-count="783">i</span>f List.exists (fun keyword -&gt; <span data-count="9888">k</span>eyword = s) keywords
+    then <span data-count="170">f</span>ail "Invalid variable name: keyword used"
+    else <span data-count="613">r</span>eturn s
+  | <span data-count="360">_</span> -&gt; fail "Invalid variable name: bad first char"
 ;;
 
 (* dispatch *)
@@ -1453,157 +1453,157 @@ type dispatch =
 
 (* binding parser *)
 let binding_p d =
-  <span data-count="332">f</span>ix
+  <span data-count="340">f</span>ix
   @@ fun self -&gt;
-  <span data-count="103">l</span>et name keyword =
-    <span data-count="206">s</span>trin<span data-count="206">g</span> keyword *<span data-count="206">&gt;</span> skip *<span data-count="206">&gt;</span> d.identifier_p
+  <span data-count="104">l</span>et name keyword =
+    <span data-count="208">s</span>trin<span data-count="208">g</span> keyword *<span data-count="208">&gt;</span> skip *<span data-count="208">&gt;</span> d.identifier_p
     &gt;&gt;= function
-    | <span data-count="121">E</span>Identifier id -&gt; return id
+    | <span data-count="124">E</span>Identifier id -&gt; return id
     | <span data-count="0">_</span> -&gt; fail "Invalid binding name"
   in
-  let args = skip *&gt; man<span data-count="103">y</span> (varname &lt;<span data-count="103">*</span> skip) in
-  <span data-count="103">l</span>et body =
+  let args = skip *&gt; man<span data-count="104">y</span> (varname &lt;<span data-count="104">*</span> skip) in
+  <span data-count="104">l</span>et body =
     skip
-    *<span data-count="103">&gt;</span> strin<span data-count="103">g</span> "="
-    *&gt; choic<span data-count="103">e</span>
-         [ d.unary_op_<span data-count="103">p</span> d
-         ; d.binary_op_<span data-count="103">p</span> d
-         ; d.let_in_<span data-count="103">p</span> d
-         ; d.app_<span data-count="103">p</span> d
-         ; d.abs_<span data-count="103">p</span> d
-         ; d.if_then_else_<span data-count="103">p</span> d
+    *<span data-count="104">&gt;</span> strin<span data-count="104">g</span> "="
+    *&gt; choic<span data-count="104">e</span>
+         [ d.unary_op_<span data-count="104">p</span> d
+         ; d.binary_op_<span data-count="104">p</span> d
+         ; d.let_in_<span data-count="104">p</span> d
+         ; d.app_<span data-count="104">p</span> d
+         ; d.abs_<span data-count="104">p</span> d
+         ; d.if_then_else_<span data-count="104">p</span> d
          ; d.literal_p
          ; d.identifier_p
          ]
   in
-  <span data-count="103">s</span>kip
-  *&gt; (paren<span data-count="103">s</span> self &lt;|<span data-count="103">&gt;</span> lift<span data-count="103">2</span> b_val (nam<span data-count="103">e</span> "val") body &lt;|<span data-count="103">&gt;</span> lift<span data-count="103">3</span> b_fun (nam<span data-count="103">e</span> "fun") args body)
+  <span data-count="104">s</span>kip
+  *&gt; (paren<span data-count="104">s</span> self &lt;|<span data-count="104">&gt;</span> lift<span data-count="104">2</span> b_val (nam<span data-count="104">e</span> "val") body &lt;|<span data-count="104">&gt;</span> lift<span data-count="104">3</span> b_fun (nam<span data-count="104">e</span> "fun") args body)
 ;;
 
 (* expression parsers *)
 let literal_p =
-  fi<span data-count="24">x</span>
+  fi<span data-count="25">x</span>
   @@ fun self -&gt;
-  <span data-count="20">l</span>et boolean = strin<span data-count="20">g</span> "true" &lt;|<span data-count="20">&gt;</span> strin<span data-count="20">g</span> "false" &gt;&gt;| bool_of_string in
-  <span data-count="20">l</span>et integer =
-    take_while<span data-count="20">1</span> (function
-      | <span data-count="146">'</span>0' .. '9' -&gt; true
-      | <span data-count="508">_</span> -&gt; false)
+  <span data-count="21">l</span>et boolean = strin<span data-count="21">g</span> "true" &lt;|<span data-count="21">&gt;</span> strin<span data-count="21">g</span> "false" &gt;&gt;| bool_of_string in
+  <span data-count="21">l</span>et integer =
+    take_while<span data-count="21">1</span> (function
+      | <span data-count="150">'</span>0' .. '9' -&gt; true
+      | <span data-count="535">_</span> -&gt; false)
     &gt;&gt;| int_of_string
   in
-  <span data-count="20">l</span>et int_literal = integer &gt;&gt;| lint in
-  <span data-count="20">l</span>et bool_literal = boolean &gt;&gt;| lbool in
-  <span data-count="20">l</span>et literal = choice [ int_literal; bool_literal ] in
-  <span data-count="20">s</span>kip *&gt; (paren<span data-count="20">s</span> self &lt;|<span data-count="20">&gt;</span> lif<span data-count="20">t</span> e_literal literal)
+  <span data-count="21">l</span>et int_literal = integer &gt;&gt;| lint in
+  <span data-count="21">l</span>et bool_literal = boolean &gt;&gt;| lbool in
+  <span data-count="21">l</span>et literal = choice [ int_literal; bool_literal ] in
+  <span data-count="21">s</span>kip *&gt; (paren<span data-count="21">s</span> self &lt;|<span data-count="21">&gt;</span> lif<span data-count="21">t</span> e_literal literal)
 ;;
 
 let identifier_p =
-  fi<span data-count="24">x</span>
+  fi<span data-count="25">x</span>
   @@ fun self -&gt;
-  <span data-count="20">l</span>et is_wildcard c = <span data-count="481">c</span> == "_" in
+  <span data-count="21">l</span>et is_wildcard c = <span data-count="511">c</span> == "_" in
   let id =
     varname
     &gt;&gt;= function
-    | <span data-count="481">i</span>d when not (is_wildcar<span data-count="481">d</span> id) -&gt; <span data-count="481">r</span>eturn @@ e_identifie<span data-count="481">r</span> id
+    | <span data-count="511">i</span>d when not (is_wildcar<span data-count="511">d</span> id) -&gt; <span data-count="511">r</span>eturn @@ e_identifie<span data-count="511">r</span> id
     | <span data-count="0">_</span> -&gt; fail "Invalid variable name"
   in
-  <span data-count="20">s</span>kip *&gt; (paren<span data-count="20">s</span> self &lt;|<span data-count="20">&gt;</span> id)
+  <span data-count="21">s</span>kip *&gt; (paren<span data-count="21">s</span> self &lt;|<span data-count="21">&gt;</span> id)
 ;;
 
 let unary_op_p d =
-  <span data-count="1160">f</span>ix
+  <span data-count="1188">f</span>ix
   @@ fun self -&gt;
-  <span data-count="403">l</span>et op = choice [ cha<span data-count="403">r</span> '~' &gt;&gt;<span data-count="403">|</span> uneg; strin<span data-count="403">g</span> "not" &gt;&gt;<span data-count="403">|</span> unot ] in
-  <span data-count="403">l</span>et body =
+  <span data-count="417">l</span>et op = choice [ cha<span data-count="417">r</span> '~' &gt;&gt;<span data-count="417">|</span> uneg; strin<span data-count="417">g</span> "not" &gt;&gt;<span data-count="417">|</span> unot ] in
+  <span data-count="417">l</span>et body =
     choice
-      [ paren<span data-count="403">s</span> self
-      ; d.binary_op_<span data-count="403">p</span> d
-      ; d.let_in_<span data-count="403">p</span> d
-      ; d.app_<span data-count="403">p</span> d
-      ; d.if_then_else_<span data-count="403">p</span> d
+      [ paren<span data-count="417">s</span> self
+      ; d.binary_op_<span data-count="417">p</span> d
+      ; d.let_in_<span data-count="417">p</span> d
+      ; d.app_<span data-count="417">p</span> d
+      ; d.if_then_else_<span data-count="417">p</span> d
       ; d.literal_p
       ; d.identifier_p
       ]
   in
-  <span data-count="403">s</span>kip *&gt; lift<span data-count="403">2</span> e_unary_op op body
+  <span data-count="417">s</span>kip *&gt; lift<span data-count="417">2</span> e_unary_op op body
 ;;
 
 let binary_op_p d =
-  <span data-count="1359">f</span>ix
+  <span data-count="1394">f</span>ix
   @@ fun self -&gt;
-  <span data-count="204">l</span>et multiplicative = skip *&gt; choic<span data-count="204">e</span> [ cha<span data-count="204">r</span> '*' &gt;&gt;<span data-count="204">|</span> bmul; cha<span data-count="204">r</span> '/' &gt;&gt;<span data-count="204">|</span> bdiv ] in
-  <span data-count="204">l</span>et additive = skip *&gt; choic<span data-count="204">e</span> [ cha<span data-count="204">r</span> '+' &gt;&gt;<span data-count="204">|</span> badd; cha<span data-count="204">r</span> '-' &gt;&gt;<span data-count="204">|</span> bsub ] in
-  <span data-count="204">l</span>et relational =
+  <span data-count="211">l</span>et multiplicative = skip *&gt; choic<span data-count="211">e</span> [ cha<span data-count="211">r</span> '*' &gt;&gt;<span data-count="211">|</span> bmul; cha<span data-count="211">r</span> '/' &gt;&gt;<span data-count="211">|</span> bdiv ] in
+  <span data-count="211">l</span>et additive = skip *&gt; choic<span data-count="211">e</span> [ cha<span data-count="211">r</span> '+' &gt;&gt;<span data-count="211">|</span> badd; cha<span data-count="211">r</span> '-' &gt;&gt;<span data-count="211">|</span> bsub ] in
+  <span data-count="211">l</span>et relational =
     skip
-    *&gt; choic<span data-count="204">e</span>
-         [ strin<span data-count="204">g</span> "&gt;=" &gt;&gt;<span data-count="204">|</span> bgte
-         ; strin<span data-count="204">g</span> "&lt;=" &gt;&gt;<span data-count="204">|</span> blte
-         ; cha<span data-count="204">r</span> '&gt;' &gt;&gt;<span data-count="204">|</span> bgt
-         ; cha<span data-count="204">r</span> '&lt;' &gt;&gt;<span data-count="204">|</span> blt
+    *&gt; choic<span data-count="211">e</span>
+         [ strin<span data-count="211">g</span> "&gt;=" &gt;&gt;<span data-count="211">|</span> bgte
+         ; strin<span data-count="211">g</span> "&lt;=" &gt;&gt;<span data-count="211">|</span> blte
+         ; cha<span data-count="211">r</span> '&gt;' &gt;&gt;<span data-count="211">|</span> bgt
+         ; cha<span data-count="211">r</span> '&lt;' &gt;&gt;<span data-count="211">|</span> blt
          ]
   in
-  <span data-count="204">l</span>et equality = skip *<span data-count="204">&gt;</span> strin<span data-count="204">g</span> "=" &gt;&gt;| beq in
-  <span data-count="204">l</span>et logical_and = skip *<span data-count="204">&gt;</span> strin<span data-count="204">g</span> "andalso" &gt;&gt;| band in
-  <span data-count="204">l</span>et logical_or = skip *<span data-count="204">&gt;</span> strin<span data-count="204">g</span> "orelse" &gt;&gt;| bor in
-  <span data-count="204">l</span>et rec parse_bin_op expr_parser op_parsers =
-    <span data-count="1224">l</span>et chainl1 expr_p op_p =
-      <span data-count="1224">l</span>et rec go acc =
-        <span data-count="1792">l</span>ift<span data-count="1792">2</span> (fun f x -&gt; <span data-count="121">e</span>_binary_op f acc x) op_p expr_p &gt;&gt;<span data-count="1792">=</span> go &lt;|&gt; retur<span data-count="1792">n</span> acc
+  <span data-count="211">l</span>et equality = skip *<span data-count="211">&gt;</span> strin<span data-count="211">g</span> "=" &gt;&gt;| beq in
+  <span data-count="211">l</span>et logical_and = skip *<span data-count="211">&gt;</span> strin<span data-count="211">g</span> "andalso" &gt;&gt;| band in
+  <span data-count="211">l</span>et logical_or = skip *<span data-count="211">&gt;</span> strin<span data-count="211">g</span> "orelse" &gt;&gt;| bor in
+  <span data-count="211">l</span>et rec parse_bin_op expr_parser op_parsers =
+    <span data-count="1266">l</span>et chainl1 expr_p op_p =
+      <span data-count="1266">l</span>et rec go acc =
+        <span data-count="1858">l</span>ift<span data-count="1858">2</span> (fun f x -&gt; <span data-count="124">e</span>_binary_op f acc x) op_p expr_p &gt;&gt;<span data-count="1858">=</span> go &lt;|&gt; retur<span data-count="1858">n</span> acc
       in
-      expr_p &gt;&gt;= fun init -&gt; <span data-count="1671">g</span>o init
+      expr_p &gt;&gt;= fun init -&gt; <span data-count="1734">g</span>o init
     in
     match op_parsers with
-    | <span data-count="204">[</span> op ] -&gt; chainl1 expr_parser op
-    | <span data-count="1020">h</span> :: t -&gt; chainl1 (parse_bin_o<span data-count="1020">p</span> expr_parser t) h
+    | <span data-count="211">[</span> op ] -&gt; chainl1 expr_parser op
+    | <span data-count="1055">h</span> :: t -&gt; chainl1 (parse_bin_o<span data-count="1055">p</span> expr_parser t) h
     | <span data-count="0">_</span> -&gt; fail "Unreachable"
   in
   let body =
     choice
-      [ paren<span data-count="204">s</span> self
-      ; d.unary_op_<span data-count="204">p</span> d
-      ; d.let_in_<span data-count="204">p</span> d
-      ; d.app_<span data-count="204">p</span> d
-      ; d.if_then_else_<span data-count="204">p</span> d
+      [ paren<span data-count="211">s</span> self
+      ; d.unary_op_<span data-count="211">p</span> d
+      ; d.let_in_<span data-count="211">p</span> d
+      ; d.app_<span data-count="211">p</span> d
+      ; d.if_then_else_<span data-count="211">p</span> d
       ; d.literal_p
       ; d.identifier_p
       ]
   in
-  <span data-count="204">s</span>kip
-  *&gt; parse_bin_o<span data-count="204">p</span>
+  <span data-count="211">s</span>kip
+  *&gt; parse_bin_o<span data-count="211">p</span>
        body
        [ logical_or; logical_and; equality; relational; additive; multiplicative ]
 ;;
 
 let app_p d =
-  <span data-count="1348">f</span>ix
+  <span data-count="1383">f</span>ix
   @@ fun self -&gt;
-  <span data-count="215">l</span>et function_parser =
+  <span data-count="222">l</span>et function_parser =
     choice
-      [ paren<span data-count="215">s</span> @@ d.let_in_<span data-count="215">p</span> d
-      ; paren<span data-count="215">s</span> @@ d.abs_<span data-count="215">p</span> d
-      ; paren<span data-count="215">s</span> @@ d.if_then_else_<span data-count="215">p</span> d
+      [ paren<span data-count="222">s</span> @@ d.let_in_<span data-count="222">p</span> d
+      ; paren<span data-count="222">s</span> @@ d.abs_<span data-count="222">p</span> d
+      ; paren<span data-count="222">s</span> @@ d.if_then_else_<span data-count="222">p</span> d
       ; identifier_p
       ]
   in
-  <span data-count="215">l</span>et operand_parser =
+  <span data-count="222">l</span>et operand_parser =
     choice
-      [ paren<span data-count="215">s</span> self
-      ; paren<span data-count="215">s</span> @@ d.unary_op_<span data-count="215">p</span> d
-      ; paren<span data-count="215">s</span> @@ d.binary_op_<span data-count="215">p</span> d
-      ; paren<span data-count="215">s</span> @@ d.let_in_<span data-count="215">p</span> d
-      ; paren<span data-count="215">s</span> @@ d.abs_<span data-count="215">p</span> d
-      ; paren<span data-count="215">s</span> @@ d.if_then_else_<span data-count="215">p</span> d
+      [ paren<span data-count="222">s</span> self
+      ; paren<span data-count="222">s</span> @@ d.unary_op_<span data-count="222">p</span> d
+      ; paren<span data-count="222">s</span> @@ d.binary_op_<span data-count="222">p</span> d
+      ; paren<span data-count="222">s</span> @@ d.let_in_<span data-count="222">p</span> d
+      ; paren<span data-count="222">s</span> @@ d.abs_<span data-count="222">p</span> d
+      ; paren<span data-count="222">s</span> @@ d.if_then_else_<span data-count="222">p</span> d
       ; literal_p
       ; identifier_p
       ]
   in
-  <span data-count="215">l</span>et apply_lift acc = <span data-count="283">l</span>ift (e_ap<span data-count="283">p</span> acc) operand_parser in
-  let rec go acc = <span data-count="66">a</span>pply_lif<span data-count="66">t</span> acc &gt;&gt;<span data-count="66">=</span> go &lt;|&gt; retur<span data-count="66">n</span> acc in
-  paren<span data-count="215">s</span> self &lt;|<span data-count="215">&gt;</span> function_parser &gt;&gt;= fun init -&gt; <span data-count="217">a</span>pply_lif<span data-count="217">t</span> init &gt;&gt;= fun init -&gt; <span data-count="50">g</span>o init
+  <span data-count="222">l</span>et apply_lift acc = <span data-count="325">l</span>ift (e_ap<span data-count="325">p</span> acc) operand_parser in
+  let rec go acc = <span data-count="87">a</span>pply_lif<span data-count="87">t</span> acc &gt;&gt;<span data-count="87">=</span> go &lt;|&gt; retur<span data-count="87">n</span> acc in
+  paren<span data-count="222">s</span> self &lt;|<span data-count="222">&gt;</span> function_parser &gt;&gt;= fun init -&gt; <span data-count="238">a</span>pply_lif<span data-count="238">t</span> init &gt;&gt;= fun init -&gt; <span data-count="69">g</span>o init
 ;;
 
 let abs_p d =
-  <span data-count="956">f</span>ix
+  <span data-count="981">f</span>ix
   @@ fun self -&gt;
   <span data-count="36">p</span>aren<span data-count="36">s</span> self
   &lt;|&gt;
@@ -1624,61 +1624,61 @@ let abs_p d =
 ;;
 
 let if_then_else_p d =
-  <span data-count="1778">f</span>ix
+  <span data-count="1827">f</span>ix
   @@ fun self -&gt;
-  <span data-count="179">p</span>aren<span data-count="179">s</span> self
+  <span data-count="182">p</span>aren<span data-count="182">s</span> self
   &lt;|&gt;
   let condition =
     choice
       [ self
-      ; d.unary_op_<span data-count="179">p</span> d
-      ; d.binary_op_<span data-count="179">p</span> d
-      ; d.let_in_<span data-count="179">p</span> d
-      ; d.app_<span data-count="179">p</span> d
-      ; d.if_then_else_<span data-count="179">p</span> d
+      ; d.unary_op_<span data-count="182">p</span> d
+      ; d.binary_op_<span data-count="182">p</span> d
+      ; d.let_in_<span data-count="182">p</span> d
+      ; d.app_<span data-count="182">p</span> d
+      ; d.if_then_else_<span data-count="182">p</span> d
       ; literal_p
       ; identifier_p
       ]
   in
-  <span data-count="179">l</span>et branch =
+  <span data-count="182">l</span>et branch =
     choice
       [ self
-      ; d.unary_op_<span data-count="179">p</span> d
-      ; d.binary_op_<span data-count="179">p</span> d
-      ; d.let_in_<span data-count="179">p</span> d
-      ; d.app_<span data-count="179">p</span> d
-      ; d.abs_<span data-count="179">p</span> d
-      ; d.if_then_else_<span data-count="179">p</span> d
+      ; d.unary_op_<span data-count="182">p</span> d
+      ; d.binary_op_<span data-count="182">p</span> d
+      ; d.let_in_<span data-count="182">p</span> d
+      ; d.app_<span data-count="182">p</span> d
+      ; d.abs_<span data-count="182">p</span> d
+      ; d.if_then_else_<span data-count="182">p</span> d
       ; literal_p
       ; identifier_p
       ]
   in
-  <span data-count="179">l</span>et cond = skip *<span data-count="179">&gt;</span> strin<span data-count="179">g</span> "if" *&gt; condition in
-  <span data-count="179">l</span>et if_true = skip *<span data-count="179">&gt;</span> strin<span data-count="179">g</span> "then" *&gt; branch in
-  <span data-count="179">l</span>et if_false = skip *<span data-count="179">&gt;</span> strin<span data-count="179">g</span> "else" *&gt; branch in
-  <span data-count="179">s</span>kip *<span data-count="179">&gt;</span> lift<span data-count="179">3</span> e_if_then_else cond if_true if_false
+  <span data-count="182">l</span>et cond = skip *<span data-count="182">&gt;</span> strin<span data-count="182">g</span> "if" *&gt; condition in
+  <span data-count="182">l</span>et if_true = skip *<span data-count="182">&gt;</span> strin<span data-count="182">g</span> "then" *&gt; branch in
+  <span data-count="182">l</span>et if_false = skip *<span data-count="182">&gt;</span> strin<span data-count="182">g</span> "else" *&gt; branch in
+  <span data-count="182">s</span>kip *<span data-count="182">&gt;</span> lift<span data-count="182">3</span> e_if_then_else cond if_true if_false
 ;;
 
 let let_in_p d =
-  <span data-count="1534">f</span>ix
+  <span data-count="1576">f</span>ix
   @@ fun self -&gt;
-  <span data-count="244">p</span>aren<span data-count="244">s</span> self
+  <span data-count="251">p</span>aren<span data-count="251">s</span> self
   &lt;|&gt;
   let expr =
     choice
       [ self
-      ; d.unary_op_<span data-count="244">p</span> d
-      ; d.binary_op_<span data-count="244">p</span> d
-      ; d.app_<span data-count="244">p</span> d
-      ; d.abs_<span data-count="244">p</span> d
-      ; d.if_then_else_<span data-count="244">p</span> d
+      ; d.unary_op_<span data-count="251">p</span> d
+      ; d.binary_op_<span data-count="251">p</span> d
+      ; d.app_<span data-count="251">p</span> d
+      ; d.abs_<span data-count="251">p</span> d
+      ; d.if_then_else_<span data-count="251">p</span> d
       ; d.literal_p
       ; d.identifier_p
       ]
   in
-  <span data-count="244">l</span>et bindings = strin<span data-count="244">g</span> "let" *<span data-count="244">&gt;</span> skip *&gt; sep_by<span data-count="244">1</span> skip (binding_<span data-count="244">p</span> d) in
-  <span data-count="244">l</span>et body = skip *<span data-count="244">&gt;</span> strin<span data-count="244">g</span> "in" *<span data-count="244">&gt;</span> expr &lt;<span data-count="244">*</span> skip &lt;* strin<span data-count="244">g</span> "end" in
-  <span data-count="244">s</span>kip *<span data-count="244">&gt;</span> lift<span data-count="244">2</span> e_let_in bindings body
+  <span data-count="251">l</span>et bindings = strin<span data-count="251">g</span> "let" *<span data-count="251">&gt;</span> skip *&gt; sep_by<span data-count="251">1</span> skip (binding_<span data-count="251">p</span> d) in
+  <span data-count="251">l</span>et body = skip *<span data-count="251">&gt;</span> strin<span data-count="251">g</span> "in" *<span data-count="251">&gt;</span> expr &lt;<span data-count="251">*</span> skip &lt;* strin<span data-count="251">g</span> "end" in
+  <span data-count="251">s</span>kip *<span data-count="251">&gt;</span> lift<span data-count="251">2</span> e_let_in bindings body
 ;;
 
 (* main parser *)
@@ -1694,8 +1694,8 @@ let dispatch =
   }
 ;;
 
-let parse program = <span data-count="88">p</span>arse_string ~consume:All (man<span data-count="88">y</span> (binding_<span data-count="88">p</span> dispatch) &lt;<span data-count="88">*</span> skip) program
-let parse_optimistically program = <span data-count="88">R</span>esult.get_ok (pars<span data-count="88">e</span> program)
+let parse program = <span data-count="89">p</span>arse_string ~consume:All (man<span data-count="89">y</span> (binding_<span data-count="89">p</span> dispatch) &lt;<span data-count="89">*</span> skip) program
+let parse_optimistically program = <span data-count="89">R</span>esult.get_ok (pars<span data-count="89">e</span> program)
 
 let parse_error program =
   <span data-count="7">t</span>ry

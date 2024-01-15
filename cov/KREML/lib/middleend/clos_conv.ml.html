@@ -780,21 +780,21 @@ open Ast
 open Cc_ast
 open Counter
 
-let gen_var = gen_va<span data-count="23">r</span> "Cc"
+let gen_var = gen_va<span data-count="24">r</span> "Cc"
 
 let simplify program =
-  <span data-count="19">l</span>et rec uncurry acc = function
+  <span data-count="20">l</span>et rec uncurry acc = function
     | <span data-count="1">E</span>Abs (arg, body) -&gt; uncurry (arg :: acc) body
     | <span data-count="10">e</span>xpr -&gt; CAbs (List.re<span data-count="10">v</span> acc, decompose_letin_exp<span data-count="10">r</span> expr)
   and decompose_letin_expr = function
-    | <span data-count="85">E</span>Identifier x -&gt; CIdentifier x
-    | <span data-count="45">E</span>Literal x -&gt; CLiteral x
+    | <span data-count="110">E</span>Identifier x -&gt; CIdentifier x
+    | <span data-count="49">E</span>Literal x -&gt; CLiteral x
     | <span data-count="2">E</span>UnaryOp (op, body) -&gt; CUnaryOp (op, decompose_letin_exp<span data-count="2">r</span> body)
-    | <span data-count="33">E</span>BinaryOp (op, l, r) -&gt;
-      CBinaryOp (op, decompose_letin_exp<span data-count="33">r</span> l, decompose_letin_exp<span data-count="33">r</span> r)
-    | <span data-count="7">E</span>IfThenElse (c, t, e) -&gt;
-      CIfThenElse (decompose_letin_exp<span data-count="7">r</span> c, decompose_letin_exp<span data-count="7">r</span> t, decompose_letin_exp<span data-count="7">r</span> e)
-    | <span data-count="44">E</span>App (l, r) -&gt; CApp (decompose_letin_exp<span data-count="44">r</span> l, decompose_letin_exp<span data-count="44">r</span> r)
+    | <span data-count="36">E</span>BinaryOp (op, l, r) -&gt;
+      CBinaryOp (op, decompose_letin_exp<span data-count="36">r</span> l, decompose_letin_exp<span data-count="36">r</span> r)
+    | <span data-count="8">E</span>IfThenElse (c, t, e) -&gt;
+      CIfThenElse (decompose_letin_exp<span data-count="8">r</span> c, decompose_letin_exp<span data-count="8">r</span> t, decompose_letin_exp<span data-count="8">r</span> e)
+    | <span data-count="65">E</span>App (l, r) -&gt; CApp (decompose_letin_exp<span data-count="65">r</span> l, decompose_letin_exp<span data-count="65">r</span> r)
     | <span data-count="10">E</span>Abs (arg, body) -&gt; uncurry [ arg ] body
     | <span data-count="6">E</span>LetIn (bindings, body) -&gt;
       List.fold_right
@@ -802,8 +802,8 @@ let simplify program =
         ~f:(fun b1 b2 -&gt; <span data-count="6">C</span>LetIn (decompose_letin_bin<span data-count="6">d</span> b1, b2))
         ~init:(decompose_letin_exp<span data-count="6">r</span> body)
   and decompose_letin_bind = function
-    | <span data-count="20">B</span>Val (name, body) -&gt; CVal (name, decompose_letin_exp<span data-count="20">r</span> body)
-    | <span data-count="19">B</span>Fun (name, args, body) -&gt; CFun (name, args, decompose_letin_exp<span data-count="19">r</span> body)
+    | <span data-count="21">B</span>Val (name, body) -&gt; CVal (name, decompose_letin_exp<span data-count="21">r</span> body)
+    | <span data-count="21">B</span>Fun (name, args, body) -&gt; CFun (name, args, decompose_letin_exp<span data-count="21">r</span> body)
   in
   List.map program ~f:decompose_letin_bind
 ;;
@@ -863,24 +863,24 @@ let replace_id_by_expr where id expr =
 ;;
 
 let rec clos_conv env parent_scope = function
-  | <span data-count="86">C</span>Identifier x -&gt; CIdentifier x, env
-  | <span data-count="45">C</span>Literal x -&gt; CLiteral x, env
+  | <span data-count="111">C</span>Identifier x -&gt; CIdentifier x, env
+  | <span data-count="49">C</span>Literal x -&gt; CLiteral x, env
   | <span data-count="2">C</span>UnaryOp (op, body) -&gt;
     let cc_body, env' = clos_conv env parent_scope body in
     <span data-count="2">C</span>UnaryOp (op, cc_body), env'
-  | <span data-count="33">C</span>BinaryOp (op, left, right) -&gt;
+  | <span data-count="36">C</span>BinaryOp (op, left, right) -&gt;
     let cc_left, env' = clos_conv env parent_scope left in
-    <span data-count="33">l</span>et cc_right, env'' = clos_conv env' parent_scope right in
-    <span data-count="33">C</span>BinaryOp (op, cc_left, cc_right), env''
-  | <span data-count="7">C</span>IfThenElse (cond, if_true, if_false) -&gt;
+    <span data-count="36">l</span>et cc_right, env'' = clos_conv env' parent_scope right in
+    <span data-count="36">C</span>BinaryOp (op, cc_left, cc_right), env''
+  | <span data-count="8">C</span>IfThenElse (cond, if_true, if_false) -&gt;
     let cc_cond, env' = clos_conv env parent_scope cond in
-    <span data-count="7">l</span>et cc_if_true, env'' = clos_conv env' parent_scope if_true in
-    <span data-count="7">l</span>et cc_if_false, env''' = clos_conv env'' parent_scope if_false in
-    <span data-count="7">C</span>IfThenElse (cc_cond, cc_if_true, cc_if_false), env'''
-  | <span data-count="45">C</span>App (left, right) -&gt;
+    <span data-count="8">l</span>et cc_if_true, env'' = clos_conv env' parent_scope if_true in
+    <span data-count="8">l</span>et cc_if_false, env''' = clos_conv env'' parent_scope if_false in
+    <span data-count="8">C</span>IfThenElse (cc_cond, cc_if_true, cc_if_false), env'''
+  | <span data-count="66">C</span>App (left, right) -&gt;
     let cc_left, env' = clos_conv env parent_scope left in
-    <span data-count="45">l</span>et cc_right, env'' = clos_conv env' parent_scope right in
-    <span data-count="45">C</span>App (cc_left, cc_right), env''
+    <span data-count="66">l</span>et cc_right, env'' = clos_conv env' parent_scope right in
+    <span data-count="66">C</span>App (cc_left, cc_right), env''
   | <span data-count="10">C</span>Abs (args, body) -&gt;
     let cc_body, env' = clos_conv env parent_scope body in
     <span data-count="10">l</span>et closed_args =
@@ -931,24 +931,24 @@ let get_name = function
 ;;
 
 let cc_program program =
-  <span data-count="19">r</span>eset ();
-  <span data-count="19">l</span>et rec helper acc parent_scope = function
-    | <span data-count="19">[</span>] -&gt; acc
-    | <span data-count="19">C</span>Val (id, body) :: tl -&gt;
+  <span data-count="20">r</span>eset ();
+  <span data-count="20">l</span>et rec helper acc parent_scope = function
+    | <span data-count="20">[</span>] -&gt; acc
+    | <span data-count="20">C</span>Val (id, body) :: tl -&gt;
       let cc_body, env = clos_conv [] parent_scope body in
-      <span data-count="19">h</span>elper
-        (CVal (id, List.fold_righ<span data-count="19">t</span> env ~f:(fun l r -&gt; <span data-count="0">C</span>LetIn (l, r)) ~init:cc_body) :: acc)
+      <span data-count="20">h</span>elper
+        (CVal (id, List.fold_righ<span data-count="20">t</span> env ~f:(fun l r -&gt; <span data-count="0">C</span>LetIn (l, r)) ~init:cc_body) :: acc)
         (id :: parent_scope)
         tl
-    | <span data-count="14">C</span>Fun (id, args, body) :: tl -&gt;
+    | <span data-count="16">C</span>Fun (id, args, body) :: tl -&gt;
       let cc_body, env = clos_conv [] (id :: parent_scope) body in
-      <span data-count="14">h</span>elper
-        (CFun (id, args, List.fold_righ<span data-count="14">t</span> env ~f:(fun l r -&gt; <span data-count="5">C</span>LetIn (l, r)) ~init:cc_body)
+      <span data-count="16">h</span>elper
+        (CFun (id, args, List.fold_righ<span data-count="16">t</span> env ~f:(fun l r -&gt; <span data-count="5">C</span>LetIn (l, r)) ~init:cc_body)
          :: acc)
         (id :: parent_scope)
         tl
   in
-  List.rev (helpe<span data-count="19">r</span> [] [] (simplif<span data-count="19">y</span> program))
+  List.rev (helpe<span data-count="20">r</span> [] [] (simplif<span data-count="20">y</span> program))
 ;;
 
 (* tests *)
