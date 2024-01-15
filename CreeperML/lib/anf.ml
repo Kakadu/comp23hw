@@ -161,6 +161,84 @@ end
 
 module AnfOptimizations = struct
   open AnfTypeAst
+  open Type_ast.TypeAst
 
-  let optimize_moves (p : anf_program) = p
+  module DbName = struct
+    type t = tname
+
+    let compare (x : t) (y : t) = compare x.value y.value
+  end
+
+  module NameMoveMap = Map.Make (DbName)
+
+  type avbl = anf_val_binding list
+  type nmm = tname NameMoveMap.t
+
+  let try_rename (nmm : nmm) (n : tname) : tname =
+    match NameMoveMap.find_opt n nmm with Some v -> v | None -> n
+
+  let apply_moves_to_imm (nmm : nmm) (i : imm) : imm =
+    match i with ImmVal x -> ImmVal (try_rename nmm x) | lit -> lit
+
+  let rec apply_moves_to_expr (nmm : nmm) (e : anf_expr) : anf_expr =
+    let rn_imm = apply_moves_to_imm nmm in
+    match e with
+    | AApply (x, args) ->
+        let args = List.map rn_imm args in
+        AApply (rn_imm x, args)
+    | ATuple xs -> ATuple (List.map rn_imm xs)
+    | Aite (i, t, e) ->
+        let i = rn_imm i in
+        let tlets, nmm = apply_moves_to_vals nmm t.lets in
+        let tres = apply_moves_to_imm nmm t.res in
+        let t = { lets = tlets; res = tres } in
+        let elets, nmm = apply_moves_to_vals nmm e.lets in
+        let eres = apply_moves_to_imm nmm e.res in
+        let e = { lets = elets; res = eres } in
+        Aite (i, t, e)
+    | AImm i -> AImm (rn_imm i)
+    | ATupleAccess (t, i) -> ATupleAccess (rn_imm t, i)
+    | AClosure (cl, env) -> AClosure (try_rename nmm cl, List.map rn_imm env)
+
+  and apply_moves_to_val (nmm : nmm) (b : anf_val_binding) =
+    let nmm =
+      match b.e with
+      | AImm (ImmVal x) -> NameMoveMap.add b.name (try_rename nmm x) nmm
+      | _ -> nmm
+    in
+    let e = apply_moves_to_expr nmm b.e in
+
+    let b = { b with e } in
+    let b = match b.e with AImm (ImmVal _) -> None | _ -> Some b in
+    (b, nmm)
+
+  and apply_moves_to_vals (nmm : nmm) (vals : avbl) : avbl * nmm =
+    let deopt_lst = List.filter_map (fun x -> x) in
+    let inner (binds, nmm) bind =
+      let bind, nmm = apply_moves_to_val nmm bind in
+      (bind :: binds, nmm)
+    in
+    let res, nmm =
+      List.fold_left inner ([], nmm) vals |> fun (bs, nm) -> (List.rev bs, nm)
+    in
+    (deopt_lst res, nmm)
+
+  let apply_moves_to_fun (nmm : nmm) (fn : anf_fun_binding) =
+    let lets, nmm = apply_moves_to_vals nmm fn.body.lets in
+    let res = apply_moves_to_imm nmm fn.body.res in
+    let body = { lets; res } in
+    ({ fn with body }, nmm)
+
+  let optimize_moves (p : anf_program) =
+    let deopt_val x = match x with None -> [] | Some x -> [ AnfVal x ] in
+    let inner (bindings, nmm) = function
+      | AnfVal b ->
+          let b, nmm = apply_moves_to_val nmm b in
+          (deopt_val b @ bindings, nmm)
+      | AnfFun fn ->
+          let fn, nmm = apply_moves_to_fun nmm fn in
+          (AnfFun fn :: bindings, nmm)
+    in
+    let nmm = NameMoveMap.empty in
+    List.fold_left inner ([], nmm) p |> fst |> List.rev
 end

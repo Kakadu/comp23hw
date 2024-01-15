@@ -64,16 +64,16 @@ module PrettyPrinter = struct
     | FunBinding x ->
         let lval = x.name.value in
         let lets =
-          List.fold_left
-            (fun xs x -> xs ^ "\n" ^ print_cf_dec st (intd ^ "  ") x)
-            intd
-            (List.map (fun x -> ValBinding x) x.b.cf_lets)
+          List.map
+            (fun y -> ValBinding y |> print_cf_dec st (intd ^ "  "))
+            x.b.cf_lets
+          |> String.concat "\n"
         in
         let args =
-          List.fold_left
-            (fun xs (x : index_lvalue) ->
-              Format.sprintf "%s (%s%s)" xs (print_lval x.value) (st x.typ))
-            "" x.args
+          List.map
+            (fun x -> Format.sprintf "(%s%s)" (print_lval x.value) (st x.typ))
+            x.args
+          |> String.concat " "
         in
         Format.sprintf "%sletc %s%s%s =%s\n%s  %s" intd lval args
           (st x.name.typ) lets intd

@@ -95,7 +95,7 @@ module Std = struct
     (* int bool *)
     let le = typed (triple int_const int_const bool_const) "<="
     let less = typed (triple int_const int_const bool_const) "<"
-    let eq = typed (triple int_const int_const bool_const) "="
+    let eq = typed (triple int_const int_const bool_const) "=="
     let gr = typed (triple int_const int_const bool_const) ">"
     let ge = typed (triple int_const int_const bool_const) ">="
 
@@ -108,7 +108,7 @@ module Std = struct
     (* float bool*)
     let fle = typed (triple float_const float_const bool_const) "<=."
     let fless = typed (triple float_const float_const bool_const) "<."
-    let feq = typed (triple float_const float_const bool_const) "=."
+    let feq = typed (triple float_const float_const bool_const) "==."
     let fgr = typed (triple float_const float_const bool_const) ">."
     let fge = typed (triple float_const float_const bool_const) ">=."
 

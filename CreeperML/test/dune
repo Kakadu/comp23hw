@@ -15,14 +15,6 @@
   (backend bisect_ppx)))
 
 (executable
- (name test_db)
- (modules test_db)
- (public_name test_db)
- (libraries CreeperML stdio)
- (instrumentation
-  (backend bisect_ppx)))
-
-(executable
  (name test_closures)
  (modules test_closures)
  (public_name test_closures)
@@ -38,10 +30,38 @@
  (instrumentation
   (backend bisect_ppx)))
 
+(executable
+ (name test_llvm)
+ (modules test_llvm)
+ (public_name test_llvm)
+ (libraries CreeperML stdio)
+ (instrumentation
+  (backend bisect_ppx))
+ (link_deps
+  (file ../lib/bindings.co)
+  (file ../lib/bindings.o)
+  (file ../build.sh)))
+
+(executable
+ (name test_asm)
+ (modules test_asm)
+ (public_name test_asm)
+ (libraries CreeperML stdio)
+ (instrumentation
+  (backend bisect_ppx))
+ (link_deps
+  (file ../lib/bindings.co)
+  (file ../lib/bindings.o)
+  (file ../build.sh)))
+
 (cram
  (deps
   ./test_infer.exe
   ./test_parser.exe
-  ./test_db.exe
   ./test_closures.exe
-  ./test_anf.exe))
+  ./test_anf.exe
+  ./test_llvm.exe
+  ./test_asm.exe
+  ../lib/bindings.co
+  ../lib/bindings.o
+  ../build.sh))

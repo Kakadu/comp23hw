@@ -239,7 +239,7 @@ module ClosureConvert = struct
     in
     let let_name = fst_typ_name_of_lvalue l.l_v in
     let* closures, cf_expr =
-      closure_free_expr globals is_rec ("l" ^ let_name.value) l.body.expr
+      closure_free_expr globals is_rec let_name.value l.body.expr
     in
     let* _, inner_closures, rev_binds =
       monadic_fold
@@ -280,5 +280,6 @@ module ClosureConvert = struct
     in
     let set = Std.operators |> List.to_seq |> NameSet.of_seq in
     inner set prog [] |> run |> List.split |> fun (closures, bindings) ->
-    List.concat closures @ List.rev bindings |> remove_redefinitons
+    (List.rev closures |> List.concat) @ List.rev bindings
+    |> remove_redefinitons
 end

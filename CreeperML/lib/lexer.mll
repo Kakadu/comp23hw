@@ -53,5 +53,4 @@ rule token = parse
     | l_prio_op { LOWLVLPREDICATE (Lexing.lexeme lexbuf) }
     | name { NAME (Lexing.lexeme lexbuf) }
     | eof { EOF }
-
     | _ { raise (Failure ("Character not allowed in source text: '" ^ Lexing.lexeme lexbuf ^ "'")) }

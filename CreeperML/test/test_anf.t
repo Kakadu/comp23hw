@@ -11,26 +11,21 @@
   > in
   > helper n 1
   > EOF
-  let (luhelper_1)  (i_8) (i_7) =
-    let (uacc_3) = i_7
-    let (un_2) = i_8
-    let (i_2) = <= un_2 1
+  let (uhelper_1)  (i_8) (i_7) =
+    let (i_2) = <= i_8 1
     let (i_6) = if i_2 then
-      uacc_3
+      i_7
     else
-      let (i_3) = * un_2 uacc_3
-      let (i_4) = - un_2 1
+      let (i_3) = * i_8 i_7
+      let (i_4) = - i_8 1
       let (i_5) = uhelper_1 i_4 i_3
       i_5
     i_6
   
-  let (lufac_4)  (i_1) =
-    let (un_0) = i_1
-    let (uhelper_1) = luhelper_1
-    let (i_0) = uhelper_1 un_0 1
+  let (ufac_4)  (i_1) =
+    let (i_0) = uhelper_1 i_1 1
     i_0
-  
-  let (ufac_4) = lufac_4
+
 
 +------------------------+
 |  Simple expr test      |
@@ -48,8 +43,6 @@
   let (i_0) = + 1 2
   
   let (i_1) = + i_0 3
-  
-  let (ures_0) = i_1
 
 +-----------------------------------+
 |  Test with functions              |
@@ -76,22 +69,15 @@
   >   in g
   > let res = f 10 11
   > EOF
-  let (lug_2) [ux_0] (i_4) =
-    let (uy_1) = i_4
-    let (i_3) = + ux_0 uy_1
+  let (ug_2) [ux_0] (i_4) =
+    let (i_3) = + ux_0 i_4
     i_3
   
-  let (luf_3)  (i_2) =
-    let (ux_0) = i_2
-    let (i_1) = clsr[lug_2][ux_0]
-    let (ug_2) = i_1
-    ug_2
-  
-  let (uf_3) = luf_3
+  let (uf_3)  (i_2) =
+    let (i_1) = clsr[ug_2][i_2]
+    i_1
   
   let (i_0) = uf_3 10 11
-  
-  let (ures_4) = i_0
 
 +----------------------------------+
 |  If-then-else test               |
@@ -131,8 +117,6 @@
   else
     let (i_3) = + 4 5
     i_3
-  
-  let (ur_0) = i_4
 
 +-----------------------+
 |  More if-then-else    |
@@ -163,8 +147,6 @@
       let (i_7) = + 25 i_6
       i_7
     i_8
-  
-  let (ur_0) = i_9
 
 +--------------------------+
 |  Tuples                  |
@@ -187,41 +169,25 @@
   
   let (i_14) = i_11[2]
   
-  let (uc_2) = i_14
-  
   let (i_13) = i_11[1]
-  
-  let (ub_1) = i_13
   
   let (i_12) = i_11[0]
   
-  let (ua_0) = i_12
+  let (i_6) = (i_13, i_14)
   
-  let (i_6) = (ub_1, uc_2)
+  let (i_7) = (i_12, i_6)
   
-  let (i_7) = (ua_0, i_6)
-  
-  let (ux_3) = i_7
-  
-  let (i_3) = ux_3[1]
+  let (i_3) = i_7[1]
   
   let (i_5) = i_3[1]
   
-  let (ue_6) = i_5
-  
   let (i_4) = i_3[0]
   
-  let (ud_5) = i_4
+  let (i_2) = i_7[0]
   
-  let (i_2) = ux_3[0]
+  let (i_0) = + i_2 i_4
   
-  let (uc_4) = i_2
-  
-  let (i_0) = + uc_4 ud_5
-  
-  let (i_1) = + i_0 ue_6
-  
-  let (ures_7) = i_1
+  let (i_1) = + i_0 i_5
 
 +------------------+
 |  Big goofy test  |
@@ -241,86 +207,58 @@
   > let s = g 55 66 77 88
   > let res = a + b - c + d * (s e (f 19)) + p
   > EOF
-  let (luh_13) [ua_7] [ub_8] [uc_9] (i_34) (i_33) (i_32) =
-    let (uf_12) = i_32
-    let (ue_11) = i_33
-    let (ud_10) = i_34
-    let (i_26) = * 2 uf_12
-    let (i_27) = * ud_10 ue_11
-    let (i_28) = * ub_8 uc_9
-    let (i_29) = + ua_7 i_28
-    let (i_30) = - i_29 i_27
-    let (i_31) = + i_30 i_26
-    i_31
+  let (uf_6)  (i_34) =
+    let (i_32) = * 22 i_34
+    let (i_33) = + 33 i_32
+    i_33
   
-  let (lug_14)  (i_25) (i_24) (i_23) =
-    let (uc_9) = i_23
-    let (ub_8) = i_24
-    let (ua_7) = i_25
-    let (i_22) = clsr[luh_13][ua_7, ub_8, uc_9]
-    let (uh_13) = i_22
-    uh_13
+  let (uh_13) [ua_7] [ub_8] [uc_9] (i_31) (i_30) (i_29) =
+    let (i_23) = * 2 i_29
+    let (i_24) = * i_31 i_30
+    let (i_25) = * ub_8 uc_9
+    let (i_26) = + ua_7 i_25
+    let (i_27) = - i_26 i_24
+    let (i_28) = + i_27 i_23
+    i_28
   
-  let (luf_6)  (i_21) =
-    let (ux_5) = i_21
-    let (i_19) = * 22 ux_5
-    let (i_20) = + 33 i_19
-    i_20
+  let (ug_14)  (i_22) (i_21) (i_20) =
+    let (i_19) = clsr[uh_13][i_22, i_21, i_20]
+    i_19
   
   let (i_17) = * 11 32
   
   let (i_18) = + 10 i_17
   
-  let (ua_0) = i_18
-  
-  let (i_15) = * ua_0 4
+  let (i_15) = * i_18 4
   
   let (i_16) = + 8 i_15
   
-  let (ub_1) = i_16
+  let (i_11) = * i_16 2
   
-  let (uc_2) = ub_1
+  let (i_12) = * i_11 i_16
   
-  let (ud_3) = uc_2
-  
-  let (i_11) = * uc_2 2
-  
-  let (i_12) = * i_11 ub_1
-  
-  let (i_13) = * i_12 ub_1
+  let (i_13) = * i_12 i_16
   
   let (i_14) = + 3 i_13
   
-  let (ue_4) = i_14
-  
-  let (uf_6) = luf_6
-  
-  let (ug_14) = lug_14
-  
   let (i_8) = ug_14 10 11 12 13 14 15
   
-  let (i_9) = + uc_2 ud_3
+  let (i_9) = + i_16 i_16
   
   let (i_10) = + i_9 i_8
   
-  let (up_15) = i_10
-  
   let (i_7) = ug_14 55 66 77 88
-  
-  let (us_16) = i_7
   
   let (i_0) = uf_6 19
   
-  let (i_1) = us_16 ue_4 i_0
+  let (i_1) = i_7 i_14 i_0
   
-  let (i_2) = * ud_3 i_1
+  let (i_2) = * i_16 i_1
   
-  let (i_3) = + ua_0 ub_1
+  let (i_3) = + i_18 i_16
   
-  let (i_4) = - i_3 uc_2
+  let (i_4) = - i_3 i_16
   
   let (i_5) = + i_4 i_2
   
-  let (i_6) = + i_5 up_15
-  
-  let (ures_17) = i_6
+  let (i_6) = + i_5 i_10

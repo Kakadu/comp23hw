@@ -317,7 +317,17 @@ module Infer = struct
                     let* acc = acc in
                     bind_lv_typ acc n t)
                   (return env)
-        | _ -> error "isnt tuple")
+        | _ ->
+            let open Lexing in
+            let pos =
+              { pos_fname = ""; pos_lnum = 0; pos_bol = 0; pos_cnum = 0 }
+            in
+            let loc = { start_p = pos; end_p = pos } in
+            let* t =
+              unify (loc, loc) t
+                (new_tuple (List.init (List.length ns) (fun _ -> new_var ())))
+            in
+            bind_lv_typ env lv t)
 
   module ExprRet = struct
     (* type of value returned by tof_expr *)

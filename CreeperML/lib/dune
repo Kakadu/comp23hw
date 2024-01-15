@@ -21,10 +21,22 @@
    %{targets}
    (run menhir --compile-errors %{deps}))))
 
+(rule
+ (deps bindings.c)
+ (targets bindings.co)
+ (action
+  (run gcc -shared %{deps} -o %{targets})))
+
+(rule
+ (deps bindings.c)
+ (targets bindings.o)
+ (action
+  (run gcc -c %{deps} -o %{targets})))
+
 (library
  (name CreeperML)
  (public_name CreeperML)
- (libraries menhirLib)
+ (libraries menhirLib llvm)
  (flags :standard -color always -safe-string -warn-error -a+8 -w -50)
  (preprocess
   (pps ppx_expect ppx_deriving.show ppx_compare))
