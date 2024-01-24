@@ -299,90 +299,90 @@ open Ast
 module StringMap = Map.Make (String)
 
 (* THIS FUNCTION CREATES DUMMY ID THAT CANNOT BE USED IN CODE AND MUST BE RENAMED FURTHER *)
-let get_lifted_name cnt = <span data-count="18">s</span>tring_of_in<span data-count="18">t</span> cnt ^ "lambda"
+let get_lifted_name cnt = <span data-count="40">s</span>tring_of_in<span data-count="40">t</span> cnt ^ "lambda"
 
 let rec replace_vars old_name new_name = function
-  | <span data-count="17">E</span>Var t when t = old_name -&gt; <span data-count="5">E</span>Var new_name
+  | <span data-count="39">E</span>Var t when t = old_name -&gt; <span data-count="9">E</span>Var new_name
   | <span data-count="0">E</span>UnOp (op, e) -&gt; EUnOp (op, replace_var<span data-count="0">s</span> old_name new_name e)
   | <span data-count="0">E</span>Let (bindings, e) -&gt;
     let new_bindings =
       List.map (fun (r, p, exp) -&gt; <span data-count="0">r</span>, p, replace_var<span data-count="0">s</span> old_name new_name exp) bindings
     in
     <span data-count="0">E</span>Let (new_bindings, replace_var<span data-count="0">s</span> old_name new_name e)
-  | <span data-count="8">E</span>Fun (p, e) -&gt; EFun (p, replace_var<span data-count="8">s</span> old_name new_name e)
-  | <span data-count="2">E</span>If (e1, e2, e3) -&gt;
+  | <span data-count="50">E</span>Fun (p, e) -&gt; EFun (p, replace_var<span data-count="50">s</span> old_name new_name e)
+  | <span data-count="5">E</span>If (e1, e2, e3) -&gt;
     EIf
-      ( replace_var<span data-count="2">s</span> old_name new_name e1
-      , replace_var<span data-count="2">s</span> old_name new_name e2
-      , replace_var<span data-count="2">s</span> old_name new_name e3 )
-  | <span data-count="7">E</span>BinOp (op, e1, e2) -&gt;
-    EBinOp (op, replace_var<span data-count="7">s</span> old_name new_name e1, replace_var<span data-count="7">s</span> old_name new_name e2)
-  | <span data-count="9">E</span>App (e1, e2) -&gt;
-    EApp (replace_var<span data-count="9">s</span> old_name new_name e1, replace_var<span data-count="9">s</span> old_name new_name e2)
-  | <span data-count="19">_</span> as original -&gt; original
+      ( replace_var<span data-count="5">s</span> old_name new_name e1
+      , replace_var<span data-count="5">s</span> old_name new_name e2
+      , replace_var<span data-count="5">s</span> old_name new_name e3 )
+  | <span data-count="14">E</span>BinOp (op, e1, e2) -&gt;
+    EBinOp (op, replace_var<span data-count="14">s</span> old_name new_name e1, replace_var<span data-count="14">s</span> old_name new_name e2)
+  | <span data-count="21">E</span>App (e1, e2) -&gt;
+    EApp (replace_var<span data-count="21">s</span> old_name new_name e1, replace_var<span data-count="21">s</span> old_name new_name e2)
+  | <span data-count="46">_</span> as original -&gt; original
 ;;
 
 let rec lift_exp map cnt exp =
-  <span data-count="116">m</span>atch exp with
+  <span data-count="339">m</span>atch exp with
   | <span data-count="0">E</span>UnOp (op, e) -&gt;
     let new_map, new_cnt, new_e = lift_exp map cnt e in
     <span data-count="0">n</span>ew_map, new_cnt, EUnOp (op, new_e)
-  | <span data-count="5">E</span>Let (bindings, e) -&gt;
+  | <span data-count="9">E</span>Let (bindings, e) -&gt;
     let (map, cnt), new_bindings =
       List.fold_left_map
         (fun (acc_map, acc_cnt) (is_rec, pt, elem) -&gt;
-          <span data-count="8">l</span>et next_map, next_cnt, new_elem = lift_exp acc_map acc_cnt elem in
-          <span data-count="8">l</span>et next_map =
+          <span data-count="13">l</span>et next_map, next_cnt, new_elem = lift_exp acc_map acc_cnt elem in
+          <span data-count="13">l</span>et next_map =
             match elem with
-            | <span data-count="3">E</span>Fun _ when is_rec -&gt;
-              <span data-count="3">l</span>et last_name = get_lifted_name (next_cnt - 1) in
-              <span data-count="3">l</span>et (DLet (_, p, e)) = StringMap.find last_name next_map in
-              <span data-count="3">l</span>et new_e =
+            | <span data-count="5">E</span>Fun _ when is_rec -&gt;
+              <span data-count="5">l</span>et last_name = get_lifted_name (next_cnt - 1) in
+              <span data-count="5">l</span>et (DLet (_, p, e)) = StringMap.find last_name next_map in
+              <span data-count="5">l</span>et new_e =
                 match pt with
-                | <span data-count="3">P</span>tVar old_name -&gt; replace_var<span data-count="3">s</span> old_name last_name e
+                | <span data-count="5">P</span>tVar old_name -&gt; replace_var<span data-count="5">s</span> old_name last_name e
                 | <span data-count="0">_</span> -&gt; e
               in
-              StringMap.ad<span data-count="3">d</span>
+              StringMap.ad<span data-count="5">d</span>
                 last_name
                 (DLet (true, p, new_e))
-                (StringMap.remov<span data-count="3">e</span> last_name next_map)
-            | <span data-count="5">_</span> -&gt; next_map
+                (StringMap.remov<span data-count="5">e</span> last_name next_map)
+            | <span data-count="8">_</span> -&gt; next_map
           in
           (next_map, next_cnt), (is_rec, pt, new_elem))
         (map, cnt)
         bindings
     in
-    <span data-count="5">l</span>et final_map, final_cnt, new_e = lift_exp map cnt e in
-    <span data-count="5">f</span>inal_map, final_cnt, ELet (new_bindings, new_e)
-  | <span data-count="14">E</span>Fun _ -&gt;
+    <span data-count="9">l</span>et final_map, final_cnt, new_e = lift_exp map cnt e in
+    <span data-count="9">f</span>inal_map, final_cnt, ELet (new_bindings, new_e)
+  | <span data-count="30">E</span>Fun _ -&gt;
     let rec helper_efun = function
-      | <span data-count="24">E</span>Fun (_, ex) -&gt; helper_efun ex
-      | <span data-count="14">o</span>ther -&gt; other
+      | <span data-count="84">E</span>Fun (_, ex) -&gt; helper_efun ex
+      | <span data-count="30">o</span>ther -&gt; other
     in
     let e = helper_efun exp in
-    <span data-count="14">l</span>et map, cnt, new_e = lift_exp map cnt e in
-    <span data-count="14">l</span>et name = get_lifted_name cnt in
-    <span data-count="14">l</span>et rec helper_result = function
-      | <span data-count="24">E</span>Fun (p, e) -&gt; EFun (p, helper_resul<span data-count="24">t</span> e)
-      | <span data-count="14">_</span> -&gt; new_e
+    <span data-count="30">l</span>et map, cnt, new_e = lift_exp map cnt e in
+    <span data-count="30">l</span>et name = get_lifted_name cnt in
+    <span data-count="30">l</span>et rec helper_result = function
+      | <span data-count="84">E</span>Fun (p, e) -&gt; EFun (p, helper_resul<span data-count="84">t</span> e)
+      | <span data-count="30">_</span> -&gt; new_e
     in
     let new_efun = helper_result exp in
-    <span data-count="14">l</span>et new_map = StringMap.add name (DLet (false, PtVar name, new_efun)) map in
-    <span data-count="14">n</span>ew_map, cnt + 1, EVar name
-  | <span data-count="2">E</span>If (e1, e2, e3) -&gt;
+    <span data-count="30">l</span>et new_map = StringMap.add name (DLet (false, PtVar name, new_efun)) map in
+    <span data-count="30">n</span>ew_map, cnt + 1, EVar name
+  | <span data-count="5">E</span>If (e1, e2, e3) -&gt;
     let map1, cnt1, exp1 = lift_exp map cnt e1 in
-    <span data-count="2">l</span>et map2, cnt2, exp2 = lift_exp map1 cnt1 e2 in
-    <span data-count="2">l</span>et map3, cnt3, exp3 = lift_exp map2 cnt2 e3 in
-    <span data-count="2">m</span>ap3, cnt3, EIf (exp1, exp2, exp3)
-  | <span data-count="14">E</span>BinOp (op, e1, e2) -&gt;
+    <span data-count="5">l</span>et map2, cnt2, exp2 = lift_exp map1 cnt1 e2 in
+    <span data-count="5">l</span>et map3, cnt3, exp3 = lift_exp map2 cnt2 e3 in
+    <span data-count="5">m</span>ap3, cnt3, EIf (exp1, exp2, exp3)
+  | <span data-count="35">E</span>BinOp (op, e1, e2) -&gt;
     let map1, cnt1, exp1 = lift_exp map cnt e1 in
-    <span data-count="14">l</span>et map2, cnt2, exp2 = lift_exp map1 cnt1 e2 in
-    <span data-count="14">m</span>ap2, cnt2, EBinOp (op, exp1, exp2)
-  | <span data-count="24">E</span>App (e1, e2) -&gt;
+    <span data-count="35">l</span>et map2, cnt2, exp2 = lift_exp map1 cnt1 e2 in
+    <span data-count="35">m</span>ap2, cnt2, EBinOp (op, exp1, exp2)
+  | <span data-count="87">E</span>App (e1, e2) -&gt;
     let map1, cnt1, exp1 = lift_exp map cnt e1 in
-    <span data-count="24">l</span>et map2, cnt2, exp2 = lift_exp map1 cnt1 e2 in
-    <span data-count="24">m</span>ap2, cnt2, EApp (exp1, exp2)
-  | <span data-count="57">_</span> -&gt; map, cnt, exp
+    <span data-count="87">l</span>et map2, cnt2, exp2 = lift_exp map1 cnt1 e2 in
+    <span data-count="87">m</span>ap2, cnt2, EApp (exp1, exp2)
+  | <span data-count="173">_</span> -&gt; map, cnt, exp
 ;;
 
 let lift_decl map cnt (DLet (is_rec, pt, exp)) =
@@ -391,32 +391,32 @@ let lift_decl map cnt (DLet (is_rec, pt, exp)) =
 ;;
 
 let lift_prog prog =
-  <span data-count="5">l</span>et (new_bindings, _), new_prog =
+  <span data-count="16">l</span>et (new_bindings, _), new_prog =
     List.fold_left_map
       (fun (acc_map, acc_cnt) (DLet (is_rec, pt, elem)) -&gt;
-        <span data-count="7">l</span>et next_map, next_cnt, new_elem = lift_exp acc_map acc_cnt elem in
-        <span data-count="7">l</span>et next_map =
+        <span data-count="28">l</span>et next_map, next_cnt, new_elem = lift_exp acc_map acc_cnt elem in
+        <span data-count="28">l</span>et next_map =
           match elem with
-          | <span data-count="4">E</span>Fun _ when is_rec -&gt;
-            <span data-count="1">l</span>et last_name = get_lifted_name (next_cnt - 1) in
-            <span data-count="1">l</span>et (DLet (_, p, e)) = StringMap.find last_name next_map in
-            <span data-count="1">l</span>et new_e =
+          | <span data-count="12">E</span>Fun _ when is_rec -&gt;
+            <span data-count="5">l</span>et last_name = get_lifted_name (next_cnt - 1) in
+            <span data-count="5">l</span>et (DLet (_, p, e)) = StringMap.find last_name next_map in
+            <span data-count="5">l</span>et new_e =
               match pt with
-              | <span data-count="1">P</span>tVar old_name -&gt; replace_var<span data-count="1">s</span> old_name last_name e
+              | <span data-count="5">P</span>tVar old_name -&gt; replace_var<span data-count="5">s</span> old_name last_name e
               | <span data-count="0">_</span> -&gt; e
             in
-            StringMap.ad<span data-count="1">d</span>
+            StringMap.ad<span data-count="5">d</span>
               last_name
               (DLet (true, p, new_e))
-              (StringMap.remov<span data-count="1">e</span> last_name next_map)
-          | <span data-count="6">_</span> -&gt; next_map
+              (StringMap.remov<span data-count="5">e</span> last_name next_map)
+          | <span data-count="23">_</span> -&gt; next_map
         in
         (next_map, next_cnt), DLet (is_rec, pt, new_elem))
       (StringMap.empty, 0)
       prog
   in
-  <span data-count="5">l</span>et new_bindings = List.map snd @@ List.of_se<span data-count="5">q</span> @@ StringMap.to_se<span data-count="5">q</span> new_bindings in
-  <span data-count="5">n</span>ew_bindings @ new_prog
+  <span data-count="16">l</span>et new_bindings = List.map snd @@ List.of_se<span data-count="16">q</span> @@ StringMap.to_se<span data-count="16">q</span> new_bindings in
+  <span data-count="16">n</span>ew_bindings @ new_prog
 ;;
 </code></pre>
       </div>

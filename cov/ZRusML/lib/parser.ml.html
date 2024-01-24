@@ -567,84 +567,84 @@ open Angstrom
 open Ast
 open Base
 
-let parse p s = <span data-count="30">p</span>arse_string ~consume:All p s
+let parse p s = <span data-count="41">p</span>arse_string ~consume:All p s
 
 let is_empty = function
-  | <span data-count="2001">'</span> ' | <span data-count="0">'</span>\t' | <span data-count="0">'</span>\r' | <span data-count="221">'</span>\n' -&gt; true
-  | <span data-count="13405">_</span> -&gt; false
+  | <span data-count="2394">'</span> ' | <span data-count="0">'</span>\t' | <span data-count="0">'</span>\r' | <span data-count="266">'</span>\n' -&gt; true
+  | <span data-count="17913">_</span> -&gt; false
 ;;
 
 let not_is_empty c = <span data-count="0">i</span>s_empty c |&gt; <span data-count="0">n</span>ot
-let empty = take_whil<span data-count="17">e</span> is_empty
-let empty_lr p = <span data-count="1062">e</span>mpty *<span data-count="1062">&gt;</span> p &lt;* empty
+let empty = take_whil<span data-count="28">e</span> is_empty
+let empty_lr p = <span data-count="1589">e</span>mpty *<span data-count="1589">&gt;</span> p &lt;* empty
 
 let is_digit = function
-  | <span data-count="133">'</span>0' .. '9' -&gt; true
-  | <span data-count="1825">_</span> -&gt; false
+  | <span data-count="209">'</span>0' .. '9' -&gt; true
+  | <span data-count="2562">_</span> -&gt; false
 ;;
 
 let is_lower = function
-  | <span data-count="310">'</span>a' .. 'z' -&gt; true
-  | <span data-count="627">_</span> -&gt; false
+  | <span data-count="524">'</span>a' .. 'z' -&gt; true
+  | <span data-count="834">_</span> -&gt; false
 ;;
 
 let is_upper = function
   | <span data-count="0">'</span>A' .. 'Z' -&gt; true
-  | <span data-count="627">_</span> -&gt; false
+  | <span data-count="834">_</span> -&gt; false
 ;;
 
 let is_wild = function
-  | <span data-count="3">'</span>_' -&gt; true
-  | <span data-count="624">_</span> -&gt; false
+  | <span data-count="16">'</span>_' -&gt; true
+  | <span data-count="818">_</span> -&gt; false
 ;;
 
-let is_valid_ident c = <span data-count="946">i</span>s_digi<span data-count="946">t</span> <span data-count="9">c</span> || is_lowe<span data-count="937">r</span> <span data-count="310">c</span> || is_uppe<span data-count="627">r</span> <span data-count="0">c</span> || is_wild c
+let is_valid_ident c = <span data-count="1387">i</span>s_digi<span data-count="1387">t</span> <span data-count="29">c</span> || is_lowe<span data-count="1358">r</span> <span data-count="524">c</span> || is_uppe<span data-count="834">r</span> <span data-count="0">c</span> || is_wild c
 
 let is_keyword = function
   | <span data-count="0">"</span>let"
-  | <span data-count="36">"</span>in"
+  | <span data-count="41">"</span>in"
   | <span data-count="0">"</span>true"
   | <span data-count="0">"</span>false"
   | <span data-count="0">"</span>rec"
   | <span data-count="0">"</span>if"
-  | <span data-count="12">"</span>else"
-  | <span data-count="12">"</span>then"
+  | <span data-count="15">"</span>else"
+  | <span data-count="15">"</span>then"
   | <span data-count="0">"</span>with"
   | <span data-count="0">"</span>fun"
   | <span data-count="0">"</span>function"
   | <span data-count="0">"</span>match" -&gt; true
-  | <span data-count="364">_</span> -&gt; false
+  | <span data-count="491">_</span> -&gt; false
 ;;
 
-let token s = <span data-count="2998">e</span>mpty *&gt; strin<span data-count="2998">g</span> s
+let token s = <span data-count="4558">e</span>mpty *&gt; strin<span data-count="4558">g</span> s
 
 let keyword s =
-  <span data-count="996">t</span>oke<span data-count="996">n</span> s
+  <span data-count="1500">t</span>oke<span data-count="1500">n</span> s
   &lt;* (peek_char
-      &gt;&gt;<span data-count="996">|</span> function
-      | <span data-count="199">S</span>ome x when is_valid_iden<span data-count="199">t</span> x -&gt; <span data-count="0">f</span>ail "Incorrect keyword"
-      | <span data-count="199">_</span> -&gt; return None)
+      &gt;&gt;<span data-count="1500">|</span> function
+      | <span data-count="250">S</span>ome x when is_valid_iden<span data-count="250">t</span> x -&gt; <span data-count="0">f</span>ail "Incorrect keyword"
+      | <span data-count="250">_</span> -&gt; return None)
 ;;
 
 let between l r p = <span data-count="0">l</span> *<span data-count="0">&gt;</span> p &lt;* r
-let brackets p = <span data-count="100">t</span>oke<span data-count="100">n</span> "(" *<span data-count="100">&gt;</span> p &lt;* toke<span data-count="100">n</span> ")"
-let cint n = <span data-count="92">C</span>Int n
-let cbool b = <span data-count="34">C</span>Bool b
-let econst c = <span data-count="96">E</span>Const c
+let brackets p = <span data-count="159">t</span>oke<span data-count="159">n</span> "(" *<span data-count="159">&gt;</span> p &lt;* toke<span data-count="159">n</span> ")"
+let cint n = <span data-count="146">C</span>Int n
+let cbool b = <span data-count="56">C</span>Bool b
+let econst c = <span data-count="150">E</span>Const c
 let eunop o e = <span data-count="1">E</span>UnOp (o, e)
-let evar id = <span data-count="193">E</span>Var id
-let eif e1 e2 e3 = <span data-count="12">E</span>If (e1, e2, e3)
-let elet binds e = <span data-count="21">E</span>Let (binds, e)
-let efun p e = <span data-count="86">E</span>Fun (p, e)
-let eapp = retur<span data-count="17">n</span> (fun e1 e2 -&gt; <span data-count="74">E</span>App (e1, e2))
-let efun args rhs = <span data-count="105">L</span>ist.fold_right args ~f:efun ~init:rhs
-let ebinop o e1 e2 = <span data-count="106">E</span>BinOp (o, e1, e2)
+let evar id = <span data-count="247">E</span>Var id
+let eif e1 e2 e3 = <span data-count="15">E</span>If (e1, e2, e3)
+let elet binds e = <span data-count="25">E</span>Let (binds, e)
+let efun p e = <span data-count="138">E</span>Fun (p, e)
+let eapp = retur<span data-count="28">n</span> (fun e1 e2 -&gt; <span data-count="129">E</span>App (e1, e2))
+let efun args rhs = <span data-count="136">L</span>ist.fold_right args ~f:efun ~init:rhs
+let ebinop o e1 e2 = <span data-count="127">E</span>BinOp (o, e1, e2)
 let ccase p e = <span data-count="0">p</span>, e
-let bbind isrec p e = <span data-count="36">i</span>srec, p, e
-let ptwild _ = <span data-count="1">P</span>tWild
-let ptvar id = <span data-count="171">P</span>tVar id
+let bbind isrec p e = <span data-count="41">i</span>srec, p, e
+let ptwild _ = <span data-count="6">P</span>tWild
+let ptvar id = <span data-count="244">P</span>tVar id
 let ptconst c = <span data-count="0">P</span>tConst c
-let dlet isrec p e = <span data-count="49">D</span>Let (isrec, p, e)
+let dlet isrec p e = <span data-count="70">D</span>Let (isrec, p, e)
 
 let procr op pl pr =
   <span data-count="0">l</span>et p =
@@ -654,68 +654,68 @@ let procr op pl pr =
 ;;
 
 let procl op pl pr =
-  <span data-count="558">l</span>et rec go acc =
-    <span data-count="1213">(</span>fun f x -&gt; <span data-count="106">f</span> acc x) &lt;$<span data-count="1213">&gt;</span> op &lt;*<span data-count="1213">&gt;</span> choic<span data-count="1213">e</span> [ pl &gt;&gt;<span data-count="1213">=</span> go; pr ] &lt;|&gt; retur<span data-count="1213">n</span> acc
+  <span data-count="846">l</span>et rec go acc =
+    <span data-count="1586">(</span>fun f x -&gt; <span data-count="127">f</span> acc x) &lt;$<span data-count="1586">&gt;</span> op &lt;*<span data-count="1586">&gt;</span> choic<span data-count="1586">e</span> [ pl &gt;&gt;<span data-count="1586">=</span> go; pr ] &lt;|&gt; retur<span data-count="1586">n</span> acc
   in
   pl &gt;&gt;= go
 ;;
 
 let choice_op ops =
-  <span data-count="558">c</span>hoice @@ List.ma<span data-count="558">p</span> ~f:(fun (tok, cons) -&gt; <span data-count="1116">t</span>oke<span data-count="1116">n</span> tok *&gt; (retur<span data-count="1116">n</span> @@ ebino<span data-count="1116">p</span> cons)) ops
+  <span data-count="846">c</span>hoice @@ List.ma<span data-count="846">p</span> ~f:(fun (tok, cons) -&gt; <span data-count="1692">t</span>oke<span data-count="1692">n</span> tok *&gt; (retur<span data-count="1692">n</span> @@ ebino<span data-count="1692">p</span> cons)) ops
 ;;
 
 let apply_unary p =
-  <span data-count="186">c</span>hoice
-    [ toke<span data-count="186">n</span> "-" *<span data-count="186">&gt;</span> p &gt;&gt;<span data-count="186">|</span> euno<span data-count="186">p</span> Minus
-    ; keywor<span data-count="186">d</span> "not" *<span data-count="186">&gt;</span> p &gt;&gt;<span data-count="186">|</span> euno<span data-count="186">p</span> Not
-    ; toke<span data-count="186">n</span> "+" *<span data-count="186">&gt;</span> p
+  <span data-count="282">c</span>hoice
+    [ toke<span data-count="282">n</span> "-" *<span data-count="282">&gt;</span> p &gt;&gt;<span data-count="282">|</span> euno<span data-count="282">p</span> Minus
+    ; keywor<span data-count="282">d</span> "not" *<span data-count="282">&gt;</span> p &gt;&gt;<span data-count="282">|</span> euno<span data-count="282">p</span> Not
+    ; toke<span data-count="282">n</span> "+" *<span data-count="282">&gt;</span> p
     ; p
     ]
 ;;
 
 let id valid_fst =
-  <span data-count="17">l</span>et* fst = empty *<span data-count="17">&gt;</span> satisf<span data-count="17">y</span> valid_fst in
-  <span data-count="425">l</span>et take_func =
+  <span data-count="28">l</span>et* fst = empty *<span data-count="28">&gt;</span> satisf<span data-count="28">y</span> valid_fst in
+  <span data-count="568">l</span>et take_func =
     match fst with
-    | <span data-count="1">'</span>_' -&gt; many1
-    | <span data-count="424">_</span> -&gt; many
+    | <span data-count="6">'</span>_' -&gt; many1
+    | <span data-count="562">_</span> -&gt; many
   in
-  let* inner = take_fun<span data-count="425">c</span> @@ satisf<span data-count="425">y</span> is_valid_ident in
-  <span data-count="424">l</span>et id = Base.String.of_char_list @@ (fst :: inner) in
-  <span data-count="424">i</span>f is_keyword id then <span data-count="60">f</span>ail "Keyword" else <span data-count="364">r</span>eturn id
+  let* inner = take_fun<span data-count="568">c</span> @@ satisf<span data-count="568">y</span> is_valid_ident in
+  <span data-count="562">l</span>et id = Base.String.of_char_list @@ (fst :: inner) in
+  <span data-count="562">i</span>f is_keyword id then <span data-count="71">f</span>ail "Keyword" else <span data-count="491">r</span>eturn id
 ;;
 
 let ident =
-  i<span data-count="17">d</span>
+  i<span data-count="28">d</span>
   @@ function
-  | <span data-count="424">'</span>a' .. 'z' | <span data-count="1">'</span>_' -&gt; true
-  | <span data-count="367">_</span> -&gt; false
+  | <span data-count="562">'</span>a' .. 'z' | <span data-count="6">'</span>_' -&gt; true
+  | <span data-count="486">_</span> -&gt; false
 ;;
 
-let uns = empty_l<span data-count="17">r</span> @@ take_while<span data-count="17">1</span> is_digit
+let uns = empty_l<span data-count="28">r</span> @@ take_while<span data-count="28">1</span> is_digit
 
 let cunsint =
   let* uns = uns in
-  <span data-count="92">r</span>etur<span data-count="92">n</span> @@ Base.Int.of_strin<span data-count="92">g</span> uns &gt;&gt;| cint
+  <span data-count="146">r</span>etur<span data-count="146">n</span> @@ Base.Int.of_strin<span data-count="146">g</span> uns &gt;&gt;| cint
 ;;
 
 let cint =
-  let* sign = optio<span data-count="17">n</span> "" (toke<span data-count="17">n</span> "+" &lt;|<span data-count="17">&gt;</span> toke<span data-count="17">n</span> "-") in
-  <span data-count="278">l</span>et* uns = empty_l<span data-count="278">r</span> @@ take_while<span data-count="278">1</span> is_digit in
+  let* sign = optio<span data-count="28">n</span> "" (toke<span data-count="28">n</span> "+" &lt;|<span data-count="28">&gt;</span> toke<span data-count="28">n</span> "-") in
+  <span data-count="387">l</span>et* uns = empty_l<span data-count="387">r</span> @@ take_while<span data-count="387">1</span> is_digit in
   <span data-count="0">r</span>etur<span data-count="0">n</span> @@ Base.Int.of_strin<span data-count="0">g</span> (sign ^ uns) &gt;&gt;| cint
 ;;
 
 let cbool =
-  let ctrue = keywor<span data-count="17">d</span> "true" *&gt; retur<span data-count="17">n</span> (cboo<span data-count="17">l</span> true) in
-  <span data-count="17">l</span>et cfalse = keywor<span data-count="17">d</span> "false" *&gt; retur<span data-count="17">n</span> (cboo<span data-count="17">l</span> false) in
-  <span data-count="17">c</span>true &lt;|<span data-count="17">&gt;</span> cfalse
+  let ctrue = keywor<span data-count="28">d</span> "true" *&gt; retur<span data-count="28">n</span> (cboo<span data-count="28">l</span> true) in
+  <span data-count="28">l</span>et cfalse = keywor<span data-count="28">d</span> "false" *&gt; retur<span data-count="28">n</span> (cboo<span data-count="28">l</span> false) in
+  <span data-count="28">c</span>true &lt;|<span data-count="28">&gt;</span> cfalse
 ;;
 
-let const = empty_l<span data-count="17">r</span> @@ choic<span data-count="17">e</span> [ cint; cbool ]
-let uns_const = empty_l<span data-count="17">r</span> @@ choic<span data-count="17">e</span> [ cunsint; cbool ]
-let ptvar = ident &gt;&gt;<span data-count="17">|</span> ptvar
-let ptwild = toke<span data-count="17">n</span> "_" &gt;&gt;<span data-count="17">|</span> ptwild
-let ptconst = const &gt;&gt;<span data-count="17">|</span> ptconst
+let const = empty_l<span data-count="28">r</span> @@ choic<span data-count="28">e</span> [ cint; cbool ]
+let uns_const = empty_l<span data-count="28">r</span> @@ choic<span data-count="28">e</span> [ cunsint; cbool ]
+let ptvar = ident &gt;&gt;<span data-count="28">|</span> ptvar
+let ptwild = toke<span data-count="28">n</span> "_" &gt;&gt;<span data-count="28">|</span> ptwild
+let ptconst = const &gt;&gt;<span data-count="28">|</span> ptconst
 
 type pdispatch =
   { other : pdispatch -&gt; pt t
@@ -728,17 +728,17 @@ let chainl1 e op =
 ;;
 
 let pack =
-  let pt d = <span data-count="24">f</span>ix @@ fun _self -&gt; <span data-count="7">e</span>mpty_lr @@ d.othe<span data-count="7">r</span> d in
+  let pt d = <span data-count="46">f</span>ix @@ fun _self -&gt; <span data-count="18">e</span>mpty_lr @@ d.othe<span data-count="18">r</span> d in
   let other d =
-    <span data-count="7">f</span>ix
+    <span data-count="18">f</span>ix
     @@ fun _self -&gt;
-    <span data-count="7">l</span>et prim = empty_lr @@ choic<span data-count="7">e</span> [ ptconst; ptvar; ptwild; bracket<span data-count="7">s</span> @@ d.p<span data-count="7">t</span> d ] in
-    <span data-count="7">p</span>rim
+    <span data-count="18">l</span>et prim = empty_lr @@ choic<span data-count="18">e</span> [ ptconst; ptvar; ptwild; bracket<span data-count="18">s</span> @@ d.p<span data-count="18">t</span> d ] in
+    <span data-count="18">p</span>rim
   in
   { other; pt }
 ;;
 
-let pt = pack.p<span data-count="17">t</span> pack
+let pt = pack.p<span data-count="28">t</span> pack
 
 type edispatch =
   { key : edispatch -&gt; exp t
@@ -747,73 +747,73 @@ type edispatch =
   }
 
 let chainl1' i e op =
-  <span data-count="93">l</span>et rec go acc = <span data-count="342">o</span>p &gt;&gt;<span data-count="342">|</span> (fun f x -&gt; <span data-count="74">f</span> acc x) &lt;*<span data-count="342">&gt;</span> e &gt;&gt;<span data-count="342">=</span> go &lt;|&gt; retur<span data-count="342">n</span> acc in
+  <span data-count="141">l</span>et rec go acc = <span data-count="473">o</span>p &gt;&gt;<span data-count="473">|</span> (fun f x -&gt; <span data-count="129">f</span> acc x) &lt;*<span data-count="473">&gt;</span> e &gt;&gt;<span data-count="473">=</span> go &lt;|&gt; retur<span data-count="473">n</span> acc in
   i &gt;&gt;= go
 ;;
 
 let pack =
   let pt = pt in
-  let exp d = <span data-count="746">f</span>ix @@ fun _self -&gt; <span data-count="105">e</span>mpty_l<span data-count="105">r</span> @@ d.ke<span data-count="105">y</span> d &lt;|&gt; d.o<span data-count="105">p</span> d in
+  let exp d = <span data-count="1117">f</span>ix @@ fun _self -&gt; <span data-count="157">e</span>mpty_l<span data-count="157">r</span> @@ d.ke<span data-count="157">y</span> d &lt;|&gt; d.o<span data-count="157">p</span> d in
   let key d =
-    <span data-count="663">f</span>ix
+    <span data-count="1003">f</span>ix
     @@ fun _self -&gt;
-    <span data-count="106">l</span>et eif =
+    <span data-count="158">l</span>et eif =
       empty_lr
-      @@ lift<span data-count="106">3</span>
+      @@ lift<span data-count="158">3</span>
            eif
-           (keywor<span data-count="106">d</span> "if" *<span data-count="106">&gt;</span> d.ex<span data-count="106">p</span> d)
-           (keywor<span data-count="106">d</span> "then" *<span data-count="106">&gt;</span> d.ex<span data-count="106">p</span> d)
-           (keywor<span data-count="106">d</span> "else" *<span data-count="106">&gt;</span> d.ex<span data-count="106">p</span> d)
+           (keywor<span data-count="158">d</span> "if" *<span data-count="158">&gt;</span> d.ex<span data-count="158">p</span> d)
+           (keywor<span data-count="158">d</span> "then" *<span data-count="158">&gt;</span> d.ex<span data-count="158">p</span> d)
+           (keywor<span data-count="158">d</span> "else" *<span data-count="158">&gt;</span> d.ex<span data-count="158">p</span> d)
     in
-    <span data-count="106">l</span>et elet =
+    <span data-count="158">l</span>et elet =
       let binding =
         empty_lr
           (bbind
-           &lt;$<span data-count="106">&gt;</span> keywor<span data-count="106">d</span> "let" *<span data-count="106">&gt;</span> optio<span data-count="106">n</span> false (keywor<span data-count="106">d</span> "rec" &gt;&gt;<span data-count="106">|</span> fun _ -&gt; <span data-count="7">t</span>rue)
-           &lt;*<span data-count="106">&gt;</span> pt
-           &lt;*<span data-count="106">&gt;</span> (efun &lt;$<span data-count="106">&gt;</span> (empty *<span data-count="106">&gt;</span> man<span data-count="106">y</span> pt &lt;<span data-count="106">*</span> toke<span data-count="106">n</span> "=") &lt;*<span data-count="106">&gt;</span> (d.ex<span data-count="106">p</span> d &lt;<span data-count="106">*</span> keywor<span data-count="106">d</span> "in")))
+           &lt;$<span data-count="158">&gt;</span> keywor<span data-count="158">d</span> "let" *<span data-count="158">&gt;</span> optio<span data-count="158">n</span> false (keywor<span data-count="158">d</span> "rec" &gt;&gt;<span data-count="158">|</span> fun _ -&gt; <span data-count="9">t</span>rue)
+           &lt;*<span data-count="158">&gt;</span> pt
+           &lt;*<span data-count="158">&gt;</span> (efun &lt;$<span data-count="158">&gt;</span> (empty *<span data-count="158">&gt;</span> man<span data-count="158">y</span> pt &lt;<span data-count="158">*</span> toke<span data-count="158">n</span> "=") &lt;*<span data-count="158">&gt;</span> (d.ex<span data-count="158">p</span> d &lt;<span data-count="158">*</span> keywor<span data-count="158">d</span> "in")))
       in
-      <span data-count="106">e</span>let &lt;$<span data-count="106">&gt;</span> many<span data-count="106">1</span> binding &lt;*<span data-count="106">&gt;</span> d.ex<span data-count="106">p</span> d
+      <span data-count="158">e</span>let &lt;$<span data-count="158">&gt;</span> many<span data-count="158">1</span> binding &lt;*<span data-count="158">&gt;</span> d.ex<span data-count="158">p</span> d
     in
-    let efun = empty_lr (efun &lt;$<span data-count="106">&gt;</span> (keywor<span data-count="106">d</span> "fun" *<span data-count="106">&gt;</span> man<span data-count="106">y</span> pt &lt;<span data-count="106">*</span> toke<span data-count="106">n</span> "-&gt;") &lt;*<span data-count="106">&gt;</span> d.ex<span data-count="106">p</span> d) in
-    <span data-count="106">c</span>hoice [ elet; eif; efun ]
+    let efun = empty_lr (efun &lt;$<span data-count="158">&gt;</span> (keywor<span data-count="158">d</span> "fun" *<span data-count="158">&gt;</span> man<span data-count="158">y</span> pt &lt;<span data-count="158">*</span> toke<span data-count="158">n</span> "-&gt;") &lt;*<span data-count="158">&gt;</span> d.ex<span data-count="158">p</span> d) in
+    <span data-count="158">c</span>hoice [ elet; eif; efun ]
   in
   let op d =
-    <span data-count="105">f</span>ix
+    <span data-count="157">f</span>ix
     @@ fun _self -&gt;
-    <span data-count="93">l</span>et prim =
-      empty_lr @@ choic<span data-count="93">e</span> [ uns_const &gt;&gt;<span data-count="93">|</span> econst; ident &gt;&gt;<span data-count="93">|</span> evar; bracket<span data-count="93">s</span> @@ d.ex<span data-count="93">p</span> d ]
+    <span data-count="141">l</span>et prim =
+      empty_lr @@ choic<span data-count="141">e</span> [ uns_const &gt;&gt;<span data-count="141">|</span> econst; ident &gt;&gt;<span data-count="141">|</span> evar; bracket<span data-count="141">s</span> @@ d.ex<span data-count="141">p</span> d ]
     in
-    <span data-count="93">l</span>et app_op = empty_lr @@ chainl1<span data-count="93">'</span> prim prim eapp in
-    <span data-count="93">l</span>et mul_op = procl (choice_o<span data-count="93">p</span> [ "*", Mul; "/", Div ]) app_op @@ d.ke<span data-count="93">y</span> d in
-    <span data-count="93">l</span>et add_op =
+    <span data-count="141">l</span>et app_op = empty_lr @@ chainl1<span data-count="141">'</span> prim prim eapp in
+    <span data-count="141">l</span>et mul_op = procl (choice_o<span data-count="141">p</span> [ "*", Mul; "/", Div ]) app_op @@ d.ke<span data-count="141">y</span> d in
+    <span data-count="141">l</span>et add_op =
       procl
-        (choice_o<span data-count="93">p</span> [ "+", Add; "-", Sub ])
-        (apply_unar<span data-count="93">y</span> mul_op)
-        (apply_unar<span data-count="93">y</span> @@ d.ke<span data-count="93">y</span> d)
+        (choice_o<span data-count="141">p</span> [ "+", Add; "-", Sub ])
+        (apply_unar<span data-count="141">y</span> mul_op)
+        (apply_unar<span data-count="141">y</span> @@ d.ke<span data-count="141">y</span> d)
     in
-    <span data-count="93">l</span>et cons_op = fix @@ fun _ -&gt; <span data-count="93">a</span>dd_op &gt;&gt;= return in
-    <span data-count="93">l</span>et cmp_op =
-      procl (choice_o<span data-count="93">p</span> [ "&gt;=", Geq; "&gt;", Gre; "&lt;=", Leq; "&lt;", Less ]) cons_op @@ d.ke<span data-count="93">y</span> d
+    <span data-count="141">l</span>et cons_op = fix @@ fun _ -&gt; <span data-count="141">a</span>dd_op &gt;&gt;= return in
+    <span data-count="141">l</span>et cmp_op =
+      procl (choice_o<span data-count="141">p</span> [ "&gt;=", Geq; "&gt;", Gre; "&lt;=", Leq; "&lt;", Less ]) cons_op @@ d.ke<span data-count="141">y</span> d
     in
-    <span data-count="93">l</span>et eq_op = procl (choice_o<span data-count="93">p</span> [ "=", Eq; "&lt;&gt;", Neq ]) cmp_op @@ d.ke<span data-count="93">y</span> d in
-    <span data-count="93">l</span>et conj_op = procl (choice_o<span data-count="93">p</span> [ "&amp;&amp;", And ]) eq_op @@ d.ke<span data-count="93">y</span> d in
-    <span data-count="93">l</span>et disj_op = procl (choice_o<span data-count="93">p</span> [ "||", Or ]) conj_op @@ d.ke<span data-count="93">y</span> d in
-    <span data-count="93">e</span>mpty_lr disj_op
+    <span data-count="141">l</span>et eq_op = procl (choice_o<span data-count="141">p</span> [ "=", Eq; "&lt;&gt;", Neq ]) cmp_op @@ d.ke<span data-count="141">y</span> d in
+    <span data-count="141">l</span>et conj_op = procl (choice_o<span data-count="141">p</span> [ "&amp;&amp;", And ]) eq_op @@ d.ke<span data-count="141">y</span> d in
+    <span data-count="141">l</span>et disj_op = procl (choice_o<span data-count="141">p</span> [ "||", Or ]) conj_op @@ d.ke<span data-count="141">y</span> d in
+    <span data-count="141">e</span>mpty_lr disj_op
   in
   { key; op; exp }
 ;;
 
 let decl =
-  lift<span data-count="17">3</span>
+  lift<span data-count="28">3</span>
     dlet
-    (keywor<span data-count="17">d</span> "let" *<span data-count="17">&gt;</span> optio<span data-count="17">n</span> false (keywor<span data-count="17">d</span> "rec" &gt;&gt;<span data-count="17">|</span> fun _ -&gt; <span data-count="10">t</span>rue))
+    (keywor<span data-count="28">d</span> "let" *<span data-count="28">&gt;</span> optio<span data-count="28">n</span> false (keywor<span data-count="28">d</span> "rec" &gt;&gt;<span data-count="28">|</span> fun _ -&gt; <span data-count="14">t</span>rue))
     pt
-    (efun &lt;$<span data-count="17">&gt;</span> (empty *<span data-count="17">&gt;</span> man<span data-count="17">y</span> pt &lt;<span data-count="17">*</span> toke<span data-count="17">n</span> "=") &lt;*<span data-count="17">&gt;</span> pack.ex<span data-count="17">p</span> pack)
+    (efun &lt;$<span data-count="28">&gt;</span> (empty *<span data-count="28">&gt;</span> man<span data-count="28">y</span> pt &lt;<span data-count="28">*</span> toke<span data-count="28">n</span> "=") &lt;*<span data-count="28">&gt;</span> pack.ex<span data-count="28">p</span> pack)
 ;;
 
-let pprog (l : decl list) : prog = <span data-count="29">l</span>
-let prog = sep_by<span data-count="17">1</span> (toke<span data-count="17">n</span> ";;") decl &lt;<span data-count="17">*</span> option "<span data-count="17">"</span> @@ empty_l<span data-count="17">r</span> (toke<span data-count="17">n</span> ";;") &gt;&gt;<span data-count="17">|</span> pprog
+let pprog (l : decl list) : prog = <span data-count="40">l</span>
+let prog = sep_by<span data-count="28">1</span> (toke<span data-count="28">n</span> ";;") decl &lt;<span data-count="28">*</span> option "<span data-count="28">"</span> @@ empty_l<span data-count="28">r</span> (toke<span data-count="28">n</span> ";;") &gt;&gt;<span data-count="28">|</span> pprog
 </code></pre>
       </div>
     </div>
