@@ -18,7 +18,7 @@
       <h2>90.00%</h2>
     </div>
     <div id="navbar">
-      <span class="unvisited" style="top:23.19%"></span>
+      <span class="unvisited" style="top:20.90%"></span>
     </div>
     <div id="report">
       <div id="lines-layer">
@@ -35,18 +35,18 @@
 <a id="L10"></a><span > </span>
 <a id="L11"></a><span > </span>
 <a id="L12"></a><span > </span>
-<a id="L13"></a><span > </span>
-<a id="L14"></a><span > </span>
+<a id="L13"></a><span class="visited"> </span>
+<a id="L14"></a><span class="unvisited"> </span>
 <a id="L15"></a><span class="visited"> </span>
-<a id="L16"></a><span class="unvisited"> </span>
-<a id="L17"></a><span class="visited"> </span>
-<a id="L18"></a><span > </span>
+<a id="L16"></a><span > </span>
+<a id="L17"></a><span > </span>
+<a id="L18"></a><span class="visited"> </span>
 <a id="L19"></a><span > </span>
-<a id="L20"></a><span class="visited"> </span>
+<a id="L20"></a><span > </span>
 <a id="L21"></a><span > </span>
-<a id="L22"></a><span > </span>
+<a id="L22"></a><span class="visited"> </span>
 <a id="L23"></a><span > </span>
-<a id="L24"></a><span class="visited"> </span>
+<a id="L24"></a><span > </span>
 <a id="L25"></a><span > </span>
 <a id="L26"></a><span > </span>
 <a id="L27"></a><span > </span>
@@ -58,9 +58,9 @@
 <a id="L33"></a><span > </span>
 <a id="L34"></a><span > </span>
 <a id="L35"></a><span > </span>
-<a id="L36"></a><span > </span>
+<a id="L36"></a><span class="visited"> </span>
 <a id="L37"></a><span > </span>
-<a id="L38"></a><span class="visited"> </span>
+<a id="L38"></a><span > </span>
 <a id="L39"></a><span > </span>
 <a id="L40"></a><span > </span>
 <a id="L41"></a><span > </span>
@@ -88,10 +88,8 @@
 <a id="L63"></a><span > </span>
 <a id="L64"></a><span > </span>
 <a id="L65"></a><span > </span>
-<a id="L66"></a><span > </span>
+<a id="L66"></a><span class="visited"> </span>
 <a id="L67"></a><span > </span>
-<a id="L68"></a><span class="visited"> </span>
-<a id="L69"></a><span > </span>
 </pre>
       </div>
       <div id="text-layer">
@@ -163,8 +161,6 @@
 <a href="#L65">65</a>
 <a href="#L66">66</a>
 <a href="#L67">67</a>
-<a href="#L68">68</a>
-<a href="#L69">69</a>
 </pre>
 <pre><code class="ocaml">(** Copyright 2023-2024, Rustam Shangareev and Danil Yevdokimov *)
 
@@ -172,9 +168,7 @@
 
 open ZRusML_lib.Anf
 open ZRusML_lib.Anf_pretty
-open ZRusML_lib.Ast
 open ZRusML_lib.Parser
-open ZRusML_lib.Pretty_printer
 open ZRusML_lib.Closure_conversion
 open ZRusML_lib.Lambda_lifting
 open ZRusML_lib.Ast_validator
@@ -206,27 +200,27 @@ let%expect_test "anf test sample" =
   <span data-count="1">[</span>%expect
     {|
     let ast_0 ast_1 ast_2 ast_3 =
-        let anf_12 = ast_3 * ast_2 in
-        let anf_13 = ast_1 anf_12 in
-    anf_13;;
+        let anf_11 = ast_3 * ast_2 in
+        let anf_12 = ast_1 anf_11 in
+    anf_12;;
 
     let rec ast_4 ast_5 ast_6 =
-        let anf_5 = ast_5 &lt;= 1 in
-        let anf_11 = if anf_5 then 1 else     let anf_6 = ast_5 - 1 in
-        let anf_7 = ast_4 anf_6 in
-        let anf_8 = ast_0 ast_6 in
-        let anf_9 = anf_8 ast_5 in
-        let anf_10 = anf_7 anf_9 in
-    anf_10 in
-    anf_11;;
+        let anf_4 = ast_5 &lt;= 1 in
+        let anf_10 = if anf_4 then 1 else     let anf_5 = ast_5 - 1 in
+        let anf_6 = ast_4 anf_5 in
+        let anf_7 = ast_0 ast_6 in
+        let anf_8 = anf_7 ast_5 in
+        let anf_9 = anf_6 anf_8 in
+    anf_9 in
+    anf_10;;
 
     let ast_7 ast_8 = ast_8;;
 
     let ast_9 ast_10 =
         let ast_11 = ast_4 in
-        let anf_3 = ast_11 ast_10 in
-        let anf_4 = anf_3 ast_7 in
-    anf_4;;
+        let anf_2 = ast_11 ast_10 in
+        let anf_3 = anf_2 ast_7 in
+    anf_3;;
 
     let ast_12 = ast_9;;
 

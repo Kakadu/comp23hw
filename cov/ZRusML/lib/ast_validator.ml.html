@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8"/>
     <title>ast_validator.ml &mdash; Coverage report</title>
-    <meta name="description" content="88.24% coverage in lib/ast_validator.ml">
+    <meta name="description" content="92.16% coverage in lib/ast_validator.ml">
     <link rel="stylesheet" href="../coverage.css"/>
     <script src="../highlight.pack.js"></script>
     <script>hljs.initHighlightingOnLoad();</script>
@@ -15,11 +15,9 @@
           <span class="dirname">lib/</span>ast_validator.ml
         </a>
       </h1>
-      <h2>88.24%</h2>
+      <h2>92.16%</h2>
     </div>
     <div id="navbar">
-      <span class="unvisited" style="top:15.29%"></span>
-      <span class="unvisited" style="top:17.65%"></span>
       <span class="unvisited" style="bottom:34.12%"></span>
       <span class="unvisited" style="bottom:31.76%"></span>
       <span class="unvisited" style="bottom:8.24%"></span>
@@ -40,9 +38,9 @@
 <a id="L10"></a><span > </span>
 <a id="L11"></a><span class="visited"> </span>
 <a id="L12"></a><span class="visited"> </span>
-<a id="L13"></a><span class="unvisited"> </span>
+<a id="L13"></a><span class="visited"> </span>
 <a id="L14"></a><span > </span>
-<a id="L15"></a><span class="unvisited"> </span>
+<a id="L15"></a><span class="visited"> </span>
 <a id="L16"></a><span class="visited"> </span>
 <a id="L17"></a><span > </span>
 <a id="L18"></a><span class="visited"> </span>
@@ -210,31 +208,31 @@
 open Ast
 module StringMap = Map.Make (String)
 
-let get_validated_name cnt = <span data-count="127">"</span>ast_" ^ string_of_in<span data-count="127">t</span> cnt
+let get_validated_name cnt = <span data-count="130">"</span>ast_" ^ string_of_in<span data-count="130">t</span> cnt
 
 let rec validate_exp env cnt exp =
-  <span data-count="400">m</span>atch exp with
-  | <span data-count="66">E</span>Const _ -&gt; env, cnt, exp
-  | <span data-count="0">E</span>UnOp (o, e) -&gt;
+  <span data-count="420">m</span>atch exp with
+  | <span data-count="71">E</span>Const _ -&gt; env, cnt, exp
+  | <span data-count="4">E</span>UnOp (o, e) -&gt;
     let new_env, new_cnt, new_exp = validate_exp env cnt e in
-    <span data-count="0">n</span>ew_env, new_cnt, EUnOp (o, new_exp)
-  | <span data-count="123">E</span>Var id -&gt;
+    <span data-count="4">n</span>ew_env, new_cnt, EUnOp (o, new_exp)
+  | <span data-count="129">E</span>Var id -&gt;
     (match StringMap.find_opt id env with
-     | <span data-count="112">S</span>ome v -&gt; env, cnt, EVar v
-     | <span data-count="11">_</span> -&gt; env, cnt, exp)
+     | <span data-count="115">S</span>ome v -&gt; env, cnt, EVar v
+     | <span data-count="14">_</span> -&gt; env, cnt, exp)
   | <span data-count="5">E</span>If (condition, true_branch, false_branch) -&gt;
     let _, new_cnt, new_condition = validate_exp env cnt condition in
     <span data-count="5">l</span>et _, new_cnt, new_true_branch = validate_exp env new_cnt true_branch in
     <span data-count="5">l</span>et _, new_cnt, new_false_branch = validate_exp env new_cnt false_branch in
     <span data-count="5">e</span>nv, new_cnt, EIf (new_condition, new_true_branch, new_false_branch)
-  | <span data-count="32">E</span>BinOp (o, e1, e2) -&gt;
+  | <span data-count="34">E</span>BinOp (o, e1, e2) -&gt;
     let _, new_cnt, new_e1 = validate_exp env cnt e1 in
-    <span data-count="32">l</span>et _, new_cnt, new_e2 = validate_exp env new_cnt e2 in
-    <span data-count="32">e</span>nv, new_cnt, EBinOp (o, new_e1, new_e2)
-  | <span data-count="85">E</span>App (e1, e2) -&gt;
+    <span data-count="34">l</span>et _, new_cnt, new_e2 = validate_exp env new_cnt e2 in
+    <span data-count="34">e</span>nv, new_cnt, EBinOp (o, new_e1, new_e2)
+  | <span data-count="88">E</span>App (e1, e2) -&gt;
     let _, new_cnt, new_e1 = validate_exp env cnt e1 in
-    <span data-count="85">l</span>et _, new_cnt, new_e2 = validate_exp env new_cnt e2 in
-    <span data-count="85">e</span>nv, new_cnt, EApp (new_e1, new_e2)
+    <span data-count="88">l</span>et _, new_cnt, new_e2 = validate_exp env new_cnt e2 in
+    <span data-count="88">e</span>nv, new_cnt, EApp (new_e1, new_e2)
   | <span data-count="81">E</span>Fun (p, e) -&gt;
     (match p with
      | <span data-count="76">P</span>tVar id -&gt;
@@ -269,24 +267,24 @@ let rec validate_exp env cnt exp =
 ;;
 
 let validate_prog prog =
-  <span data-count="15">l</span>et _, new_prog =
+  <span data-count="18">l</span>et _, new_prog =
     List.fold_left_map
       (fun (acc_env, acc_cnt) (DLet (is_rec, p, exp)) -&gt;
-        <span data-count="51">m</span>atch p with
-        | <span data-count="51">P</span>tVar id -&gt;
-          let new_name = if id &lt;&gt; "main" then <span data-count="40">g</span>et_validated_nam<span data-count="40">e</span> acc_cnt else <span data-count="11">"</span>main" in
+        <span data-count="57">m</span>atch p with
+        | <span data-count="57">P</span>tVar id -&gt;
+          let new_name = if id &lt;&gt; "main" then <span data-count="43">g</span>et_validated_nam<span data-count="43">e</span> acc_cnt else <span data-count="14">"</span>main" in
           let acc_cnt = acc_cnt + 1 in
           let new_env = StringMap.add id new_name acc_env in
-          <span data-count="51">l</span>et validated_env = if is_rec then <span data-count="14">n</span>ew_env else <span data-count="37">a</span>cc_env in
+          <span data-count="57">l</span>et validated_env = if is_rec then <span data-count="14">n</span>ew_env else <span data-count="43">a</span>cc_env in
           let _, acc_cnt, new_exp = validate_exp validated_env acc_cnt exp in
-          <span data-count="51">(</span>new_env, acc_cnt), DLet (is_rec, PtVar new_name, new_exp)
+          <span data-count="57">(</span>new_env, acc_cnt), DLet (is_rec, PtVar new_name, new_exp)
         | <span data-count="0">_</span> -&gt;
           let _, acc_cnt, new_exp = validate_exp acc_env acc_cnt exp in
           <span data-count="0">(</span>acc_env, acc_cnt), DLet (is_rec, p, new_exp))
       (StringMap.empty, 0)
       prog
   in
-  <span data-count="15">n</span>ew_prog
+  <span data-count="18">n</span>ew_prog
 ;;
 </code></pre>
       </div>
