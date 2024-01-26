@@ -145,7 +145,7 @@ let print_prog_result code =
         ~f:(fun acc (id, t) -&gt; <span data-count="28">T</span>ypeEnv.extend acc id (Set.empt<span data-count="28">y</span> (module Int), t))
         stdlib
     in
-    <span data-count="14">(</span>match env_show_inference code stdlib_env with
+    <span data-count="14">(</span>match env_show_inference res stdlib_env with
      | <span data-count="14">O</span>k _ -&gt;
        let prog_closure = transform_decls res in
        <span data-count="14">l</span>et lifted = lift_prog prog_closure in
