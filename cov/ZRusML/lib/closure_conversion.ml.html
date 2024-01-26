@@ -245,11 +245,11 @@ let rec decompose_fun pts = function
 ;;
 
 let rec transform_exp exp env exp_name =
-  <span data-count="339">m</span>atch exp with
-  | <span data-count="102">E</span>Var nm -&gt;
+  <span data-count="341">m</span>atch exp with
+  | <span data-count="103">E</span>Var nm -&gt;
     (match StringSet.find_opt nm env with
      | <span data-count="69">S</span>ome _ -&gt; StringSet.empty, exp
-     | <span data-count="33">N</span>one -&gt; StringSet.singleto<span data-count="33">n</span> nm, exp)
+     | <span data-count="34">N</span>one -&gt; StringSet.singleto<span data-count="34">n</span> nm, exp)
   | <span data-count="4">E</span>UnOp (op, e) -&gt;
     let new_env, new_exp = transform_exp e env exp_name in
     <span data-count="4">n</span>ew_env, EUnOp (op, new_exp)
@@ -262,10 +262,10 @@ let rec transform_exp exp env exp_name =
     let env1, exp1 = transform_exp e1 env exp_name in
     <span data-count="39">l</span>et env2, exp2 = transform_exp e2 env exp_name in
     <span data-count="39">S</span>tringSet.unio<span data-count="39">n</span> env1 env2, EBinOp (op, exp1, exp2)
-  | <span data-count="74">E</span>App (e1, e2) -&gt;
+  | <span data-count="75">E</span>App (e1, e2) -&gt;
     let env1, exp1 = transform_exp e1 env exp_name in
-    <span data-count="74">l</span>et env2, exp2 = transform_exp e2 env exp_name in
-    <span data-count="74">S</span>tringSet.unio<span data-count="74">n</span> env1 env2, EApp (exp1, exp2)
+    <span data-count="75">l</span>et env2, exp2 = transform_exp e2 env exp_name in
+    <span data-count="75">S</span>tringSet.unio<span data-count="75">n</span> env1 env2, EApp (exp1, exp2)
   | <span data-count="33">E</span>Fun (_, _) -&gt;
     let vars, body = decompose_fun [] exp in
     <span data-count="33">l</span>et args =

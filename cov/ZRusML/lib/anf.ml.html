@@ -357,8 +357,8 @@ type pexpr =
 type abinding = ABind of bool * string * pexpr list * aexpr
 
 let fresh_var_temp count () =
-  <span data-count="109">i</span>ncr count;
-  <span data-count="109">P</span>rintf.sprintf "%s_%d" "anf" !count
+  <span data-count="110">i</span>ncr count;
+  <span data-count="110">P</span>rintf.sprintf "%s_%d" "anf" !count
 ;;
 
 let new_fresh_var () =
@@ -369,8 +369,8 @@ let new_fresh_var () =
 let rec anf_func (fresh_var : unit -&gt; id) (e : exp) (expr_with_hole : immexpr -&gt; aexpr)
   : aexpr
   =
-  <span data-count="286">l</span>et anf = anf_func fresh_var in
-  <span data-count="286">l</span>et rec anf_let_bindings bindings body expr_with_hole =
+  <span data-count="288">l</span>et anf = anf_func fresh_var in
+  <span data-count="288">l</span>et rec anf_let_bindings bindings body expr_with_hole =
     <span data-count="19">m</span>atch bindings with
     | <span data-count="12">[</span>] -&gt; anf body expr_with_hole
     | <span data-count="7">(</span>_, pt, exp) :: rest -&gt;
@@ -385,7 +385,7 @@ let rec anf_func (fresh_var : unit -&gt; id) (e : exp) (expr_with_hole : immexpr
   match e with
   | <span data-count="63">E</span>Const (CInt n) -&gt; expr_with_hole (ImmInt n)
   | <span data-count="1">E</span>Const (CBool b) -&gt; expr_with_hole (ImmBool b)
-  | <span data-count="101">E</span>Var x -&gt; expr_with_hole (ImmIdentifier x)
+  | <span data-count="102">E</span>Var x -&gt; expr_with_hole (ImmIdentifier x)
   | <span data-count="4">E</span>UnOp (op, exp) -&gt;
     anf exp (fun imm -&gt;
       <span data-count="4">l</span>et varname = fresh_var () in
@@ -395,11 +395,11 @@ let rec anf_func (fresh_var : unit -&gt; id) (e : exp) (expr_with_hole : immexpr
       <span data-count="27">a</span>nf right (fun rimm -&gt;
         <span data-count="27">l</span>et varname = fresh_var () in
         <span data-count="27">A</span>Let (varname, CBinaryOp (op, limm, rimm), expr_with_hol<span data-count="27">e</span> (ImmIdentifier varname))))
-  | <span data-count="74">E</span>App (e1, e2) -&gt;
+  | <span data-count="75">E</span>App (e1, e2) -&gt;
     anf e1 (fun e1imm -&gt;
-      <span data-count="74">a</span>nf e2 (fun e2imm -&gt;
-        <span data-count="74">l</span>et varname = fresh_var () in
-        <span data-count="74">A</span>Let (varname, CApp (e1imm, e2imm), expr_with_hol<span data-count="74">e</span> (ImmIdentifier varname))))
+      <span data-count="75">a</span>nf e2 (fun e2imm -&gt;
+        <span data-count="75">l</span>et varname = fresh_var () in
+        <span data-count="75">A</span>Let (varname, CApp (e1imm, e2imm), expr_with_hol<span data-count="75">e</span> (ImmIdentifier varname))))
   | <span data-count="4">E</span>If (cond, e1, e2) -&gt;
     anf cond (fun condimm -&gt;
       <span data-count="4">l</span>et new_e1 = anf e1 (fun e1imm -&gt; <span data-count="4">A</span>CExpr (CImmExpr e1imm)) in

@@ -321,7 +321,7 @@ let rec replace_vars old_name new_name = function
 ;;
 
 let rec lift_exp map cnt exp =
-  <span data-count="359">m</span>atch exp with
+  <span data-count="361">m</span>atch exp with
   | <span data-count="4">E</span>UnOp (op, e) -&gt;
     let new_map, new_cnt, new_e = lift_exp map cnt e in
     <span data-count="4">n</span>ew_map, new_cnt, EUnOp (op, new_e)
@@ -376,11 +376,11 @@ let rec lift_exp map cnt exp =
     let map1, cnt1, exp1 = lift_exp map cnt e1 in
     <span data-count="37">l</span>et map2, cnt2, exp2 = lift_exp map1 cnt1 e2 in
     <span data-count="37">m</span>ap2, cnt2, EBinOp (op, exp1, exp2)
-  | <span data-count="90">E</span>App (e1, e2) -&gt;
+  | <span data-count="91">E</span>App (e1, e2) -&gt;
     let map1, cnt1, exp1 = lift_exp map cnt e1 in
-    <span data-count="90">l</span>et map2, cnt2, exp2 = lift_exp map1 cnt1 e2 in
-    <span data-count="90">m</span>ap2, cnt2, EApp (exp1, exp2)
-  | <span data-count="184">_</span> -&gt; map, cnt, exp
+    <span data-count="91">l</span>et map2, cnt2, exp2 = lift_exp map1 cnt1 e2 in
+    <span data-count="91">m</span>ap2, cnt2, EApp (exp1, exp2)
+  | <span data-count="185">_</span> -&gt; map, cnt, exp
 ;;
 
 let lift_decl map cnt (DLet (is_rec, pt, exp)) =

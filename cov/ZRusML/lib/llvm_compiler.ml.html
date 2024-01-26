@@ -507,18 +507,18 @@ let ( let* ) = bind
 let codegen_imm = function
   | <span data-count="59">I</span>mmInt x -&gt; ok (const_in<span data-count="59">t</span> int_type x)
   | <span data-count="1">I</span>mmBool b -&gt; ok (const_in<span data-count="1">t</span> int_type (Base.Bool.to_in<span data-count="1">t</span> b))
-  | <span data-count="182">I</span>mmIdentifier id -&gt;
+  | <span data-count="184">I</span>mmIdentifier id -&gt;
     (match Hashtbl.find_opt named_values id with
-     | <span data-count="137">S</span>ome v -&gt; ok (build_loa<span data-count="137">d</span> int_type v id builder)
-     | <span data-count="45">N</span>one -&gt;
+     | <span data-count="138">S</span>ome v -&gt; ok (build_loa<span data-count="138">d</span> int_type v id builder)
+     | <span data-count="46">N</span>one -&gt;
        (match lookup_function id the_module with
-        | <span data-count="45">S</span>ome v -&gt;
+        | <span data-count="46">S</span>ome v -&gt;
           ok
-            (build_cal<span data-count="45">l</span>
-               (function_typ<span data-count="45">e</span> int_type [| int_type; int_type |])
-               (Option.ge<span data-count="45">t</span> (lookup_functio<span data-count="45">n</span> "addNewPAppliClosure" the_module))
-               [| build_pointercas<span data-count="45">t</span> v int_type "cast_pointer_to_int" builder
-                ; params v |&gt; <span data-count="45">B</span>ase.Array.length |&gt; <span data-count="45">c</span>onst_in<span data-count="45">t</span> int_type
+            (build_cal<span data-count="46">l</span>
+               (function_typ<span data-count="46">e</span> int_type [| int_type; int_type |])
+               (Option.ge<span data-count="46">t</span> (lookup_functio<span data-count="46">n</span> "addNewPAppliClosure" the_module))
+               [| build_pointercas<span data-count="46">t</span> v int_type "cast_pointer_to_int" builder
+                ; params v |&gt; <span data-count="46">B</span>ase.Array.length |&gt; <span data-count="46">c</span>onst_in<span data-count="46">t</span> int_type
                |]
                "PAppliClosure"
                builder)
@@ -541,12 +541,12 @@ let codegen_binop = function
 ;;
 
 let rec codegen_aexpr = function
-  | <span data-count="103">A</span>Let (id, c, ae) -&gt;
-    let* body = codegen_cexp<span data-count="103">r</span> c in
-    <span data-count="103">l</span>et alloca = build_alloca int_type id builder in
-    <span data-count="103">l</span>et (_ : Llvm.llvalue) = build_store body alloca builder in
-    <span data-count="103">H</span>ashtbl.add named_values id alloca;
-    <span data-count="103">c</span>odegen_aexpr ae
+  | <span data-count="104">A</span>Let (id, c, ae) -&gt;
+    let* body = codegen_cexp<span data-count="104">r</span> c in
+    <span data-count="104">l</span>et alloca = build_alloca int_type id builder in
+    <span data-count="104">l</span>et (_ : Llvm.llvalue) = build_store body alloca builder in
+    <span data-count="104">H</span>ashtbl.add named_values id alloca;
+    <span data-count="104">c</span>odegen_aexpr ae
   | <span data-count="49">A</span>CExpr c -&gt; codegen_cexpr c
 
 and codegen_cexpr = function
@@ -564,13 +564,13 @@ and codegen_cexpr = function
     <span data-count="24">l</span>et res = codegen_binop op l' r' in
     <span data-count="24">o</span>k (build_zex<span data-count="24">t</span> res int_type "to_int" builder)
   | <span data-count="55">C</span>ImmExpr e -&gt; codegen_imm e
-  | <span data-count="66">C</span>App (func, argument) -&gt;
-    let* calee = codegen_im<span data-count="66">m</span> func in
-    <span data-count="66">l</span>et* arg = codegen_im<span data-count="66">m</span> argument in
-    <span data-count="66">o</span>k
-      (build_cal<span data-count="66">l</span>
-         (function_typ<span data-count="66">e</span> int_type [| int_type; int_type |])
-         (Option.ge<span data-count="66">t</span> (lookup_functio<span data-count="66">n</span> "applyPAppli" the_module))
+  | <span data-count="67">C</span>App (func, argument) -&gt;
+    let* calee = codegen_im<span data-count="67">m</span> func in
+    <span data-count="67">l</span>et* arg = codegen_im<span data-count="67">m</span> argument in
+    <span data-count="67">o</span>k
+      (build_cal<span data-count="67">l</span>
+         (function_typ<span data-count="67">e</span> int_type [| int_type; int_type |])
+         (Option.ge<span data-count="67">t</span> (lookup_functio<span data-count="67">n</span> "applyPAppli" the_module))
          [| calee; arg |]
          "PAppliApplication"
          builder)

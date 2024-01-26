@@ -211,15 +211,15 @@ module StringMap = Map.Make (String)
 let get_validated_name cnt = <span data-count="130">"</span>ast_" ^ string_of_in<span data-count="130">t</span> cnt
 
 let rec validate_exp env cnt exp =
-  <span data-count="420">m</span>atch exp with
+  <span data-count="422">m</span>atch exp with
   | <span data-count="71">E</span>Const _ -&gt; env, cnt, exp
   | <span data-count="4">E</span>UnOp (o, e) -&gt;
     let new_env, new_cnt, new_exp = validate_exp env cnt e in
     <span data-count="4">n</span>ew_env, new_cnt, EUnOp (o, new_exp)
-  | <span data-count="129">E</span>Var id -&gt;
+  | <span data-count="130">E</span>Var id -&gt;
     (match StringMap.find_opt id env with
      | <span data-count="115">S</span>ome v -&gt; env, cnt, EVar v
-     | <span data-count="14">_</span> -&gt; env, cnt, exp)
+     | <span data-count="15">_</span> -&gt; env, cnt, exp)
   | <span data-count="5">E</span>If (condition, true_branch, false_branch) -&gt;
     let _, new_cnt, new_condition = validate_exp env cnt condition in
     <span data-count="5">l</span>et _, new_cnt, new_true_branch = validate_exp env new_cnt true_branch in
@@ -229,10 +229,10 @@ let rec validate_exp env cnt exp =
     let _, new_cnt, new_e1 = validate_exp env cnt e1 in
     <span data-count="34">l</span>et _, new_cnt, new_e2 = validate_exp env new_cnt e2 in
     <span data-count="34">e</span>nv, new_cnt, EBinOp (o, new_e1, new_e2)
-  | <span data-count="88">E</span>App (e1, e2) -&gt;
+  | <span data-count="89">E</span>App (e1, e2) -&gt;
     let _, new_cnt, new_e1 = validate_exp env cnt e1 in
-    <span data-count="88">l</span>et _, new_cnt, new_e2 = validate_exp env new_cnt e2 in
-    <span data-count="88">e</span>nv, new_cnt, EApp (new_e1, new_e2)
+    <span data-count="89">l</span>et _, new_cnt, new_e2 = validate_exp env new_cnt e2 in
+    <span data-count="89">e</span>nv, new_cnt, EApp (new_e1, new_e2)
   | <span data-count="81">E</span>Fun (p, e) -&gt;
     (match p with
      | <span data-count="76">P</span>tVar id -&gt;

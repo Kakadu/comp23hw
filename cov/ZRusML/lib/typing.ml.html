@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8"/>
     <title>typing.ml &mdash; Coverage report</title>
-    <meta name="description" content="69.57% coverage in lib/typing.ml">
+    <meta name="description" content="88.46% coverage in lib/typing.ml">
     <link rel="stylesheet" href="../coverage.css"/>
     <script src="../highlight.pack.js"></script>
     <script>hljs.initHighlightingOnLoad();</script>
@@ -15,14 +15,12 @@
           <span class="dirname">lib/</span>typing.ml
         </a>
       </h1>
-      <h2>69.57%</h2>
+      <h2>88.46%</h2>
     </div>
     <div id="navbar">
-      <span class="unvisited" style="bottom:47.89%"></span>
-      <span class="unvisited" style="bottom:33.80%"></span>
-      <span class="unvisited" style="bottom:7.04%"></span>
-      <span class="unvisited" style="bottom:5.63%"></span>
-      <span class="unvisited" style="bottom:4.23%"></span>
+      <span class="unvisited" style="bottom:7.58%"></span>
+      <span class="unvisited" style="bottom:6.06%"></span>
+      <span class="unvisited" style="bottom:4.55%"></span>
     </div>
     <div id="report">
       <div id="lines-layer">
@@ -46,9 +44,9 @@
 <a id="L17"></a><span > </span>
 <a id="L18"></a><span > </span>
 <a id="L19"></a><span > </span>
-<a id="L20"></a><span class="visited"> </span>
+<a id="L20"></a><span > </span>
 <a id="L21"></a><span class="visited"> </span>
-<a id="L22"></a><span > </span>
+<a id="L22"></a><span class="visited"> </span>
 <a id="L23"></a><span > </span>
 <a id="L24"></a><span > </span>
 <a id="L25"></a><span > </span>
@@ -61,43 +59,38 @@
 <a id="L32"></a><span > </span>
 <a id="L33"></a><span > </span>
 <a id="L34"></a><span > </span>
-<a id="L35"></a><span class="visited"> </span>
-<a id="L36"></a><span > </span>
-<a id="L37"></a><span class="unvisited"> </span>
+<a id="L35"></a><span > </span>
+<a id="L36"></a><span class="visited"> </span>
+<a id="L37"></a><span > </span>
 <a id="L38"></a><span class="visited"> </span>
 <a id="L39"></a><span > </span>
-<a id="L40"></a><span > </span>
+<a id="L40"></a><span class="visited"> </span>
 <a id="L41"></a><span class="visited"> </span>
-<a id="L42"></a><span > </span>
+<a id="L42"></a><span class="visited"> </span>
 <a id="L43"></a><span class="visited"> </span>
 <a id="L44"></a><span class="visited"> </span>
 <a id="L45"></a><span class="visited"> </span>
-<a id="L46"></a><span class="visited"> </span>
-<a id="L47"></a><span class="unvisited"> </span>
-<a id="L48"></a><span > </span>
+<a id="L46"></a><span > </span>
+<a id="L47"></a><span > </span>
+<a id="L48"></a><span class="visited"> </span>
 <a id="L49"></a><span > </span>
-<a id="L50"></a><span class="visited"> </span>
-<a id="L51"></a><span > </span>
+<a id="L50"></a><span > </span>
+<a id="L51"></a><span class="visited"> </span>
 <a id="L52"></a><span > </span>
 <a id="L53"></a><span class="visited"> </span>
-<a id="L54"></a><span > </span>
-<a id="L55"></a><span class="visited"> </span>
+<a id="L54"></a><span class="visited"> </span>
+<a id="L55"></a><span > </span>
 <a id="L56"></a><span class="visited"> </span>
 <a id="L57"></a><span > </span>
-<a id="L58"></a><span class="visited"> </span>
-<a id="L59"></a><span > </span>
-<a id="L60"></a><span > </span>
-<a id="L61"></a><span > </span>
-<a id="L62"></a><span > </span>
-<a id="L63"></a><span > </span>
+<a id="L58"></a><span > </span>
+<a id="L59"></a><span class="visited"> </span>
+<a id="L60"></a><span class="visited"> </span>
+<a id="L61"></a><span class="unvisited"> </span>
+<a id="L62"></a><span class="unvisited"> </span>
+<a id="L63"></a><span class="unvisited"> </span>
 <a id="L64"></a><span > </span>
 <a id="L65"></a><span > </span>
-<a id="L66"></a><span class="unvisited"> </span>
-<a id="L67"></a><span class="unvisited"> </span>
-<a id="L68"></a><span class="unvisited"> </span>
-<a id="L69"></a><span > </span>
-<a id="L70"></a><span > </span>
-<a id="L71"></a><span class="visited"> </span>
+<a id="L66"></a><span class="visited"> </span>
 </pre>
       </div>
       <div id="text-layer">
@@ -168,11 +161,6 @@
 <a href="#L64">64</a>
 <a href="#L65">65</a>
 <a href="#L66">66</a>
-<a href="#L67">67</a>
-<a href="#L68">68</a>
-<a href="#L69">69</a>
-<a href="#L70">70</a>
-<a href="#L71">71</a>
 </pre>
 <pre><code class="ocaml">(** Copyright 2023-2024, Rustam Shangareev and Danil Yevdokimov *)
 
@@ -184,6 +172,7 @@ type identifier = string
 type ground_type =
   | Int
   | Bool
+  | Unit
 
 type typ =
   | TVar of type_variable_number (** 'a *)
@@ -193,8 +182,8 @@ type typ =
 (* Ground types *)
 let int_typ = TGround Int
 let bool_typ = TGround Bool
-let var_t n = <span data-count="48">T</span>Var n
-let arrow_t left_type right_type = <span data-count="157">T</span>Arr (left_type, right_type)
+let var_t n = <span data-count="398">T</span>Var n
+let arrow_t left_type right_type = <span data-count="36451">T</span>Arr (left_type, right_type)
 
 type scheme = (type_variable_number, Base.Int.comparator_witness) Base.Set.t * typ
 
@@ -207,44 +196,38 @@ type error =
   | `Matching_failed
   ]
 
-let rec pp_type fmt typ =
-  <span data-count="28">l</span>et open Format in
-  let arrow_format = function
-    | <span data-count="0">T</span>Arr _ -&gt; format_of_string "(%a)"
-    | <span data-count="6">_</span> -&gt; format_of_string "%a"
-  in
+let rec show_typ typ =
+  <span data-count="179">l</span>et open Format in
   match typ with
-  | <span data-count="22">T</span>Ground x -&gt;
+  | <span data-count="51">T</span>Ground x -&gt;
     (match x with
-     | <span data-count="16">I</span>nt -&gt; fprintf fmt "int"
-     | <span data-count="6">B</span>ool -&gt; fprintf fmt "bool")
-  | <span data-count="6">T</span>Arr (typ_left, typ_right) -&gt;
-    fprintf fmt (arrow_forma<span data-count="6">t</span> typ_left ^<span data-count="6">^</span> " -&gt; %a") pp_type typ_left pp_type typ_right
-  | <span data-count="0">T</span>Var var -&gt; fprintf fmt "%s" @@ "'" ^ Char.escape<span data-count="0">d</span> (Stdlib.Char.ch<span data-count="0">r</span> (var + 97))
+     | <span data-count="31">I</span>nt -&gt; "int"
+     | <span data-count="7">B</span>ool -&gt; "bool"
+     | <span data-count="13">U</span>nit -&gt; "unit")
+  | <span data-count="67">T</span>Arr (typ_left, typ_right) -&gt;
+    sprintf "%s -&gt; %s" (show_ty<span data-count="67">p</span> typ_left) (show_ty<span data-count="67">p</span> typ_right)
+  | <span data-count="61">T</span>Var var -&gt; sprintf "%s" @@ "'" ^ Char.escape<span data-count="61">d</span> (Stdlib.Char.ch<span data-count="61">r</span> (var + 97))
 ;;
 
-let print_typ typ = <span data-count="11">F</span>ormat.printf "%a\n" pp_type typ
+let pp_typ fmt typ = <span data-count="3">F</span>ormat.fprintf fmt "%s" (show_ty<span data-count="3">p</span> typ)
 
-let pp_error fmt (err : error) =
+let show_error (err : error) =
   <span data-count="3">l</span>et open Format in
   match err with
-  | <span data-count="1">`</span>OccursCheck -&gt; fprintf fmt "Occurs check failed."
+  | <span data-count="1">`</span>OccursCheck -&gt; "Occurs check failed."
   | <span data-count="1">`</span>NoVariable identifier -&gt;
-    fprintf fmt "Elaboration failed: Unbound value identifier %s" identifier
+    sprintf "Elaboration failed: Unbound value identifier %s" identifier
   | <span data-count="1">`</span>UnificationFailed (t1, t2) -&gt;
-    fprintf
-      fmt
-      "Elaboration failed: Rules disagree on type: Cannot merge %a and %a"
-      pp_type
-      t1
-      pp_type
-      t2
-  | <span data-count="0">`</span>Unreachable -&gt; fprintf fmt "Not reachable."
-  | <span data-count="0">`</span>Not_function -&gt; fprintf fmt "Applying not a function"
-  | <span data-count="0">`</span>Matching_failed -&gt; fprintf fmt "Non-exhaustive matching"
+    sprintf
+      "Elaboration failed: Rules disagree on type: Cannot merge %s and %s"
+      (show_ty<span data-count="1">p</span> t1)
+      (show_ty<span data-count="1">p</span> t2)
+  | <span data-count="0">`</span>Unreachable -&gt; "Not reachable."
+  | <span data-count="0">`</span>Not_function -&gt; "Applying not a function"
+  | <span data-count="0">`</span>Matching_failed -&gt; "Non-exhaustive matching"
 ;;
 
-let print_type_error error = <span data-count="2">F</span>ormat.printf "%a\n" pp_error error
+let pp_error fmt err = <span data-count="1">F</span>ormat.fprintf fmt "%s" (show_erro<span data-count="1">r</span> err)
 </code></pre>
       </div>
     </div>

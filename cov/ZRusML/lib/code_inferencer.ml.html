@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8"/>
     <title>code_inferencer.ml &mdash; Coverage report</title>
-    <meta name="description" content="85.00% coverage in lib/code_inferencer.ml">
+    <meta name="description" content="82.00% coverage in lib/code_inferencer.ml">
     <link rel="stylesheet" href="../coverage.css"/>
     <script src="../highlight.pack.js"></script>
     <script>hljs.initHighlightingOnLoad();</script>
@@ -15,14 +15,15 @@
           <span class="dirname">lib/</span>code_inferencer.ml
         </a>
       </h1>
-      <h2>85.00%</h2>
+      <h2>82.00%</h2>
     </div>
     <div id="navbar">
-      <span class="unvisited" style="top:14.93%"></span>
-      <span class="unvisited" style="top:37.31%"></span>
-      <span class="unvisited" style="top:40.30%"></span>
-      <span class="unvisited" style="bottom:11.94%"></span>
-      <span class="unvisited" style="bottom:2.99%"></span>
+      <span class="unvisited" style="top:13.70%"></span>
+      <span class="unvisited" style="top:34.25%"></span>
+      <span class="unvisited" style="top:36.99%"></span>
+      <span class="unvisited" style="bottom:49.32%"></span>
+      <span class="unvisited" style="bottom:20.55%"></span>
+      <span class="unvisited" style="bottom:12.33%"></span>
     </div>
     <div id="report">
       <div id="lines-layer">
@@ -63,7 +64,7 @@
 <a id="L34"></a><span class="visited"> </span>
 <a id="L35"></a><span > </span>
 <a id="L36"></a><span > </span>
-<a id="L37"></a><span class="visited"> </span>
+<a id="L37"></a><span class="unvisited"> </span>
 <a id="L38"></a><span > </span>
 <a id="L39"></a><span > </span>
 <a id="L40"></a><span class="visited"> </span>
@@ -80,20 +81,26 @@
 <a id="L51"></a><span class="visited"> </span>
 <a id="L52"></a><span class="visited"> </span>
 <a id="L53"></a><span > </span>
-<a id="L54"></a><span > </span>
-<a id="L55"></a><span class="visited"> </span>
+<a id="L54"></a><span class="visited"> </span>
+<a id="L55"></a><span > </span>
 <a id="L56"></a><span class="visited"> </span>
-<a id="L57"></a><span > </span>
-<a id="L58"></a><span class="visited"> </span>
-<a id="L59"></a><span class="unvisited"> </span>
+<a id="L57"></a><span class="visited"> </span>
+<a id="L58"></a><span class="unvisited"> </span>
+<a id="L59"></a><span > </span>
 <a id="L60"></a><span > </span>
 <a id="L61"></a><span class="visited"> </span>
 <a id="L62"></a><span > </span>
 <a id="L63"></a><span class="visited"> </span>
-<a id="L64"></a><span class="visited"> </span>
-<a id="L65"></a><span class="unvisited"> </span>
-<a id="L66"></a><span class="visited"> </span>
+<a id="L64"></a><span class="unvisited"> </span>
+<a id="L65"></a><span class="visited"> </span>
+<a id="L66"></a><span > </span>
 <a id="L67"></a><span > </span>
+<a id="L68"></a><span > </span>
+<a id="L69"></a><span class="visited"> </span>
+<a id="L70"></a><span class="visited"> </span>
+<a id="L71"></a><span > </span>
+<a id="L72"></a><span > </span>
+<a id="L73"></a><span class="visited"> </span>
 </pre>
       </div>
       <div id="text-layer">
@@ -165,6 +172,12 @@
 <a href="#L65">65</a>
 <a href="#L66">66</a>
 <a href="#L67">67</a>
+<a href="#L68">68</a>
+<a href="#L69">69</a>
+<a href="#L70">70</a>
+<a href="#L71">71</a>
+<a href="#L72">72</a>
+<a href="#L73">73</a>
 </pre>
 <pre><code class="ocaml">(** Copyright 2023-2024, Rustam Shangareev and Danil Yevdokimov *)
 
@@ -180,59 +193,65 @@ let rec find x = function
 ;;
 
 let env_inference prog env =
-  <span data-count="8">l</span>et typs, _ =
+  <span data-count="23">l</span>et typs, _ =
     List.fold_left
       (fun (typs, environment) dec -&gt;
-        <span data-count="16">l</span>et rec get_last_env = function
-          | <span data-count="14">[</span> Ok (env, _) ] -&gt; env
+        <span data-count="45">l</span>et rec get_last_env = function
+          | <span data-count="43">[</span> Ok (env, _) ] -&gt; env
           | <span data-count="2">_</span> :: tl -&gt; get_last_env tl
           | <span data-count="2">_</span> -&gt; environment
         in
         let tcheck dec =
-          <span data-count="32">m</span>atch dec with
+          <span data-count="90">m</span>atch dec with
           | <span data-count="0">D</span>Let (_, PtWild, _) -&gt; [ "- ", run_inferenc<span data-count="0">e</span> dec environment ]
-          | <span data-count="32">D</span>Let (_, PtVar name, _) -&gt; [ name, run_inferenc<span data-count="32">e</span> dec environment ]
+          | <span data-count="90">D</span>Let (_, PtVar name, _) -&gt; [ name, run_inferenc<span data-count="90">e</span> dec environment ]
           | <span data-count="0">_</span> -&gt; [ "", Error `Matching_failed ]
         in
-        let environment' = get_last_env (List.ma<span data-count="16">p</span> snd (tchec<span data-count="16">k</span> dec)) in
-        <span data-count="16">t</span>chec<span data-count="16">k</span> dec :: typs, environment')
+        let environment' = get_last_env (List.ma<span data-count="45">p</span> snd (tchec<span data-count="45">k</span> dec)) in
+        <span data-count="45">t</span>chec<span data-count="45">k</span> dec :: typs, environment')
       ([], env)
       prog
   in
-  <span data-count="8">L</span>ist.concat (List.re<span data-count="8">v</span> typs)
+  <span data-count="23">L</span>ist.concat (List.re<span data-count="23">v</span> typs)
 ;;
 
-let inference_prog prog = <span data-count="8">e</span>nv_inference prog TypeEnv.empty
+let inference_prog prog = <span data-count="0">e</span>nv_inference prog TypeEnv.empty
 
-let inference _ code =
-  <span data-count="9">m</span>atch Parser.parse Parser.prog code with
-  | <span data-count="8">O</span>k prog -&gt;
-    let id_x_typs = inference_prog prog in
-    <span data-count="8">l</span>et only_typs = List.map snd id_x_typs in
-    <span data-count="8">l</span>et error_check =
+let env_show_inference code env =
+  <span data-count="24">m</span>atch Parser.parse Parser.prog code with
+  | <span data-count="23">O</span>k prog -&gt;
+    let id_x_typs = env_inference prog env in
+    <span data-count="23">l</span>et only_typs = List.map snd id_x_typs in
+    <span data-count="23">l</span>et error_check =
       List.find_opt
         (function
           | <span data-count="2">E</span>rror _ -&gt; true
-          | <span data-count="14">_</span> -&gt; false)
+          | <span data-count="43">_</span> -&gt; false)
         only_typs
     in
-    <span data-count="8">(</span>match error_check with
-     | <span data-count="6">N</span>one -&gt;
-       List.iter
-         (fun (a, b) -&gt;
-           <span data-count="11">m</span>atch b with
-           | <span data-count="11">O</span>k (_, typ) -&gt;
-             Format.printf "val %s : " a;
-             <span data-count="11">p</span>rint_typ typ
-           | <span data-count="0">E</span>rror e -&gt; print_type_error e)
-         id_x_typs
+    <span data-count="23">(</span>match error_check with
+     | <span data-count="21">N</span>one -&gt;
+       Ok
+         (List.fold_lef<span data-count="21">t</span>
+            (fun acc (a, b) -&gt;
+              <span data-count="40">m</span>atch b with
+              | <span data-count="40">O</span>k (_, typ) -&gt; acc ^ Format.sprint<span data-count="40">f</span> "val %s : %s\n" a (show_ty<span data-count="40">p</span> typ)
+              | <span data-count="0">E</span>rror e -&gt; acc ^ show_erro<span data-count="0">r</span> e)
+            ""
+            id_x_typs)
      | <span data-count="2">S</span>ome (Error e) -&gt;
        let index = find (Error e) only_typs in
-       <span data-count="2">F</span>ormat.printf "Error in №%d declaration:\n" index;
-       <span data-count="2">p</span>rint_type_error e
-     | <span data-count="0">_</span> -&gt; print_type_error `Unreachable)
-  | <span data-count="1">_</span> -&gt; Format.printf "Parse error\n"
+       <span data-count="2">E</span>rror (Format.sprint<span data-count="2">f</span> "Error in №%d declaration: \n%s\n" index (show_erro<span data-count="2">r</span> e))
+     | <span data-count="0">_</span> -&gt; Error (show_erro<span data-count="0">r</span> `Unreachable))
+  | <span data-count="1">_</span> -&gt; Error "Parse error\n"
 ;;
+
+let show_inference code =
+  <span data-count="10">m</span>atch env_show_inference code TypeEnv.empty with
+  | <span data-count="7">O</span>k res | <span data-count="3">E</span>rror res -&gt; res
+;;
+
+let inference fmt code = <span data-count="10">F</span>ormat.fprintf fmt "%s" (show_inferenc<span data-count="10">e</span> code)
 </code></pre>
       </div>
     </div>
