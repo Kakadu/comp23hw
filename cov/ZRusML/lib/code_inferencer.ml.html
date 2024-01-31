@@ -193,47 +193,47 @@ let rec find x = function
 ;;
 
 let env_inference prog env =
-  <span data-count="23">l</span>et typs, _ =
+  <span data-count="18">l</span>et typs, _ =
     List.fold_left
       (fun (typs, environment) dec -&gt;
-        <span data-count="45">l</span>et rec get_last_env = function
-          | <span data-count="43">[</span> Ok (env, _) ] -&gt; env
+        <span data-count="39">l</span>et rec get_last_env = function
+          | <span data-count="37">[</span> Ok (env, _) ] -&gt; env
           | <span data-count="2">_</span> :: tl -&gt; get_last_env tl
           | <span data-count="2">_</span> -&gt; environment
         in
         let tcheck dec =
-          <span data-count="90">m</span>atch dec with
+          <span data-count="78">m</span>atch dec with
           | <span data-count="0">D</span>Let (_, PtWild, _) -&gt; [ "- ", run_inferenc<span data-count="0">e</span> dec environment ]
-          | <span data-count="90">D</span>Let (_, PtVar name, _) -&gt; [ name, run_inferenc<span data-count="90">e</span> dec environment ]
+          | <span data-count="78">D</span>Let (_, PtVar name, _) -&gt; [ name, run_inferenc<span data-count="78">e</span> dec environment ]
           | <span data-count="0">_</span> -&gt; [ "", Error `Matching_failed ]
         in
-        let environment' = get_last_env (List.ma<span data-count="45">p</span> snd (tchec<span data-count="45">k</span> dec)) in
-        <span data-count="45">t</span>chec<span data-count="45">k</span> dec :: typs, environment')
+        let environment' = get_last_env (List.ma<span data-count="39">p</span> snd (tchec<span data-count="39">k</span> dec)) in
+        <span data-count="39">t</span>chec<span data-count="39">k</span> dec :: typs, environment')
       ([], env)
       prog
   in
-  <span data-count="23">L</span>ist.concat (List.re<span data-count="23">v</span> typs)
+  <span data-count="18">L</span>ist.concat (List.re<span data-count="18">v</span> typs)
 ;;
 
 let inference_prog prog = <span data-count="0">e</span>nv_inference prog TypeEnv.empty
 
 let env_show_inference prog env =
-  <span data-count="23">l</span>et id_x_typs = env_inference prog env in
-  <span data-count="23">l</span>et only_typs = List.map snd id_x_typs in
-  <span data-count="23">l</span>et error_check =
+  <span data-count="18">l</span>et id_x_typs = env_inference prog env in
+  <span data-count="18">l</span>et only_typs = List.map snd id_x_typs in
+  <span data-count="18">l</span>et error_check =
     List.find_opt
       (function
         | <span data-count="2">E</span>rror _ -&gt; true
-        | <span data-count="43">_</span> -&gt; false)
+        | <span data-count="37">_</span> -&gt; false)
       only_typs
   in
-  <span data-count="23">m</span>atch error_check with
-  | <span data-count="21">N</span>one -&gt;
+  <span data-count="18">m</span>atch error_check with
+  | <span data-count="16">N</span>one -&gt;
     Ok
-      (List.fold_lef<span data-count="21">t</span>
+      (List.fold_lef<span data-count="16">t</span>
          (fun acc (a, b) -&gt;
-           <span data-count="40">m</span>atch b with
-           | <span data-count="40">O</span>k (_, typ) -&gt; acc ^ Format.sprint<span data-count="40">f</span> "val %s : %s\n" a (show_ty<span data-count="40">p</span> typ)
+           <span data-count="34">m</span>atch b with
+           | <span data-count="34">O</span>k (_, typ) -&gt; acc ^ Format.sprint<span data-count="34">f</span> "val %s : %s\n" a (show_ty<span data-count="34">p</span> typ)
            | <span data-count="0">E</span>rror e -&gt; acc ^ show_erro<span data-count="0">r</span> e)
          ""
          id_x_typs)

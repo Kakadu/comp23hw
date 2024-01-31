@@ -322,7 +322,7 @@ open Ast
 open Format
 
 let show_const = function
-  | <span data-count="41">C</span>Int x -&gt; sprintf "%d" x
+  | <span data-count="61">C</span>Int x -&gt; sprintf "%d" x
   | <span data-count="1">C</span>Bool x -&gt; sprintf "%b" x
 ;;
 
@@ -331,15 +331,15 @@ let pp_const fmt cnst = <span data-count="0">f</span>printf fmt "%s" (show_cons<
 let show_bin_op = function
   | <span data-count="1">A</span>nd -&gt; "&amp;&amp;"
   | <span data-count="2">O</span>r -&gt; "||"
-  | <span data-count="2">L</span>ess -&gt; "&lt;"
-  | <span data-count="5">L</span>eq -&gt; "&lt;="
+  | <span data-count="3">L</span>ess -&gt; "&lt;"
+  | <span data-count="7">L</span>eq -&gt; "&lt;="
   | <span data-count="1">G</span>re -&gt; "&gt;"
   | <span data-count="1">G</span>eq -&gt; "&gt;="
   | <span data-count="4">E</span>q -&gt; "="
   | <span data-count="1">N</span>eq -&gt; "&lt;&gt;"
-  | <span data-count="29">A</span>dd -&gt; "+"
-  | <span data-count="5">S</span>ub -&gt; "-"
-  | <span data-count="10">M</span>ul -&gt; "*"
+  | <span data-count="32">A</span>dd -&gt; "+"
+  | <span data-count="12">S</span>ub -&gt; "-"
+  | <span data-count="12">M</span>ul -&gt; "*"
   | <span data-count="1">D</span>iv -&gt; "/"
 ;;
 
@@ -354,61 +354,61 @@ let pp_un_op fmt op = <span data-count="0">f</span>printf fmt "%s" (show_un_o<sp
 
 let show_pt = function
   | <span data-count="0">P</span>tWild -&gt; "_"
-  | <span data-count="142">P</span>tVar x -&gt; sprintf "%s" x
+  | <span data-count="213">P</span>tVar x -&gt; sprintf "%s" x
   | <span data-count="0">P</span>tConst x -&gt; sprintf "%s" (show_cons<span data-count="0">t</span> x)
 ;;
 
 let pp_pt fmt pt = <span data-count="0">f</span>printf fmt "%s" (show_p<span data-count="0">t</span> pt)
-let sprintf_tabs cnt = <span data-count="105">s</span>printf "%s" (String.conca<span data-count="105">t</span> "" (List.ini<span data-count="105">t</span> cnt (fun _ -&gt; <span data-count="67">"</span>    ")))
+let sprintf_tabs cnt = <span data-count="122">s</span>printf "%s" (String.conca<span data-count="122">t</span> "" (List.ini<span data-count="122">t</span> cnt (fun _ -&gt; <span data-count="66">"</span>    ")))
 let print_tabs fmt cnt = <span data-count="0">f</span>printf fmt "%s" (sprintf_tab<span data-count="0">s</span> cnt)
 
 let rec show_exp_helper cnt = function
-  | <span data-count="42">E</span>Const x -&gt; sprintf "%s" (show_cons<span data-count="42">t</span> x)
+  | <span data-count="62">E</span>Const x -&gt; sprintf "%s" (show_cons<span data-count="62">t</span> x)
   | <span data-count="1">E</span>UnOp (o, e) -&gt; sprintf "%s%s" (show_un_o<span data-count="1">p</span> o) (show_exp_helpe<span data-count="1">r</span> cnt e)
-  | <span data-count="152">E</span>Var id -&gt; sprintf "%s" id
-  | <span data-count="4">E</span>If (predicate, true_branch, false_branch) -&gt;
+  | <span data-count="241">E</span>Var id -&gt; sprintf "%s" id
+  | <span data-count="8">E</span>If (predicate, true_branch, false_branch) -&gt;
     sprintf
       "if %s then %s else %s"
-      (show_exp_helpe<span data-count="4">r</span> cnt predicate)
-      (show_exp_helpe<span data-count="4">r</span> cnt true_branch)
-      (show_exp_helpe<span data-count="4">r</span> cnt false_branch)
-  | <span data-count="59">E</span>BinOp (op, e1, e2) -&gt;
+      (show_exp_helpe<span data-count="8">r</span> cnt predicate)
+      (show_exp_helpe<span data-count="8">r</span> cnt true_branch)
+      (show_exp_helpe<span data-count="8">r</span> cnt false_branch)
+  | <span data-count="77">E</span>BinOp (op, e1, e2) -&gt;
     let s, e =
       match op with
-      | <span data-count="4">S</span>ub | <span data-count="29">A</span>dd | <span data-count="9">M</span>ul | <span data-count="4">E</span>q | <span data-count="1">G</span>eq | <span data-count="4">L</span>eq | <span data-count="1">G</span>re | <span data-count="2">L</span>ess -&gt; "(", ")"
+      | <span data-count="12">S</span>ub | <span data-count="32">A</span>dd | <span data-count="12">M</span>ul | <span data-count="4">E</span>q | <span data-count="1">G</span>eq | <span data-count="7">L</span>eq | <span data-count="1">G</span>re | <span data-count="3">L</span>ess -&gt; "(", ")"
       | <span data-count="5">_</span> -&gt; "", ""
     in
     sprintf
       "%s%s %s %s%s"
       s
-      (show_exp_helpe<span data-count="59">r</span> cnt e1)
-      (show_bin_o<span data-count="59">p</span> op)
-      (show_exp_helpe<span data-count="59">r</span> cnt e2)
+      (show_exp_helpe<span data-count="77">r</span> cnt e1)
+      (show_bin_o<span data-count="77">p</span> op)
+      (show_exp_helpe<span data-count="77">r</span> cnt e2)
       e
-  | <span data-count="13">E</span>Fun _ as orig -&gt;
+  | <span data-count="19">E</span>Fun _ as orig -&gt;
     let rec helper = function
-      | <span data-count="24">E</span>Fun (a, b) -&gt; sprintf "%s %s" (show_p<span data-count="24">t</span> a) (helpe<span data-count="24">r</span> b)
-      | <span data-count="13">e</span>xp -&gt; sprintf "-&gt; %s" (show_exp_helpe<span data-count="13">r</span> cnt exp)
+      | <span data-count="43">E</span>Fun (a, b) -&gt; sprintf "%s %s" (show_p<span data-count="43">t</span> a) (helpe<span data-count="43">r</span> b)
+      | <span data-count="19">e</span>xp -&gt; sprintf "-&gt; %s" (show_exp_helpe<span data-count="19">r</span> cnt exp)
     in
-    sprintf "(fun %s)" (helpe<span data-count="13">r</span> orig)
+    sprintf "(fun %s)" (helpe<span data-count="19">r</span> orig)
   | <span data-count="19">E</span>Let (bindings, e) -&gt;
     let cnt = cnt + 1 in
     let binds =
       List.fold_left
         (fun acc (is_rec, pt, exp) -&gt;
-          <span data-count="34">l</span>et rec helper = function
-            | <span data-count="12">E</span>Fun (a, b) -&gt; sprintf "%s %s" (show_p<span data-count="12">t</span> a) (helpe<span data-count="12">r</span> b)
-            | <span data-count="34">e</span>xp -&gt; sprintf "= %s" (show_exp_helpe<span data-count="34">r</span> cnt exp)
+          <span data-count="33">l</span>et rec helper = function
+            | <span data-count="10">E</span>Fun (a, b) -&gt; sprintf "%s %s" (show_p<span data-count="10">t</span> a) (helpe<span data-count="10">r</span> b)
+            | <span data-count="33">e</span>xp -&gt; sprintf "= %s" (show_exp_helpe<span data-count="33">r</span> cnt exp)
           in
           let bind =
             sprintf
               "%slet %s%s %s in\n"
-              (sprintf_tab<span data-count="34">s</span> cnt)
-              (if is_rec then <span data-count="6">"</span>rec " else <span data-count="28">"</span>")
-              (show_p<span data-count="34">t</span> pt)
-              (helpe<span data-count="34">r</span> exp)
+              (sprintf_tab<span data-count="33">s</span> cnt)
+              (if is_rec then <span data-count="4">"</span>rec " else <span data-count="29">"</span>")
+              (show_p<span data-count="33">t</span> pt)
+              (helpe<span data-count="33">r</span> exp)
           in
-          <span data-count="34">l</span>et acc = acc ^ bind in
+          <span data-count="33">l</span>et acc = acc ^ bind in
           acc)
         String.empty
         bindings
@@ -419,38 +419,38 @@ let rec show_exp_helper cnt = function
       (sprintf_tab<span data-count="19">s</span> cnt)
       (show_exp_helpe<span data-count="19">r</span> cnt e)
       (sprintf_tab<span data-count="19">s</span> (cnt - 1))
-  | <span data-count="60">E</span>App (e1, e2) -&gt;
+  | <span data-count="126">E</span>App (e1, e2) -&gt;
     let s, e =
       match e2 with
-      | <span data-count="3">E</span>App _ -&gt; "(", ")"
-      | <span data-count="57">_</span> -&gt; "", ""
+      | <span data-count="13">E</span>App _ -&gt; "(", ")"
+      | <span data-count="113">_</span> -&gt; "", ""
     in
-    sprintf "%s %s%s%s" (show_exp_helpe<span data-count="60">r</span> cnt e1) s (show_exp_helpe<span data-count="60">r</span> cnt e2) e
+    sprintf "%s %s%s%s" (show_exp_helpe<span data-count="126">r</span> cnt e1) s (show_exp_helpe<span data-count="126">r</span> cnt e2) e
 ;;
 
 let show_exp exp = <span data-count="0">s</span>printf "%s" (show_exp_helpe<span data-count="0">r</span> 0 exp)
 let pp_exp fmt exp = <span data-count="0">f</span>printf fmt "%s" (show_ex<span data-count="0">p</span> exp)
 
 let show_binding_helper cnt (is_rec, pt, exp) =
-  <span data-count="33">l</span>et rec helper = function
-    | <span data-count="39">E</span>Fun (a, b) -&gt; sprintf "%s %s" (show_p<span data-count="39">t</span> a) (helpe<span data-count="39">r</span> b)
-    | <span data-count="33">e</span> -&gt; sprintf "= %s" (show_exp_helpe<span data-count="33">r</span> cnt e)
+  <span data-count="51">l</span>et rec helper = function
+    | <span data-count="76">E</span>Fun (a, b) -&gt; sprintf "%s %s" (show_p<span data-count="76">t</span> a) (helpe<span data-count="76">r</span> b)
+    | <span data-count="51">e</span> -&gt; sprintf "= %s" (show_exp_helpe<span data-count="51">r</span> cnt e)
   in
   sprintf
     "%slet %s%s %s"
-    (sprintf_tab<span data-count="33">s</span> cnt)
-    (if is_rec then <span data-count="7">"</span>rec " else <span data-count="26">"</span>")
-    (show_p<span data-count="33">t</span> pt)
-    (helpe<span data-count="33">r</span> exp)
+    (sprintf_tab<span data-count="51">s</span> cnt)
+    (if is_rec then <span data-count="10">"</span>rec " else <span data-count="41">"</span>")
+    (show_p<span data-count="51">t</span> pt)
+    (helpe<span data-count="51">r</span> exp)
 ;;
 
 let show_binding = show_binding_helpe<span data-count="17">r</span> 0
 let pp_binding_helper fmt cnt x = <span data-count="0">f</span>printf fmt "%s" (show_binding_helpe<span data-count="0">r</span> cnt x)
 let pp_binding fmt = <span data-count="0">p</span>p_binding_helper fmt 0
-let show_decl (DLet t) = <span data-count="33">s</span>printf "%s;;\n" (show_bindin<span data-count="33">g</span> t)
+let show_decl (DLet t) = <span data-count="51">s</span>printf "%s;;\n" (show_bindin<span data-count="51">g</span> t)
 let pp_decl fmt x = <span data-count="0">f</span>printf fmt "%s" (show_dec<span data-count="0">l</span> x)
-let show_prog = List.fold_lef<span data-count="17">t</span> (fun acc decl -&gt; <span data-count="33">a</span>cc ^ show_dec<span data-count="33">l</span> decl) ""
-let pp_prog fmt prog = <span data-count="17">f</span>printf fmt "%s" (show_pro<span data-count="17">g</span> prog)
+let show_prog = List.fold_lef<span data-count="17">t</span> (fun acc decl -&gt; <span data-count="51">a</span>cc ^ show_dec<span data-count="51">l</span> decl) ""
+let pp_prog fmt prog = <span data-count="19">f</span>printf fmt "%s" (show_pro<span data-count="19">g</span> prog)
 </code></pre>
       </div>
     </div>

@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8"/>
     <title>anf_pretty.ml &mdash; Coverage report</title>
-    <meta name="description" content="72.00% coverage in lib/anf_pretty.ml">
+    <meta name="description" content="52.08% coverage in lib/anf_pretty.ml">
     <link rel="stylesheet" href="../coverage.css"/>
     <script src="../highlight.pack.js"></script>
     <script>hljs.initHighlightingOnLoad();</script>
@@ -15,17 +15,24 @@
           <span class="dirname">lib/</span>anf_pretty.ml
         </a>
       </h1>
-      <h2>72.00%</h2>
+      <h2>52.08%</h2>
     </div>
     <div id="navbar">
-      <span class="unvisited" style="top:16.18%"></span>
-      <span class="unvisited" style="top:22.06%"></span>
-      <span class="unvisited" style="top:35.29%"></span>
-      <span class="unvisited" style="bottom:47.06%"></span>
-      <span class="unvisited" style="bottom:41.18%"></span>
-      <span class="unvisited" style="bottom:36.76%"></span>
-      <span class="unvisited" style="bottom:35.29%"></span>
-      <span class="unvisited" style="bottom:10.29%"></span>
+      <span class="unvisited" style="top:16.42%"></span>
+      <span class="unvisited" style="top:22.39%"></span>
+      <span class="unvisited" style="top:35.82%"></span>
+      <span class="unvisited" style="top:37.31%"></span>
+      <span class="unvisited" style="top:38.81%"></span>
+      <span class="unvisited" style="top:41.79%"></span>
+      <span class="unvisited" style="top:46.27%"></span>
+      <span class="unvisited" style="top:47.76%"></span>
+      <span class="unvisited" style="top:49.25%"></span>
+      <span class="unvisited" style="bottom:46.27%"></span>
+      <span class="unvisited" style="bottom:40.30%"></span>
+      <span class="unvisited" style="bottom:35.82%"></span>
+      <span class="unvisited" style="bottom:34.33%"></span>
+      <span class="unvisited" style="bottom:19.40%"></span>
+      <span class="unvisited" style="bottom:10.45%"></span>
     </div>
     <div id="report">
       <div id="lines-layer">
@@ -54,15 +61,15 @@
 <a id="L22"></a><span > </span>
 <a id="L23"></a><span class="visited"> </span>
 <a id="L24"></a><span class="unvisited"> </span>
-<a id="L25"></a><span class="visited"> </span>
-<a id="L26"></a><span class="visited"> </span>
+<a id="L25"></a><span class="unvisited"> </span>
+<a id="L26"></a><span class="unvisited"> </span>
 <a id="L27"></a><span class="visited"> </span>
-<a id="L28"></a><span class="visited"> </span>
+<a id="L28"></a><span class="unvisited"> </span>
 <a id="L29"></a><span > </span>
 <a id="L30"></a><span > </span>
-<a id="L31"></a><span class="visited"> </span>
-<a id="L32"></a><span class="visited"> </span>
-<a id="L33"></a><span class="visited"> </span>
+<a id="L31"></a><span class="unvisited"> </span>
+<a id="L32"></a><span class="unvisited"> </span>
+<a id="L33"></a><span class="unvisited"> </span>
 <a id="L34"></a><span > </span>
 <a id="L35"></a><span > </span>
 <a id="L36"></a><span class="unvisited"> </span>
@@ -77,27 +84,26 @@
 <a id="L45"></a><span > </span>
 <a id="L46"></a><span > </span>
 <a id="L47"></a><span class="visited"> </span>
-<a id="L48"></a><span > </span>
+<a id="L48"></a><span class="visited"> </span>
 <a id="L49"></a><span class="visited"> </span>
-<a id="L50"></a><span class="visited"> </span>
+<a id="L50"></a><span > </span>
 <a id="L51"></a><span > </span>
 <a id="L52"></a><span > </span>
-<a id="L53"></a><span > </span>
-<a id="L54"></a><span class="visited"> </span>
-<a id="L55"></a><span class="visited"> </span>
+<a id="L53"></a><span class="visited"> </span>
+<a id="L54"></a><span class="unvisited"> </span>
+<a id="L55"></a><span > </span>
 <a id="L56"></a><span > </span>
-<a id="L57"></a><span > </span>
-<a id="L58"></a><span class="visited"> </span>
+<a id="L57"></a><span class="visited"> </span>
+<a id="L58"></a><span > </span>
 <a id="L59"></a><span > </span>
-<a id="L60"></a><span > </span>
-<a id="L61"></a><span class="unvisited"> </span>
+<a id="L60"></a><span class="unvisited"> </span>
+<a id="L61"></a><span > </span>
 <a id="L62"></a><span > </span>
-<a id="L63"></a><span > </span>
+<a id="L63"></a><span class="visited"> </span>
 <a id="L64"></a><span class="visited"> </span>
-<a id="L65"></a><span class="visited"> </span>
+<a id="L65"></a><span > </span>
 <a id="L66"></a><span > </span>
-<a id="L67"></a><span > </span>
-<a id="L68"></a><span class="visited"> </span>
+<a id="L67"></a><span class="visited"> </span>
 </pre>
       </div>
       <div id="text-layer">
@@ -169,7 +175,6 @@
 <a href="#L65">65</a>
 <a href="#L66">66</a>
 <a href="#L67">67</a>
-<a href="#L68">68</a>
 </pre>
 <pre><code class="ocaml">(** Copyright 2023-2024, Rustam Shangareev and Danil Yevdokimov *)
 
@@ -180,30 +185,30 @@ open Format
 open Pretty_printer
 
 let show_immexpr = function
-  | <span data-count="4">I</span>mmInt x -&gt; sprintf "%d" x
+  | <span data-count="8">I</span>mmInt x -&gt; sprintf "%d" x
   | <span data-count="0">I</span>mmBool x -&gt; sprintf "%b" x
-  | <span data-count="35">I</span>mmIdentifier x -&gt; x
+  | <span data-count="41">I</span>mmIdentifier x -&gt; x
 ;;
 
 let pp_immexpr fmt ie = <span data-count="0">f</span>printf fmt "%s" (show_immexp<span data-count="0">r</span> ie)
 
 let rec show_aexpr = function
-  | <span data-count="13">A</span>Let (id, ce, ae) -&gt;
-    sprintf "    let %s = %s in\n%s" id (show_cexp<span data-count="13">r</span> ce) (show_aexp<span data-count="13">r</span> ae)
-  | <span data-count="8">A</span>CExpr ce -&gt; show_cexpr ce
+  | <span data-count="21">A</span>Let (id, ce, ae) -&gt;
+    sprintf "    let %s = %s in\n%s" id (show_cexp<span data-count="21">r</span> ce) (show_aexp<span data-count="21">r</span> ae)
+  | <span data-count="4">A</span>CExpr ce -&gt; show_cexpr ce
 
 and show_cexpr = function
-  | <span data-count="9">C</span>ImmExpr x -&gt; show_immexpr x
+  | <span data-count="8">C</span>ImmExpr x -&gt; show_immexpr x
   | <span data-count="0">C</span>UnaryOp (o, x) -&gt; sprintf "%s%s" (show_un_o<span data-count="0">p</span> o) (show_immexp<span data-count="0">r</span> x)
-  | <span data-count="3">C</span>BinaryOp (o, x1, x2) -&gt;
-    sprintf "%s %s %s" (show_immexp<span data-count="3">r</span> x1) (show_bin_o<span data-count="3">p</span> o) (show_immexp<span data-count="3">r</span> x2)
-  | <span data-count="8">C</span>App (f, x) -&gt; sprintf "%s %s" (show_immexp<span data-count="8">r</span> f) (show_immexp<span data-count="8">r</span> x)
-  | <span data-count="1">C</span>If (condition, true_branch, false_branch) -&gt;
+  | <span data-count="0">C</span>BinaryOp (o, x1, x2) -&gt;
+    sprintf "%s %s %s" (show_immexp<span data-count="0">r</span> x1) (show_bin_o<span data-count="0">p</span> o) (show_immexp<span data-count="0">r</span> x2)
+  | <span data-count="17">C</span>App (f, x) -&gt; sprintf "%s %s" (show_immexp<span data-count="17">r</span> f) (show_immexp<span data-count="17">r</span> x)
+  | <span data-count="0">C</span>If (condition, true_branch, false_branch) -&gt;
     sprintf
       "if %s then %s else %s"
-      (show_immexp<span data-count="1">r</span> condition)
-      (show_aexp<span data-count="1">r</span> true_branch)
-      (show_aexp<span data-count="1">r</span> false_branch)
+      (show_immexp<span data-count="0">r</span> condition)
+      (show_aexp<span data-count="0">r</span> true_branch)
+      (show_aexp<span data-count="0">r</span> false_branch)
 ;;
 
 let pp_cexpr fmt ce = <span data-count="0">f</span>printf fmt "%s" (show_cexp<span data-count="0">r</span> ce)
@@ -216,25 +221,24 @@ let show_pexpr = function
 let pp_pexpr fmt pe = <span data-count="0">f</span>printf fmt "%s" pe
 let pp_aexpr fmt ae = <span data-count="0">f</span>printf fmt "%s" (show_aexp<span data-count="0">r</span> ae)
 
-let show_abinding (ABind (is_rec, id, lst, ae)) =
-  <span data-count="6">l</span>et rec_str = if is_rec then <span data-count="1">"</span>rec " else <span data-count="5">"</span>" in
-  let rec construct_lst = function
+let show_abinding (ABind (id, lst, ae)) =
+  <span data-count="4">l</span>et rec construct_lst = function
     | <span data-count="7">h</span>d :: tl -&gt; sprintf "%s %s" (show_pexp<span data-count="7">r</span> hd) (construct_ls<span data-count="7">t</span> tl)
-    | <span data-count="6">_</span> -&gt; ""
+    | <span data-count="4">_</span> -&gt; ""
   in
   let jump =
     match ae with
     | <span data-count="4">A</span>Let _ -&gt; "\n"
-    | <span data-count="2">_</span> -&gt; " "
+    | <span data-count="0">_</span> -&gt; " "
   in
   let lst_str = construct_lst lst in
-  <span data-count="6">s</span>printf "let %s%s %s=%s%s;;\n\n" rec_str id lst_str jump (show_aexp<span data-count="6">r</span> ae)
+  <span data-count="4">s</span>printf "let %s %s=%s%s;;\n\n" id lst_str jump (show_aexp<span data-count="4">r</span> ae)
 ;;
 
 let pp_abinding fmt ab = <span data-count="0">f</span>printf fmt "%s" (show_abindin<span data-count="0">g</span> ab)
 
 let rec show_abinding_list = function
-  | <span data-count="6">h</span>d :: tl -&gt; sprintf "%s%s" (show_abindin<span data-count="6">g</span> hd) (show_abinding_lis<span data-count="6">t</span> tl)
+  | <span data-count="4">h</span>d :: tl -&gt; sprintf "%s%s" (show_abindin<span data-count="4">g</span> hd) (show_abinding_lis<span data-count="4">t</span> tl)
   | <span data-count="1">_</span> -&gt; ""
 ;;
 
