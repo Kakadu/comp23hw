@@ -435,7 +435,7 @@ let codegen_imm = function
           ok
             (build_cal<span data-count="64">l</span>
                (function_typ<span data-count="64">e</span> int_type [| int_type; int_type |])
-               (Option.ge<span data-count="64">t</span> (lookup_functio<span data-count="64">n</span> "addNewPAppliClosure" the_module))
+               (Option.ge<span data-count="64">t</span> (lookup_functio<span data-count="64">n</span> "create_new_apply" the_module))
                [| build_pointercas<span data-count="64">t</span> v int_type "cast_pointer_to_int" builder
                 ; params v |&gt; <span data-count="64">B</span>ase.Array.length |&gt; <span data-count="64">c</span>onst_in<span data-count="64">t</span> int_type
                |]
@@ -489,7 +489,7 @@ and codegen_cexpr = function
     <span data-count="110">o</span>k
       (build_cal<span data-count="110">l</span>
          (function_typ<span data-count="110">e</span> int_type [| int_type; int_type |])
-         (Option.ge<span data-count="110">t</span> (lookup_functio<span data-count="110">n</span> "applyPAppli" the_module))
+         (Option.ge<span data-count="110">t</span> (lookup_functio<span data-count="110">n</span> "partially_apply" the_module))
          [| calee; arg |]
          "PAppliApplication"
          builder)
@@ -567,11 +567,11 @@ let codegen_abind = function
 let codegen_program prog =
   <span data-count="9">l</span>et runtime =
     [ declare_functio<span data-count="9">n</span>
-        "addNewPAppliClosure"
+        "create_new_apply"
         (function_typ<span data-count="9">e</span> int_type [| int_type; int_type |])
         the_module
     ; declare_functio<span data-count="9">n</span>
-        "applyPAppli"
+        "partially_apply"
         (function_typ<span data-count="9">e</span> int_type [| int_type; int_type |])
         the_module
     ; declare_functio<span data-count="9">n</span> "print_int" (function_typ<span data-count="9">e</span> int_type [| int_type |]) the_module
