@@ -366,34 +366,34 @@ type pexpr =
 type abinding = ABind of string * pexpr list * aexpr
 
 let fresh_var_temp count () =
-  <span data-count="299">i</span>ncr count;
-  <span data-count="299">P</span>rintf.sprintf "%s_%d" "anf" !count
+  <span data-count="314">i</span>ncr count;
+  <span data-count="314">P</span>rintf.sprintf "%s_%d" "anf" !count
 ;;
 
 let new_fresh_var () =
-  <span data-count="19">l</span>et count = ref 0 in
+  <span data-count="20">l</span>et count = ref 0 in
   fresh_var_temp count
 ;;
 
 let rec anf_func (fresh_var : unit -&gt; id) (e : exp) (expr_with_hole : immexpr -&gt; aexpr)
   : aexpr
   =
-  <span data-count="732">l</span>et anf = anf_func fresh_var in
-  <span data-count="732">l</span>et rec anf_let_bindings bindings body expr_with_hole =
-    <span data-count="38">m</span>atch bindings with
-    | <span data-count="13">[</span>] -&gt; anf body expr_with_hole
-    | <span data-count="25">(</span>_, pt, exp) :: rest -&gt;
+  <span data-count="777">l</span>et anf = anf_func fresh_var in
+  <span data-count="777">l</span>et rec anf_let_bindings bindings body expr_with_hole =
+    <span data-count="47">m</span>atch bindings with
+    | <span data-count="14">[</span>] -&gt; anf body expr_with_hole
+    | <span data-count="33">(</span>_, pt, exp) :: rest -&gt;
       anf exp (fun immexpr -&gt;
-        <span data-count="25">m</span>atch pt with
+        <span data-count="33">m</span>atch pt with
         | <span data-count="0">P</span>tWild -&gt; anf_let_bindings rest body expr_with_hole
-        | <span data-count="25">P</span>tVar id -&gt;
-          ALet (id, CImmExpr immexpr, anf_let_binding<span data-count="25">s</span> rest body expr_with_hole)
+        | <span data-count="33">P</span>tVar id -&gt;
+          ALet (id, CImmExpr immexpr, anf_let_binding<span data-count="33">s</span> rest body expr_with_hole)
         | <span data-count="0">P</span>tConst _ -&gt; anf_let_bindings rest body expr_with_hole)
   in
   match e with
-  | <span data-count="122">E</span>Const (CInt n) -&gt; expr_with_hole (ImmInt n)
-  | <span data-count="18">E</span>Const (CBool b) -&gt; expr_with_hole (ImmBool b)
-  | <span data-count="280">E</span>Var x -&gt; expr_with_hole (ImmIdentifier x)
+  | <span data-count="127">E</span>Const (CInt n) -&gt; expr_with_hole (ImmInt n)
+  | <span data-count="22">E</span>Const (CBool b) -&gt; expr_with_hole (ImmBool b)
+  | <span data-count="300">E</span>Var x -&gt; expr_with_hole (ImmIdentifier x)
   | <span data-count="6">E</span>UnOp (op, exp) -&gt;
     anf exp (fun imm -&gt;
       <span data-count="6">l</span>et varname = fresh_var () in
@@ -403,18 +403,18 @@ let rec anf_func (fresh_var : unit -&gt; id) (e : exp) (expr_with_hole : immexpr
       <span data-count="68">a</span>nf right (fun rimm -&gt;
         <span data-count="68">l</span>et varname = fresh_var () in
         <span data-count="68">A</span>Let (varname, CBinaryOp (op, limm, rimm), expr_with_hol<span data-count="68">e</span> (ImmIdentifier varname))))
-  | <span data-count="218">E</span>App (e1, e2) -&gt;
+  | <span data-count="233">E</span>App (e1, e2) -&gt;
     anf e1 (fun e1imm -&gt;
-      <span data-count="218">a</span>nf e2 (fun e2imm -&gt;
-        <span data-count="218">l</span>et varname = fresh_var () in
-        <span data-count="218">A</span>Let (varname, CApp (e1imm, e2imm), expr_with_hol<span data-count="218">e</span> (ImmIdentifier varname))))
+      <span data-count="233">a</span>nf e2 (fun e2imm -&gt;
+        <span data-count="233">l</span>et varname = fresh_var () in
+        <span data-count="233">A</span>Let (varname, CApp (e1imm, e2imm), expr_with_hol<span data-count="233">e</span> (ImmIdentifier varname))))
   | <span data-count="7">E</span>If (cond, e1, e2) -&gt;
     anf cond (fun condimm -&gt;
       <span data-count="7">l</span>et new_e1 = anf e1 (fun e1imm -&gt; <span data-count="7">A</span>CExpr (CImmExpr e1imm)) in
       <span data-count="7">l</span>et new_e2 = anf e2 (fun e2imm -&gt; <span data-count="7">A</span>CExpr (CImmExpr e2imm)) in
       <span data-count="7">l</span>et varname = fresh_var () in
       <span data-count="7">A</span>Let (varname, CIf (condimm, new_e1, new_e2), expr_with_hol<span data-count="7">e</span> (ImmIdentifier varname)))
-  | <span data-count="13">E</span>Let (bindings, body) -&gt; anf_let_bindings bindings body expr_with_hole
+  | <span data-count="14">E</span>Let (bindings, body) -&gt; anf_let_bindings bindings body expr_with_hole
   | <span data-count="0">E</span>Fun (_, body) -&gt;
     let varname = fresh_var () in
     <span data-count="0">l</span>et anf_body = anf body (fun imm -&gt; <span data-count="0">A</span>CExpr (CImmExpr imm)) in
@@ -452,24 +452,24 @@ and substitute_in_binding old_id new_id (is_rec, pt, exp) =
 ;;
 
 let anf_program (program : prog) : abinding list =
-  <span data-count="19">l</span>et fresh_var = new_fresh_var () in
-  <span data-count="19">L</span>ist.fold_right
+  <span data-count="20">l</span>et fresh_var = new_fresh_var () in
+  <span data-count="20">L</span>ist.fold_right
     (fun decl acc -&gt;
-      <span data-count="95">m</span>atch decl with
-      | <span data-count="95">D</span>Let (_, pt, exp) -&gt;
+      <span data-count="101">m</span>atch decl with
+      | <span data-count="101">D</span>Let (_, pt, exp) -&gt;
         let rec get_new_exp lst = function
-          | <span data-count="123">E</span>Fun (PtVar id, nxt) -&gt; get_new_exp (PImmExpr (ImmIdentifier id) :: lst) nxt
+          | <span data-count="129">E</span>Fun (PtVar id, nxt) -&gt; get_new_exp (PImmExpr (ImmIdentifier id) :: lst) nxt
           | <span data-count="12">E</span>Fun (PtWild, nxt) -&gt; get_new_exp (PImmWild :: lst) nxt
           | <span data-count="0">E</span>Fun (PtConst t, nxt) -&gt;
             get_new_exp (PImmExpr (const_to_immexp<span data-count="0">r</span> t) :: lst) nxt
-          | <span data-count="95">r</span>esult -&gt; lst, result
+          | <span data-count="101">r</span>esult -&gt; lst, result
         in
         let lst, exp = get_new_exp [] exp in
-        <span data-count="95">l</span>et lst = List.rev lst in
-        <span data-count="95">l</span>et anf_exp = anf_func fresh_var exp (fun imm -&gt; <span data-count="95">A</span>CExpr (CImmExpr imm)) in
-        <span data-count="95">l</span>et id =
+        <span data-count="101">l</span>et lst = List.rev lst in
+        <span data-count="101">l</span>et anf_exp = anf_func fresh_var exp (fun imm -&gt; <span data-count="101">A</span>CExpr (CImmExpr imm)) in
+        <span data-count="101">l</span>et id =
           match pt with
-          | <span data-count="95">P</span>tVar id -&gt; id
+          | <span data-count="101">P</span>tVar id -&gt; id
           | <span data-count="0">P</span>tWild -&gt; fresh_va<span data-count="0">r</span> ()
           | <span data-count="0">P</span>tConst _ -&gt; fresh_va<span data-count="0">r</span> ()
         in

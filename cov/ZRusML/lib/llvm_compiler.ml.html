@@ -410,29 +410,29 @@ open Result
 open Ast
 open Anf
 
-let context = global_contex<span data-count="34">t</span> ()
-let the_module = create_modul<span data-count="34">e</span> context "ZRusML"
-let builder = builde<span data-count="34">r</span> context
-let int_type = i64_typ<span data-count="34">e</span> context
-let bool_type = i1_typ<span data-count="34">e</span> context
-let named_values : (string, llvalue) Hashtbl.t = Hashtbl.creat<span data-count="34">e</span> 50
+let context = global_contex<span data-count="40">t</span> ()
+let the_module = create_modul<span data-count="40">e</span> context "ZRusML"
+let builder = builde<span data-count="40">r</span> context
+let int_type = i64_typ<span data-count="40">e</span> context
+let bool_type = i1_typ<span data-count="40">e</span> context
+let named_values : (string, llvalue) Hashtbl.t = Hashtbl.creat<span data-count="40">e</span> 50
 let ( let* ) = bind
 
 let codegen_imm = function
-  | <span data-count="108">I</span>mmInt x -&gt; ok (const_in<span data-count="108">t</span> int_type x)
-  | <span data-count="18">I</span>mmBool b -&gt; ok (const_in<span data-count="18">t</span> int_type (Base.Bool.to_in<span data-count="18">t</span> b))
-  | <span data-count="529">I</span>mmIdentifier id -&gt;
+  | <span data-count="113">I</span>mmInt x -&gt; ok (const_in<span data-count="113">t</span> int_type x)
+  | <span data-count="22">I</span>mmBool b -&gt; ok (const_in<span data-count="22">t</span> int_type (Base.Bool.to_in<span data-count="22">t</span> b))
+  | <span data-count="564">I</span>mmIdentifier id -&gt;
     (match Hashtbl.find_opt named_values id with
-     | <span data-count="423">S</span>ome v -&gt; ok (build_loa<span data-count="423">d</span> int_type v id builder)
-     | <span data-count="106">N</span>one -&gt;
+     | <span data-count="447">S</span>ome v -&gt; ok (build_loa<span data-count="447">d</span> int_type v id builder)
+     | <span data-count="117">N</span>one -&gt;
        (match lookup_function id the_module with
-        | <span data-count="106">S</span>ome v -&gt;
+        | <span data-count="117">S</span>ome v -&gt;
           ok
-            (build_cal<span data-count="106">l</span>
-               (function_typ<span data-count="106">e</span> int_type [| int_type; int_type |])
-               (Option.ge<span data-count="106">t</span> (lookup_functio<span data-count="106">n</span> "create_new_apply" the_module))
-               [| build_pointercas<span data-count="106">t</span> v int_type "cast_pointer_to_int" builder
-                ; params v |&gt; <span data-count="106">B</span>ase.Array.length |&gt; <span data-count="106">c</span>onst_in<span data-count="106">t</span> int_type
+            (build_cal<span data-count="117">l</span>
+               (function_typ<span data-count="117">e</span> int_type [| int_type; int_type |])
+               (Option.ge<span data-count="117">t</span> (lookup_functio<span data-count="117">n</span> "create_new_apply" the_module))
+               [| build_pointercas<span data-count="117">t</span> v int_type "cast_pointer_to_int" builder
+                ; params v |&gt; <span data-count="117">B</span>ase.Array.length |&gt; <span data-count="117">c</span>onst_in<span data-count="117">t</span> int_type
                |]
                "PAppliClosure"
                builder)
@@ -455,13 +455,13 @@ let codegen_binop = function
 ;;
 
 let rec codegen_aexpr = function
-  | <span data-count="293">A</span>Let (id, c, ae) -&gt;
-    let* body = codegen_cexp<span data-count="293">r</span> c in
-    <span data-count="293">l</span>et alloca = build_alloca int_type id builder in
-    <span data-count="293">l</span>et _ = build_store body alloca builder in
-    <span data-count="293">H</span>ashtbl.add named_values id alloca;
-    <span data-count="293">c</span>odegen_aexpr ae
-  | <span data-count="102">A</span>CExpr c -&gt; codegen_cexpr c
+  | <span data-count="316">A</span>Let (id, c, ae) -&gt;
+    let* body = codegen_cexp<span data-count="316">r</span> c in
+    <span data-count="316">l</span>et alloca = build_alloca int_type id builder in
+    <span data-count="316">l</span>et _ = build_store body alloca builder in
+    <span data-count="316">H</span>ashtbl.add named_values id alloca;
+    <span data-count="316">c</span>odegen_aexpr ae
+  | <span data-count="108">A</span>CExpr c -&gt; codegen_cexpr c
 
 and codegen_cexpr = function
   | <span data-count="1">C</span>UnaryOp (Not, x) -&gt;
@@ -477,14 +477,14 @@ and codegen_cexpr = function
     <span data-count="63">l</span>et* r' = codegen_im<span data-count="63">m</span> r in
     <span data-count="63">l</span>et res = codegen_binop op l' r' in
     <span data-count="63">o</span>k (build_zex<span data-count="63">t</span> res int_type "to_int" builder)
-  | <span data-count="123">C</span>ImmExpr e -&gt; codegen_imm e
-  | <span data-count="197">C</span>App (func, argument) -&gt;
-    let* calee = codegen_im<span data-count="197">m</span> func in
-    <span data-count="197">l</span>et* arg = codegen_im<span data-count="197">m</span> argument in
-    <span data-count="197">o</span>k
-      (build_cal<span data-count="197">l</span>
-         (function_typ<span data-count="197">e</span> int_type [| int_type; int_type |])
-         (Option.ge<span data-count="197">t</span> (lookup_functio<span data-count="197">n</span> "partially_apply" the_module))
+  | <span data-count="137">C</span>ImmExpr e -&gt; codegen_imm e
+  | <span data-count="212">C</span>App (func, argument) -&gt;
+    let* calee = codegen_im<span data-count="212">m</span> func in
+    <span data-count="212">l</span>et* arg = codegen_im<span data-count="212">m</span> argument in
+    <span data-count="212">o</span>k
+      (build_cal<span data-count="212">l</span>
+         (function_typ<span data-count="212">e</span> int_type [| int_type; int_type |])
+         (Option.ge<span data-count="212">t</span> (lookup_functio<span data-count="212">n</span> "partially_apply" the_module))
          [| calee; arg |]
          "PAppliApplication"
          builder)
@@ -518,73 +518,73 @@ and codegen_cexpr = function
 ;;
 
 let codegen_abind = function
-  | <span data-count="88">A</span>Bind (id, args, body) -&gt;
+  | <span data-count="94">A</span>Bind (id, args, body) -&gt;
     Hashtbl.clear named_values;
-    <span data-count="88">l</span>et ints = Array.make (List.lengt<span data-count="88">h</span> args) int_type in
-    <span data-count="88">l</span>et ftype = function_type int_type ints in
-    <span data-count="88">l</span>et* func =
+    <span data-count="94">l</span>et ints = Array.make (List.lengt<span data-count="94">h</span> args) int_type in
+    <span data-count="94">l</span>et ftype = function_type int_type ints in
+    <span data-count="94">l</span>et* func =
       match lookup_function id the_module with
       | <span data-count="0">S</span>ome _ -&gt; erro<span data-count="0">r</span> "Function already exists"
-      | <span data-count="88">N</span>one -&gt; o<span data-count="88">k</span> @@ declare_functio<span data-count="88">n</span> id ftype the_module
+      | <span data-count="94">N</span>one -&gt; o<span data-count="94">k</span> @@ declare_functio<span data-count="94">n</span> id ftype the_module
     in
-    <span data-count="88">l</span>et* names =
+    <span data-count="94">l</span>et* names =
       let rec check acc = function
-        | <span data-count="88">[</span>] -&gt; ok (List.re<span data-count="88">v</span> acc)
-        | <span data-count="114">P</span>ImmExpr (ImmIdentifier id) :: xs -&gt; check (id :: acc) xs
+        | <span data-count="94">[</span>] -&gt; ok (List.re<span data-count="94">v</span> acc)
+        | <span data-count="120">P</span>ImmExpr (ImmIdentifier id) :: xs -&gt; check (id :: acc) xs
         | <span data-count="12">P</span>ImmWild :: xs -&gt; check ("0_unused" :: acc) xs
         | <span data-count="0">_</span> -&gt; error "Invalid argument"
       in
-      chec<span data-count="88">k</span> [] args
+      chec<span data-count="94">k</span> [] args
     in
-    <span data-count="88">A</span>rray.iteri
+    <span data-count="94">A</span>rray.iteri
       (fun i a -&gt;
-        <span data-count="126">l</span>et name = List.nth names i in
-        <span data-count="126">s</span>et_value_name name a)
-      (param<span data-count="88">s</span> func);
-    <span data-count="88">l</span>et bb = append_block context "entry" func in
-    <span data-count="88">p</span>osition_at_end bb builder;
-    <span data-count="88">A</span>rray.iteri
+        <span data-count="132">l</span>et name = List.nth names i in
+        <span data-count="132">s</span>et_value_name name a)
+      (param<span data-count="94">s</span> func);
+    <span data-count="94">l</span>et bb = append_block context "entry" func in
+    <span data-count="94">p</span>osition_at_end bb builder;
+    <span data-count="94">A</span>rray.iteri
       (fun i a -&gt;
-        <span data-count="126">l</span>et name = List.nth names i in
-        <span data-count="126">l</span>et alloca = build_alloca int_type name builder in
-        <span data-count="126">l</span>et (_ : llvalue) = build_store a alloca builder in
-        <span data-count="126">H</span>ashtbl.add named_values name alloca)
-      (param<span data-count="88">s</span> func);
-    <span data-count="88">l</span>et* ret_val = codegen_aexp<span data-count="88">r</span> body in
-    <span data-count="88">l</span>et _ =
+        <span data-count="132">l</span>et name = List.nth names i in
+        <span data-count="132">l</span>et alloca = build_alloca int_type name builder in
+        <span data-count="132">l</span>et (_ : llvalue) = build_store a alloca builder in
+        <span data-count="132">H</span>ashtbl.add named_values name alloca)
+      (param<span data-count="94">s</span> func);
+    <span data-count="94">l</span>et* ret_val = codegen_aexp<span data-count="94">r</span> body in
+    <span data-count="94">l</span>et _ =
       if id = "main"
-      then <span data-count="17">b</span>uild_re<span data-count="17">t</span> (const_in<span data-count="17">t</span> int_type 0) builder
-      else <span data-count="71">b</span>uild_re<span data-count="71">t</span> ret_val builder
+      then <span data-count="18">b</span>uild_re<span data-count="18">t</span> (const_in<span data-count="18">t</span> int_type 0) builder
+      else <span data-count="76">b</span>uild_re<span data-count="76">t</span> ret_val builder
     in
     ok func
 ;;
 
 let codegen_program prog =
-  <span data-count="17">l</span>et runtime =
-    [ declare_functio<span data-count="17">n</span>
+  <span data-count="18">l</span>et runtime =
+    [ declare_functio<span data-count="18">n</span>
         "create_new_apply"
-        (function_typ<span data-count="17">e</span> int_type [| int_type; int_type |])
+        (function_typ<span data-count="18">e</span> int_type [| int_type; int_type |])
         the_module
-    ; declare_functio<span data-count="17">n</span>
+    ; declare_functio<span data-count="18">n</span>
         "partially_apply"
-        (function_typ<span data-count="17">e</span> int_type [| int_type; int_type |])
+        (function_typ<span data-count="18">e</span> int_type [| int_type; int_type |])
         the_module
-    ; declare_functio<span data-count="17">n</span> "print_int" (function_typ<span data-count="17">e</span> int_type [| int_type |]) the_module
-    ; declare_functio<span data-count="17">n</span> "print_bool" (function_typ<span data-count="17">e</span> int_type [| int_type |]) the_module
-    ; declare_functio<span data-count="17">n</span> "print_endline" (function_typ<span data-count="17">e</span> int_type [||]) the_module
-    ; declare_functio<span data-count="17">n</span> "print_char" (function_typ<span data-count="17">e</span> int_type [| int_type |]) the_module
+    ; declare_functio<span data-count="18">n</span> "print_int" (function_typ<span data-count="18">e</span> int_type [| int_type |]) the_module
+    ; declare_functio<span data-count="18">n</span> "print_bool" (function_typ<span data-count="18">e</span> int_type [| int_type |]) the_module
+    ; declare_functio<span data-count="18">n</span> "print_endline" (function_typ<span data-count="18">e</span> int_type [||]) the_module
+    ; declare_functio<span data-count="18">n</span> "print_char" (function_typ<span data-count="18">e</span> int_type [| int_type |]) the_module
     ]
   in
   let* result =
-    List.fold_lef<span data-count="17">t</span>
+    List.fold_lef<span data-count="18">t</span>
       (fun acc abind -&gt;
-        <span data-count="88">l</span>et* acc = acc in
-        <span data-count="88">l</span>et* res = codegen_abin<span data-count="88">d</span> abind in
-        <span data-count="88">o</span>k (res :: acc))
-      (o<span data-count="17">k</span> runtime)
+        <span data-count="94">l</span>et* acc = acc in
+        <span data-count="94">l</span>et* res = codegen_abin<span data-count="94">d</span> abind in
+        <span data-count="94">o</span>k (res :: acc))
+      (o<span data-count="18">k</span> runtime)
       prog
   in
-  <span data-count="17">o</span>k (List.re<span data-count="17">v</span> result)
+  <span data-count="18">o</span>k (List.re<span data-count="18">v</span> result)
 ;;
 </code></pre>
       </div>

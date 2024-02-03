@@ -187,56 +187,56 @@ open Typing
 
 let rec find x = function
   | <span data-count="0">[</span>] -&gt; 0
-  | <span data-count="5">h</span> :: t -&gt; if x = h then <span data-count="2">1</span> else <span data-count="3">1</span> + fin<span data-count="3">d</span> x t
+  | <span data-count="13">h</span> :: t -&gt; if x = h then <span data-count="6">1</span> else <span data-count="7">1</span> + fin<span data-count="7">d</span> x t
 ;;
 
 let env_inference prog env =
-  <span data-count="27">l</span>et typs, _ =
+  <span data-count="32">l</span>et typs, _ =
     List.fold_left
       (fun (typs, environment) dec -&gt;
-        <span data-count="57">l</span>et tcheck dec =
-          <span data-count="114">m</span>atch dec with
+        <span data-count="68">l</span>et tcheck dec =
+          <span data-count="136">m</span>atch dec with
           | <span data-count="0">D</span>Let (_, PtWild, _) -&gt; "- ", run_inferenc<span data-count="0">e</span> dec environment
-          | <span data-count="114">D</span>Let (_, PtVar name, _) -&gt; name, run_inferenc<span data-count="114">e</span> dec environment
+          | <span data-count="136">D</span>Let (_, PtVar name, _) -&gt; name, run_inferenc<span data-count="136">e</span> dec environment
           | <span data-count="0">_</span> -&gt; "", Error `Matching_failed
         in
         let environment' =
-          match snd (tchec<span data-count="57">k</span> dec) with
-          | <span data-count="55">O</span>k (env, _) -&gt; env
-          | <span data-count="2">_</span> -&gt; environment
+          match snd (tchec<span data-count="68">k</span> dec) with
+          | <span data-count="62">O</span>k (env, _) -&gt; env
+          | <span data-count="6">_</span> -&gt; environment
         in
-        tchec<span data-count="57">k</span> dec :: typs, environment')
+        tchec<span data-count="68">k</span> dec :: typs, environment')
       ([], env)
       prog
   in
-  <span data-count="27">L</span>ist.rev typs
+  <span data-count="32">L</span>ist.rev typs
 ;;
 
 let inference_prog prog = <span data-count="0">e</span>nv_inference prog TypeEnv.empty
 
 let env_show_inference prog env =
-  <span data-count="27">l</span>et id_x_typs = env_inference prog env in
-  <span data-count="27">l</span>et only_typs = List.map snd id_x_typs in
-  <span data-count="27">l</span>et error_check =
+  <span data-count="32">l</span>et id_x_typs = env_inference prog env in
+  <span data-count="32">l</span>et only_typs = List.map snd id_x_typs in
+  <span data-count="32">l</span>et error_check =
     List.find_opt
       (function
-        | <span data-count="2">E</span>rror _ -&gt; true
-        | <span data-count="55">_</span> -&gt; false)
+        | <span data-count="6">E</span>rror _ -&gt; true
+        | <span data-count="62">_</span> -&gt; false)
       only_typs
   in
-  <span data-count="27">m</span>atch error_check with
-  | <span data-count="25">N</span>one -&gt;
+  <span data-count="32">m</span>atch error_check with
+  | <span data-count="26">N</span>one -&gt;
     Ok
-      (List.fold_lef<span data-count="25">t</span>
+      (List.fold_lef<span data-count="26">t</span>
          (fun acc (a, b) -&gt;
-           <span data-count="52">m</span>atch b with
-           | <span data-count="52">O</span>k (_, typ) -&gt; acc ^ Format.sprint<span data-count="52">f</span> "val %s : %s\n" a (show_ty<span data-count="52">p</span> typ)
+           <span data-count="55">m</span>atch b with
+           | <span data-count="55">O</span>k (_, typ) -&gt; acc ^ Format.sprint<span data-count="55">f</span> "val %s : %s\n" a (show_ty<span data-count="55">p</span> typ)
            | <span data-count="0">E</span>rror e -&gt; acc ^ show_erro<span data-count="0">r</span> e)
          ""
          id_x_typs)
-  | <span data-count="2">S</span>ome (Error e) -&gt;
+  | <span data-count="6">S</span>ome (Error e) -&gt;
     let index = find (Error e) only_typs in
-    <span data-count="2">E</span>rror (Format.sprint<span data-count="2">f</span> "Error in №%d declaration: \n%s\n" index (show_erro<span data-count="2">r</span> e))
+    <span data-count="6">E</span>rror (Format.sprint<span data-count="6">f</span> "Error in №%d declaration: \n%s\n" index (show_erro<span data-count="6">r</span> e))
   | <span data-count="0">_</span> -&gt; Error (show_erro<span data-count="0">r</span> `Unreachable)
 ;;
 

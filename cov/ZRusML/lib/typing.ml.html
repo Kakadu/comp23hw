@@ -182,8 +182,8 @@ type typ =
 (* Ground types *)
 let int_typ = TGround Int
 let bool_typ = TGround Bool
-let var_t n = <span data-count="684">T</span>Var n
-let arrow_t left_type right_type = <span data-count="20057">T</span>Arr (left_type, right_type)
+let var_t n = <span data-count="782">T</span>Var n
+let arrow_t left_type right_type = <span data-count="20735">T</span>Arr (left_type, right_type)
 
 type scheme = (type_variable_number, Base.Int.comparator_witness) Base.Set.t * typ
 
@@ -197,31 +197,31 @@ type error =
   ]
 
 let rec show_typ typ =
-  <span data-count="199">l</span>et open Format in
+  <span data-count="218">l</span>et open Format in
   match typ with
-  | <span data-count="86">T</span>Ground x -&gt;
+  | <span data-count="93">T</span>Ground x -&gt;
     (match x with
-     | <span data-count="61">I</span>nt -&gt; "int"
-     | <span data-count="7">B</span>ool -&gt; "bool"
+     | <span data-count="66">I</span>nt -&gt; "int"
+     | <span data-count="9">B</span>ool -&gt; "bool"
      | <span data-count="18">U</span>nit -&gt; "unit")
-  | <span data-count="71">T</span>Arr (typ_left, typ_right) -&gt;
-    sprintf "%s -&gt; %s" (show_ty<span data-count="71">p</span> typ_left) (show_ty<span data-count="71">p</span> typ_right)
-  | <span data-count="42">T</span>Var var -&gt; sprintf "%s" @@ "'" ^ Char.escape<span data-count="42">d</span> (Stdlib.Char.ch<span data-count="42">r</span> (var + 97))
+  | <span data-count="76">T</span>Arr (typ_left, typ_right) -&gt;
+    sprintf "%s -&gt; %s" (show_ty<span data-count="76">p</span> typ_left) (show_ty<span data-count="76">p</span> typ_right)
+  | <span data-count="49">T</span>Var var -&gt; sprintf "%s" @@ "'" ^ Char.escape<span data-count="49">d</span> (Stdlib.Char.ch<span data-count="49">r</span> (var + 97))
 ;;
 
 let pp_typ fmt typ = <span data-count="3">F</span>ormat.fprintf fmt "%s" (show_ty<span data-count="3">p</span> typ)
 
 let show_error (err : error) =
-  <span data-count="3">l</span>et open Format in
+  <span data-count="7">l</span>et open Format in
   match err with
   | <span data-count="1">`</span>OccursCheck -&gt; "Occurs check failed."
-  | <span data-count="1">`</span>NoVariable identifier -&gt;
+  | <span data-count="2">`</span>NoVariable identifier -&gt;
     sprintf "Elaboration failed: Unbound value identifier %s" identifier
-  | <span data-count="1">`</span>UnificationFailed (t1, t2) -&gt;
+  | <span data-count="4">`</span>UnificationFailed (t1, t2) -&gt;
     sprintf
       "Elaboration failed: Rules disagree on type: Cannot merge %s and %s"
-      (show_ty<span data-count="1">p</span> t1)
-      (show_ty<span data-count="1">p</span> t2)
+      (show_ty<span data-count="4">p</span> t1)
+      (show_ty<span data-count="4">p</span> t2)
   | <span data-count="0">`</span>Unreachable -&gt; "Not reachable."
   | <span data-count="0">`</span>Not_function -&gt; "Applying not a function"
   | <span data-count="0">`</span>Matching_failed -&gt; "Non-exhaustive matching"
