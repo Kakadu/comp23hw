@@ -152,6 +152,25 @@
 <a id="L128"></a><span > </span>
 <a id="L129"></a><span class="visited"> </span>
 <a id="L130"></a><span > </span>
+<a id="L131"></a><span > </span>
+<a id="L132"></a><span > </span>
+<a id="L133"></a><span class="visited"> </span>
+<a id="L134"></a><span > </span>
+<a id="L135"></a><span > </span>
+<a id="L136"></a><span > </span>
+<a id="L137"></a><span > </span>
+<a id="L138"></a><span > </span>
+<a id="L139"></a><span > </span>
+<a id="L140"></a><span > </span>
+<a id="L141"></a><span > </span>
+<a id="L142"></a><span > </span>
+<a id="L143"></a><span > </span>
+<a id="L144"></a><span class="visited"> </span>
+<a id="L145"></a><span > </span>
+<a id="L146"></a><span > </span>
+<a id="L147"></a><span > </span>
+<a id="L148"></a><span class="visited"> </span>
+<a id="L149"></a><span > </span>
 </pre>
       </div>
       <div id="text-layer">
@@ -286,6 +305,25 @@
 <a href="#L128">128</a>
 <a href="#L129">129</a>
 <a href="#L130">130</a>
+<a href="#L131">131</a>
+<a href="#L132">132</a>
+<a href="#L133">133</a>
+<a href="#L134">134</a>
+<a href="#L135">135</a>
+<a href="#L136">136</a>
+<a href="#L137">137</a>
+<a href="#L138">138</a>
+<a href="#L139">139</a>
+<a href="#L140">140</a>
+<a href="#L141">141</a>
+<a href="#L142">142</a>
+<a href="#L143">143</a>
+<a href="#L144">144</a>
+<a href="#L145">145</a>
+<a href="#L146">146</a>
+<a href="#L147">147</a>
+<a href="#L148">148</a>
+<a href="#L149">149</a>
 </pre>
 <pre><code class="ocaml">(** Copyright 2023-2024, Rustam Shangareev and Danil Yevdokimov *)
 
@@ -415,6 +453,25 @@ let%expect_test "wild test" =
   <span data-count="1">[</span>%expect {|
 val foo : 'a -&gt; 'b -&gt; 'c -&gt; 'd -&gt; 'e -&gt; 'f -&gt; 'g -&gt; 'e
 val k : int
+  |}<span data-count="5">]</span>
+;;
+
+let%expect_test "wild test" =
+  <span data-count="1">l</span>et code =
+    {|
+    let f _ _ x y z _ _ = x * y;;
+
+    let main = 
+      let m t = 2 * t in
+      let tmp = m (f true 4 15 3 true 6 false) in
+    tmp;;
+  |}
+  in
+  Format.printf "%a" inference code;
+  <span data-count="1">[</span>%expect
+    {|
+  val f : 'a -&gt; 'b -&gt; int -&gt; int -&gt; 'e -&gt; 'f -&gt; 'g -&gt; int
+  val main : int
   |}<span data-count="5">]</span>
 ;;
 </code></pre>

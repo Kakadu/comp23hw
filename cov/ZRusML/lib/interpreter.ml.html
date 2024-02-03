@@ -138,11 +138,11 @@ open Code_inferencer
 open Typing
 open Inferencer
 open Anf_pretty
-open Pretty_printer
+open Ast_pretty
 
 let print_prog_result code =
-  <span data-count="9">m</span>atch parse prog code with
-  | <span data-count="9">O</span>k res -&gt;
+  <span data-count="17">m</span>atch parse prog code with
+  | <span data-count="17">O</span>k res -&gt;
     let stdlib =
       [ "print_int", TArr (TGround Int, TGround Unit)
       ; "print_bool", TArr (TGround Bool, TGround Unit)
@@ -154,19 +154,19 @@ let print_prog_result code =
       Base.List.fold_left
         ~init:TypeEnv.empty
         ~f:(fun acc (id, t) -&gt;
-          <span data-count="36">T</span>ypeEnv.extend acc id (Base.Set.empt<span data-count="36">y</span> (module Base.Int), t))
+          <span data-count="68">T</span>ypeEnv.extend acc id (Base.Set.empt<span data-count="68">y</span> (module Base.Int), t))
         stdlib
     in
-    <span data-count="9">(</span>match env_show_inference res stdlib_env with
-     | <span data-count="9">O</span>k _ -&gt;
+    <span data-count="17">(</span>match env_show_inference res stdlib_env with
+     | <span data-count="17">O</span>k _ -&gt;
        let prog_closure = transform_decls res in
-       <span data-count="9">l</span>et lifted = lift_prog prog_closure in
-       <span data-count="9">l</span>et validated = validate_prog lifted in
-       <span data-count="9">l</span>et anf_prog = anf_program validated in
-       <span data-count="9">(</span>match codegen_program anf_prog with
-        | <span data-count="9">O</span>k llvalue_list -&gt;
+       <span data-count="17">l</span>et lifted = lift_prog prog_closure in
+       <span data-count="17">l</span>et validated = validate_prog lifted in
+       <span data-count="17">l</span>et anf_prog = anf_program validated in
+       <span data-count="17">(</span>match codegen_program anf_prog with
+        | <span data-count="17">O</span>k llvalue_list -&gt;
           Base.List.iter llvalue_list ~f:(fun f -&gt;
-            <span data-count="109">S</span>tdlib.Format.printf "%s\n" (Llvm.string_of_llvalu<span data-count="109">e</span> f))
+            <span data-count="190">S</span>tdlib.Format.printf "%s\n" (Llvm.string_of_llvalu<span data-count="190">e</span> f))
         | <span data-count="0">E</span>rror e -&gt; Stdlib.Format.printf "Error\n%s" e)
      | <span data-count="0">E</span>rror res -&gt; Stdlib.Format.printf "%s" res)
   | <span data-count="0">E</span>rror e -&gt; Stdlib.Format.printf "Error\n%s" e

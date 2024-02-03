@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8"/>
     <title>closure_conversion.ml &mdash; Coverage report</title>
-    <meta name="description" content="98.48% coverage in lib/closure_conversion.ml">
+    <meta name="description" content="100.00% coverage in lib/closure_conversion.ml">
     <link rel="stylesheet" href="../coverage.css"/>
     <script src="../highlight.pack.js"></script>
     <script>hljs.initHighlightingOnLoad();</script>
@@ -15,10 +15,9 @@
           <span class="dirname">lib/</span>closure_conversion.ml
         </a>
       </h1>
-      <h2>98.48%</h2>
+      <h2>100.00%</h2>
     </div>
     <div id="navbar">
-      <span class="unvisited" style="top:45.74%"></span>
     </div>
     <div id="report">
       <div id="lines-layer">
@@ -65,7 +64,7 @@
 <a id="L40"></a><span class="visited"> </span>
 <a id="L41"></a><span > </span>
 <a id="L42"></a><span class="visited"> </span>
-<a id="L43"></a><span class="unvisited"> </span>
+<a id="L43"></a><span class="visited"> </span>
 <a id="L44"></a><span > </span>
 <a id="L45"></a><span > </span>
 <a id="L46"></a><span class="visited"> </span>
@@ -225,90 +224,90 @@ module StringMap = Map.Make (String)
 module StringSet = Set.Make (String)
 
 let rec decompose_fun pts = function
-  | <span data-count="75">E</span>Fun (p, e) -&gt; decompose_fun (p :: pts) e
-  | <span data-count="56">e</span> -&gt; pts, e
+  | <span data-count="111">E</span>Fun (p, e) -&gt; decompose_fun (p :: pts) e
+  | <span data-count="65">e</span> -&gt; pts, e
 ;;
 
 let rec transform_exp exp env =
-  <span data-count="548">m</span>atch exp with
-  | <span data-count="186">E</span>Var nm -&gt;
+  <span data-count="797">m</span>atch exp with
+  | <span data-count="231">E</span>Var nm -&gt;
     (match StringSet.find_opt nm env with
-     | <span data-count="99">S</span>ome _ -&gt; StringSet.empty, exp
-     | <span data-count="87">N</span>one -&gt; StringSet.singleto<span data-count="87">n</span> nm, exp)
-  | <span data-count="4">E</span>UnOp (op, e) -&gt;
+     | <span data-count="117">S</span>ome _ -&gt; StringSet.empty, exp
+     | <span data-count="114">N</span>one -&gt; StringSet.singleto<span data-count="114">n</span> nm, exp)
+  | <span data-count="6">E</span>UnOp (op, e) -&gt;
     let new_env, new_exp = transform_exp e env in
-    <span data-count="4">n</span>ew_env, EUnOp (op, new_exp)
+    <span data-count="6">n</span>ew_env, EUnOp (op, new_exp)
   | <span data-count="13">E</span>If (e1, e2, e3) -&gt;
     let env1, exp1 = transform_exp e1 env in
     <span data-count="13">l</span>et env2, exp2 = transform_exp e2 env in
     <span data-count="13">l</span>et env3, exp3 = transform_exp e3 env in
     <span data-count="13">S</span>tringSet.unio<span data-count="13">n</span> (StringSet.unio<span data-count="13">n</span> env1 env2) env3, EIf (exp1, exp2, exp3)
-  | <span data-count="73">E</span>BinOp (op, e1, e2) -&gt;
-    let env1, exp1 = transform_exp e1 env in
-    <span data-count="73">l</span>et env2, exp2 = transform_exp e2 env in
-    <span data-count="73">S</span>tringSet.unio<span data-count="73">n</span> env1 env2, EBinOp (op, exp1, exp2)
-  | <span data-count="110">E</span>App (e1, e2) -&gt;
+  | <span data-count="110">E</span>BinOp (op, e1, e2) -&gt;
     let env1, exp1 = transform_exp e1 env in
     <span data-count="110">l</span>et env2, exp2 = transform_exp e2 env in
-    <span data-count="110">S</span>tringSet.unio<span data-count="110">n</span> env1 env2, EApp (exp1, exp2)
-  | <span data-count="56">E</span>Fun (_, _) -&gt;
+    <span data-count="110">S</span>tringSet.unio<span data-count="110">n</span> env1 env2, EBinOp (op, exp1, exp2)
+  | <span data-count="174">E</span>App (e1, e2) -&gt;
+    let env1, exp1 = transform_exp e1 env in
+    <span data-count="174">l</span>et env2, exp2 = transform_exp e2 env in
+    <span data-count="174">S</span>tringSet.unio<span data-count="174">n</span> env1 env2, EApp (exp1, exp2)
+  | <span data-count="65">E</span>Fun (_, _) -&gt;
     let vars, body = decompose_fun [] exp in
-    <span data-count="56">l</span>et args =
+    <span data-count="65">l</span>et args =
       StringSet.of_list
-        (List.filter_ma<span data-count="56">p</span>
+        (List.filter_ma<span data-count="65">p</span>
            (function
-             | <span data-count="75">P</span>tVar name -&gt; Some name
-             | <span data-count="0">_</span> -&gt; None)
+             | <span data-count="99">P</span>tVar name -&gt; Some name
+             | <span data-count="12">_</span> -&gt; None)
            vars)
     in
-    <span data-count="56">l</span>et body_vars, new_body = transform_exp body args in
-    <span data-count="56">l</span>et body_vars_lst = List.of_seq (StringSet.to_se<span data-count="56">q</span> body_vars) in
-    <span data-count="56">l</span>et pt_vars = List.ma<span data-count="56">p</span> (fun elem -&gt; <span data-count="65">P</span>tVar elem) body_vars_lst @ List.re<span data-count="56">v</span> vars in
+    <span data-count="65">l</span>et body_vars, new_body = transform_exp body args in
+    <span data-count="65">l</span>et body_vars_lst = List.of_seq (StringSet.to_se<span data-count="65">q</span> body_vars) in
+    <span data-count="65">l</span>et pt_vars = List.ma<span data-count="65">p</span> (fun elem -&gt; <span data-count="65">P</span>tVar elem) body_vars_lst @ List.re<span data-count="65">v</span> vars in
     let new_efun =
       let rec helper_efun = function
-        | <span data-count="140">h</span>d :: tl -&gt; EFun (hd, helper_efu<span data-count="140">n</span> tl)
-        | <span data-count="56">_</span> -&gt; new_body
+        | <span data-count="176">h</span>d :: tl -&gt; EFun (hd, helper_efu<span data-count="176">n</span> tl)
+        | <span data-count="65">_</span> -&gt; new_body
       in
-      helper_efu<span data-count="56">n</span> pt_vars
+      helper_efu<span data-count="65">n</span> pt_vars
     in
     let new_eapp =
       let rec helper_eapp = function
         | <span data-count="65">h</span>d :: tl -&gt; EApp (helper_eap<span data-count="65">p</span> tl, hd)
-        | <span data-count="56">_</span> -&gt; new_efun
+        | <span data-count="65">_</span> -&gt; new_efun
       in
-      helper_eap<span data-count="56">p</span> (List.re<span data-count="56">v</span> (List.ma<span data-count="56">p</span> (fun elem -&gt; <span data-count="65">E</span>Var elem) body_vars_lst))
+      helper_eap<span data-count="65">p</span> (List.re<span data-count="65">v</span> (List.ma<span data-count="65">p</span> (fun elem -&gt; <span data-count="65">E</span>Var elem) body_vars_lst))
     in
-    StringSet.dif<span data-count="56">f</span> body_vars env, new_eapp
-  | <span data-count="18">E</span>Let (bindings, e) -&gt;
+    StringSet.dif<span data-count="65">f</span> body_vars env, new_eapp
+  | <span data-count="23">E</span>Let (bindings, e) -&gt;
     let (bindings_acc, final_env), new_bindings =
       List.fold_left_map
         (fun (acc, prev_env) (is_rec, p, ex) -&gt;
-          <span data-count="28">l</span>et p_name =
+          <span data-count="41">l</span>et p_name =
             match p with
-            | <span data-count="25">P</span>tVar name -&gt; name
+            | <span data-count="38">P</span>tVar name -&gt; name
             | <span data-count="3">_</span> -&gt; "_"
           in
-          let new_acc = if is_rec then <span data-count="5">S</span>tringSet.ad<span data-count="5">d</span> p_name acc else <span data-count="23">a</span>cc in
+          let new_acc = if is_rec then <span data-count="5">S</span>tringSet.ad<span data-count="5">d</span> p_name acc else <span data-count="36">a</span>cc in
           let next_env, new_ex = transform_exp ex new_acc in
-          <span data-count="28">l</span>et new_acc = StringSet.add p_name acc in
-          <span data-count="28">(</span>new_acc, StringSet.unio<span data-count="28">n</span> next_env prev_env), (is_rec, p, new_ex))
+          <span data-count="41">l</span>et new_acc = StringSet.add p_name acc in
+          <span data-count="41">(</span>new_acc, StringSet.unio<span data-count="41">n</span> next_env prev_env), (is_rec, p, new_ex))
         (env, StringSet.empty)
         bindings
     in
-    <span data-count="18">l</span>et final_acc, new_e = transform_exp e bindings_acc in
-    <span data-count="18">S</span>tringSet.unio<span data-count="18">n</span> final_acc final_env, ELet (new_bindings, new_e)
-  | <span data-count="88">_</span> -&gt; StringSet.empty, exp
+    <span data-count="23">l</span>et final_acc, new_e = transform_exp e bindings_acc in
+    <span data-count="23">S</span>tringSet.unio<span data-count="23">n</span> final_acc final_env, ELet (new_bindings, new_e)
+  | <span data-count="175">_</span> -&gt; StringSet.empty, exp
 ;;
 
 let transform_decls bindings =
-  <span data-count="21">l</span>et new_bindings =
+  <span data-count="30">l</span>et new_bindings =
     List.map
       (fun (DLet (is_rec, p, exp)) -&gt;
-        <span data-count="37">l</span>et _, new_exp = transform_exp exp StringSet.empty in
-        <span data-count="37">i</span>s_rec, p, new_exp)
+        <span data-count="55">l</span>et _, new_exp = transform_exp exp StringSet.empty in
+        <span data-count="55">i</span>s_rec, p, new_exp)
       bindings
   in
-  <span data-count="21">L</span>ist.map (fun elem -&gt; <span data-count="37">D</span>Let elem) new_bindings
+  <span data-count="30">L</span>ist.map (fun elem -&gt; <span data-count="55">D</span>Let elem) new_bindings
 ;;
 </code></pre>
       </div>

@@ -228,11 +228,11 @@
 (** SPDX-License-Identifier: LGPL-2.1 *)
 
 open Ast
-open Pretty_printer
+open Ast_pretty
 module StringMap = Map.Make (String)
 
 (* THIS FUNCTIONS CREATES DUMMY ID THAT CANNOT BE USED IN CODE AND MUST BE RENAMED FURTHER *)
-let get_lifted_name cnt = <span data-count="45">s</span>tring_of_in<span data-count="45">t</span> cnt ^ "lambda"
+let get_lifted_name cnt = <span data-count="54">s</span>tring_of_in<span data-count="54">t</span> cnt ^ "lambda"
 let z_combinator_name = "/Z"
 
 let z_combinator =
@@ -254,37 +254,37 @@ let lift_rec lst cnt pt exp =
 ;;
 
 let rec lift_exp lst cnt exp =
-  <span data-count="489">m</span>atch exp with
-  | <span data-count="4">E</span>UnOp (op, e) -&gt;
+  <span data-count="738">m</span>atch exp with
+  | <span data-count="6">E</span>UnOp (op, e) -&gt;
     let new_lst, new_cnt, new_e = lift_exp lst cnt e in
-    <span data-count="4">n</span>ew_lst, new_cnt, EUnOp (op, new_e)
-  | <span data-count="12">E</span>Let (bindings, e) -&gt;
+    <span data-count="6">n</span>ew_lst, new_cnt, EUnOp (op, new_e)
+  | <span data-count="17">E</span>Let (bindings, e) -&gt;
     let (lst, cnt), new_bindings =
       List.fold_left_map
         (fun (acc_lst, acc_cnt) decl -&gt;
-          <span data-count="18">l</span>et next_lst, next_cnt, new_decl = lift_decl acc_lst acc_cnt decl in
-          <span data-count="18">(</span>next_lst, next_cnt), new_decl)
+          <span data-count="31">l</span>et next_lst, next_cnt, new_decl = lift_decl acc_lst acc_cnt decl in
+          <span data-count="31">(</span>next_lst, next_cnt), new_decl)
         (lst, cnt)
         bindings
     in
-    <span data-count="12">l</span>et final_lst, final_cnt, new_e = lift_exp lst cnt e in
-    <span data-count="12">f</span>inal_lst, final_cnt, ELet (new_bindings, new_e)
-  | <span data-count="36">E</span>Fun _ -&gt;
+    <span data-count="17">l</span>et final_lst, final_cnt, new_e = lift_exp lst cnt e in
+    <span data-count="17">f</span>inal_lst, final_cnt, ELet (new_bindings, new_e)
+  | <span data-count="45">E</span>Fun _ -&gt;
     let e =
       let rec helper_efun = function
-        | <span data-count="92">E</span>Fun (_, ex) -&gt; helper_efun ex
-        | <span data-count="36">o</span>ther -&gt; other
+        | <span data-count="128">E</span>Fun (_, ex) -&gt; helper_efun ex
+        | <span data-count="45">o</span>ther -&gt; other
       in
-      helper_efu<span data-count="36">n</span> exp
+      helper_efu<span data-count="45">n</span> exp
     in
     let lst, cnt, new_e = lift_exp lst cnt e in
-    <span data-count="36">l</span>et name = get_lifted_name cnt in
-    <span data-count="36">l</span>et new_efun =
+    <span data-count="45">l</span>et name = get_lifted_name cnt in
+    <span data-count="45">l</span>et new_efun =
       let rec helper_result = function
-        | <span data-count="92">E</span>Fun (p, e) -&gt; EFun (p, helper_resul<span data-count="92">t</span> e)
-        | <span data-count="36">_</span> -&gt; new_e
+        | <span data-count="128">E</span>Fun (p, e) -&gt; EFun (p, helper_resul<span data-count="128">t</span> e)
+        | <span data-count="45">_</span> -&gt; new_e
       in
-      helper_resul<span data-count="36">t</span> exp
+      helper_resul<span data-count="45">t</span> exp
     in
     let lst = DLet (false, PtVar name, new_efun) :: lst in
     lst, cnt + 1, EVar name
@@ -293,33 +293,33 @@ let rec lift_exp lst cnt exp =
     <span data-count="10">l</span>et lst, cnt, exp2 = lift_exp lst cnt e2 in
     <span data-count="10">l</span>et lst, cnt, exp3 = lift_exp lst cnt e3 in
     <span data-count="10">l</span>st, cnt, EIf (exp1, exp2, exp3)
-  | <span data-count="49">E</span>BinOp (op, e1, e2) -&gt;
+  | <span data-count="86">E</span>BinOp (op, e1, e2) -&gt;
     let map, cnt, exp1 = lift_exp lst cnt e1 in
-    <span data-count="49">l</span>et map, cnt, exp2 = lift_exp map cnt e2 in
-    <span data-count="49">m</span>ap, cnt, EBinOp (op, exp1, exp2)
-  | <span data-count="131">E</span>App (e1, e2) -&gt;
+    <span data-count="86">l</span>et map, cnt, exp2 = lift_exp map cnt e2 in
+    <span data-count="86">m</span>ap, cnt, EBinOp (op, exp1, exp2)
+  | <span data-count="195">E</span>App (e1, e2) -&gt;
     let map, cnt, exp1 = lift_exp lst cnt e1 in
-    <span data-count="131">l</span>et map, cnt, exp2 = lift_exp map cnt e2 in
-    <span data-count="131">m</span>ap, cnt, EApp (exp1, exp2)
-  | <span data-count="247">_</span> -&gt; lst, cnt, exp
+    <span data-count="195">l</span>et map, cnt, exp2 = lift_exp map cnt e2 in
+    <span data-count="195">m</span>ap, cnt, EApp (exp1, exp2)
+  | <span data-count="379">_</span> -&gt; lst, cnt, exp
 
 and lift_decl lst cnt (is_rec, pt, exp) =
-  <span data-count="47">l</span>et lst, cnt, exp = lift_exp lst cnt exp in
-  <span data-count="47">l</span>et lst, cnt, exp = if is_rec then <span data-count="9">l</span>ift_re<span data-count="9">c</span> lst cnt pt exp else <span data-count="38">l</span>st, cnt, exp in
+  <span data-count="78">l</span>et lst, cnt, exp = lift_exp lst cnt exp in
+  <span data-count="78">l</span>et lst, cnt, exp = if is_rec then <span data-count="9">l</span>ift_re<span data-count="9">c</span> lst cnt pt exp else <span data-count="69">l</span>st, cnt, exp in
   lst, cnt, (false, pt, exp)
 ;;
 
 let lift_prog prog =
-  <span data-count="15">l</span>et new_bindings, _ =
+  <span data-count="24">l</span>et new_bindings, _ =
     List.fold_left
       (fun (acc_lst, acc_cnt) (DLet decl) -&gt;
-        <span data-count="29">l</span>et next_lst, next_cnt, new_decl = lift_decl [] acc_cnt decl in
-        <span data-count="29">l</span>et next_lst = DLet new_decl :: next_lst in
-        acc_lst @ List.re<span data-count="29">v</span> next_lst, next_cnt)
+        <span data-count="47">l</span>et next_lst, next_cnt, new_decl = lift_decl [] acc_cnt decl in
+        <span data-count="47">l</span>et next_lst = DLet new_decl :: next_lst in
+        acc_lst @ List.re<span data-count="47">v</span> next_lst, next_cnt)
       ([ z_combinator ], 0)
       prog
   in
-  <span data-count="15">n</span>ew_bindings
+  <span data-count="24">n</span>ew_bindings
 ;;
 </code></pre>
       </div>

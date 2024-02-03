@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8"/>
     <title>parser_test.ml &mdash; Coverage report</title>
-    <meta name="description" content="54.55% coverage in test/parser/parser_test.ml">
+    <meta name="description" content="58.33% coverage in test/parser/parser_test.ml">
     <link rel="stylesheet" href="../../coverage.css"/>
     <script src="../../highlight.pack.js"></script>
     <script>hljs.initHighlightingOnLoad();</script>
@@ -15,14 +15,14 @@
           <span class="dirname">test/parser/</span>parser_test.ml
         </a>
       </h1>
-      <h2>54.55%</h2>
+      <h2>58.33%</h2>
     </div>
     <div id="navbar">
-      <span class="unvisited" style="top:6.75%"></span>
+      <span class="unvisited" style="top:5.85%"></span>
+      <span class="unvisited" style="top:6.91%"></span>
       <span class="unvisited" style="top:7.98%"></span>
-      <span class="unvisited" style="top:9.20%"></span>
-      <span class="unvisited" style="top:10.43%"></span>
-      <span class="unvisited" style="top:11.66%"></span>
+      <span class="unvisited" style="top:9.04%"></span>
+      <span class="unvisited" style="top:10.11%"></span>
     </div>
     <div id="report">
       <div id="lines-layer">
@@ -102,7 +102,7 @@
 <a id="L73"></a><span > </span>
 <a id="L74"></a><span > </span>
 <a id="L75"></a><span > </span>
-<a id="L76"></a><span class="visited"> </span>
+<a id="L76"></a><span > </span>
 <a id="L77"></a><span > </span>
 <a id="L78"></a><span > </span>
 <a id="L79"></a><span > </span>
@@ -110,7 +110,7 @@
 <a id="L81"></a><span > </span>
 <a id="L82"></a><span > </span>
 <a id="L83"></a><span > </span>
-<a id="L84"></a><span > </span>
+<a id="L84"></a><span class="visited"> </span>
 <a id="L85"></a><span > </span>
 <a id="L86"></a><span > </span>
 <a id="L87"></a><span > </span>
@@ -134,7 +134,7 @@
 <a id="L105"></a><span > </span>
 <a id="L106"></a><span > </span>
 <a id="L107"></a><span > </span>
-<a id="L108"></a><span class="visited"> </span>
+<a id="L108"></a><span > </span>
 <a id="L109"></a><span > </span>
 <a id="L110"></a><span > </span>
 <a id="L111"></a><span > </span>
@@ -142,7 +142,7 @@
 <a id="L113"></a><span > </span>
 <a id="L114"></a><span > </span>
 <a id="L115"></a><span > </span>
-<a id="L116"></a><span > </span>
+<a id="L116"></a><span class="visited"> </span>
 <a id="L117"></a><span > </span>
 <a id="L118"></a><span > </span>
 <a id="L119"></a><span > </span>
@@ -190,6 +190,31 @@
 <a id="L161"></a><span > </span>
 <a id="L162"></a><span > </span>
 <a id="L163"></a><span > </span>
+<a id="L164"></a><span > </span>
+<a id="L165"></a><span > </span>
+<a id="L166"></a><span > </span>
+<a id="L167"></a><span > </span>
+<a id="L168"></a><span > </span>
+<a id="L169"></a><span > </span>
+<a id="L170"></a><span > </span>
+<a id="L171"></a><span > </span>
+<a id="L172"></a><span > </span>
+<a id="L173"></a><span > </span>
+<a id="L174"></a><span class="visited"> </span>
+<a id="L175"></a><span > </span>
+<a id="L176"></a><span > </span>
+<a id="L177"></a><span > </span>
+<a id="L178"></a><span > </span>
+<a id="L179"></a><span > </span>
+<a id="L180"></a><span > </span>
+<a id="L181"></a><span > </span>
+<a id="L182"></a><span > </span>
+<a id="L183"></a><span > </span>
+<a id="L184"></a><span > </span>
+<a id="L185"></a><span > </span>
+<a id="L186"></a><span > </span>
+<a id="L187"></a><span > </span>
+<a id="L188"></a><span > </span>
 </pre>
       </div>
       <div id="text-layer">
@@ -357,6 +382,31 @@
 <a href="#L161">161</a>
 <a href="#L162">162</a>
 <a href="#L163">163</a>
+<a href="#L164">164</a>
+<a href="#L165">165</a>
+<a href="#L166">166</a>
+<a href="#L167">167</a>
+<a href="#L168">168</a>
+<a href="#L169">169</a>
+<a href="#L170">170</a>
+<a href="#L171">171</a>
+<a href="#L172">172</a>
+<a href="#L173">173</a>
+<a href="#L174">174</a>
+<a href="#L175">175</a>
+<a href="#L176">176</a>
+<a href="#L177">177</a>
+<a href="#L178">178</a>
+<a href="#L179">179</a>
+<a href="#L180">180</a>
+<a href="#L181">181</a>
+<a href="#L182">182</a>
+<a href="#L183">183</a>
+<a href="#L184">184</a>
+<a href="#L185">185</a>
+<a href="#L186">186</a>
+<a href="#L187">187</a>
+<a href="#L188">188</a>
 </pre>
 <pre><code class="ocaml">(** Copyright 2023-2024, Rustam Shangareev and Danil Yevdokimov *)
 
@@ -364,14 +414,14 @@
 
 open ZRusML_lib.Ast
 open ZRusML_lib.Parser
-open ZRusML_lib.Pretty_printer
+open ZRusML_lib.Ast_pretty
 
 let test_parse ~label ~code ~expected =
-  <span data-count="3">m</span>atch parse prog code with
+  <span data-count="4">m</span>atch parse prog code with
   | <span data-count="0">E</span>rror _ -&gt;
     Printf.printf "[Parser test] %s -&gt; PARSE ERROR" label;
     <span data-count="0">f</span>alse
-  | <span data-count="3">R</span>esult.Ok res when expected = res -&gt; <span data-count="3">t</span>rue
+  | <span data-count="4">R</span>esult.Ok res when expected = res -&gt; <span data-count="4">t</span>rue
   | <span data-count="0">R</span>esult.Ok res -&gt;
     let () =
       Printf.printf "[Parser test] %s failed.\nActual is:\n%s\n" label (show_pro<span data-count="0">g</span> res)
@@ -403,9 +453,13 @@ let%test _ =
                       , EBinOp
                           ( Add
                           , EBinOp
-                              ( Div
-                              , EBinOp (Add, EVar "x", EBinOp (Mul, EVar "y", EVar "z"))
-                              , EBinOp (Mul, EConst (CInt 2), EConst (CInt 1337)) )
+                              ( Mul
+                              , EBinOp
+                                  ( Div
+                                  , EBinOp
+                                      (Add, EVar "x", EBinOp (Mul, EVar "y", EVar "z"))
+                                  , EConst (CInt 2) )
+                              , EConst (CInt 1337) )
                           , EBinOp
                               ( Sub
                               , EBinOp (Div, EConst (CInt 9), EConst (CInt 13))
@@ -422,9 +476,13 @@ let%test _ =
                       , EBinOp
                           ( Add
                           , EBinOp
-                              ( Div
-                              , EBinOp (Add, EVar "x", EBinOp (Mul, EVar "y", EVar "z"))
-                              , EBinOp (Mul, EConst (CInt 2), EConst (CInt 1337)) )
+                              ( Mul
+                              , EBinOp
+                                  ( Div
+                                  , EBinOp
+                                      (Add, EVar "x", EBinOp (Mul, EVar "y", EVar "z"))
+                                  , EConst (CInt 2) )
+                              , EConst (CInt 1337) )
                           , EBinOp
                               ( Sub
                               , EBinOp (Div, EConst (CInt 9), EConst (CInt 13))
@@ -519,6 +577,23 @@ let%test _ =
                               , EVar "x" ) ) ) )
                 ]
               , EVar "check" ) )
+      ]
+;;
+
+let%test _ =
+  <span data-count="1">t</span>est_parse
+    ~label:"operators test"
+    ~code:{|
+
+      let x = 6 / 3 * 2;;
+
+    |}
+    ~expected:
+      [ DLet
+          ( false
+          , PtVar "x"
+          , EBinOp (Mul, EBinOp (Div, EConst (CInt 6), EConst (CInt 3)), EConst (CInt 2))
+          )
       ]
 ;;
 </code></pre>
