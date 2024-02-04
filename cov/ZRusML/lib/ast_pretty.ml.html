@@ -329,18 +329,18 @@ let show_const = function
 let pp_const fmt cnst = <span data-count="0">f</span>printf fmt "%s" (show_cons<span data-count="0">t</span> cnst)
 
 let show_bin_op = function
-  | <span data-count="1">A</span>nd -&gt; "&amp;&amp;"
-  | <span data-count="2">O</span>r -&gt; "||"
-  | <span data-count="3">L</span>ess -&gt; "&lt;"
-  | <span data-count="7">L</span>eq -&gt; "&lt;="
-  | <span data-count="1">G</span>re -&gt; "&gt;"
+  | <span data-count="2">A</span>nd -&gt; "&amp;&amp;"
+  | <span data-count="7">O</span>r -&gt; "||"
+  | <span data-count="6">L</span>ess -&gt; "&lt;"
+  | <span data-count="11">L</span>eq -&gt; "&lt;="
+  | <span data-count="3">G</span>re -&gt; "&gt;"
   | <span data-count="1">G</span>eq -&gt; "&gt;="
-  | <span data-count="4">E</span>q -&gt; "="
-  | <span data-count="1">N</span>eq -&gt; "&lt;&gt;"
-  | <span data-count="35">A</span>dd -&gt; "+"
-  | <span data-count="12">S</span>ub -&gt; "-"
-  | <span data-count="13">M</span>ul -&gt; "*"
-  | <span data-count="2">D</span>iv -&gt; "/"
+  | <span data-count="9">E</span>q -&gt; "="
+  | <span data-count="2">N</span>eq -&gt; "&lt;&gt;"
+  | <span data-count="44">A</span>dd -&gt; "+"
+  | <span data-count="22">S</span>ub -&gt; "-"
+  | <span data-count="30">M</span>ul -&gt; "*"
+  | <span data-count="8">D</span>iv -&gt; "/"
 ;;
 
 let pp_bin_op fmt op = <span data-count="0">f</span>printf fmt "%s" (show_bin_o<span data-count="0">p</span> op)
@@ -444,12 +444,12 @@ let show_binding_helper cnt (is_rec, pt, exp) =
     (helpe<span data-count="51">r</span> exp)
 ;;
 
-let show_binding = show_binding_helpe<span data-count="17">r</span> 0
+let show_binding = show_binding_helpe<span data-count="40">r</span> 0
 let pp_binding_helper fmt cnt x = <span data-count="0">f</span>printf fmt "%s" (show_binding_helpe<span data-count="0">r</span> cnt x)
 let pp_binding fmt = <span data-count="0">p</span>p_binding_helper fmt 0
 let show_decl (DLet t) = <span data-count="51">s</span>printf "%s;;\n" (show_bindin<span data-count="51">g</span> t)
 let pp_decl fmt x = <span data-count="0">f</span>printf fmt "%s" (show_dec<span data-count="0">l</span> x)
-let show_prog = List.fold_lef<span data-count="17">t</span> (fun acc decl -&gt; <span data-count="51">a</span>cc ^ show_dec<span data-count="51">l</span> decl) ""
+let show_prog = List.fold_lef<span data-count="40">t</span> (fun acc decl -&gt; <span data-count="51">a</span>cc ^ show_dec<span data-count="51">l</span> decl) ""
 let pp_prog fmt prog = <span data-count="19">f</span>printf fmt "%s" (show_pro<span data-count="19">g</span> prog)
 </code></pre>
       </div>
