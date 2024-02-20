@@ -242,94 +242,94 @@ open IState
 open IState.Syntax
 
 let rec get_args acc = function
-  | <span data-count="128">E</span>Fun (p, e) -&gt; get_args (p :: acc) e
-  | <span data-count="71">e</span> -&gt; List.re<span data-count="71">v</span> acc, e
+  | <span data-count="172">E</span>Fun (p, e) -&gt; get_args (p :: acc) e
+  | <span data-count="96">e</span> -&gt; List.re<span data-count="96">v</span> acc, e
 ;;
 
 let rec get_global_scope prog global =
-  <span data-count="70">m</span>atch prog with
-  | <span data-count="28">[</span>] -&gt; global
-  | <span data-count="42">E</span>Let (_, id, _) :: tl -&gt; Set.add global id |&gt; <span data-count="42">g</span>et_global_scope tl
+  <span data-count="97">m</span>atch prog with
+  | <span data-count="37">[</span>] -&gt; global
+  | <span data-count="60">E</span>Let (_, id, _) :: tl -&gt; Set.add global id |&gt; <span data-count="60">g</span>et_global_scope tl
 ;;
 
 let rec gen_fresh_id global =
-  <span data-count="29">l</span>et* fresh_id = fresh_name_int in
-  <span data-count="29">l</span>et new_id = "id_" ^ Int.to_strin<span data-count="29">g</span> fresh_id in
+  <span data-count="36">l</span>et* fresh_id = fresh_name_int in
+  <span data-count="36">l</span>et new_id = "id_" ^ Int.to_strin<span data-count="36">g</span> fresh_id in
   let is_in = Set.mem global new_id in
-  <span data-count="29">i</span>f is_in then <span data-count="0">g</span>en_fresh_id global else <span data-count="29">r</span>eturn new_id
+  <span data-count="36">i</span>f is_in then <span data-count="0">g</span>en_fresh_id global else <span data-count="36">r</span>eturn new_id
 ;;
 
 let prog_lift prog =
-  <span data-count="28">l</span>et rec lift_expr env ll_list global = function
-    | <span data-count="103">E</span>Const c -&gt;
+  <span data-count="37">l</span>et rec lift_expr env ll_list global = function
+    | <span data-count="153">E</span>Const c -&gt;
       (match c with
-       | <span data-count="103">C</span>Int i -&gt; return (LLConst (CInt i), ll_list)
+       | <span data-count="153">C</span>Int i -&gt; return (LLConst (CInt i), ll_list)
        | <span data-count="0">C</span>Bool b -&gt; return (LLConst (CBool b), ll_list)
        | <span data-count="0">C</span>Unit -&gt; return (LLConst CUnit, ll_list))
-    | <span data-count="174">E</span>Var x -&gt;
+    | <span data-count="230">E</span>Var x -&gt;
       (match Map.find env x with
-       | <span data-count="22">S</span>ome id -&gt; return (LLVar id, ll_list)
-       | <span data-count="152">N</span>one -&gt; return (LLVar x, ll_list))
-    | <span data-count="64">E</span>BinOp (op, e1, e2) -&gt;
-      let* l1, ll_list = lift_exp<span data-count="64">r</span> env ll_list global e1 in
-      <span data-count="64">l</span>et* l2, ll_list = lift_exp<span data-count="64">r</span> env ll_list global e2 in
-      <span data-count="64">r</span>eturn (LLBinOp (op, l1, l2), ll_list)
-    | <span data-count="10">E</span>If (e1, e2, e3) -&gt;
-      let* l1, ll_list = lift_exp<span data-count="10">r</span> env ll_list global e1 in
-      <span data-count="10">l</span>et* l2, ll_list = lift_exp<span data-count="10">r</span> env ll_list global e2 in
-      <span data-count="10">l</span>et* l3, ll_list = lift_exp<span data-count="10">r</span> env ll_list global e3 in
-      <span data-count="10">r</span>eturn (LLIf (l1, l2, l3), ll_list)
-    | <span data-count="131">E</span>App (e1, e2) -&gt;
-      let* l1, ll_list = lift_exp<span data-count="131">r</span> env ll_list global e1 in
-      <span data-count="131">l</span>et* l2, ll_list = lift_exp<span data-count="131">r</span> env ll_list global e2 in
-      <span data-count="131">r</span>eturn (LLApp (l1, l2), ll_list)
-    | <span data-count="12">E</span>LetIn (is_rec, id, (EFun (_, _) as e1), e2) -&gt;
+       | <span data-count="27">S</span>ome id -&gt; return (LLVar id, ll_list)
+       | <span data-count="203">N</span>one -&gt; return (LLVar x, ll_list))
+    | <span data-count="83">E</span>BinOp (op, e1, e2) -&gt;
+      let* l1, ll_list = lift_exp<span data-count="83">r</span> env ll_list global e1 in
+      <span data-count="83">l</span>et* l2, ll_list = lift_exp<span data-count="83">r</span> env ll_list global e2 in
+      <span data-count="83">r</span>eturn (LLBinOp (op, l1, l2), ll_list)
+    | <span data-count="13">E</span>If (e1, e2, e3) -&gt;
+      let* l1, ll_list = lift_exp<span data-count="13">r</span> env ll_list global e1 in
+      <span data-count="13">l</span>et* l2, ll_list = lift_exp<span data-count="13">r</span> env ll_list global e2 in
+      <span data-count="13">l</span>et* l3, ll_list = lift_exp<span data-count="13">r</span> env ll_list global e3 in
+      <span data-count="13">r</span>eturn (LLIf (l1, l2, l3), ll_list)
+    | <span data-count="190">E</span>App (e1, e2) -&gt;
+      let* l1, ll_list = lift_exp<span data-count="190">r</span> env ll_list global e1 in
+      <span data-count="190">l</span>et* l2, ll_list = lift_exp<span data-count="190">r</span> env ll_list global e2 in
+      <span data-count="190">r</span>eturn (LLApp (l1, l2), ll_list)
+    | <span data-count="14">E</span>LetIn (is_rec, id, (EFun (_, _) as e1), e2) -&gt;
       let args, exp = get_args [] e1 in
-      <span data-count="12">l</span>et* new_id = gen_fresh_i<span data-count="12">d</span> global in
-      <span data-count="12">l</span>et new_env = Map.set env ~key:id ~data:new_id in
-      <span data-count="12">l</span>et* l1, ll_list =
+      <span data-count="14">l</span>et* new_id = gen_fresh_i<span data-count="14">d</span> global in
+      <span data-count="14">l</span>et new_env = Map.set env ~key:id ~data:new_id in
+      <span data-count="14">l</span>et* l1, ll_list =
         if is_rec
-        then <span data-count="7">l</span>ift_exp<span data-count="7">r</span> new_env ll_list global exp
+        then <span data-count="9">l</span>ift_exp<span data-count="9">r</span> new_env ll_list global exp
         else <span data-count="5">l</span>ift_exp<span data-count="5">r</span> env ll_list global exp
       in
-      <span data-count="12">l</span>et ll_list = LLLet (is_rec, new_id, args, l1) :: ll_list in
-      let* l2, ll_list = lift_exp<span data-count="12">r</span> new_env ll_list global e2 in
-      <span data-count="12">r</span>eturn (l2, ll_list)
-    | <span data-count="8">E</span>LetIn (_, id, e1, e2) -&gt;
-      let* l1, ll_list = lift_exp<span data-count="8">r</span> env ll_list global e1 in
-      <span data-count="8">l</span>et* l2, ll_list = lift_exp<span data-count="8">r</span> env ll_list global e2 in
-      <span data-count="8">r</span>eturn (LLLetIn (id, l1, l2), ll_list)
-    | <span data-count="17">E</span>Fun (_, _) as e -&gt;
+      <span data-count="14">l</span>et ll_list = LLLet (is_rec, new_id, args, l1) :: ll_list in
+      let* l2, ll_list = lift_exp<span data-count="14">r</span> new_env ll_list global e2 in
+      <span data-count="14">r</span>eturn (l2, ll_list)
+    | <span data-count="10">E</span>LetIn (_, id, e1, e2) -&gt;
+      let* l1, ll_list = lift_exp<span data-count="10">r</span> env ll_list global e1 in
+      <span data-count="10">l</span>et* l2, ll_list = lift_exp<span data-count="10">r</span> env ll_list global e2 in
+      <span data-count="10">r</span>eturn (LLLetIn (id, l1, l2), ll_list)
+    | <span data-count="22">E</span>Fun (_, _) as e -&gt;
       let args, exp = get_args [] e in
-      <span data-count="17">l</span>et* new_id = gen_fresh_i<span data-count="17">d</span> global in
-      <span data-count="17">l</span>et* l1, ll_list = lift_exp<span data-count="17">r</span> (Map.empt<span data-count="17">y</span> (module String)) ll_list global exp in
-      <span data-count="17">l</span>et ll_list = LLLet (false, new_id, args, l1) :: ll_list in
+      <span data-count="22">l</span>et* new_id = gen_fresh_i<span data-count="22">d</span> global in
+      <span data-count="22">l</span>et* l1, ll_list = lift_exp<span data-count="22">r</span> (Map.empt<span data-count="22">y</span> (module String)) ll_list global exp in
+      <span data-count="22">l</span>et ll_list = LLLet (false, new_id, args, l1) :: ll_list in
       return (LLVar new_id, ll_list)
   in
   let decl_ll global = function
-    | <span data-count="42">E</span>Let (is_rec, id, e) -&gt;
+    | <span data-count="60">E</span>Let (is_rec, id, e) -&gt;
       let p, expr = get_args [] e in
-      <span data-count="42">l</span>et* l1, ll_list = lift_exp<span data-count="42">r</span> (Map.empt<span data-count="42">y</span> (module String)) [] global expr in
-      <span data-count="42">l</span>et ll_list = LLLet (is_rec, id, p, l1) :: ll_list in
+      <span data-count="60">l</span>et* l1, ll_list = lift_exp<span data-count="60">r</span> (Map.empt<span data-count="60">y</span> (module String)) [] global expr in
+      <span data-count="60">l</span>et ll_list = LLLet (is_rec, id, p, l1) :: ll_list in
       return ll_list
   in
   let prog_ll prog =
-    <span data-count="28">l</span>et global = get_global_scope prog (Set.empt<span data-count="28">y</span> (module String)) in
-    <span data-count="28">l</span>et* ll_list =
-      List.fold_lef<span data-count="28">t</span>
+    <span data-count="37">l</span>et global = get_global_scope prog (Set.empt<span data-count="37">y</span> (module String)) in
+    <span data-count="37">l</span>et* ll_list =
+      List.fold_lef<span data-count="37">t</span>
         ~f:(fun acc x -&gt;
-          <span data-count="42">l</span>et* ll_list = decl_l<span data-count="42">l</span> global x in
-          <span data-count="42">l</span>et* acc = acc in
-          <span data-count="42">r</span>eturn (acc @ List.re<span data-count="42">v</span> ll_list))
-        ~init:(retur<span data-count="28">n</span> [])
+          <span data-count="60">l</span>et* ll_list = decl_l<span data-count="60">l</span> global x in
+          <span data-count="60">l</span>et* acc = acc in
+          <span data-count="60">r</span>eturn (acc @ List.re<span data-count="60">v</span> ll_list))
+        ~init:(retur<span data-count="37">n</span> [])
         prog
     in
-    <span data-count="28">r</span>eturn ll_list
+    <span data-count="37">r</span>eturn ll_list
   in
   prog_ll prog
 ;;
 
-let run_ll prog = <span data-count="28">s</span>nd @@ IState.runStat<span data-count="28">e</span> ~init:0 (prog_lif<span data-count="28">t</span> prog)
+let run_ll prog = <span data-count="37">s</span>nd @@ IState.runStat<span data-count="37">e</span> ~init:0 (prog_lif<span data-count="37">t</span> prog)
 </code></pre>
       </div>
     </div>

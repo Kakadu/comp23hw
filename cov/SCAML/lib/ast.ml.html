@@ -229,30 +229,30 @@
 <span data-count="25">t</span>ype program = <span data-count="73">b</span>inding lis<span data-count="16">t</span> [@@deriving show { with_path = false }<span data-count="32">]</span>
 
 (**  Const constructors *)
-let constr_cint n = <span data-count="184">C</span>Int n
+let constr_cint n = <span data-count="234">C</span>Int n
 
 let constr_cbool b = <span data-count="5">C</span>Bool b
 
 (**  Pattern constructors *)
 
-let constr_pwild _ = <span data-count="11">P</span>Wild
+let constr_pwild _ = <span data-count="16">P</span>Wild
 let constr_pconst c = <span data-count="2">P</span>Const c
-let constr_pvar id = <span data-count="232">P</span>Var id
+let constr_pvar id = <span data-count="271">P</span>Var id
 
 (**  Operation constructor *)
-let constr_ebinop binary_op expr1 expr2 = <span data-count="265">E</span>BinOp (binary_op, expr1, expr2)
+let constr_ebinop binary_op expr1 expr2 = <span data-count="303">E</span>BinOp (binary_op, expr1, expr2)
 
 (**  Expr constructors *)
-let constr_econst e = <span data-count="306">E</span>Const e
+let constr_econst e = <span data-count="406">E</span>Const e
 
-let constr_evar id = <span data-count="693">E</span>Var id
-let constr_eif e1 e2 e3 = <span data-count="42">E</span>If (e1, e2, e3)
-let constr_efun pl e = <span data-count="340">L</span>ist.fold_right (fun p e -&gt; <span data-count="373">E</span>Fun (p, e)) pl e
-let constr_eletin b id e1 e2 = <span data-count="59">E</span>LetIn (b, id, e1, e2)
-let constr_eapp f args = <span data-count="310">L</span>ist.fold_left (fun f arg -&gt; <span data-count="378">E</span>App (f, arg)) f args
+let constr_evar id = <span data-count="768">E</span>Var id
+let constr_eif e1 e2 e3 = <span data-count="48">E</span>If (e1, e2, e3)
+let constr_efun pl e = <span data-count="411">L</span>ist.fold_right (fun p e -&gt; <span data-count="454">E</span>Fun (p, e)) pl e
+let constr_eletin b id e1 e2 = <span data-count="67">E</span>LetIn (b, id, e1, e2)
+let constr_eapp f args = <span data-count="394">L</span>ist.fold_left (fun f arg -&gt; <span data-count="489">E</span>App (f, arg)) f args
 
 (**  Binding constructor *)
-let constr_elet b id e = <span data-count="131">E</span>Let (b, id, e)
+let constr_elet b id e = <span data-count="167">E</span>Let (b, id, e)
 </code></pre>
       </div>
     </div>

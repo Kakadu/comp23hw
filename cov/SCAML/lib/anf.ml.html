@@ -569,14 +569,14 @@ open StdlibFunc
 (** Converts constant to immediate value *)
 let conv_const = function
   | <span data-count="0">C</span>Bool b -&gt; ImmBool b
-  | <span data-count="105">C</span>Int i -&gt; ImmNum i
+  | <span data-count="155">C</span>Int i -&gt; ImmNum i
   | <span data-count="0">C</span>Unit -&gt; ImmUnit
 ;;
 
 (** Converts pattern to immediate pattern *)
 let conv_pattern = function
-  | <span data-count="10">P</span>Wild -&gt; PImmWild
-  | <span data-count="102">P</span>Var id -&gt; PImmExpr (ImmId id)
+  | <span data-count="15">P</span>Wild -&gt; PImmWild
+  | <span data-count="141">P</span>Var id -&gt; PImmExpr (ImmId id)
   | <span data-count="0">P</span>Const c -&gt; PImmExpr (conv_cons<span data-count="0">t</span> c)
 ;;
 
@@ -585,10 +585,10 @@ open IState.Syntax
 
 (** Variable Generation *)
 let rec gen_var base global =
-  <span data-count="187">l</span>et* fresh_id = fresh_name_int in
-  <span data-count="187">l</span>et new_id = base ^ Int.to_strin<span data-count="187">g</span> fresh_id in
+  <span data-count="268">l</span>et* fresh_id = fresh_name_int in
+  <span data-count="268">l</span>et new_id = base ^ Int.to_strin<span data-count="268">g</span> fresh_id in
   let is_in = Base.Set.mem global new_id in
-  <span data-count="187">i</span>f is_in then <span data-count="0">g</span>en_var base global else <span data-count="187">r</span>eturn new_id
+  <span data-count="268">i</span>f is_in then <span data-count="0">g</span>en_var base global else <span data-count="268">r</span>eturn new_id
 ;;
 
 let rec anf_expr
@@ -597,56 +597,56 @@ let rec anf_expr
   (expr_with_imm_hole : immexpr -&gt; aexpr t)
   : aexpr t
   =
-  <span data-count="455">m</span>atch e with
-  | <span data-count="105">L</span>LConst c -&gt; expr_with_imm_hole @@ conv_cons<span data-count="105">t</span> c
-  | <span data-count="158">L</span>LVar id -&gt; expr_with_imm_hole @@ ImmId id
-  | <span data-count="60">L</span>LBinOp (op, left, right) -&gt;
+  <span data-count="649">m</span>atch e with
+  | <span data-count="155">L</span>LConst c -&gt; expr_with_imm_hole @@ conv_cons<span data-count="155">t</span> c
+  | <span data-count="219">L</span>LVar id -&gt; expr_with_imm_hole @@ ImmId id
+  | <span data-count="79">L</span>LBinOp (op, left, right) -&gt;
     anf_expr env left (fun limm -&gt;
-      <span data-count="60">a</span>nf_expr env right (fun rimm -&gt;
-        <span data-count="60">l</span>et* var = gen_va<span data-count="60">r</span> "b_op_" env in
-        <span data-count="60">e</span>xpr_with_imm_hol<span data-count="60">e</span> @@ ImmId var
-        &gt;&gt;= fun ae -&gt; <span data-count="60">r</span>eturn (ALetIn (var, CBinOp (op, limm, rimm), ae))))
-  | <span data-count="8">L</span>LIf (cond, t, e) -&gt;
+      <span data-count="79">a</span>nf_expr env right (fun rimm -&gt;
+        <span data-count="79">l</span>et* var = gen_va<span data-count="79">r</span> "b_op_" env in
+        <span data-count="79">e</span>xpr_with_imm_hol<span data-count="79">e</span> @@ ImmId var
+        &gt;&gt;= fun ae -&gt; <span data-count="79">r</span>eturn (ALetIn (var, CBinOp (op, limm, rimm), ae))))
+  | <span data-count="11">L</span>LIf (cond, t, e) -&gt;
     anf_expr env cond (fun cimm -&gt;
-      <span data-count="8">l</span>et* taexpr = anf_exp<span data-count="8">r</span> env t (fun timm -&gt; <span data-count="8">r</span>eturn @@ ACExpr (CImmExpr timm)) in
-      <span data-count="8">l</span>et* eaexpr = anf_exp<span data-count="8">r</span> env e (fun eimm -&gt; <span data-count="8">r</span>eturn @@ ACExpr (CImmExpr eimm)) in
-      <span data-count="8">l</span>et* var = gen_va<span data-count="8">r</span> "if_" env in
-      <span data-count="8">e</span>xpr_with_imm_hol<span data-count="8">e</span> @@ ImmId var
-      &gt;&gt;= fun ae -&gt; <span data-count="8">r</span>eturn (ALetIn (var, CIf (cimm, taexpr, eaexpr), ae)))
-  | <span data-count="119">L</span>LApp (f, arg) -&gt;
+      <span data-count="11">l</span>et* taexpr = anf_exp<span data-count="11">r</span> env t (fun timm -&gt; <span data-count="11">r</span>eturn @@ ACExpr (CImmExpr timm)) in
+      <span data-count="11">l</span>et* eaexpr = anf_exp<span data-count="11">r</span> env e (fun eimm -&gt; <span data-count="11">r</span>eturn @@ ACExpr (CImmExpr eimm)) in
+      <span data-count="11">l</span>et* var = gen_va<span data-count="11">r</span> "if_" env in
+      <span data-count="11">e</span>xpr_with_imm_hol<span data-count="11">e</span> @@ ImmId var
+      &gt;&gt;= fun ae -&gt; <span data-count="11">r</span>eturn (ALetIn (var, CIf (cimm, taexpr, eaexpr), ae)))
+  | <span data-count="178">L</span>LApp (f, arg) -&gt;
     anf_expr env f (fun fimm -&gt;
-      <span data-count="119">a</span>nf_expr env arg (fun argimm -&gt;
-        <span data-count="119">l</span>et* var = gen_va<span data-count="119">r</span> "app_" env in
-        <span data-count="119">e</span>xpr_with_imm_hol<span data-count="119">e</span> @@ ImmId var
-        &gt;&gt;= fun ae -&gt; <span data-count="119">r</span>eturn (ALetIn (var, CApp (fimm, argimm), ae))))
-  | <span data-count="5">L</span>LLetIn (varname, e1, e2) -&gt;
+      <span data-count="178">a</span>nf_expr env arg (fun argimm -&gt;
+        <span data-count="178">l</span>et* var = gen_va<span data-count="178">r</span> "app_" env in
+        <span data-count="178">e</span>xpr_with_imm_hol<span data-count="178">e</span> @@ ImmId var
+        &gt;&gt;= fun ae -&gt; <span data-count="178">r</span>eturn (ALetIn (var, CApp (fimm, argimm), ae))))
+  | <span data-count="7">L</span>LLetIn (varname, e1, e2) -&gt;
     let new_env = Base.Set.add env varname in
-    <span data-count="5">a</span>nf_expr new_env e1 (fun immval -&gt;
-      <span data-count="5">a</span>nf_exp<span data-count="5">r</span> new_env e2 expr_with_imm_hole
-      &gt;&gt;= fun body -&gt; <span data-count="5">r</span>eturn (ALetIn (varname, CImmExpr immval, body)))
+    <span data-count="7">a</span>nf_expr new_env e1 (fun immval -&gt;
+      <span data-count="7">a</span>nf_exp<span data-count="7">r</span> new_env e2 expr_with_imm_hole
+      &gt;&gt;= fun body -&gt; <span data-count="7">r</span>eturn (ALetIn (varname, CImmExpr immval, body)))
 ;;
 
 let anf_binding env = function
-  | <span data-count="60">L</span>LLet (r, varname, args, e) -&gt;
+  | <span data-count="85">L</span>LLet (r, varname, args, e) -&gt;
     let rec get_initial_env args acc =
-      <span data-count="172">m</span>atch args with
-      | <span data-count="60">[</span>] -&gt; acc
-      | <span data-count="102">P</span>Var id :: tl -&gt; Base.Set.add acc id |&gt; <span data-count="102">g</span>et_initial_env tl
-      | <span data-count="10">_</span> :: tl -&gt; get_initial_env tl acc
+      <span data-count="241">m</span>atch args with
+      | <span data-count="85">[</span>] -&gt; acc
+      | <span data-count="141">P</span>Var id :: tl -&gt; Base.Set.add acc id |&gt; <span data-count="141">g</span>et_initial_env tl
+      | <span data-count="15">_</span> :: tl -&gt; get_initial_env tl acc
     in
-    anf_exp<span data-count="60">r</span> (get_initial_en<span data-count="60">v</span> args env) e (fun ie -&gt; <span data-count="60">r</span>eturn (ACExpr (CImmExpr ie)))
-    &gt;&gt;= fun anf_e -&gt; <span data-count="60">r</span>eturn (ALet (r, varname, List.ma<span data-count="60">p</span> conv_pattern args, anf_e))
+    anf_exp<span data-count="85">r</span> (get_initial_en<span data-count="85">v</span> args env) e (fun ie -&gt; <span data-count="85">r</span>eturn (ACExpr (CImmExpr ie)))
+    &gt;&gt;= fun anf_e -&gt; <span data-count="85">r</span>eturn (ALet (r, varname, List.ma<span data-count="85">p</span> conv_pattern args, anf_e))
 ;;
 
 let anf_program (binds : llbinding list) =
-  <span data-count="23">l</span>et rec get_initial_env binds acc =
-    <span data-count="83">m</span>atch binds with
-    | <span data-count="23">[</span>] -&gt; acc
-    | <span data-count="60">L</span>LLet (_, varname, _, _) :: tl -&gt; Base.Set.add acc varname |&gt; <span data-count="60">g</span>et_initial_env tl
+  <span data-count="32">l</span>et rec get_initial_env binds acc =
+    <span data-count="117">m</span>atch binds with
+    | <span data-count="32">[</span>] -&gt; acc
+    | <span data-count="85">L</span>LLet (_, varname, _, _) :: tl -&gt; Base.Set.add acc varname |&gt; <span data-count="85">g</span>et_initial_env tl
   in
-  let env = get_initial_env binds (Base.Set.empt<span data-count="23">y</span> (module Base.String)) in
-  <span data-count="23">l</span>et env = List.fold_left (fun acc (id, _) -&gt; <span data-count="46">B</span>ase.Set.add acc id) env stdlib in
-  <span data-count="23">L</span>ist.map (fun bind -&gt; <span data-count="60">s</span>nd @@ IState.runStat<span data-count="60">e</span> ~init:0 (anf_bindin<span data-count="60">g</span> env bind)) binds
+  let env = get_initial_env binds (Base.Set.empt<span data-count="32">y</span> (module Base.String)) in
+  <span data-count="32">l</span>et env = List.fold_left (fun acc (id, _) -&gt; <span data-count="64">B</span>ase.Set.add acc id) env stdlib in
+  <span data-count="32">L</span>ist.map (fun bind -&gt; <span data-count="85">s</span>nd @@ IState.runStat<span data-count="85">e</span> ~init:0 (anf_bindin<span data-count="85">g</span> env bind)) binds
 ;;
 
 let print_anf_prog llbinds =
@@ -673,7 +673,7 @@ let%expect_test _ =
   <span data-count="1">[</span>%expect {|
     let b_op_0 = 5 + 4 in
      let b_op_1 = b_op_0 - 2 in
-     b_op_1 |}<span data-count="55">]</span>
+     b_op_1 |}<span data-count="73">]</span>
 ;;
 
 let%expect_test _ =
@@ -687,7 +687,7 @@ let%expect_test _ =
     let b_op_0 = 4 - 3 in
      let b_op_1 = 5 + b_op_0 in
      let b_op_2 = b_op_1 + 2 in
-     b_op_2 |}<span data-count="55">]</span>
+     b_op_2 |}<span data-count="73">]</span>
 ;;
 
 let%expect_test _ =
@@ -701,7 +701,7 @@ let%expect_test _ =
     let b_op_0 = 5 + 4 in
      let b_op_1 = 3 + 2 in
      let b_op_2 = b_op_0 + b_op_1 in
-     b_op_2 |}<span data-count="55">]</span>
+     b_op_2 |}<span data-count="73">]</span>
 ;;
 
 let%expect_test _ =
@@ -748,7 +748,7 @@ let%expect_test _ =
     let id x = x;;
     let fac n = let app_0 = fack n in
      let app_1 = app_0 id in
-     app_1 |}<span data-count="55">]</span>
+     app_1 |}<span data-count="73">]</span>
 ;;
 
 let%expect_test _ =
@@ -815,7 +815,7 @@ let%expect_test _ =
      if_8;;
     let fibo n = let app_0 = fibo_cps n in
      let app_1 = app_0 id in
-     app_1 |}<span data-count="55">]</span>
+     app_1 |}<span data-count="73">]</span>
 ;;
 </code></pre>
       </div>

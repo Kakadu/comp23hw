@@ -398,110 +398,110 @@ open Ast
 open Base
 
 let free_vars expr =
-  <span data-count="44">l</span>et rec efun_helper set = function
-    | <span data-count="29">E</span>Fun (PVar x, e) -&gt; efun_helper (Set.ad<span data-count="29">d</span> set x) e
+  <span data-count="51">l</span>et rec efun_helper set = function
+    | <span data-count="33">E</span>Fun (PVar x, e) -&gt; efun_helper (Set.ad<span data-count="33">d</span> set x) e
     | <span data-count="0">E</span>Fun (_, e) -&gt; efun_helper set e
-    | <span data-count="18">_</span> -&gt; set
+    | <span data-count="20">_</span> -&gt; set
   in
   let rec helper = function
-    | <span data-count="44">E</span>Const _ -&gt; Set.empty (module String)
-    | <span data-count="210">E</span>Var x -&gt; Set.singleton (module String) x
-    | <span data-count="66">E</span>BinOp (_, e1, e2) -&gt; Set.union (helpe<span data-count="66">r</span> e1) (helpe<span data-count="66">r</span> e2)
-    | <span data-count="11">E</span>If (e1, e2, e3) -&gt; Set.union (Set.unio<span data-count="11">n</span> (helpe<span data-count="11">r</span> e1) (helpe<span data-count="11">r</span> e2)) (helpe<span data-count="11">r</span> e3)
-    | <span data-count="104">E</span>App (e1, e2) -&gt; Set.union (helpe<span data-count="104">r</span> e1) (helpe<span data-count="104">r</span> e2)
-    | <span data-count="93">E</span>Fun (x, e) -&gt;
+    | <span data-count="52">E</span>Const _ -&gt; Set.empty (module String)
+    | <span data-count="245">E</span>Var x -&gt; Set.singleton (module String) x
+    | <span data-count="77">E</span>BinOp (_, e1, e2) -&gt; Set.union (helpe<span data-count="77">r</span> e1) (helpe<span data-count="77">r</span> e2)
+    | <span data-count="13">E</span>If (e1, e2, e3) -&gt; Set.union (Set.unio<span data-count="13">n</span> (helpe<span data-count="13">r</span> e1) (helpe<span data-count="13">r</span> e2)) (helpe<span data-count="13">r</span> e3)
+    | <span data-count="123">E</span>App (e1, e2) -&gt; Set.union (helpe<span data-count="123">r</span> e1) (helpe<span data-count="123">r</span> e2)
+    | <span data-count="108">E</span>Fun (x, e) -&gt;
       (match x with
-       | <span data-count="93">P</span>Var x -&gt; Set.remove (helpe<span data-count="93">r</span> e) x
+       | <span data-count="108">P</span>Var x -&gt; Set.remove (helpe<span data-count="108">r</span> e) x
        | <span data-count="0">_</span> -&gt; helper e)
-    | <span data-count="18">E</span>LetIn (b, x, e1, e2) -&gt;
+    | <span data-count="20">E</span>LetIn (b, x, e1, e2) -&gt;
       let free1 = helper e1 in
-      <span data-count="18">l</span>et free1' = if b then <span data-count="11">S</span>et.remov<span data-count="11">e</span> free1 x else <span data-count="7">f</span>ree1 in
-      let e1_pat = efun_helper (Set.empt<span data-count="18">y</span> (module String)) e1 in
-      <span data-count="18">l</span>et free2 = Set.diff (helpe<span data-count="18">r</span> e2) e1_pat in
-      <span data-count="18">l</span>et free2' = Set.remove free2 x in
-      <span data-count="18">S</span>et.union free1' free2'
+      <span data-count="20">l</span>et free1' = if b then <span data-count="13">S</span>et.remov<span data-count="13">e</span> free1 x else <span data-count="7">f</span>ree1 in
+      let e1_pat = efun_helper (Set.empt<span data-count="20">y</span> (module String)) e1 in
+      <span data-count="20">l</span>et free2 = Set.diff (helpe<span data-count="20">r</span> e2) e1_pat in
+      <span data-count="20">l</span>et free2' = Set.remove free2 x in
+      <span data-count="20">S</span>et.union free1' free2'
   in
   helper expr
 ;;
 
 let closure_conversion global_env decl =
-  <span data-count="51">l</span>et rec expr_closure local_env global_env = function
-    | <span data-count="122">E</span>Const x -&gt; constr_econst x
-    | <span data-count="209">E</span>Var x as orig -&gt;
+  <span data-count="69">l</span>et rec expr_closure local_env global_env = function
+    | <span data-count="172">E</span>Const x -&gt; constr_econst x
+    | <span data-count="258">E</span>Var x as orig -&gt;
       (match Map.find local_env x with
-       | <span data-count="18">S</span>ome free -&gt;
-         let ids = List.map (Set.to_lis<span data-count="18">t</span> free) ~f:(fun x -&gt; <span data-count="7">c</span>onstr_evar x) in
-         <span data-count="18">c</span>onstr_eapp orig ids
-       | <span data-count="191">N</span>one -&gt; orig)
-    | <span data-count="86">E</span>BinOp (op, e1, e2) -&gt;
+       | <span data-count="20">S</span>ome free -&gt;
+         let ids = List.map (Set.to_lis<span data-count="20">t</span> free) ~f:(fun x -&gt; <span data-count="7">c</span>onstr_evar x) in
+         <span data-count="20">c</span>onstr_eapp orig ids
+       | <span data-count="238">N</span>one -&gt; orig)
+    | <span data-count="105">E</span>BinOp (op, e1, e2) -&gt;
       let e1' = expr_closure local_env global_env e1 in
-      <span data-count="86">l</span>et e2' = expr_closure local_env global_env e2 in
-      <span data-count="86">c</span>onstr_ebinop op e1' e2'
-    | <span data-count="15">E</span>If (e1, e2, e3) -&gt;
+      <span data-count="105">l</span>et e2' = expr_closure local_env global_env e2 in
+      <span data-count="105">c</span>onstr_ebinop op e1' e2'
+    | <span data-count="18">E</span>If (e1, e2, e3) -&gt;
       let e1' = expr_closure local_env global_env e1 in
-      <span data-count="15">l</span>et e2' = expr_closure local_env global_env e2 in
-      <span data-count="15">l</span>et e3' = expr_closure local_env global_env e3 in
-      <span data-count="15">c</span>onstr_eif e1' e2' e3'
-    | <span data-count="135">E</span>App (e1, e2) -&gt;
+      <span data-count="18">l</span>et e2' = expr_closure local_env global_env e2 in
+      <span data-count="18">l</span>et e3' = expr_closure local_env global_env e3 in
+      <span data-count="18">c</span>onstr_eif e1' e2' e3'
+    | <span data-count="187">E</span>App (e1, e2) -&gt;
       let e1' = expr_closure local_env global_env e1 in
-      <span data-count="135">l</span>et e2' = expr_closure local_env global_env e2 in
-      <span data-count="135">c</span>onstr_eapp e1' [ e2' ]
-    | <span data-count="26">E</span>Fun (x, _) as orig -&gt;
+      <span data-count="187">l</span>et e2' = expr_closure local_env global_env e2 in
+      <span data-count="187">c</span>onstr_eapp e1' [ e2' ]
+    | <span data-count="31">E</span>Fun (x, _) as orig -&gt;
       let s = free_vars orig in
-      <span data-count="26">l</span>et s' = Set.diff s global_env in
-      <span data-count="26">l</span>et e' = efun_helper local_env global_env orig in
-      <span data-count="26">(</span>match x with
-       | <span data-count="26">P</span>Var _ -&gt;
+      <span data-count="31">l</span>et s' = Set.diff s global_env in
+      <span data-count="31">l</span>et e' = efun_helper local_env global_env orig in
+      <span data-count="31">(</span>match x with
+       | <span data-count="31">P</span>Var _ -&gt;
          let fun_fold =
-           constr_efun (List.ma<span data-count="26">p</span> (Set.to_lis<span data-count="26">t</span> s') ~f:(fun x -&gt; <span data-count="30">c</span>onstr_pvar x)) e'
+           constr_efun (List.ma<span data-count="31">p</span> (Set.to_lis<span data-count="31">t</span> s') ~f:(fun x -&gt; <span data-count="37">c</span>onstr_pvar x)) e'
          in
-         <span data-count="26">c</span>onstr_eapp fun_fold (List.ma<span data-count="26">p</span> (Set.to_lis<span data-count="26">t</span> s') ~f:(fun x -&gt; <span data-count="30">c</span>onstr_evar x))
+         <span data-count="31">c</span>onstr_eapp fun_fold (List.ma<span data-count="31">p</span> (Set.to_lis<span data-count="31">t</span> s') ~f:(fun x -&gt; <span data-count="37">c</span>onstr_evar x))
        | <span data-count="0">_</span> -&gt; e')
-    | <span data-count="18">E</span>LetIn (b, x, (EFun (_, _) as e1), e2) as orig -&gt;
+    | <span data-count="20">E</span>LetIn (b, x, (EFun (_, _) as e1), e2) as orig -&gt;
       let free = free_vars orig in
-      <span data-count="18">l</span>et free' = Set.diff free global_env in
-      <span data-count="18">l</span>et e1' = efun_helper local_env global_env e1 in
-      <span data-count="18">l</span>et e1_closure =
-        constr_efun (List.ma<span data-count="18">p</span> (Set.to_lis<span data-count="18">t</span> free') ~f:(fun x -&gt; <span data-count="7">c</span>onstr_pvar x)) e1'
+      <span data-count="20">l</span>et free' = Set.diff free global_env in
+      <span data-count="20">l</span>et e1' = efun_helper local_env global_env e1 in
+      <span data-count="20">l</span>et e1_closure =
+        constr_efun (List.ma<span data-count="20">p</span> (Set.to_lis<span data-count="20">t</span> free') ~f:(fun x -&gt; <span data-count="7">c</span>onstr_pvar x)) e1'
       in
-      <span data-count="18">l</span>et local_env' = Map.set local_env ~key:x ~data:free' in
-      <span data-count="18">l</span>et e2' = expr_closure local_env' (Set.ad<span data-count="18">d</span> global_env x) e2 in
-      <span data-count="18">c</span>onstr_eletin b x e1_closure e2'
-    | <span data-count="11">E</span>LetIn (b, x, e1, e2) -&gt;
+      <span data-count="20">l</span>et local_env' = Map.set local_env ~key:x ~data:free' in
+      <span data-count="20">l</span>et e2' = expr_closure local_env' (Set.ad<span data-count="20">d</span> global_env x) e2 in
+      <span data-count="20">c</span>onstr_eletin b x e1_closure e2'
+    | <span data-count="13">E</span>LetIn (b, x, e1, e2) -&gt;
       let e1' = expr_closure local_env global_env e1 in
-      <span data-count="11">l</span>et e2' = expr_closure local_env global_env e2 in
-      <span data-count="11">c</span>onstr_eletin b x e1' e2'
+      <span data-count="13">l</span>et e2' = expr_closure local_env global_env e2 in
+      <span data-count="13">c</span>onstr_eletin b x e1' e2'
   and efun_helper local_env global_env = function
-    | <span data-count="122">E</span>Fun ((PVar _ as orig), e) -&gt;
+    | <span data-count="154">E</span>Fun ((PVar _ as orig), e) -&gt;
       let e' = efun_helper local_env global_env e in
-      <span data-count="122">c</span>onstr_efun [ orig ] e'
-    | <span data-count="10">E</span>Fun (p, e) -&gt;
+      <span data-count="154">c</span>onstr_efun [ orig ] e'
+    | <span data-count="15">E</span>Fun (p, e) -&gt;
       let e' = efun_helper local_env global_env e in
-      <span data-count="10">c</span>onstr_efun [ p ] e'
-    | <span data-count="95">e</span>xpr -&gt; expr_closure local_env global_env expr
+      <span data-count="15">c</span>onstr_efun [ p ] e'
+    | <span data-count="120">e</span>xpr -&gt; expr_closure local_env global_env expr
   in
   let decl_closure global_env = function
-    | <span data-count="51">E</span>Let (is_rec, id, e) -&gt;
-      let global_env' = if is_rec then <span data-count="8">S</span>et.ad<span data-count="8">d</span> global_env id else <span data-count="43">g</span>lobal_env in
-      let e' = efun_helper (Map.empt<span data-count="51">y</span> (module String)) global_env' e in
-      <span data-count="51">c</span>onstr_elet is_rec id e'
+    | <span data-count="69">E</span>Let (is_rec, id, e) -&gt;
+      let global_env' = if is_rec then <span data-count="11">S</span>et.ad<span data-count="11">d</span> global_env id else <span data-count="58">g</span>lobal_env in
+      let e' = efun_helper (Map.empt<span data-count="69">y</span> (module String)) global_env' e in
+      <span data-count="69">c</span>onstr_elet is_rec id e'
   in
   decl_closure global_env decl
 ;;
 
 let prog_conversion program =
-  <span data-count="35">l</span>et closured prog =
-    <span data-count="35">L</span>ist.fold
-      ~init:([], Set.empt<span data-count="35">y</span> (module String))
+  <span data-count="44">l</span>et closured prog =
+    <span data-count="44">L</span>ist.fold
+      ~init:([], Set.empt<span data-count="44">y</span> (module String))
       ~f:(fun (acc, global) -&gt;
         function
-        | <span data-count="50">E</span>Let (_, id, _) as orig -&gt;
+        | <span data-count="68">E</span>Let (_, id, _) as orig -&gt;
           let e' = closure_conversion global orig in
-          <span data-count="50">l</span>et global' = Set.add global id in
-          <span data-count="50">e</span>' :: acc, global')
+          <span data-count="68">l</span>et global' = Set.add global id in
+          <span data-count="68">e</span>' :: acc, global')
       prog
   in
-  List.rev (fs<span data-count="35">t</span> @@ closure<span data-count="35">d</span> program)
+  List.rev (fs<span data-count="44">t</span> @@ closure<span data-count="44">d</span> program)
 ;;
 
 let print_expr_result decl =
@@ -568,7 +568,7 @@ let%expect_test _ =
                ))
             ))
          ))
-         |}<span data-count="83">]</span>
+         |}<span data-count="101">]</span>
 ;;
 </code></pre>
       </div>

@@ -168,20 +168,20 @@ module State (S : sig
   type state = S.t
   type 'a t = state -&gt; state * 'a
 
-  let return v s = <span data-count="1422">s</span>, v
+  let return v s = <span data-count="1987">s</span>, v
 
   let ( &gt;&gt;= ) m k s =
-    <span data-count="1763">l</span>et s', a = m s in
-    <span data-count="1763">k</span> a s'
+    <span data-count="2470">l</span>et s', a = m s in
+    <span data-count="2470">k</span> a s'
   ;;
 
   module Syntax = struct
-    let ( let* ) x f = <span data-count="1079">x</span> &gt;&gt;= f
+    let ( let* ) x f = <span data-count="1502">x</span> &gt;&gt;= f
   end
 
-  let get s = <span data-count="216">s</span>, s
-  let put s' _ = <span data-count="216">s</span>', ()
-  let runState m ~init = <span data-count="91">m</span> init
+  let get s = <span data-count="304">s</span>, s
+  let put s' _ = <span data-count="304">s</span>', ()
+  let runState m ~init = <span data-count="125">m</span> init
 end
 
 module IState = State (struct
@@ -190,7 +190,7 @@ module IState = State (struct
 
 let fresh_name_int : int IState.t =
   let open IState in
-  get &gt;&gt;<span data-count="34">=</span> fun i -&gt; <span data-count="216">p</span>u<span data-count="216">t</span> (i + 1) &gt;&gt;= fun () -&gt; <span data-count="216">r</span>eturn i
+  get &gt;&gt;<span data-count="43">=</span> fun i -&gt; <span data-count="304">p</span>u<span data-count="304">t</span> (i + 1) &gt;&gt;= fun () -&gt; <span data-count="304">r</span>eturn i
 ;;
 </code></pre>
       </div>
