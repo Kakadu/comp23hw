@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <title>Pprintanf.ml &mdash; Coverage report</title>
+    <meta name="description" content="83.33% coverage in lib/Pprintanf.ml">
+    <link rel="stylesheet" href="../coverage.css"/>
+    <script src="../highlight.pack.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+  </head>
+  <body>
+    <div id="header">
+      <h1>
+        <a href="../index.html">
+          <span class="dirname">lib/</span>Pprintanf.ml
+        </a>
+      </h1>
+      <h2>83.33%</h2>
+    </div>
+    <div id="navbar">
+      <span class="unvisited" style="top:18.48%"></span>
+      <span class="unvisited" style="top:29.35%"></span>
+      <span class="unvisited" style="top:30.43%"></span>
+      <span class="unvisited" style="top:31.52%"></span>
+      <span class="unvisited" style="top:32.61%"></span>
+      <span class="unvisited" style="top:33.70%"></span>
+      <span class="unvisited" style="top:34.78%"></span>
+      <span class="unvisited" style="top:36.96%"></span>
+    </div>
+    <div id="report">
+      <div id="lines-layer">
+        <pre>
+<a id="L1"></a><span > </span>
+<a id="L2"></a><span > </span>
+<a id="L3"></a><span > </span>
+<a id="L4"></a><span class="visited"> </span>
+<a id="L5"></a><span class="visited"> </span>
+<a id="L6"></a><span > </span>
+<a id="L7"></a><span > </span>
+<a id="L8"></a><span class="visited"> </span>
+<a id="L9"></a><span > </span>
+<a id="L10"></a><span > </span>
+<a id="L11"></a><span > </span>
+<a id="L12"></a><span class="visited"> </span>
+<a id="L13"></a><span > </span>
+<a id="L14"></a><span > </span>
+<a id="L15"></a><span > </span>
+<a id="L16"></a><span class="visited"> </span>
+<a id="L17"></a><span class="unvisited"> </span>
+<a id="L18"></a><span class="visited"> </span>
+<a id="L19"></a><span class="visited"> </span>
+<a id="L20"></a><span > </span>
+<a id="L21"></a><span > </span>
+<a id="L22"></a><span > </span>
+<a id="L23"></a><span class="visited"> </span>
+<a id="L24"></a><span class="visited"> </span>
+<a id="L25"></a><span class="visited"> </span>
+<a id="L26"></a><span class="visited"> </span>
+<a id="L27"></a><span class="unvisited"> </span>
+<a id="L28"></a><span class="unvisited"> </span>
+<a id="L29"></a><span class="unvisited"> </span>
+<a id="L30"></a><span class="unvisited"> </span>
+<a id="L31"></a><span class="unvisited"> </span>
+<a id="L32"></a><span class="unvisited"> </span>
+<a id="L33"></a><span class="visited"> </span>
+<a id="L34"></a><span class="unvisited"> </span>
+<a id="L35"></a><span class="visited"> </span>
+<a id="L36"></a><span class="visited"> </span>
+<a id="L37"></a><span class="visited"> </span>
+<a id="L38"></a><span class="visited"> </span>
+<a id="L39"></a><span class="visited"> </span>
+<a id="L40"></a><span class="visited"> </span>
+<a id="L41"></a><span > </span>
+<a id="L42"></a><span > </span>
+<a id="L43"></a><span > </span>
+<a id="L44"></a><span > </span>
+<a id="L45"></a><span class="visited"> </span>
+<a id="L46"></a><span class="visited"> </span>
+<a id="L47"></a><span class="visited"> </span>
+<a id="L48"></a><span > </span>
+<a id="L49"></a><span > </span>
+<a id="L50"></a><span > </span>
+<a id="L51"></a><span > </span>
+<a id="L52"></a><span > </span>
+<a id="L53"></a><span > </span>
+<a id="L54"></a><span > </span>
+<a id="L55"></a><span > </span>
+<a id="L56"></a><span > </span>
+<a id="L57"></a><span > </span>
+<a id="L58"></a><span > </span>
+<a id="L59"></a><span class="visited"> </span>
+<a id="L60"></a><span > </span>
+<a id="L61"></a><span > </span>
+<a id="L62"></a><span > </span>
+<a id="L63"></a><span > </span>
+<a id="L64"></a><span > </span>
+<a id="L65"></a><span > </span>
+<a id="L66"></a><span > </span>
+<a id="L67"></a><span > </span>
+<a id="L68"></a><span > </span>
+<a id="L69"></a><span class="visited"> </span>
+<a id="L70"></a><span > </span>
+<a id="L71"></a><span class="visited"> </span>
+<a id="L72"></a><span > </span>
+<a id="L73"></a><span > </span>
+<a id="L74"></a><span > </span>
+<a id="L75"></a><span class="visited"> </span>
+<a id="L76"></a><span class="visited"> </span>
+<a id="L77"></a><span class="visited"> </span>
+<a id="L78"></a><span > </span>
+<a id="L79"></a><span > </span>
+<a id="L80"></a><span > </span>
+<a id="L81"></a><span class="visited"> </span>
+<a id="L82"></a><span class="visited"> </span>
+<a id="L83"></a><span > </span>
+<a id="L84"></a><span class="visited"> </span>
+<a id="L85"></a><span > </span>
+<a id="L86"></a><span > </span>
+<a id="L87"></a><span > </span>
+<a id="L88"></a><span > </span>
+<a id="L89"></a><span class="visited"> </span>
+<a id="L90"></a><span class="visited"> </span>
+<a id="L91"></a><span class="visited"> </span>
+<a id="L92"></a><span > </span>
+</pre>
+      </div>
+      <div id="text-layer">
+        <pre id="line-numbers">
+<a href="#L1"> 1</a>
+<a href="#L2"> 2</a>
+<a href="#L3"> 3</a>
+<a href="#L4"> 4</a>
+<a href="#L5"> 5</a>
+<a href="#L6"> 6</a>
+<a href="#L7"> 7</a>
+<a href="#L8"> 8</a>
+<a href="#L9"> 9</a>
+<a href="#L10">10</a>
+<a href="#L11">11</a>
+<a href="#L12">12</a>
+<a href="#L13">13</a>
+<a href="#L14">14</a>
+<a href="#L15">15</a>
+<a href="#L16">16</a>
+<a href="#L17">17</a>
+<a href="#L18">18</a>
+<a href="#L19">19</a>
+<a href="#L20">20</a>
+<a href="#L21">21</a>
+<a href="#L22">22</a>
+<a href="#L23">23</a>
+<a href="#L24">24</a>
+<a href="#L25">25</a>
+<a href="#L26">26</a>
+<a href="#L27">27</a>
+<a href="#L28">28</a>
+<a href="#L29">29</a>
+<a href="#L30">30</a>
+<a href="#L31">31</a>
+<a href="#L32">32</a>
+<a href="#L33">33</a>
+<a href="#L34">34</a>
+<a href="#L35">35</a>
+<a href="#L36">36</a>
+<a href="#L37">37</a>
+<a href="#L38">38</a>
+<a href="#L39">39</a>
+<a href="#L40">40</a>
+<a href="#L41">41</a>
+<a href="#L42">42</a>
+<a href="#L43">43</a>
+<a href="#L44">44</a>
+<a href="#L45">45</a>
+<a href="#L46">46</a>
+<a href="#L47">47</a>
+<a href="#L48">48</a>
+<a href="#L49">49</a>
+<a href="#L50">50</a>
+<a href="#L51">51</a>
+<a href="#L52">52</a>
+<a href="#L53">53</a>
+<a href="#L54">54</a>
+<a href="#L55">55</a>
+<a href="#L56">56</a>
+<a href="#L57">57</a>
+<a href="#L58">58</a>
+<a href="#L59">59</a>
+<a href="#L60">60</a>
+<a href="#L61">61</a>
+<a href="#L62">62</a>
+<a href="#L63">63</a>
+<a href="#L64">64</a>
+<a href="#L65">65</a>
+<a href="#L66">66</a>
+<a href="#L67">67</a>
+<a href="#L68">68</a>
+<a href="#L69">69</a>
+<a href="#L70">70</a>
+<a href="#L71">71</a>
+<a href="#L72">72</a>
+<a href="#L73">73</a>
+<a href="#L74">74</a>
+<a href="#L75">75</a>
+<a href="#L76">76</a>
+<a href="#L77">77</a>
+<a href="#L78">78</a>
+<a href="#L79">79</a>
+<a href="#L80">80</a>
+<a href="#L81">81</a>
+<a href="#L82">82</a>
+<a href="#L83">83</a>
+<a href="#L84">84</a>
+<a href="#L85">85</a>
+<a href="#L86">86</a>
+<a href="#L87">87</a>
+<a href="#L88">88</a>
+<a href="#L89">89</a>
+<a href="#L90">90</a>
+<a href="#L91">91</a>
+<a href="#L92">92</a>
+</pre>
+<pre><code class="ocaml">open Anf
+open Stdlib.Format
+
+let pp_name ppf = <span data-count="117">f</span>printf ppf "%s"
+let space ppf depth = <span data-count="86">f</span>printf ppf "\n%*s" (4 * depth) ""
+
+let pp_tuple ppf pp_el =
+  <span data-count="4">f</span>printf ppf "(%a)" (pp_print_lis<span data-count="4">t</span> ~pp_sep:(fun ppf _ -&gt; <span data-count="4">f</span>printf ppf ", ") pp_el)
+;;
+
+let pp_args pp_el ppf =
+  <span data-count="26">f</span>printf ppf "%a" (pp_print_lis<span data-count="26">t</span> ~pp_sep:(fun ppf _ -&gt; <span data-count="35">f</span>printf ppf " ") pp_el)
+;;
+
+let rec pp_immexpr ppf = function
+  | <span data-count="55">I</span>mmNum i -&gt; fprintf ppf "%d" i
+  | <span data-count="0">I</span>mmBool b -&gt; fprintf ppf "%B" b
+  | <span data-count="174">I</span>mmId s -&gt; fprintf ppf "%s" s
+  | <span data-count="4">I</span>mmTuple elems -&gt; pp_tuple ppf pp_immexpr elems
+;;
+
+let pp_cexpr ppf = function
+  | <span data-count="26">C</span>Plus (l, r) -&gt; fprintf ppf "(%a + %a)" pp_immexpr l pp_immexpr r
+  | <span data-count="5">C</span>Minus (l, r) -&gt; fprintf ppf "(%a - %a)" pp_immexpr l pp_immexpr r
+  | <span data-count="1">C</span>Divide (l, r) -&gt; fprintf ppf "(%a / %a)" pp_immexpr l pp_immexpr r
+  | <span data-count="4">C</span>Multiply (l, r) -&gt; fprintf ppf "(%a * %a)" pp_immexpr l pp_immexpr r
+  | <span data-count="0">C</span>Xor (l, r) -&gt; fprintf ppf "(%a ^ %a)" pp_immexpr l pp_immexpr r
+  | <span data-count="0">C</span>And (l, r) -&gt; fprintf ppf "(%a &amp;&amp; %a)" pp_immexpr l pp_immexpr r
+  | <span data-count="0">C</span>Or (l, r) -&gt; fprintf ppf "(%a || %a)" pp_immexpr l pp_immexpr r
+  | <span data-count="0">C</span>Eq (l, r) -&gt; fprintf ppf "(%a = %a)" pp_immexpr l pp_immexpr r
+  | <span data-count="0">C</span>Neq (l, r) -&gt; fprintf ppf "(%a &lt;&gt; %a)" pp_immexpr l pp_immexpr r
+  | <span data-count="0">C</span>Gt (l, r) -&gt; fprintf ppf "(%a &gt; %a)" pp_immexpr l pp_immexpr r
+  | <span data-count="2">C</span>Lt (l, r) -&gt; fprintf ppf "(%a &lt; %a)" pp_immexpr l pp_immexpr r
+  | <span data-count="0">C</span>Gte (l, r) -&gt; fprintf ppf "(%a &gt;= %a)" pp_immexpr l pp_immexpr r
+  | <span data-count="1">C</span>Lte (l, r) -&gt; fprintf ppf "(%a &lt;= %a)" pp_immexpr l pp_immexpr r
+  | <span data-count="21">C</span>App (func, args) -&gt; fprintf ppf "(%a %a)" pp_immexpr func (pp_arg<span data-count="21">s</span> pp_immexpr) args
+  | <span data-count="47">C</span>ImmExpr imm -&gt; fprintf ppf "%a" pp_immexpr imm
+  | <span data-count="13">C</span>Take (imm, n) -&gt; fprintf ppf "take(%a, %i)" pp_immexpr imm n
+  | <span data-count="5">C</span>MakeClosure (imm, _, _, args) -&gt;
+    fprintf ppf "make_closure(%a, %a)" pp_immexpr imm (pp_arg<span data-count="5">s</span> pp_immexpr) (List.re<span data-count="5">v</span> args)
+;;
+
+let pp_aexpr =
+  let rec helper tabs ppf =
+    <span data-count="125">l</span>et helper = helper tabs in
+    <span data-count="125">f</span>unction
+    | <span data-count="86">A</span>Let (name, cexpr, aexpr) -&gt;
+      fprintf
+        ppf
+        "%alet %a = %a in %a"
+        space
+        tabs
+        pp_name
+        name
+        pp_cexpr
+        cexpr
+        helper
+        aexpr
+    | <span data-count="4">A</span>IfThenElse (if_aexpr, then_aexpr, else_aexpr) -&gt;
+      fprintf
+        ppf
+        "if %a then %a else %a"
+        pp_cexpr
+        if_aexpr
+        helper
+        then_aexpr
+        helper
+        else_aexpr
+    | <span data-count="35">A</span>CEexpr cexpr -&gt; fprintf ppf "%a" pp_cexpr cexpr
+  in
+  helpe<span data-count="7">r</span> 1
+;;
+
+let pp_args =
+  pp_print_lis<span data-count="7">t</span>
+    ~pp_sep:(fun ppf _ -&gt; <span data-count="30">f</span>printf ppf " ")
+    (fun ppf binding -&gt; <span data-count="52">(</span>fun ppf -&gt; <span data-count="52">f</span>printf ppf "%s") ppf binding)
+;;
+
+let pp_anfexpr ppf = function
+  | <span data-count="9">A</span>nfLetVar (name, aexpr) -&gt; fprintf ppf "let %a = %a" pp_name name pp_aexpr aexpr
+  | <span data-count="21">A</span>nfLetFun (name, args, aexpr) -&gt;
+    fprintf ppf "let %a %a = %a" pp_name name pp_args args pp_aexpr aexpr
+  | <span data-count="1">A</span>nfLetRec (name, args, aexpr) -&gt;
+    fprintf ppf "let rec %a %a = %a" pp_name name pp_args args pp_aexpr aexpr
+;;
+
+let pp_anfstatements =
+  pp_print_lis<span data-count="7">t</span>
+    ~pp_sep:(fun ppf _ -&gt; <span data-count="17">f</span>printf ppf ";\n")
+    (fun ppf binding -&gt; <span data-count="31">p</span>p_anfexpr ppf binding)
+;;
+</code></pre>
+      </div>
+    </div>
+    <script src="../coverage.js"></script>
+  </body>
+</html>

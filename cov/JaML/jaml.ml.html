@@ -241,7 +241,7 @@ let infer_types input mode =
   <span data-count="4">l</span>et parsed = Parser.parse input in
   <span data-count="4">m</span>atch parsed with
   | <span data-count="4">O</span>k statements -&gt;
-    (match Inferencer.infer statements mode with
+    (match Inferencer.infer mode statements with
      | <span data-count="4">O</span>k typed_statements -&gt; printf "%a\n" pp_statements typed_statements
      | <span data-count="0">E</span>rror err -&gt; printf "%a\n" Inferencer.pp_error err)
   | <span data-count="0">E</span>rror err -&gt; printf "%a\n" Parser.pp_error err

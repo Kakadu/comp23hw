@@ -56,19 +56,28 @@
 <a id="L32"></a><span > </span>
 <a id="L33"></a><span > </span>
 <a id="L34"></a><span > </span>
-<a id="L35"></a><span class="visited"> </span>
-<a id="L36"></a><span class="visited"> </span>
-<a id="L37"></a><span class="visited"> </span>
-<a id="L38"></a><span class="visited"> </span>
-<a id="L39"></a><span class="visited"> </span>
-<a id="L40"></a><span class="visited"> </span>
-<a id="L41"></a><span class="visited"> </span>
-<a id="L42"></a><span class="visited"> </span>
-<a id="L43"></a><span > </span>
-<a id="L44"></a><span > </span>
-<a id="L45"></a><span > </span>
+<a id="L35"></a><span > </span>
+<a id="L36"></a><span > </span>
+<a id="L37"></a><span > </span>
+<a id="L38"></a><span > </span>
+<a id="L39"></a><span > </span>
+<a id="L40"></a><span > </span>
+<a id="L41"></a><span > </span>
+<a id="L42"></a><span > </span>
+<a id="L43"></a><span class="visited"> </span>
+<a id="L44"></a><span class="visited"> </span>
+<a id="L45"></a><span class="visited"> </span>
 <a id="L46"></a><span class="visited"> </span>
 <a id="L47"></a><span class="visited"> </span>
+<a id="L48"></a><span class="visited"> </span>
+<a id="L49"></a><span class="visited"> </span>
+<a id="L50"></a><span class="visited"> </span>
+<a id="L51"></a><span class="visited"> </span>
+<a id="L52"></a><span > </span>
+<a id="L53"></a><span > </span>
+<a id="L54"></a><span > </span>
+<a id="L55"></a><span class="visited"> </span>
+<a id="L56"></a><span class="visited"> </span>
 </pre>
       </div>
       <div id="text-layer">
@@ -120,6 +129,15 @@
 <a href="#L45">45</a>
 <a href="#L46">46</a>
 <a href="#L47">47</a>
+<a href="#L48">48</a>
+<a href="#L49">49</a>
+<a href="#L50">50</a>
+<a href="#L51">51</a>
+<a href="#L52">52</a>
+<a href="#L53">53</a>
+<a href="#L54">54</a>
+<a href="#L55">55</a>
+<a href="#L56">56</a>
 </pre>
 <pre><code class="ocaml">(** Copyright 2023-2024, Ilya Pankratov, Maxim Drumov *)
 
@@ -128,46 +146,55 @@
 open Ast
 open Ty
 
-type arg = Arg of string * ty (** Typed function argument *)
+(** Typed patterns *)
+type tpattern =
+  | TPVar of string * ty
+  | TPWildcard of ty
+  | TPTuple of tpattern list * ty
+
+type typed_name = string * ty (** Typed function name *)
+type typed_binop = bin_op * ty (** Typed sign of a binary operation *)
 
 (** Typed expession type *)
 type texpr =
   | TConst of const * ty (** Typed expression for the constant *)
   | TVar of string * ty (** Typed expression for the variables *)
-  | TBinop of bin_op * texpr * texpr * ty
+  | TBinop of typed_binop * texpr * texpr
   (** Typed expression for the binary operations *)
   | TApp of texpr * texpr * ty
   (** Typed expression for the function application to the arguments *)
   | TIfThenElse of texpr * texpr * texpr * ty
   (** Typed expression for condition statement *)
-  | TLetIn of string * texpr * texpr * ty (** Typed expression for let in declaration *)
-  | TLetRecIn of string * texpr * texpr * ty
+  | TLetIn of tpattern * texpr * texpr (** Typed expression for let in declaration *)
+  | TLetRecIn of typed_name * texpr * texpr
   (** Typed expression for let rec in declaration *)
-  | TFun of arg * texpr * ty (** Typed expression for function *)
+  | TFun of tpattern * texpr * ty (** Typed expression for function *)
+  | TTuple of texpr list * ty (** Typed expression for the tuples *)
 
 (** Typed binding type *)
 type tbinding =
-  | TLet of string * texpr * ty (** Typed expression for let declaration *)
-  | TLetRec of string * texpr * ty (** Typed expression for let rec declaration *)
+  | TLet of tpattern * texpr (** Typed expression for let declaration *)
+  | TLetRec of typed_name * texpr (** Typed expression for let rec declaration *)
 
 (** Typed statements type *)
 type tstatements = tbinding list
 
 (** Typed texpr constructors *)
 
-let tconst c t = <span data-count="138">T</span>Const (c, t)
-let tvar s t = <span data-count="294">T</span>Var (s, t)
-let tbinop b e1 e2 t = <span data-count="126">T</span>Binop (b, e1, e2, t)
-let tapp f a t = <span data-count="166">T</span>App (f, a, t)
-let tifthenelse i t e ty = <span data-count="28">T</span>IfThenElse (i, t, e, ty)
-let tletin s a b t = <span data-count="2">T</span>LetIn (s, a, b, t)
-let tletrecin s a b t = <span data-count="10">T</span>LetRecIn (s, a, b, t)
-let tfun arg_name arg_type a t = <span data-count="124">T</span>Fun (Arg (arg_name, arg_type), a, t)
+let tconst c t = <span data-count="242">T</span>Const (c, t)
+let tvar s t = <span data-count="722">T</span>Var (s, t)
+let tbinop b t e1 e2 = <span data-count="288">T</span>Binop ((b, t), e1, e2)
+let tapp f a t = <span data-count="380">T</span>App (f, a, t)
+let tifthenelse i t e ty = <span data-count="42">T</span>IfThenElse (i, t, e, ty)
+let tletin t a b = <span data-count="48">T</span>LetIn (t, a, b)
+let tletrecin s a b t = <span data-count="18">T</span>LetRecIn ((s, t), a, b)
+let tfun p a t = <span data-count="350">T</span>Fun (p, a, t)
+let ttuple t ty = <span data-count="50">T</span>Tuple (t, ty)
 
 (** tbinding constructors *)
 
-let tlet n e t = <span data-count="68">T</span>Let (n, e, t)
-let tletrec n e t = <span data-count="22">T</span>LetRec (n, e, t)
+let tlet tpat e = <span data-count="184">T</span>Let (tpat, e)
+let tletrec n t e = <span data-count="24">T</span>LetRec ((n, t), e)
 </code></pre>
       </div>
     </div>
