@@ -1247,7 +1247,7 @@ end = struct
   end
 
   let fresh : int t = fun last -&gt; <span data-count="693">l</span>ast + 1, Result.Ok last
-  let run m = <span data-count="104">s</span>nd (<span data-count="104">m</span> 0)
+  let run (m : 'a t) = <span data-count="104">s</span>nd (<span data-count="104">m</span> 0)
 end
 
 type fresh = int
