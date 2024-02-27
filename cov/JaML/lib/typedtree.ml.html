@@ -155,7 +155,7 @@ type tpattern =
 type typed_name = string * ty (** Typed function name *)
 type typed_binop = bin_op * ty (** Typed sign of a binary operation *)
 
-(** Typed expession type *)
+(** Typed expression type *)
 type texpr =
   | TConst of const * ty (** Typed expression for the constant *)
   | TVar of string * ty (** Typed expression for the variables *)

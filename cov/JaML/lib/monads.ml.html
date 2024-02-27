@@ -214,7 +214,7 @@ module VariableNameGeneratorMonad = struct
   ;;
 end
 
-module StateResultOrResultStateMonad = struct
+module ResultStateMonad = struct
   type ('a, 'error) t = int -&gt; ('a, 'error) Result.t * int
 
   let return x : ('a, 'error) t = <span data-count="170">f</span>un state -&gt; <span data-count="170">R</span>esult.retur<span data-count="170">n</span> x, state
