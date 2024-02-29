@@ -208,11 +208,11 @@ end
 
 module type RESULTSTATE = sig
   type state
-  type errorMsg
+  type e_msg
 
   type 'a res =
     | ROk of 'a
-    | RErr of errorMsg
+    | RErr of e_msg
 
   include MONAD
 
@@ -221,21 +221,21 @@ module type RESULTSTATE = sig
   end
 
   val ok : 'a -&gt; 'a t
-  val error : errorMsg -&gt; 'a t
+  val error : e_msg -&gt; 'a t
   val get : state t
   val put : state -&gt; unit t
   val runResState : 'a t -&gt; init:state -&gt; state * 'a res
 end
 
 module ResState (S : sig
-    type eMsg
+    type e_msg
     type st
-  end) : RESULTSTATE with type state = S.st and type errorMsg = S.eMsg = struct
-  type errorMsg = S.eMsg
+  end) : RESULTSTATE with type state = S.st and type e_msg = S.e_msg = struct
+  type e_msg = S.e_msg
 
   type 'a res =
     | ROk of 'a
-    | RErr of errorMsg
+    | RErr of e_msg
 
   type state = S.st
   type 'a t = state -&gt; state * 'a res
@@ -261,7 +261,7 @@ end
 
 module IResState = ResState (struct
     type st = int * int
-    type eMsg = string
+    type e_msg = string
   end)
 
 let fresh_if : (int * int) IResState.t =
