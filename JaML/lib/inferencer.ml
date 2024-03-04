@@ -526,9 +526,15 @@ let fix_typedtree subst =
 
 let infer_statements (bindings : Ast.statements) : tbinding list t =
   let open Ast in
+  let env =
+    List.fold
+      ~init:empty
+      ~f:(fun acc (name, tv, _) -> TypeEnv.extend acc (name, S (VarSet.empty, tv)))
+      Jamlstdlib.stdlib_functions
+  in
   let* _, tbindings =
     List.fold
-      ~init:(return (empty, []))
+      ~init:(return (env, []))
       ~f:(fun env_binding ->
         function
         | ELet (pattern, _) as new_binding ->
