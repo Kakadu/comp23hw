@@ -30,3 +30,9 @@
  (deps Makefile test_runtime.c runtime.c runtime.h)
  (action
   (run make run)))
+
+(rule
+ (deps runtime.h runtime.c stdlib.c)
+ (targets jaml-runtime.so)
+ (action
+  (run gcc -fPIC -shared %{deps} -o %{targets})))
