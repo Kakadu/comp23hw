@@ -24,3 +24,9 @@
  (preprocess
   (pps ppx_expect ppx_deriving.show ppx_deriving.eq))
  (inline_tests))
+
+(rule
+ (alias runtest)
+ (deps Makefile test_runtime.c runtime.c runtime.h)
+ (action
+  (run make run)))
