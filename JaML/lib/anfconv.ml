@@ -220,8 +220,7 @@ let anf_binding env = function
     let constructor name args aexpr = AnfLetFun (name, args, aexpr) in
     let args =
       List.map
-        ~f:(fun arg ->
-          match arg with
+        ~f:(function
           | Used (s, _) -> Anf.Used s
           | _ -> Anf.Unused)
         args

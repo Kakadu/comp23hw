@@ -51,24 +51,6 @@ let%expect_test _ =
 ;;
 
 let%expect_test _ =
-  (* Input:
-     let fac n =
-     let rec fack n k =
-     if n<=1 then k 1
-     else fack (n−1) ((fun k n m −> k (m ∗ n)) k n)
-     in
-     fack n (fun x −> x)
-
-     Output:
-     let fac n =
-     let #closure_fun2 k n m = k (m * n)
-     let #closure_fun3 x = x in
-     let rec fack n k =
-     if n<=1 then k 1
-     else fack (n−1) (#closure_fun2 k n)
-     in
-     fack n #closure_fun3
-  *)
   let _ =
     let test =
       {|
