@@ -90,7 +90,7 @@ uint64_t apply_n(uint64_t (*func_ptr)(uint64_t, ...), uint64_t n, uint64_t *args
         result = func_ptr(args[0], args[1], args[2], args[3], args[4], args[5], args[6], args[7], args[8], args[9], args[10], args[11], args[12], args[13]);
         break;
     case 15:
-        result = func_ptr(args[0], args[1], args[2], args[3], args[4], args[5], args[6], args[7], args[8], args[9], args[10], args[11], args[12], args[13], args[4]);
+        result = func_ptr(args[0], args[1], args[2], args[3], args[4], args[5], args[6], args[7], args[8], args[9], args[10], args[11], args[12], args[13], args[14]);
         break;
     case 16:
         result = func_ptr(args[0], args[1], args[2], args[3], args[4], args[5], args[6], args[7], args[8], args[9], args[10], args[11], args[12], args[13], args[14], args[15]);

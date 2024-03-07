@@ -8,9 +8,9 @@
 #include <stdint.h>
 #include <inttypes.h>
 
-uint64_t print_int(uint64_t n)
+uint64_t print_int(int64_t n)
 {
-    printf("%" PRIu64 "\n", n);
+    printf("%" PRId64 "\n", n);
     return 0;
 }
 
