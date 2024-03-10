@@ -271,13 +271,7 @@ module CompilerMonad = struct
 
   let fresh name : (string, 'error) t =
     fun state ->
-    return
-      (name ^ string_of_int state.counter)
-      { labels = state.labels
-      ; frame = state.frame
-      ; stack = state.stack
-      ; counter = state.counter + 1
-      }
+    return (name ^ string_of_int state.counter) { state with counter = state.counter + 1 }
   ;;
 
   let monad_map l ~f =
@@ -435,7 +429,7 @@ module CompilerMonad = struct
     @@
     match comment with
     | Some com -> make_cmd_with_comment f com
-    | _ -> make_cmd @@ f
+    | _ -> make_cmd f
   ;;
 
   (* Unsafe commands. They should not be used by a monad user *)
@@ -675,7 +669,7 @@ module CompilerMonad = struct
         let* mov = mov_cmd h2 h1 in
         (* It's important to concat lists in that way. *)
         helper t1 t2 (acc @ mov)
-      | _ :: _, [] -> fail @@ TryToStoreInRegsMoreThanSixArguments
+      | _ :: _, [] -> fail TryToStoreInRegsMoreThanSixArguments
     in
     helper args R.regs_for_args []
   ;;
