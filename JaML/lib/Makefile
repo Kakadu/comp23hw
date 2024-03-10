@@ -5,11 +5,14 @@ CFLAGS=-Wall -Wextra
 
 all: test_runtime
 
-test_runtime: runtime.o test_runtime.o
+test_runtime: runtime.o stdlib.o test_runtime.o
 	$(CC) $(CFLAGS) -o $@ $^
 
 %.o: %.c
 	$(CC) $(CFLAGS) -c $< -o $@
+
+jaml-runtime: runtime.c stdlib.c
+	$(CC) $(CFLAGS) -fPIC -shared  $^ -o jaml-runtime.so 
 
 run: test_runtime
 	./test_runtime

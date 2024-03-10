@@ -30,12 +30,13 @@
 
 (rule
  (alias runtest)
+ (targets runtime.o stdlib.o)
  (deps Makefile test_runtime.c runtime.c runtime.h)
  (action
   (run make run)))
 
 (rule
- (deps runtime.h runtime.c stdlib.c)
+ (deps Makefile stdlib.c runtime.c runtime.h)
  (targets jaml-runtime.so)
  (action
-  (run gcc -fPIC -shared %{deps} -o %{targets})))
+  (run make jaml-runtime)))
