@@ -18,7 +18,8 @@
   Anfconv
   Monads
   Codegen
-  Jamlstdlib)
+  Jamlstdlib
+  x86_64)
  (modules_without_implementation LL_ast Anf)
  (libraries base angstrom llvm)
  (instrumentation
