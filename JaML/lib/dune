@@ -17,7 +17,8 @@
   Anf
   Anfconv
   Monads
-  Jamlstdlib)
+  Jamlstdlib
+  x86_64)
  (modules_without_implementation LL_ast Anf)
  (libraries base angstrom)
  (instrumentation
