@@ -22,4 +22,6 @@
   ./tests/occurs-check-disable.ja
   ./jaml.exe
   %{bin:jaml}
-  lib/jaml-runtime.so))
+  lib/jaml-runtime.so
+  lib/runtime.o
+  lib/stdlib.o))
