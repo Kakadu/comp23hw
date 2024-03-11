@@ -144,9 +144,8 @@ uint64_t add_args_to_pa(uint64_t partial_app, uint64_t n, ...)
             uint64_t (*valid_ptr)(uint64_t, ...) = (uint64_t(*)(uint64_t, ...))partial->func_ptr;
             uint64_t tmp = apply_n(valid_ptr, partial->max_args_n, partial->args);
 
-            // Free applied partial application
-            free(partial->args);
-            free(partial);
+            // We can't release partial application here, because if it's used twice,
+            // we'll get undefined behavior.
 
             partial = (pa *)tmp;
         }
