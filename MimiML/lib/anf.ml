@@ -3,28 +3,25 @@
 (** SPDX-License-Identifier: LGPL-3.0-or-later *)
 
 open Ast
-module ClosureMap = Map.Make (String)
+module SMap = Map.Make (String)
+module SSet = Set.Make (String)
 
-type closuremap = string list ClosureMap.t
+type smap = SSet.t SMap.t
 
-let rec find_free_vars known (expr : expr) =
-  let ffv = find_free_vars known in
-  let bool_of_rf = function
-    | RecF -> true
-    | _ -> false
-  in
-  let pat_of_str str = str in
+let rec find_free_vars (expr : expr) : SSet.t =
   match expr with
-  | EConst _ -> []
-  | EVar var -> [ pat_of_str var ]
-  | EApp (e1, e2) -> ffv e1 @ ffv e2
-  | EIfElse (e1, e2, e3) -> ffv e1 @ ffv e2 @ ffv e3
-  | ELam (PatVar pat, body) ->
-    List.filter (fun v -> v <> pat && List.mem v known |> not) (ffv body)
-  | ELet ((rec_flag, PatVar pat, value), body) ->
-    let r = bool_of_rf rec_flag in
-    let known = if r then pat :: known else known in
-    ffv value @ List.filter (fun v -> v <> pat && r && List.mem v known |> not) (ffv body)
+  | EConst _ -> SSet.empty
+  | EVar v -> SSet.singleton v
+  | EApp (f, a) -> SSet.union (find_free_vars f) (find_free_vars a)
+  | EIfElse (i, t, e) ->
+    SSet.union (find_free_vars i) (find_free_vars t) |> SSet.union (find_free_vars e)
+  | ELam (PatVar p, e) -> find_free_vars e |> SSet.remove p
+  | ELet ((r, PatVar p, e_v), e_in) ->
+    let free_outer = find_free_vars e_in |> SSet.remove p in
+    let free_inner =
+      find_free_vars e_v |> if r = RecF then SSet.remove p else fun x -> x
+    in
+    SSet.union free_outer free_inner
 ;;
 
 (* intermideate name generator *)
@@ -67,29 +64,29 @@ module NameGen = struct
   ;;
 end
 
-type clres = closuremap * expr * (string * expr) list
+type clres = smap * expr * (string * expr) list
 
 let rec rename_ast ast traceback used_vars =
   let traceback_name = List.fold_left (Format.sprintf "%s%s.") "" (List.rev traceback) in
   let rename_new_var v used_vars =
     let rec rename_used new_name =
       let tb_name = traceback_name ^ new_name in
-      match ClosureMap.find_opt tb_name used_vars with
+      match SMap.find_opt tb_name used_vars with
       | Some x -> rename_used (List.hd x ^ ".")
       | None -> tb_name
     in
     rename_used v
   in
   let rename_var v =
-    match ClosureMap.find_opt v used_vars with
+    match SMap.find_opt v used_vars with
     | Some [] -> v
     | Some names -> List.hd names
     | None -> v
   in
   let uv_with old_name new_name =
-    match ClosureMap.find_opt old_name used_vars with
-    | None -> ClosureMap.add old_name [ new_name ] used_vars
-    | Some other_names -> ClosureMap.add old_name (new_name :: other_names) used_vars
+    match SMap.find_opt old_name used_vars with
+    | None -> SMap.add old_name [ new_name ] used_vars
+    | Some other_names -> SMap.add old_name (new_name :: other_names) used_vars
   in
   match ast with
   | EConst c -> EConst c
@@ -118,18 +115,22 @@ let rec rename_ast ast traceback used_vars =
 
 open NameGen
 
+let list_of_set x = List.of_seq @@ SSet.to_seq x
+
 (* closure: expr -> fun list * expr *)
-let rec closure (known : string list) (cm : closuremap) : expr -> clres NameGen.t =
+let rec closure known (cm : smap) : expr -> clres NameGen.t =
   let klosure = closure in
   let closure = closure known in
   let name_and_lift known arg body name =
-    let free_vars = ELam (PatVar arg, body) |> find_free_vars known in
-    let cm = ClosureMap.add name free_vars cm in
+    let free_vars = ELam (PatVar arg, body) |> find_free_vars in
+    let free_vars = SSet.diff free_vars known in
+    let cm = SMap.add name free_vars cm in
     let* v = closure cm body in
     let cm, body, lftd_b = v in
     (* add args *)
     let lifted_body =
-      List.fold_left (fun x y -> ELam (PatVar y, x)) (ELam (PatVar arg, body)) free_vars
+      let free_vars = list_of_set free_vars in
+      List.fold_right (fun y x -> ELam (PatVar y, x)) free_vars (ELam (PatVar arg, body))
     in
     let* _, clsr, _ = EVar name |> closure cm in
     ret (cm, clsr, lftd_b @ [ name, lifted_body ])
@@ -138,9 +139,9 @@ let rec closure (known : string list) (cm : closuremap) : expr -> clres NameGen.
   | EConst c -> ret (cm, EConst c, [])
   | EVar var ->
     let apply fn arg = EApp (fn, EVar arg) in
-    (match ClosureMap.find_opt var cm with
+    (match SMap.find_opt var cm with
      (* var is present in closures we found, replace var with var x y z (x y z are in free vars) *)
-     | Some args -> cm, List.fold_left apply (EVar var) args, []
+     | Some args -> cm, List.fold_left apply (EVar var) (list_of_set args), []
      (* var is either a simple var or a closure with no unbound vars, leaving just var *)
      | None -> cm, EVar var, [])
     |> NameGen.ret
@@ -156,7 +157,7 @@ let rec closure (known : string list) (cm : closuremap) : expr -> clres NameGen.
   | ELet ((r, PatVar name, ELam (PatVar arg, expr)), body) ->
     let known =
       match r with
-      | RecF -> name :: known
+      | RecF -> SSet.add name known
       | _ -> known
     in
     let* cm, _, l = name_and_lift known arg expr name in
@@ -168,17 +169,17 @@ let rec closure (known : string list) (cm : closuremap) : expr -> clres NameGen.
   | ELet ((r, PatVar pat, value), body) ->
     let known =
       match r with
-      | RecF -> pat :: known
+      | RecF -> SSet.add pat known
       | _ -> known
     in
     let* cm, value_res, lftd_v = klosure known cm value in
-    let* cm, body_res, lftd_b = klosure (pat :: known) cm body in
+    let* cm, body_res, lftd_b = klosure (SSet.add pat known) cm body in
     ret (cm, ELet ((r, PatVar pat, value_res), body_res), lftd_v @ lftd_b)
 ;;
 
 let closure ast =
-  let ops = [ "+"; "-"; "*"; "/"; "<"; ">"; ">="; "<="; "=" ] in
-  rename_ast ast [] ClosureMap.empty |> closure ops ClosureMap.empty
+  let ops = SSet.of_list [ "+"; "-"; "*"; "/"; "<"; ">"; ">="; "<="; "=" ] in
+  rename_ast ast [] SMap.empty |> closure ops SMap.empty
 ;;
 
 type immexpr =

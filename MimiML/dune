@@ -1,6 +1,0 @@
-(executable
- (name repl)
- (public_name repl)
- (libraries MimiML)
- (instrumentation
-  (backend bisect_ppx)))

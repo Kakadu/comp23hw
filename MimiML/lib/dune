@@ -1,11 +1,10 @@
 (library
  (name MimiML_lib)
  (public_name MimiML)
- (modules Ast Parser Typing Inferencer Pp Anf)
+ (modules Ast Asm Parser Typing Inferencer Pp Anf)
  (libraries base angstrom stdio)
  (instrumentation
   (backend bisect_ppx))
  (preprocess
   (pps ppx_expect ppx_deriving.show ppx_variants_conv))
  (inline_tests))
- 

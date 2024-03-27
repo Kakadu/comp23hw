@@ -15,3 +15,14 @@
 
 (cram
  (deps ./demoANF.exe))
+
+(executable
+ (name demoAsm)
+ (modules demoAsm)
+ (public_name demoAsm)
+ (libraries MimiML_lib stdio)
+ (link_deps
+  (file ../stdlib/stdlib.c)))
+
+(cram
+ (deps ./demoAsm.exe ../stdlib/stdlib.c))
