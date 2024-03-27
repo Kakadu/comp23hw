@@ -1,3 +1,7 @@
+(** Copyright 2023, Lev Golofastov & Ksenia Kuzmina *)
+
+(** SPDX-License-Identifier: LGPL-3.0-or-later *)
+
 open Anf
 include Format
 include List
@@ -115,7 +119,7 @@ let is_alphanumeric s =
     | 'a' .. 'z' | 'A' .. 'Z' | '0' .. '9' | '_' | '.' -> true
     | _ -> false
   in
-  explode s |> map is_alphanumeric_inner |> fold_left ( && ) true
+  String.for_all is_alphanumeric_inner s
 ;;
 
 let allocate_closure function_name arity =
@@ -159,8 +163,7 @@ let load_name n =
 
 let load_int n = return @@ mov rax (intconstant n)
 
-let compile_immexpr e =
-  match e with
+let compile_immexpr = function
   | ImmValue name -> load_name name
   | ImmNum n -> load_int n
   | ImmString _ -> load_int (-1)
@@ -194,8 +197,7 @@ let apply_store n r c =
   | None -> ()
 ;;
 
-let rec append_cexpr e =
-  match e with
+let rec append_cexpr = function
   | CImm ie -> append_immexpr ie
   | CApp (target, argument) -> append_apply_argument target argument
   | CIfElse (condition, then_part, else_part) ->
@@ -217,10 +219,10 @@ and compile_if_then_else condition then_part else_part =
 
 and evaluate_locals bindings c =
   let inner (name, expr) =
-    append_cexpr expr c |> ignore;
+    let (_ : unit * context) = append_cexpr expr c in
     apply_store name rax c
   in
-  iter inner bindings
+  List.iter inner bindings
 
 and append_block (b : ablock) c =
   let expr, lets = b in
