@@ -237,13 +237,7 @@ let list_partititioni n lst =
 ;;
 
 let truncate n lst = filteri (fun i _ -> i < n) lst
-
-let rec zip l1 l2 =
-  match l1, l2 with
-  | [], [] -> []
-  | h1 :: t1, h2 :: t2 -> (h1, h2) :: zip t1 t2
-  | _, _ -> [ "Not", "performed" ]
-;;
+let zip l1 l2 = List.combine l1 l2
 
 let map_stack bindings =
   let empty_map = SMap.empty in
