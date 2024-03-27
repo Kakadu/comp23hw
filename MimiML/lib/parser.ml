@@ -8,7 +8,7 @@ open Ast
 (* Mini-parsers *)
 
 (** skip spaces *)
-let spaces = take_while (( = ) ' ')
+let spaces = take_while (fun c -> c = ' ' || c = '\n' || c = '\r')
 
 (** skip spaces and newlines *)
 let spaces_nls = take_while (fun c -> c = ' ' || c = '\n')
@@ -27,7 +27,7 @@ let is_digit = function
 ;;
 
 let is_letter = function
-  | 'a' .. 'z' | 'A' .. 'Z' -> true
+  | 'a' .. 'z' | 'A' .. 'Z' | '_' -> true
   | _ -> false
 ;;
 
