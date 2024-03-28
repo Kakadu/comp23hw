@@ -651,13 +651,28 @@ module CompilerMonad = struct
 
   (* Working with functions *)
 
+  let is_int str =
+    match int_of_string_opt str with
+    | Some _ -> true
+    | None -> false
+  ;;
+
   let push_args_to_stack init_offset args =
     List.fold
       ~init:(return (init_offset, []))
       ~f:(fun acc arg ->
         let* offset, acc = acc in
-        let* p = push_arg offset arg in
-        return (offset + 8, p :: acc))
+        let* cmds =
+          match arg with
+          | StackMem _ ->
+            let* m = mov_cmd R.r15 arg in
+            let* p = push_arg offset (Reg R.r15) in
+            return (m @ [ p ])
+          | _ ->
+            let* p = push_arg offset arg in
+            return [ p ]
+        in
+        return (offset + 8, cmds @ acc))
       (List.rev args)
   ;;
 
