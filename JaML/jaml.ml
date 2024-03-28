@@ -6,30 +6,38 @@ open Jaml_lib
 open Format
 open Result
 
-module YamlCLIArgs = struct
+module JamlCLIArgs = struct
   type t =
     { infer_type : bool
     ; filename : string
     ; occurs_check : bool
+    ; compiler : bool
     }
 
-  let usage = "jaml -i -d -f <file>\nCompile program from stdin"
+  let usage = "jaml -i -d -f -ll -x86_64 <file>\nCompile program from stdin"
 
   let parse () =
     let infer = ref false in
     let occurs_check_flag = ref true in
     let file = ref "" in
+    let compiler = ref false in
     let specs =
       [ ( "-i"
         , Arg.Set infer
         , "Infer only the types for the input, do not use the compiler." )
       ; "-f", Set_string file, "Read program from specified file, not from the stdin."
       ; "-d", Set occurs_check_flag, "Disable occurrence checking during type checking"
+      ; "-ll", Clear compiler, "Compilation with Llvm"
+      ; "-x86_64", Set compiler, "Compilation with x86_64"
       ]
     in
     let anon _ = () in
     Arg.parse specs anon usage;
-    { infer_type = !infer; filename = !file; occurs_check = not !occurs_check_flag }
+    { infer_type = !infer
+    ; filename = !file
+    ; occurs_check = not !occurs_check_flag
+    ; compiler = !compiler
+    }
   ;;
 end
 
@@ -55,6 +63,23 @@ let infer_types input mode =
   | Error err -> printf "%a\n" Parser.pp_error err
 ;;
 
+let compile_llvm test_case mode =
+  let fmt = Format.std_formatter in
+  match Parser.parse test_case with
+  | Error err -> Parser.pp_error fmt err
+  | Ok commands ->
+    (match Inferencer.infer mode commands with
+     | Error err -> Inferencer.pp_error fmt err
+     | Ok typed_commands ->
+       Closure.closure typed_commands
+       |> Lambdalift.lambda_lift
+       |> Anfconv.anf
+       |> Codegen.compile
+       |> fun llvalue_list ->
+       Base.List.iter llvalue_list ~f:(fun f ->
+         Stdlib.Format.printf "%s\n" (Llvm.string_of_llvalue f)))
+;;
+
 let read_input filename =
   if filename <> ""
   then
@@ -65,12 +90,14 @@ let read_input filename =
 ;;
 
 let () =
-  let args = YamlCLIArgs.parse () in
+  let args = JamlCLIArgs.parse () in
   let mode = flag_to_occurs_check_mode args.occurs_check in
   match read_input args.filename with
   | Ok input when input <> "" && args.infer_type -> infer_types input mode
-  | Ok input when input <> "" && not args.infer_type ->
-    printf "compilation is not supported"
+  | Ok input when input <> "" && (not args.compiler) && not args.infer_type ->
+    compile_llvm input mode
+  | Ok input when input <> "" && args.compiler && not args.infer_type ->
+    printf "Compile input to x86_64"
   | Ok _ -> printf "empty input"
   | Error err -> printf "%a\n" pp_error err
 ;;

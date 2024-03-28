@@ -21,4 +21,5 @@
   ./tests/combinators.ja
   ./tests/occurs-check-disable.ja
   ./jaml.exe
-  %{bin:jaml}))
+  %{bin:jaml}
+  lib/jaml-runtime.so))

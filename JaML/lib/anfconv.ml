@@ -232,11 +232,17 @@ let anf_binding env = function
 
 (* Performs transformation from Toplevel.llstatements to Anf.anfstatements *)
 let anf lstatements =
+  let env =
+    List.fold
+      ~init:Env.empty
+      ~f:(fun acc (name, _, n) -> Env.add acc name n)
+      Jamlstdlib.stdlib_functions
+  in
   List.rev
   @@ snd
   @@ run
   @@ monad_fold
-       ~init:(Env.empty, [])
+       ~init:(env, [])
        ~f:(fun (env, stmts) lbinding ->
          let* env, stmt = anf_binding env lbinding in
          return (env, stmt :: stmts))
