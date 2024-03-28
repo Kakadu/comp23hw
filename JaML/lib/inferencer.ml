@@ -462,7 +462,7 @@ let infer_binding env =
   let open Typedtree in
   function
   | ELet (pattern, e) ->
-    let* env, ty, tpattern = infer_pattern env pattern in
+    let* _, ty, tpattern = infer_pattern env pattern in
     let* s, t, te = infer_expr env e in
     let* extra_subst = unify (Subst.apply s ty) t in
     let* final_subst = Subst.compose s extra_subst in
