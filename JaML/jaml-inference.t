@@ -1,10 +1,12 @@
 Show help
   $ ./jaml.exe -help
-  jaml -i -d -f <file>
+  jaml -i -d -f -ll -x86_64 <file>
   Compile program from stdin
     -i Infer only the types for the input, do not use the compiler.
     -f Read program from specified file, not from the stdin.
     -d Disable occurrence checking during type checking
+    -ll Compilation with Llvm
+    -x86_64 Compilation with x86_64
     -help  Display this list of options
     --help  Display this list of options
 Fixed point combinators

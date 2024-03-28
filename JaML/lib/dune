@@ -16,7 +16,9 @@
   LL_ast
   Anf
   Anfconv
-  Monads)
+  Monads
+  Jamlstdlib
+  x86_64)
  (modules_without_implementation LL_ast Anf)
  (libraries base angstrom)
  (instrumentation
@@ -24,3 +26,16 @@
  (preprocess
   (pps ppx_expect ppx_deriving.show ppx_deriving.eq))
  (inline_tests))
+
+(rule
+ (alias runtest)
+ (targets runtime.o stdlib.o)
+ (deps Makefile test_runtime.c runtime.c runtime.h)
+ (action
+  (run make run)))
+
+(rule
+ (deps Makefile stdlib.c runtime.c runtime.h)
+ (targets jaml-runtime.so)
+ (action
+  (run make jaml-runtime)))
