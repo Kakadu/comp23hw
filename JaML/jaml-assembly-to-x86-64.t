@@ -97,7 +97,7 @@ Show help
   5
 
   $ ./jaml.exe -x86_64 <<- EOF && ./jaml
-  > let fib n =
+  > let rec fib n =
   > if n < 3 then 1 else fib (n - 1) + fib (n - 2)
   > let main = print_int (fib 6)
   > EOF
