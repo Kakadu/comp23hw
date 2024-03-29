@@ -263,3 +263,12 @@ Show help
   > let main = print_int (second_f 5 (fun a -> a))
   > EOF
   120
+
+  $ ./jaml.exe -x86_64 <<- EOF && ./jaml
+  > let rec fix = fun f -> (fun x -> f (fix f) x)
+  > let fib_cps self n cont = if n <= 1 then cont n else self (n-1) (fun k -> self (n-2) (fun m -> cont (k + m)))
+  > let fib_cps_second = fix fib_cps
+  > let fib n = fib_cps_second n (fun x -> x)
+  > let main = print_int (fib 8)
+  > EOF
+  21
