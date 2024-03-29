@@ -254,3 +254,12 @@ Show help
   > let main = print_int (apply20 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20)
   > EOF
   210
+
+  $ ./jaml.exe -x86_64 <<- EOF && ./jaml
+  > let rec fix = fun f -> (fun x -> f (fix f) x)
+  > let fac = fun self -> (fun n -> (fun k ->
+  >   if n<2 then k 1 else self (n-1) (fun a -> k (n*a))))
+  > let second_f = (fun a -> fix fac a)
+  > let main = print_int (second_f 5 (fun a -> a))
+  > EOF
+  120
