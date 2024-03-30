@@ -58,10 +58,8 @@ module AsmBuilderTools = struct
     | StackLocation d when d < 0 -> Format.sprintf "qword [rbp%d]" d
     | StackLocation _ -> Format.sprintf "qword [rbp]"
     | Register r -> r
-    | IntConstant c -> Format.sprintf "%d" c
-    | Displacement (r, d) when d > 0 -> Format.sprintf "qword [%s+%d]" r d
-    | Displacement (r, d) when d < 0 -> Format.sprintf "qword [%s%d]" r d
-    | Displacement (r, _) -> Format.sprintf "qword [%s]" r
+    | IntConstant c -> Format.sprintf "%+d" c
+    | Displacement (r, d) -> Format.sprintf "qword [%s%+d]" r d
     | SubDefenition fname -> fname
   ;;
 
